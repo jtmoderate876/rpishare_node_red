@@ -1,12 +1,5 @@
 [
     {
-        "id": "52a5f477.bf498c",
-        "type": "tab",
-        "label": "Flow 1",
-        "disabled": false,
-        "info": ""
-    },
-    {
         "id": "984823b1.a0823",
         "type": "tab",
         "label": "Insteon-mqtt",
@@ -307,40 +300,6 @@
         "willTopic": "",
         "willQos": "0",
         "willPayload": ""
-    },
-    {
-        "id": "85e5c865.8eb318",
-        "type": "inject",
-        "z": "52a5f477.bf498c",
-        "name": "",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "x": 80,
-        "y": 80,
-        "wires": [
-            [
-                "73526119.2c707"
-            ]
-        ]
-    },
-    {
-        "id": "73526119.2c707",
-        "type": "debug",
-        "z": "52a5f477.bf498c",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "x": 420,
-        "y": 220,
-        "wires": []
     },
     {
         "id": "71a47ab9.6044a4",
@@ -1426,7 +1385,7 @@
         "type": "function",
         "z": "5c25c3f4.74d4ac",
         "name": "set flow context variables",
-        "func": "var username = 'username';\nvar password = 'password';\nvar urlprefix = \"http://192.168.1.231:25105/\"; //example \"http://192.168.1.231:25105/\"\n\nvar auth = 'Basic ' + new Buffer(username + ':' + password).toString('base64');\nvar newMsg ={\n    \"url\":urlprefix + \"buffstatus.xml\",\n    \"method\": \"GET\",\n    headers: {\n        'Authorization': auth\n    }\n};\nflow.set('buffurlwithauth',newMsg);\nflow.set('urlbase',\"http://192.168.1.231:25105/\");\nflow.set('urlsuffixforbuffstatus',\"buffstatus.xml\");\nflow.set('urlsuffixforbuffclear',\"1?XB=M=1\");\n\n// new way for context\n//var newMsg = Object.create(flow.get('buffurlwithauth'));\n\n/*\njt notes about context:\nnode level context (just) within a function block or node):\n    context.set(''); context.get('');\nflow level:\n    flow.set(''); flow.get('');\nglobal\n    global.set(''); global.get('');\n*/\n\nvar devices = {\n    \"3129FE\":\"hub1\",\n    \"3B562B\":\"hub2\",\n    \"14841C\":\"plm             \",\n    \"062197\":\"holwhtapp062197\",\n    \"07904A\":\"applinc07904A\",\n    \"0621C1\":\"#deadoldaquarium\",\n    \"09557A\":\"guestbdrm\",\n    \"13FD44\":\"holoutapp13fd44\",\n    \"13FE5A\":\"holoutapp13fe5a\",\n    \"14022E\":\"outmalibu\",\n    \"14416B\":\"livingcurio\",\n    \"144184\":\"livingtable\",\n    \"1443CC\":\"livingpic\",\n    \"1561AC\":\"bmtoffbig\",\n    \"156497\":\"bmtstairs\",\n    \"1564D3\":\"bmtoffsml\",\n    \"15C7C0\":\"mstrportkpd\",\n    \"1649CF\":\"spare1\",\n    \"1649F8\":\"outfront\",\n    \"164B6E\":\"upstairshalldummy1\",\n    \"164B8D\":\"upstairshall\",\n    \"164BE2\":\"famfireplace\",\n    \"167203\":\"mstrmain\",\n    \"169295\":\"famfloorlamp\",\n    \"1692D1\":\"spare2\",\n    \"1692F8\":\"mstrbathvan\",\n    \"169350\":\"spare3\",\n    \"169371\":\"spare4\",\n    \"16D788\":\"holwhtapp16d788\",\n    \"16D7F1\":\"bobscncapp16d7f1\",\n    \"16DAC3\":\"aquarium\",\n    \"18933C\":\"lamplinc18933c\",\n    \"192260\":\"outbacklaundry\",\n    \"1AF6AF\":\"bmtwshpmain\",\n    \"1B8C3B\":\"garage\",\n    \"1B97B8\":\"mstrbathfan\",\n    \"1F03E0\":\"kitisland\",\n    \"1F04EC\":\"kitclg\",\n    \"1F05AB\":\"kitclgdummy\",\n    \"1F6AE0\":\"kitundercab\",\n    \"1F6B12\":\"laundrydummy\",\n    \"1F6C54\":\"laundry\",\n    \"1F6D12\":\"kitdinette\",\n    \"1F6DC1\":\"bmtrecwest\",\n    \"1F707C\":\"vestible\",\n    \"1F70EE\":\"livingmain\",\n    \"1F733E\":\"bmtreceast\",\n    \"1F7974\":\"foyerchanddummy\",\n    \"1F7C43\":\"mstrbathdome\",\n    \"1F7F02\":\"foyerchand\",\n    \"1F7F83\":\"upstairshalldummy1\",\n    \"1F8029\":\"powderlight\",\n    \"1F80D2\":\"diningroom\",\n    \"1F816B\":\"kitsinkbay\",\n    \"201FC1\":\"#mstrclosjeff\",\n    \"203390\":\"mstrclosjeff\",\n    \"20341F\":\"mstrcloskathy\",\n    \"208E27\":\"kitdisposal\",\n    \"209011\":\"powderfan\",\n    \"221474\":\"kitkeypad\",\n    \"221547\":\"bmthall\",\n    \"2215E5\":\"guestbath\",\n    \"3F4A5A\":\"kyleclgfan\",\n    \"3999C8\":\"kylekeypad\",\n    \"3A874C\":\"lamplinc3A874C\",\n    \"3A8A4F\":\"lamplinc3A8A4F\",\n    \"322A0F\":\"holoutapp322A0F\",\n    \"322DFD\":\"holout322DFD\",\n    \"1F023C\":\"unknown2\",\n    \"01DDB3\":\"unknown4\",\n    \"141184\":\"bmtwshpmotion\",\n    \"1C336F\":\"miniremote\",\n    \"01DD83\":\"ezio6i01DD83\"\n};\n//newMsg.url = \"http://192.168.1.231:25105/mywebpage.xml\";\nreturn newMsg;",
+        "func": "flow.set(\"username\",msg.username)\nflow.set(\"password\",msg.password)\n\nvar urlprefix = \"http://192.168.1.231:25105/\"; //example \"http://192.168.1.231:25105/\"\n\nvar auth = 'Basic ' + new Buffer(username + ':' + password).toString('base64');\nvar newMsg ={\n    \"url\":urlprefix + \"buffstatus.xml\",\n    \"method\": \"GET\",\n    headers: {\n        'Authorization': auth\n    }\n};\nflow.set('buffurlwithauth',newMsg);\nflow.set('urlbase',\"http://192.168.1.231:25105/\");\nflow.set('urlsuffixforbuffstatus',\"buffstatus.xml\");\nflow.set('urlsuffixforbuffclear',\"1?XB=M=1\");\n\n// new way for context\n//var newMsg = Object.create(flow.get('buffurlwithauth'));\n\n/*\njt notes about context:\nnode level context (just) within a function block or node):\n    context.set(''); context.get('');\nflow level:\n    flow.set(''); flow.get('');\nglobal\n    global.set(''); global.get('');\n*/\n\nvar devices = {\n    \"3129FE\":\"hub1\",\n    \"3B562B\":\"hub2\",\n    \"14841C\":\"plm             \",\n    \"062197\":\"holwhtapp062197\",\n    \"07904A\":\"applinc07904A\",\n    \"0621C1\":\"#deadoldaquarium\",\n    \"09557A\":\"guestbdrm\",\n    \"13FD44\":\"holoutapp13fd44\",\n    \"13FE5A\":\"holoutapp13fe5a\",\n    \"14022E\":\"outmalibu\",\n    \"14416B\":\"livingcurio\",\n    \"144184\":\"livingtable\",\n    \"1443CC\":\"livingpic\",\n    \"1561AC\":\"bmtoffbig\",\n    \"156497\":\"bmtstairs\",\n    \"1564D3\":\"bmtoffsml\",\n    \"15C7C0\":\"mstrportkpd\",\n    \"1649CF\":\"spare1\",\n    \"1649F8\":\"outfront\",\n    \"164B6E\":\"upstairshalldummy1\",\n    \"164B8D\":\"upstairshall\",\n    \"164BE2\":\"famfireplace\",\n    \"167203\":\"mstrmain\",\n    \"169295\":\"famfloorlamp\",\n    \"1692D1\":\"spare2\",\n    \"1692F8\":\"mstrbathvan\",\n    \"169350\":\"spare3\",\n    \"169371\":\"spare4\",\n    \"16D788\":\"holwhtapp16d788\",\n    \"16D7F1\":\"bobscncapp16d7f1\",\n    \"16DAC3\":\"aquarium\",\n    \"18933C\":\"lamplinc18933c\",\n    \"192260\":\"outbacklaundry\",\n    \"1AF6AF\":\"bmtwshpmain\",\n    \"1B8C3B\":\"garage\",\n    \"1B97B8\":\"mstrbathfan\",\n    \"1F03E0\":\"kitisland\",\n    \"1F04EC\":\"kitclg\",\n    \"1F05AB\":\"kitclgdummy\",\n    \"1F6AE0\":\"kitundercab\",\n    \"1F6B12\":\"laundrydummy\",\n    \"1F6C54\":\"laundry\",\n    \"1F6D12\":\"kitdinette\",\n    \"1F6DC1\":\"bmtrecwest\",\n    \"1F707C\":\"vestible\",\n    \"1F70EE\":\"livingmain\",\n    \"1F733E\":\"bmtreceast\",\n    \"1F7974\":\"foyerchanddummy\",\n    \"1F7C43\":\"mstrbathdome\",\n    \"1F7F02\":\"foyerchand\",\n    \"1F7F83\":\"upstairshalldummy1\",\n    \"1F8029\":\"powderlight\",\n    \"1F80D2\":\"diningroom\",\n    \"1F816B\":\"kitsinkbay\",\n    \"201FC1\":\"#mstrclosjeff\",\n    \"203390\":\"mstrclosjeff\",\n    \"20341F\":\"mstrcloskathy\",\n    \"208E27\":\"kitdisposal\",\n    \"209011\":\"powderfan\",\n    \"221474\":\"kitkeypad\",\n    \"221547\":\"bmthall\",\n    \"2215E5\":\"guestbath\",\n    \"3F4A5A\":\"kyleclgfan\",\n    \"3999C8\":\"kylekeypad\",\n    \"3A874C\":\"lamplinc3A874C\",\n    \"3A8A4F\":\"lamplinc3A8A4F\",\n    \"322A0F\":\"holoutapp322A0F\",\n    \"322DFD\":\"holout322DFD\",\n    \"1F023C\":\"unknown2\",\n    \"01DDB3\":\"unknown4\",\n    \"141184\":\"bmtwshpmotion\",\n    \"1C336F\":\"miniremote\",\n    \"01DD83\":\"ezio6i01DD83\"\n};\n//newMsg.url = \"http://192.168.1.231:25105/mywebpage.xml\";\nreturn newMsg;",
         "outputs": 1,
         "noerr": 0,
         "x": 270,
@@ -1434,25 +1393,6 @@
         "wires": [
             [
                 "bceb7c7a.2e4b2"
-            ]
-        ]
-    },
-    {
-        "id": "893be6d4.070318",
-        "type": "inject",
-        "z": "5c25c3f4.74d4ac",
-        "name": "Step 1",
-        "topic": "",
-        "payload": "",
-        "payloadType": "str",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "x": 90,
-        "y": 100,
-        "wires": [
-            [
-                "8668c6d2.d2b728"
             ]
         ]
     },
@@ -1560,7 +1500,7 @@
         "type": "function",
         "z": "5c25c3f4.74d4ac",
         "name": "form http request",
-        "func": "var insteondeviceid = \"322A0F\"; //insteon device id\nvar insteonsdflag = \"0F\"; //0F indicates we are sending a standard command, not an extended command\nvar insteoncommand = \"12\";//11=on, 12=fast on, 13=off, 14=fast off, 19 = get status\nvar insteonlevel = \"FF\"; //\nvar username = 'username';\nvar password = 'password';\nvar auth = 'Basic ' + new Buffer(username + ':' + password).toString('base64');\n\nvar newMsg ={\n    \"url\":\"http://192.168.1.231:25105/buffstatus.xml\",\n    \"method\": \"GET\",\n    headers: {\n        'Authorization': auth\n    }\n};\n\n\nreturn newMsg;\n",
+        "func": "var insteondeviceid = \"322A0F\"; //insteon device id\nvar insteonsdflag = \"0F\"; //0F indicates we are sending a standard command, not an extended command\nvar insteoncommand = \"12\";//11=on, 12=fast on, 13=off, 14=fast off, 19 = get status\nvar insteonlevel = \"FF\"; //\nvar username = flow.get(\"username\");\nvar password = flow.get(\"password\");\nvar auth = 'Basic ' + new Buffer(username + ':' + password).toString('base64');\n\nvar newMsg ={\n    \"url\":\"http://192.168.1.231:25105/buffstatus.xml\",\n    \"method\": \"GET\",\n    headers: {\n        'Authorization': auth\n    }\n};\n\n\nreturn newMsg;\n",
         "outputs": 1,
         "noerr": 0,
         "x": 360,
@@ -1775,8 +1715,8 @@
         "func": "var newMsg = Object.create( flow.get('buffurlwithauth') );\n// not\n// var newMsg = flow.get('buffurlwithauth');\nnewMsg.url = flow.get('urlbase') + flow.get('urlsuffixforbuffclear');\n\nreturn newMsg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 338.99999237060547,
-        "y": 528.0000057220459,
+        "x": 330,
+        "y": 500,
         "wires": [
             [
                 "bd58eab9.0e17d8",
@@ -1795,8 +1735,8 @@
         "repeat": "",
         "crontab": "",
         "once": false,
-        "x": 127.99999237060547,
-        "y": 525.0000057220459,
+        "x": 130,
+        "y": 500,
         "wires": [
             [
                 "e40ab172.210d4"
@@ -6348,10 +6288,32 @@
                 "type": "msg"
             }
         ],
-        "x": 350,
-        "y": 60,
+        "x": 470,
+        "y": 20,
         "wires": [
-            []
+            [
+                "8668c6d2.d2b728"
+            ]
+        ]
+    },
+    {
+        "id": "4a0855af.2f68dc",
+        "type": "inject",
+        "z": "5c25c3f4.74d4ac",
+        "name": "initialize",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 280,
+        "y": 20,
+        "wires": [
+            [
+                "e5cf2007.dc6b8"
+            ]
         ]
     }
 ]
