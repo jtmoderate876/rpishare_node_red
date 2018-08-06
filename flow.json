@@ -976,9 +976,10 @@
         "topic": "",
         "payload": "Refresh Thermostat Variables",
         "payloadType": "str",
-        "repeat": "60",
+        "repeat": "120",
         "crontab": "",
         "once": false,
+        "onceDelay": "",
         "x": 160,
         "y": 400,
         "wires": [
@@ -1061,7 +1062,8 @@
         "y": 399.5,
         "wires": [
             [
-                "b543311d.f82ef"
+                "b543311d.f82ef",
+                "cf55e901.124768"
             ]
         ]
     },
@@ -1156,9 +1158,9 @@
         "id": "cefa9323.f506",
         "type": "comment",
         "z": "50466fda.5d00f",
-        "name": "Step #4 - Get Thermostat Data",
-        "info": "Get thermostat data",
-        "x": 150,
+        "name": "Step #4 - Get Thermostat Data - 1 minute polling works but Ecobee says only poll every 3 minutes or more",
+        "info": "Get thermostat data\nEcobee reference to 3 minute interval:\nhttps://www.ecobee.com/home/developer/api/documentation/v1/operations/get-thermostat-summary.shtml\n",
+        "x": 380,
         "y": 360,
         "wires": []
     },
@@ -6160,8 +6162,8 @@
         "y": 540,
         "wires": [
             [
-                "60c14a65.0287d4",
-                "ef1bb868.c53928"
+                "ef1bb868.c53928",
+                "4bfc0d3e.407e84"
             ]
         ]
     },
@@ -6205,7 +6207,7 @@
         "func": "var prefix = \"tapia/home/\";\nif (msg.topic.startsWith(prefix)){\n    \n}else{\n    msg.topic = prefix + msg.topic;\n}\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 670,
+        "x": 810,
         "y": 540,
         "wires": [
             [
@@ -6221,7 +6223,7 @@
         "func": "/*\ninsteon-mqtt dimmer state contains complex json\n    insteon/mydimmer/state='{\"state\":\"ON\",\"Brightness\":255}''\nwe are breaking this down to be like switches where:\n    insteon/myswitch/state = \"ON\"\n*/\n\nvar suffix = \"/state\";\n\nif (msg.topic && msg.topic.endsWith(suffix) && (msg.payload !== null) && (msg.payload !== \"\") && (typeof msg.payload == \"object\") && (msg.payload.state) && (msg.payload.brightness)) {\n    var newmsg = [];\n    var prefix = msg.topic.replace(suffix,\"\")+\"/\";\n    for(var propertyName in msg.payload) {\n        newmsg.push({\n            topic : prefix  + propertyName,\n            payload : msg.payload[propertyName]\n        });\n    }\n    msg = newmsg;\n    return [msg];\n} else {\n    \n}\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 430,
+        "x": 570,
         "y": 540,
         "wires": [
             [
@@ -6239,7 +6241,7 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 830,
+        "x": 970,
         "y": 540,
         "wires": []
     },
@@ -6251,7 +6253,7 @@
         "property": "payload",
         "action": "obj",
         "pretty": false,
-        "x": 230,
+        "x": 370,
         "y": 540,
         "wires": [
             [
@@ -6313,6 +6315,51 @@
         "wires": [
             [
                 "e5cf2007.dc6b8"
+            ]
+        ]
+    },
+    {
+        "id": "7547d12e.78211",
+        "type": "function",
+        "z": "e8223701.eebbe8",
+        "name": "disable",
+        "func": "//return null;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 620,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4bfc0d3e.407e84",
+        "type": "switch",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "{",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 250,
+        "y": 540,
+        "wires": [
+            [
+                "60c14a65.0287d4"
+            ],
+            [
+                "b802be46.082e7"
             ]
         ]
     }
