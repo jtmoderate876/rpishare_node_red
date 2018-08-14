@@ -5162,8 +5162,8 @@
         "func": "msg.payload=JSON.parse(msg.payload);\nmsg.payload=msg.payload.state;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 420,
-        "y": 340,
+        "x": 400,
+        "y": 320,
         "wires": [
             [
                 "f94896ba.660248",
