@@ -223,78 +223,6 @@
         "willPayload": ""
     },
     {
-        "id": "ddce9a21.6ede38",
-        "type": "mqtt-broker",
-        "z": "",
-        "broker": "localhost",
-        "port": "1883",
-        "clientid": "",
-        "usetls": false,
-        "compatmode": false,
-        "keepalive": "60",
-        "cleansession": true,
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthPayload": "",
-        "willTopic": "",
-        "willQos": "0",
-        "willPayload": ""
-    },
-    {
-        "id": "41694b5d.7385f4",
-        "type": "mqtt-broker",
-        "z": "",
-        "broker": "localhost",
-        "port": "1883",
-        "clientid": "",
-        "usetls": false,
-        "compatmode": false,
-        "keepalive": "60",
-        "cleansession": true,
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthPayload": "",
-        "willTopic": "",
-        "willQos": "0",
-        "willPayload": ""
-    },
-    {
-        "id": "eedcaf0f.ed952",
-        "type": "mqtt-broker",
-        "z": "",
-        "broker": "localhost",
-        "port": "1883",
-        "clientid": "",
-        "usetls": false,
-        "compatmode": false,
-        "keepalive": "60",
-        "cleansession": true,
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthPayload": "",
-        "willTopic": "",
-        "willQos": "0",
-        "willPayload": ""
-    },
-    {
-        "id": "c2e8e5ca.847de8",
-        "type": "mqtt-broker",
-        "z": "",
-        "broker": "localhost",
-        "port": "1883",
-        "clientid": "",
-        "usetls": false,
-        "compatmode": false,
-        "keepalive": "60",
-        "cleansession": true,
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthPayload": "",
-        "willTopic": "",
-        "willQos": "0",
-        "willPayload": ""
-    },
-    {
         "id": "71a47ab9.6044a4",
         "type": "mosca in",
         "z": "c201e10a.3d66f",
@@ -3663,7 +3591,6 @@
             [
                 "5fed1231.75455c",
                 "570ea412.7b645c",
-                "6c3080da.bcc57",
                 "1dc3ed7a.081c13"
             ]
         ]
@@ -3788,18 +3715,6 @@
                 "824a49d7.4a9e88"
             ]
         ]
-    },
-    {
-        "id": "6c3080da.bcc57",
-        "type": "link out",
-        "z": "c201e10a.3d66f",
-        "name": "To Insteon",
-        "links": [
-            "53df8777.f51a08"
-        ],
-        "x": 580,
-        "y": 480,
-        "wires": []
     },
     {
         "id": "5dcf2f10.86981",
