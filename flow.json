@@ -75,13 +75,6 @@
         "info": ""
     },
     {
-        "id": "af1f1e51.99db8",
-        "type": "tab",
-        "label": "Test Wonderware",
-        "disabled": false,
-        "info": ""
-    },
-    {
         "id": "5c25c3f4.74d4ac",
         "type": "tab",
         "label": "Insteon HUB direct",
@@ -324,7 +317,7 @@
         "type": "debug",
         "z": "c201e10a.3d66f",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -687,7 +680,7 @@
         "type": "debug",
         "z": "88396424.c54498",
         "name": "",
-        "active": false,
+        "active": true,
         "console": "false",
         "complete": "false",
         "x": 860,
@@ -738,7 +731,7 @@
         "ret": "txt",
         "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
         "tls": "",
-        "x": 526,
+        "x": 490,
         "y": 460,
         "wires": [
             [
@@ -797,7 +790,7 @@
         "name": "",
         "attr": "",
         "chr": "",
-        "x": 685,
+        "x": 630,
         "y": 460,
         "wires": [
             [
@@ -813,11 +806,11 @@
         "func": "msg.payload = \"Demand Polling set for: \" + msg.payload.ScheduleList.ScheduleInfo[0].Frequency[0] + \" secs\"\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 851,
+        "x": 770,
         "y": 460,
         "wires": [
             [
-                "1db1d842.642b08"
+                "872c5b0d.507928"
             ]
         ]
     },
@@ -1062,8 +1055,7 @@
         "y": 399.5,
         "wires": [
             [
-                "b543311d.f82ef",
-                "cf55e901.124768"
+                "b543311d.f82ef"
             ]
         ]
     },
@@ -1123,7 +1115,7 @@
         "type": "function",
         "z": "50466fda.5d00f",
         "name": "Define Access and Refresh Token vars",
-        "func": "global.set(\"Ecobee.access_token\",msg.payload.access_token);\nglobal.set(\"Ecobee.refresh_toke\",msg.payload.refresh_token);\n// node.warn(\"Tokens refreshed successfully.\");\nmsg.payload={\n    \"_id\":\"tokens\",\n    \"_rev\":global.get(\"Ecobee._rev\"),\n    \"access_token\":global.get(\"Ecobee.access_token\"),\n    \"refresh_token\":global.get(\"Ecobee.refresh_token\")\n};\nreturn msg;",
+        "func": "global.set(\"Ecobee.access_token\",msg.payload.access_token);\nglobal.set(\"Ecobee.refresh_token\",msg.payload.refresh_token);\n// node.warn(\"Tokens refreshed successfully.\");\nmsg.payload={\n    \"_id\":\"tokens\",\n    \"_rev\":global.get(\"Ecobee._rev\"),\n    \"access_token\":global.get(\"Ecobee.access_token\"),\n    \"refresh_token\":global.get(\"Ecobee.refresh_token\")\n};\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 880,
@@ -1911,8 +1903,8 @@
         "z": "e8223701.eebbe8",
         "name": "Configure YOUR Wonderware connection here -->",
         "info": "This is essentiall a data pump from MQTT to\nOnline.Wonderware.com",
-        "x": 230,
-        "y": 80,
+        "x": 210,
+        "y": 20,
         "wires": []
     },
     {
@@ -1924,7 +1916,7 @@
         "ret": "txt",
         "url": "",
         "tls": "",
-        "x": 770,
+        "x": 950,
         "y": 120,
         "wires": [
             []
@@ -1942,7 +1934,7 @@
             "f120ff8e.ebe99"
         ],
         "x": 195,
-        "y": 460,
+        "y": 320,
         "wires": [
             [
                 "7de4fca4.680f64"
@@ -3178,22 +3170,12 @@
             "feef4a4e.553278"
         ],
         "x": 195,
-        "y": 500,
+        "y": 280,
         "wires": [
             [
                 "7de4fca4.680f64"
             ]
         ]
-    },
-    {
-        "id": "6f744bd0.6cff74",
-        "type": "comment",
-        "z": "af1f1e51.99db8",
-        "name": "Enter YOUR Wonderware Token to the right here -->",
-        "info": "This is a data pump to\nOnline.Wonderware.com\n\nCreate a datasource in online.wonderware.com\nCopy the Generated Authorization Bearer Token\n(ie. \"Bearer abcd1234aVeryVeryLongSequence...\")\nand paste it (including the word \"Bearer \") in the\nnode at right labeled\n\"ENTER YOUR Wonderware Bearer Token HERE\"\n\nThat is it for creating the secure connection.",
-        "x": 210,
-        "y": 20,
-        "wires": []
     },
     {
         "id": "7de4fca4.680f64",
@@ -3203,8 +3185,8 @@
         "func": "var prefix = \"tapia/home/\";\nif (msg.topic.startsWith(prefix)){\n    \n}else{\n    msg.topic = prefix + msg.topic;\n}\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 450,
-        "y": 460,
+        "x": 430,
+        "y": 300,
         "wires": [
             [
                 "8b940ec1.056b4",
@@ -3220,7 +3202,7 @@
         "func": "// configure http (headers,url,method)\nmsg.headers = {\n//    \"Authorization\" : msg.authorization,\n    \"Content-type\" : \"application/json\"\n};\nmsg.url = \"https://online.wonderware.com/apis/upload/datasource\";\nmsg.method = \"POST\";\n\nmsg.headers.Authorization = msg.Authorization;  //copy Authorization to be under headers\ndelete msg.Authorization;                       // and remove from old location\nreturn msg;\n\n\n/*\nThe following works (replace token with real one):\nmsg.headers = {\n    \"Authorization\" : \"Bearer aThisIsMyFakeTokenYourWillBeLonger-AjsTIEvRKKQ\",\n    \"Content-type\" : \"application/json\"\n    };\nmsg.url = \"https://online.wonderware.com/apis/upload/datasource\";\nmsg.method = \"POST\";\n*/\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 610,
+        "x": 750,
         "y": 120,
         "wires": [
             [
@@ -3228,137 +3210,6 @@
                 "c2c9f38.db1451"
             ]
         ]
-    },
-    {
-        "id": "90a17708.9a3658",
-        "type": "debug",
-        "z": "af1f1e51.99db8",
-        "name": "",
-        "active": true,
-        "console": "false",
-        "complete": "true",
-        "x": 810,
-        "y": 160,
-        "wires": []
-    },
-    {
-        "id": "5b9bd72c.c258c8",
-        "type": "http request",
-        "z": "af1f1e51.99db8",
-        "name": "",
-        "method": "use",
-        "ret": "txt",
-        "url": "",
-        "tls": "",
-        "x": 890,
-        "y": 80,
-        "wires": [
-            [
-                "90a17708.9a3658"
-            ]
-        ]
-    },
-    {
-        "id": "f137e0d0.e3672",
-        "type": "function",
-        "z": "af1f1e51.99db8",
-        "name": "config http",
-        "func": "// configure http (headers,url,method)\nmsg.headers = {\n//    \"Authorization\" : msg.authorization,\n    \"Content-type\" : \"application/json\"\n};\nmsg.url = \"https://online.wonderware.com/apis/upload/datasource\";\nmsg.method = \"POST\";\n\nmsg.headers.Authorization = msg.Authorization;  //copy Authorization to be under headers\ndelete msg.Authorization;                       // and remove from old location\nreturn msg;\n\n\n/*\nThe following works (replace token with real one):\nmsg.headers = {\n    \"Authorization\" : \"Bearer aThisIsMyFakeTokenYourWillBeLonger-AjsTIEvRKKQ\",\n    \"Content-type\" : \"application/json\"\n    };\nmsg.url = \"https://online.wonderware.com/apis/upload/datasource\";\nmsg.method = \"POST\";\n*/\n",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 630,
-        "y": 80,
-        "wires": [
-            [
-                "90a17708.9a3658"
-            ]
-        ]
-    },
-    {
-        "id": "ac56a94f.2008b8",
-        "type": "link in",
-        "z": "af1f1e51.99db8",
-        "name": "Openhab",
-        "links": [
-            "602c326d.7dd2bc"
-        ],
-        "x": 175,
-        "y": 80,
-        "wires": [
-            [
-                "abbecadb.382738"
-            ]
-        ]
-    },
-    {
-        "id": "5a7ce947.089858",
-        "type": "function",
-        "z": "af1f1e51.99db8",
-        "name": "Openhab State Changes Only",
-        "func": "if (msg.payload.type==\"ItemStateChangedEvent\") {\n    \n} else {\n    msg = null;\n}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 350,
-        "y": 420,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "252c1cea.4ee764",
-        "type": "function",
-        "z": "af1f1e51.99db8",
-        "name": "topic pre-to-suffix",
-        "func": "var prefix = \"\";\n//if (String(msg.payload.topic).startsWith(\"Lights_\")){\nif (msg.payload.topic.startsWith(\"Lights_\")){\n    prefix = \"Lights_\";\n    msg.payload.topic = msg.payload.topic.substring((prefix.length)) + \"/lights\";\n} else if (msg.payload.topic.startsWith(\"Fan_\")){\n    prefix = \"Fan_\";\n    msg.payload.topic = msg.payload.topic.substring((prefix.length)) + \"/fan\";\n} else if (msg.payload.topic.startsWith(\"LightsAndFan_\")){\n    prefix = \"LightsAndFan\";\n    msg.payload.topic = msg.payload.topic.substring((prefix.length)) + \"/lightsandfan\";\n}\nreturn msg;\n\n",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 270,
-        "y": 340,
-        "wires": [
-            [
-                "a65d3a1a.899038"
-            ]
-        ]
-    },
-    {
-        "id": "d061cffe.81bf3",
-        "type": "function",
-        "z": "af1f1e51.99db8",
-        "name": "Conv to OnOff",
-        "func": "if (msg.payload.payload.type==\"OnOff\") {\n    // leave it alone if it's already an OnOff\n} else if (msg.payload.payload.type==\"Percent\") {\n    msg.payload.payload.type = \"OnOff\";\n    if (msg.payload.payload.value==\"0\") {\n        msg.payload.payload.value =\"OFF\";\n    } else {\n        msg.payload.payload.value =\"ON\";\n    }\n} else if (msg.payload.payload.type==\"OpenClosed\") {\n    msg.payload.payload.type =\"OnOff\";\n    if (msg.payload.payload.value==\"CLOSED\") {\n        msg.payload.payload.value = \"OFF\";\n    } else {\n        msg.payload.payload.value = \"ON\";\n    }\n} else {\n    msg = null;\n}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 240,
-        "y": 300,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "a65d3a1a.899038",
-        "type": "function",
-        "z": "af1f1e51.99db8",
-        "name": "topic.replace \"_\" with \"/\"",
-        "func": "msg.topic = String(msg.topic).replace(/_/g,\"/\");\nreturn msg;\n",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 310,
-        "y": 380,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "abbecadb.382738",
-        "type": "debug",
-        "z": "af1f1e51.99db8",
-        "name": "",
-        "active": true,
-        "console": "false",
-        "complete": "true",
-        "x": 550,
-        "y": 340,
-        "wires": []
     },
     {
         "id": "b09a5356.307a4",
@@ -3371,8 +3222,8 @@
         "repeat": "10",
         "crontab": "",
         "once": false,
-        "x": 250,
-        "y": 220,
+        "x": 110,
+        "y": 120,
         "wires": [
             [
                 "40e3d262.b63afc"
@@ -3387,8 +3238,8 @@
         "func": "msg.payload = JSON.stringify(msg.payload,null,\"\\t\");\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 760,
-        "y": 220,
+        "x": 520,
+        "y": 120,
         "wires": [
             [
                 "78534302.56589c"
@@ -3401,8 +3252,8 @@
         "z": "e8223701.eebbe8",
         "name": "wwQueue processing",
         "info": "",
-        "x": 140,
-        "y": 180,
+        "x": 120,
+        "y": 80,
         "wires": []
     },
     {
@@ -3431,8 +3282,8 @@
         "func": "/*20171208 \ninput message should contain:\nmsg.timestamp ie 1514764800000 is an epoch milliseconds timestamp representing 2018.01.01. at 00:00:00.000\n (if msg.timestamp does not exist then \"now\" will be used)\neither single value-based payload:\n    msg.payload ie 72.1 or any string or number representing the value for the topic\n    msg.topic ie diningroom/temperature\nor multi-variable object-based payload containing property : value pairs (use . as delimiter)\n    https://stackoverflow.com/questions/1661197/what-characters-are-valid-for-javascript-variable-names\n    msg.payload ie {basement$temperature : 72.1, diningroom$temperature: 73.2}\n    msg.topic ie wisconsin/summerhome becomes the prefix for each item, creating final items such as wisconsin/summerhome/basement/temperature\n*/\nvar wwQueue = flow.get('wwQueue') ||{\"data\":[]};\n//var dt = new Date(); // defaults to now //var dtstring = dt.toISOString();\n//use timestamp if it exists otherwise default to now\nif ((typeof msg.timestamp !== 'undefined')){dtstring = new Date(msg.timestamp).toISOString();} \nelse {dtstring = new Date().toISOString();}\n\ni = 0;\nwhile (\n    (typeof wwQueue.data !== 'undefined') &&\n    (typeof wwQueue.data[i] !== 'undefined') &&\n    (typeof wwQueue.data[i].dateTime !== 'undefined') &&\n    (new Date(wwQueue.data[i].dateTime).getTime() > new Date(dtstring).getTime()) //while we find newer dates keep looking \n) {i++;}\n\nvar obj = {};\nif (\n    (typeof wwQueue.data !== 'undefined')&&\n    (typeof wwQueue.data[i] !== 'undefined')&&\n    (typeof wwQueue.data[i].dateTime !== 'undefined')&&\n    (new Date(wwQueue.data[i].dateTime).getTime() == new Date(dtstring).getTime()) //if exact date found then we need to handle existing\n) {\n    obj = wwQueue.data.splice(i,1)[0];\n} else {\n    obj.dateTime = dtstring;\n}\n\nif (typeof msg.payload !== \"object\"){\n    var tag = msg.topic.replace(/\\//g,\".\"); //globally replace / with .\n    obj[tag]=msg.payload;//add new tag and value to this dateTime record\n} else {\n    var prefix = msg.topic.replace(/\\//g,\".\") + \".\";\n    var tag = \"\";\n    for(var propertyName in msg.payload) {\n        tag = prefix  + propertyName;//propertyName.replace(/\\$/g,\".\") was going to use $ delimiter but dot \".\" works \n        obj[tag] = msg.payload[propertyName];\n//        node.error(JSON.stringify(obj,null, 4));\n    }\n}\nwwQueue.data.splice(i,0,obj); //add new, full dateTime record back to all record data in the right spot\n\nflow.set('wwQueue',wwQueue);\nmsg.topic = \"tapia/home\";\nmsg.payload = wwQueue;\n\nreturn msg;\n\n/*\nexample from online.wonderware.com\n{\n  \"data\": [\n    {\n      \"dateTime\": \"2017-03-20T12:21:12.199Z\",\n      \"Reactor3.Level\": 1.51860072870498,\n      \"Reactor3.Temp\": 27.1360543141452,\n      \"Reactor3.InletValve\": 0,\n      \"Reactor3.Step\": 7,\n      \"Line3.Units\": 1518,\n      \"Line3.Product\": \"BRN\"\n    }\n  ]\n}\n*/\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 540,
-        "y": 180,
+        "x": 300,
+        "y": 200,
         "wires": [
             []
         ]
@@ -3445,8 +3296,8 @@
         "func": "\nvar wwQueue = flow.get('wwQueue') || null;\nflow.set('wwQueue',null); //delete processed json from global context\nmsg.payload = wwQueue;\nif (!msg.payload) {\n    msg = null;\n}\n//msg.payload = JSON.stringify(wwQueue,null,\"\\t\");\n\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 550,
-        "y": 220,
+        "x": 310,
+        "y": 120,
         "wires": [
             [
                 "ec1ff4f0.8a3f18"
@@ -3464,8 +3315,8 @@
         "repeat": "60",
         "crontab": "",
         "once": true,
-        "x": 110,
-        "y": 680,
+        "x": 90,
+        "y": 500,
         "wires": [
             [
                 "727637d9.5f7708"
@@ -3483,8 +3334,8 @@
         "timer": "",
         "oldrc": false,
         "name": "getCPUtemp",
-        "x": 290,
-        "y": 680,
+        "x": 330,
+        "y": 480,
         "wires": [
             [
                 "508af0fb.c62c4"
@@ -3501,8 +3352,8 @@
         "func": "//msg.payload = {'d':{'temp': parseFloat(msg.payload.replace(\"temp=\",\"\").replace(\"'C\\n\",\"\"))}};\n//temp in F where max op of 85C = 185F\nmsg.payload = Math.round(\n    (parseFloat(msg.payload.replace(\"temp=\",\"\").replace(\"'C\\n\",\"\")) * 9/5 + 32)*10)/10;\nmsg.topic = \"rpishare/cpu/temperature\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 500,
-        "y": 680,
+        "x": 540,
+        "y": 500,
         "wires": [
             [
                 "7de4fca4.680f64"
@@ -3515,8 +3366,8 @@
         "z": "e8223701.eebbe8",
         "name": "Check CPU's Temperature",
         "info": "",
-        "x": 147.00003051757812,
-        "y": 633.6192539760045,
+        "x": 130,
+        "y": 460,
         "wires": []
     },
     {
@@ -3530,8 +3381,8 @@
         "repeat": "",
         "crontab": "",
         "once": false,
-        "x": 250,
-        "y": 260,
+        "x": 110,
+        "y": 160,
         "wires": [
             [
                 "810817eb.dbcb88"
@@ -3546,8 +3397,8 @@
         "func": "var wwQueue = flow.get('wwQueue') || null;\nmsg.payload = wwQueue;\nif (!msg.payload) {\n    msg = null;\n}\n\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 540,
-        "y": 260,
+        "x": 300,
+        "y": 160,
         "wires": [
             [
                 "bc9e74de.3876b8"
@@ -3562,8 +3413,8 @@
         "active": true,
         "console": "false",
         "complete": "true",
-        "x": 790,
-        "y": 260,
+        "x": 950,
+        "y": 160,
         "wires": []
     },
     {
@@ -3572,8 +3423,8 @@
         "z": "e8223701.eebbe8",
         "name": "Main inputs",
         "info": "",
-        "x": 110,
-        "y": 400,
+        "x": 90,
+        "y": 260,
         "wires": []
     },
     {
@@ -3582,8 +3433,8 @@
         "z": "e8223701.eebbe8",
         "name": "MQTT processing",
         "info": "",
-        "x": 750,
-        "y": 400,
+        "x": 730,
+        "y": 260,
         "wires": []
     },
     {
@@ -3639,8 +3490,8 @@
         "active": false,
         "console": "false",
         "complete": "true",
-        "x": 790,
-        "y": 180,
+        "x": 950,
+        "y": 80,
         "wires": []
     },
     {
@@ -3704,37 +3555,18 @@
         "wires": []
     },
     {
-        "id": "4dcffbd2.046ec4",
-        "type": "credentials",
-        "z": "af1f1e51.99db8",
-        "name": "ENTER YOUR Wonderware Bearer Token HERE",
-        "props": [
-            {
-                "value": "Authorization",
-                "type": "msg"
-            }
-        ],
-        "x": 630,
-        "y": 20,
-        "wires": [
-            [
-                "f137e0d0.e3672"
-            ]
-        ]
-    },
-    {
         "id": "78534302.56589c",
         "type": "credentials",
         "z": "e8223701.eebbe8",
-        "name": "ENTER YOUR Wonderware Bearer Token HERE",
+        "name": "ENTER YOUR Wonderware Data Source (Data Upload) Bearer Token HERE",
         "props": [
             {
                 "value": "Authorization",
                 "type": "msg"
             }
         ],
-        "x": 650,
-        "y": 80,
+        "x": 710,
+        "y": 20,
         "wires": [
             [
                 "89b4a504.7f21e8"
@@ -3784,8 +3616,8 @@
             "543addd1.376954",
             "3c87aa50.8e7256"
         ],
-        "x": 735,
-        "y": 460,
+        "x": 715,
+        "y": 300,
         "wires": []
     },
     {
@@ -3841,7 +3673,7 @@
         "type": "debug",
         "z": "c201e10a.3d66f",
         "name": "",
-        "active": true,
+        "active": false,
         "console": "false",
         "complete": "true",
         "x": 585,
@@ -5995,7 +5827,9 @@
         "x": 660,
         "y": 60,
         "wires": [
-            []
+            [
+                "d07c6ad.e3c7298"
+            ]
         ]
     },
     {
@@ -6158,8 +5992,8 @@
         "topic": "insteon/#",
         "qos": "2",
         "broker": "971eda83.260398",
-        "x": 100,
-        "y": 540,
+        "x": 80,
+        "y": 380,
         "wires": [
             [
                 "ef1bb868.c53928",
@@ -6207,8 +6041,8 @@
         "func": "var prefix = \"tapia/home/\";\nif (msg.topic.startsWith(prefix)){\n    \n}else{\n    msg.topic = prefix + msg.topic;\n}\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 810,
-        "y": 540,
+        "x": 790,
+        "y": 380,
         "wires": [
             [
                 "c73faab4.97eef8"
@@ -6223,8 +6057,8 @@
         "func": "/*\ninsteon-mqtt dimmer state contains complex json\n    insteon/mydimmer/state='{\"state\":\"ON\",\"Brightness\":255}''\nwe are breaking this down to be like switches where:\n    insteon/myswitch/state = \"ON\"\n*/\n\nvar suffix = \"/state\";\n\nif (msg.topic && msg.topic.endsWith(suffix) && (msg.payload !== null) && (msg.payload !== \"\") && (typeof msg.payload == \"object\") && (msg.payload.state) && (msg.payload.brightness)) {\n    var newmsg = [];\n    var prefix = msg.topic.replace(suffix,\"\")+\"/\";\n    for(var propertyName in msg.payload) {\n        newmsg.push({\n            topic : prefix  + propertyName,\n            payload : msg.payload[propertyName]\n        });\n    }\n    msg = newmsg;\n    return [msg];\n} else {\n    \n}\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 570,
-        "y": 540,
+        "x": 550,
+        "y": 380,
         "wires": [
             [
                 "450cd6f0.b7c678"
@@ -6241,8 +6075,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 970,
-        "y": 540,
+        "x": 950,
+        "y": 380,
         "wires": []
     },
     {
@@ -6253,8 +6087,8 @@
         "property": "payload",
         "action": "obj",
         "pretty": false,
-        "x": 370,
-        "y": 540,
+        "x": 350,
+        "y": 380,
         "wires": [
             [
                 "b802be46.082e7"
@@ -6271,8 +6105,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 290,
-        "y": 580,
+        "x": 950,
+        "y": 420,
         "wires": []
     },
     {
@@ -6319,20 +6153,6 @@
         ]
     },
     {
-        "id": "7547d12e.78211",
-        "type": "function",
-        "z": "e8223701.eebbe8",
-        "name": "disable",
-        "func": "//return null;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 620,
-        "y": 500,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "4bfc0d3e.407e84",
         "type": "switch",
         "z": "e8223701.eebbe8",
@@ -6352,8 +6172,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 250,
-        "y": 540,
+        "x": 230,
+        "y": 380,
         "wires": [
             [
                 "60c14a65.0287d4"
@@ -6362,5 +6182,194 @@
                 "b802be46.082e7"
             ]
         ]
+    },
+    {
+        "id": "4917e4e5.06bbbc",
+        "type": "credentials",
+        "z": "e8223701.eebbe8",
+        "name": "ENTER YOUR Wonderware Integration (REST API Data Retreival) Bearer Token HERE",
+        "props": [
+            {
+                "value": "Authorization",
+                "type": "msg"
+            }
+        ],
+        "x": 530,
+        "y": 560,
+        "wires": [
+            [
+                "307e7272.0da96e"
+            ]
+        ]
+    },
+    {
+        "id": "12ed0d8a.fd29a2",
+        "type": "comment",
+        "z": "e8223701.eebbe8",
+        "name": "Read REST API",
+        "info": "",
+        "x": 100,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "43ec985e.08bb38",
+        "type": "http request",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "method": "use",
+        "ret": "txt",
+        "url": "",
+        "tls": "",
+        "x": 750,
+        "y": 640,
+        "wires": [
+            [
+                "5825d936.db4968"
+            ]
+        ]
+    },
+    {
+        "id": "1fb01f.a409cfe1",
+        "type": "inject",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 100,
+        "y": 600,
+        "wires": [
+            [
+                "4917e4e5.06bbbc"
+            ]
+        ]
+    },
+    {
+        "id": "9a406cda.bd797",
+        "type": "function",
+        "z": "e8223701.eebbe8",
+        "name": "move Authorization to headers",
+        "func": "//msg.url = \"https://online.wonderware.com/apis/Historian/v2/\";\n//msg.method = \"GET\";\n//msg.headers = {};\nmsg.headers.Authorization = msg.Authorization;  //copy Authorization to be under headers\ndelete msg.Authorization;                       // and remove from old location\n//msg.headers.ContentType = \"application/json\";\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 350,
+        "y": 640,
+        "wires": [
+            [
+                "43ec985e.08bb38"
+            ]
+        ]
+    },
+    {
+        "id": "5825d936.db4968",
+        "type": "debug",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 950,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "dbb8355c.ae2f88",
+        "type": "change",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "method",
+                "pt": "msg",
+                "to": "GET",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 440,
+        "y": 600,
+        "wires": [
+            [
+                "7e76212d.f8ed5"
+            ]
+        ]
+    },
+    {
+        "id": "307e7272.0da96e",
+        "type": "change",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "https://online.wonderware.com/apis/Historian/v2/",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 600,
+        "wires": [
+            [
+                "dbb8355c.ae2f88"
+            ]
+        ]
+    },
+    {
+        "id": "7e76212d.f8ed5",
+        "type": "change",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "headers.ContentType",
+                "pt": "msg",
+                "to": "application/json",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 650,
+        "y": 600,
+        "wires": [
+            [
+                "9a406cda.bd797"
+            ]
+        ]
+    },
+    {
+        "id": "872c5b0d.507928",
+        "type": "debug",
+        "z": "88396424.c54498",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 910,
+        "y": 460,
+        "wires": []
     }
 ]
