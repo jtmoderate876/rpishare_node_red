@@ -886,7 +886,8 @@
             [],
             [
                 "aecb869a.6a2788",
-                "d07c6ad.e3c7298"
+                "d07c6ad.e3c7298",
+                "a228dbb5.6bd0f8"
             ]
         ]
     },
@@ -3754,7 +3755,7 @@
         "qos": "2",
         "broker": "971eda83.260398",
         "x": 200,
-        "y": 700,
+        "y": 780,
         "wires": [
             [
                 "c5f1953a.314208"
@@ -3772,7 +3773,7 @@
         "tostatus": false,
         "complete": "false",
         "x": 750,
-        "y": 700,
+        "y": 780,
         "wires": []
     },
     {
@@ -3784,7 +3785,7 @@
         "qos": "2",
         "broker": "971eda83.260398",
         "x": 70,
-        "y": 640,
+        "y": 720,
         "wires": [
             [
                 "e454fb33.9a59f8"
@@ -3802,7 +3803,7 @@
         "tostatus": false,
         "complete": "false",
         "x": 750,
-        "y": 640,
+        "y": 720,
         "wires": []
     },
     {
@@ -3818,7 +3819,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 120,
-        "y": 1000,
+        "y": 1240,
         "wires": [
             [
                 "e650743f.56d978"
@@ -3832,7 +3833,7 @@
         "name": "lamplinc tests 18.93.3c",
         "info": "",
         "x": 120,
-        "y": 900,
+        "y": 1140,
         "wires": []
     },
     {
@@ -3844,7 +3845,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 430,
-        "y": 1000,
+        "y": 1240,
         "wires": [
             [
                 "710d3950.694438"
@@ -3861,7 +3862,7 @@
         "retain": "",
         "broker": "971eda83.260398",
         "x": 650,
-        "y": 960,
+        "y": 1200,
         "wires": []
     },
     {
@@ -3877,7 +3878,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 250,
-        "y": 1040,
+        "y": 1280,
         "wires": [
             [
                 "710d3950.694438"
@@ -3891,7 +3892,7 @@
         "name": "plm tests 14.84.1c",
         "info": "",
         "x": 110,
-        "y": 1380,
+        "y": 1620,
         "wires": []
     },
     {
@@ -3904,7 +3905,7 @@
         "retain": "",
         "broker": "971eda83.260398",
         "x": 610,
-        "y": 1420,
+        "y": 1660,
         "wires": []
     },
     {
@@ -3920,7 +3921,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 150,
-        "y": 1420,
+        "y": 1660,
         "wires": [
             [
                 "357d8636.7d764a"
@@ -3940,7 +3941,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 290,
-        "y": 960,
+        "y": 1200,
         "wires": [
             [
                 "710d3950.694438"
@@ -3960,7 +3961,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 270,
-        "y": 1080,
+        "y": 1320,
         "wires": [
             [
                 "710d3950.694438"
@@ -4594,7 +4595,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 140,
-        "y": 860,
+        "y": 1100,
         "wires": [
             [
                 "b4f329cb.60c288"
@@ -4610,7 +4611,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 320,
-        "y": 860,
+        "y": 1100,
         "wires": [
             []
         ]
@@ -4642,7 +4643,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 510,
-        "y": 700,
+        "y": 780,
         "wires": [
             [
                 "7502f25.a3ec60c"
@@ -4728,7 +4729,7 @@
         "randomUnits": "seconds",
         "drop": true,
         "x": 210,
-        "y": 640,
+        "y": 720,
         "wires": [
             [
                 "bb0b2c50.7562e"
@@ -4861,7 +4862,7 @@
         "name": "experimental testing:",
         "info": "",
         "x": 90,
-        "y": 780,
+        "y": 1020,
         "wires": []
     },
     {
@@ -4871,7 +4872,7 @@
         "name": "troubleshooting tools:",
         "info": "",
         "x": 120,
-        "y": 600,
+        "y": 680,
         "wires": []
     },
     {
@@ -4881,7 +4882,7 @@
         "name": "possibly use global/flow context for name/insteon id lookup table",
         "info": "",
         "x": 250,
-        "y": 820,
+        "y": 1060,
         "wires": []
     },
     {
@@ -5029,7 +5030,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 940,
-        "y": 960,
+        "y": 1200,
         "wires": [
             [
                 "710d3950.694438"
@@ -5045,7 +5046,7 @@
         "qos": "2",
         "broker": "971eda83.260398",
         "x": 140,
-        "y": 440,
+        "y": 840,
         "wires": [
             [
                 "61553f8d.492ec"
@@ -5062,7 +5063,7 @@
         "retain": "true",
         "broker": "971eda83.260398",
         "x": 1000,
-        "y": 480,
+        "y": 880,
         "wires": []
     },
     {
@@ -5072,7 +5073,7 @@
         "name": "notes on insteon/command/{device} vs insteon/{device}/set",
         "info": "it appears you can set a dimmer device, for example\nusing either:\n msg.topic = 'insteon/command/{device}''\n msg.payload = '{ \"cmd\": \"on\", \"level\" : 175, \"instant\" : 1 }''\n\nor:\n msg.topic = 'insteon/{device}/set'\n msg.payload = { \"cmd\": \"on\" }\n\nor:\n msg.topic = 'insteon/{device}/level'\n msg.payload = '{ \"cmd\": \"on\"[,\"level\" : 175] }'\n ([]-optional)\n \n I'm unclear which of the 3 might be best.\n ",
         "x": 670,
-        "y": 860,
+        "y": 1100,
         "wires": []
     },
     {
@@ -5088,7 +5089,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 100,
-        "y": 560,
+        "y": 940,
         "wires": [
             [
                 "fe37c1ff.2d225"
@@ -5104,7 +5105,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 460,
-        "y": 560,
+        "y": 940,
         "wires": [
             [
                 "ac6b2d4c.ea248"
@@ -5122,7 +5123,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 860,
-        "y": 560,
+        "y": 940,
         "wires": []
     },
     {
@@ -5138,7 +5139,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 950,
-        "y": 1000,
+        "y": 1240,
         "wires": [
             [
                 "710d3950.694438"
@@ -5158,7 +5159,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 810,
-        "y": 1040,
+        "y": 1280,
         "wires": [
             [
                 "710d3950.694438"
@@ -5178,7 +5179,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 160,
-        "y": 1240,
+        "y": 1480,
         "wires": [
             [
                 "710d3950.694438"
@@ -5198,7 +5199,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 190,
-        "y": 1280,
+        "y": 1520,
         "wires": [
             [
                 "710d3950.694438"
@@ -5218,7 +5219,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 240,
-        "y": 1200,
+        "y": 1440,
         "wires": [
             [
                 "710d3950.694438"
@@ -5238,7 +5239,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 250,
-        "y": 1160,
+        "y": 1400,
         "wires": [
             [
                 "710d3950.694438"
@@ -5258,7 +5259,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 270,
-        "y": 1120,
+        "y": 1360,
         "wires": [
             [
                 "710d3950.694438"
@@ -5272,7 +5273,7 @@
         "name": "THESE WORK",
         "info": "",
         "x": 300,
-        "y": 920,
+        "y": 1160,
         "wires": []
     },
     {
@@ -5282,7 +5283,7 @@
         "name": "THESE DO NOT WORK",
         "info": "",
         "x": 890,
-        "y": 920,
+        "y": 1160,
         "wires": []
     },
     {
@@ -5291,7 +5292,7 @@
         "z": "984823b1.a0823",
         "name": "",
         "x": 970,
-        "y": 440,
+        "y": 840,
         "wires": []
     },
     {
@@ -5333,7 +5334,7 @@
         "to": "",
         "reg": false,
         "x": 450,
-        "y": 440,
+        "y": 840,
         "wires": [
             [
                 "fbac0c39.6c15"
@@ -6433,5 +6434,238 @@
         "x": 1010,
         "y": 360,
         "wires": []
+    },
+    {
+        "id": "399523d5.0af1ec",
+        "type": "comment",
+        "z": "88396424.c54498",
+        "name": "Tell insteon to turn Rainforest Eagle on and off to reset it because it locked up again",
+        "info": "",
+        "x": 430,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "a228dbb5.6bd0f8",
+        "type": "link out",
+        "z": "88396424.c54498",
+        "name": "Rainforest Side of Rainforest Eagle Lockup",
+        "links": [
+            "530a8d76.498e64"
+        ],
+        "x": 540,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "530a8d76.498e64",
+        "type": "link in",
+        "z": "984823b1.a0823",
+        "name": "Insteon Side of Rainforest Eagle Lockup",
+        "links": [
+            "a228dbb5.6bd0f8"
+        ],
+        "x": 95,
+        "y": 480,
+        "wires": [
+            [
+                "8a99f153.54606"
+            ]
+        ]
+    },
+    {
+        "id": "e770146e.cd19d8",
+        "type": "comment",
+        "z": "984823b1.a0823",
+        "name": "Handle Rainforest Eagle lock ups",
+        "info": "",
+        "x": 150,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "170f2749.593049",
+        "type": "trigger",
+        "z": "984823b1.a0823",
+        "op1": "",
+        "op2": "{\"payload\":\"OFF\"}",
+        "op1type": "nul",
+        "op2type": "json",
+        "duration": "5",
+        "extend": true,
+        "units": "s",
+        "reset": "CANCEL",
+        "bytopic": "all",
+        "name": "",
+        "x": 380,
+        "y": 480,
+        "wires": [
+            [
+                "c60c4f0e.5ed16"
+            ]
+        ]
+    },
+    {
+        "id": "2fe3dcad.5fea14",
+        "type": "mqtt out",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "insteon/bsmt_officesmall_rainforest_appliancelinc_16.d7.f1/set",
+        "qos": "1",
+        "retain": "true",
+        "broker": "971eda83.260398",
+        "x": 870,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "4492e2a2.88eb4c",
+        "type": "comment",
+        "z": "984823b1.a0823",
+        "name": "insteon-mqtt notes",
+        "info": "insteon-mqtt is configured via web browser:\n\nRDP into 192.168.1.216\nopen command terminal\n\nsudo geany /opt/insteon-mqtt/config.yaml\n\nsudo systemctl --system daemon-reload\nsudo systemctl start insteon-mqtt\nsudo systemctl status insteon-mqtt\n#If everything looks OK, enable the service to start at the next boot.\nsudo systemctl enable insteon-mqtt\n",
+        "x": 1130,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "8964dd55.295e8",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "",
+        "payload": "OFF",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 510,
+        "y": 520,
+        "wires": [
+            [
+                "2fe3dcad.5fea14"
+            ]
+        ]
+    },
+    {
+        "id": "43feb82f.a74898",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "",
+        "payload": "ON",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 330,
+        "y": 520,
+        "wires": [
+            [
+                "2fe3dcad.5fea14"
+            ]
+        ]
+    },
+    {
+        "id": "8a99f153.54606",
+        "type": "switch",
+        "z": "984823b1.a0823",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "true",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 220,
+        "y": 480,
+        "wires": [
+            [
+                "a492e30a.883e4"
+            ]
+        ]
+    },
+    {
+        "id": "a492e30a.883e4",
+        "type": "change",
+        "z": "984823b1.a0823",
+        "name": "send OFF",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "OFF",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 440,
+        "wires": [
+            [
+                "2fe3dcad.5fea14",
+                "170f2749.593049"
+            ]
+        ]
+    },
+    {
+        "id": "c60c4f0e.5ed16",
+        "type": "change",
+        "z": "984823b1.a0823",
+        "name": "send ON",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "ON",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 480,
+        "wires": [
+            [
+                "2fe3dcad.5fea14"
+            ]
+        ]
+    },
+    {
+        "id": "5aeda534.532a3c",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "test with true",
+        "topic": "",
+        "payload": "true",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 520,
+        "wires": [
+            [
+                "8a99f153.54606"
+            ]
+        ]
     }
 ]
