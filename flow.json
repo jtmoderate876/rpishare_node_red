@@ -446,7 +446,8 @@
         "y": 100,
         "wires": [
             [
-                "2bd6f5db.37729a"
+                "2bd6f5db.37729a",
+                "2e5e419d.b21b5e"
             ]
         ]
     },
@@ -511,7 +512,7 @@
         "type": "function",
         "z": "88396424.c54498",
         "name": "Format request",
-        "func": "//Create Eagle command XML fragment\nvar command = \"<Command>\\n\";\ncommand += \"  <Name>reboot</Name>\\n\";\n// adding jeff tapia's eagle mac:\n//command += \"  <MacId>0xd8d5b90000005c9e</MacId>\\n\";\ncommand += \"  <Target>Eagle</Target>\\n\";\ncommand += \"</Command>\\n\";\n\n\n//Modify header to include Gateway authentication\nif ((context.flow.Rainforest !== null) && (context.flow.Rainforest !== undefined) && (context.flow.Rainforest.headers !== null) && (context.flow.Rainforest.headers !== undefined)) {\n    msg.headers = context.flow.Rainforest.headers;\n    msg.payload = command;\n}\nelse {\n    msg = null;\n}\n\nreturn msg;",
+        "func": "//Create Eagle command XML fragment\nvar command = \"<Command>\\n\";\ncommand += \"  <Name>reboot</Name>\\n\";\ncommand += \"  <Target>Eagle</Target>\\n\";\ncommand += \"</Command>\\n\";\n\n\n//Modify header to include Gateway authentication\nif ((context.flow.Rainforest !== null) && (context.flow.Rainforest !== undefined) && (context.flow.Rainforest.headers !== null) && (context.flow.Rainforest.headers !== undefined)) {\n    msg.headers = context.flow.Rainforest.headers;\n    msg.payload = command;\n}\nelse {\n    msg = null;\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 367,
@@ -556,7 +557,7 @@
         "type": "function",
         "z": "88396424.c54498",
         "name": "Format request",
-        "func": "//Create Eagle command XML fragment\nvar command = \"<Command>\\n\";\ncommand += \"  <Name>set_schedule</Name>\\n\";\n// adding jeff tapia's eagle mac:\n// command += \"  <MacId>0xd8d5b90000005c9e</MacId>\\n\";\ncommand += \"  <Event>demand</Event>\\n\";\ncommand += \"  <Frequency>5</Frequency>\\n\";\ncommand += \"  <Enabled>Y</Enabled>\\n\";\ncommand += \"</Command>\\n\";\n\n//Modify header to include Gateway authentication\nif ((context.flow.Rainforest !== null) && (context.flow.Rainforest !== undefined) && (context.flow.Rainforest.headers !== null) && (context.flow.Rainforest.headers !== undefined)) {\n    msg.headers = context.flow.Rainforest.headers;\n    msg.payload = command;\n}\nelse {\n    msg = null;\n}\n\nreturn msg;",
+        "func": "//Create Eagle command XML fragment\nvar command = \"<Command>\\n\";\ncommand += \"  <Name>set_schedule</Name>\\n\";\ncommand += \"  <Event>demand</Event>\\n\";\ncommand += \"  <Frequency>5</Frequency>\\n\";\ncommand += \"  <Enabled>Y</Enabled>\\n\";\ncommand += \"</Command>\\n\";\n\n//Modify header to include Gateway authentication\nif ((context.flow.Rainforest !== null) && (context.flow.Rainforest !== undefined) && (context.flow.Rainforest.headers !== null) && (context.flow.Rainforest.headers !== undefined)) {\n    msg.headers = context.flow.Rainforest.headers;\n    msg.payload = command;\n}\nelse {\n    msg = null;\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 500,
@@ -639,7 +640,7 @@
         "type": "function",
         "z": "88396424.c54498",
         "name": "Format request",
-        "func": "//Create Eagle command XML fragment\nvar command = \"<Command>\\n\";\ncommand += \"  <Name>get_schedule</Name>\\n\";\n// adding jeff tapia's eagle mac:\n// command += \"  <MacId>0xd8d5b90000005c9e</MacId>\\n\";\ncommand += \"  <Event>demand</Event>\\n\";\ncommand += \"</Command>\\n\";\n\n//Modify header to include Gateway authentication\nif ((context.flow.Rainforest !== null) && (context.flow.Rainforest !== undefined) && (context.flow.Rainforest.headers !== null) && (context.flow.Rainforest.headers !== undefined)) {\n    msg.headers = context.flow.Rainforest.headers;\n    msg.payload = command;\n}\nelse {\n    msg = null;\n}\n\nreturn msg;",
+        "func": "//Create Eagle command XML fragment\nvar command = \"<Command>\\n\";\ncommand += \"  <Name>get_schedule</Name>\\n\";\ncommand += \"  <Event>demand</Event>\\n\";\ncommand += \"</Command>\\n\";\n\n//Modify header to include Gateway authentication\nif ((context.flow.Rainforest !== null) && (context.flow.Rainforest !== undefined) && (context.flow.Rainforest.headers !== null) && (context.flow.Rainforest.headers !== undefined)) {\n    msg.headers = context.flow.Rainforest.headers;\n    msg.payload = command;\n}\nelse {\n    msg = null;\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 320,
@@ -893,15 +894,15 @@
         "id": "96a2c3b4.61f02",
         "type": "inject",
         "z": "50466fda.5d00f",
-        "name": "Refresh Thermostat Data",
+        "name": "Request Data",
         "topic": "",
-        "payload": "Refresh Thermostat Variables",
+        "payload": "",
         "payloadType": "str",
         "repeat": "120",
         "crontab": "",
         "once": false,
         "onceDelay": "",
-        "x": 160,
+        "x": 120,
         "y": 400,
         "wires": [
             [
@@ -962,8 +963,8 @@
         "func": "//    curl -H \"Content-Type: text/json\" -H \"Authorization: Bearer ACCESS_TOKEN\" 'https://api.ecobee.com/1/thermostat?format=json&body=\\{\"selection\":\\{\"selectionType\":\"registered\",\"selectionMatch\":\"\",\"includeRuntime\":true\\}\\}'             \n\n//if ((context.global.Ecobee !== null) && (context.global.Ecobee !== undefined)) {\n//    if ((context.global.Ecobee.refresh_token !== null) && (context.global.Ecobee.refresh_token !== undefined)) {\n    if ((global.get(\"Ecobee.refresh_token\") !== null) && (global.get(\"Ecobee.refresh_token\") !== undefined)) {\n    // if (typeof context.global.Ecobee.refresh_token !== 'undefined') {\n    //if (context.global.Ecobee.refresh_token!==\"\") {\n        var newMsg={\n    //        \"url\":\"https://api.ecobee.com/1/thermostat?format=json&body=%7B%22selection%22%3A%7B%22includeAlerts%22%3A%22true%22%2C%22selectionType%22%3A%22registered%22%2C%22selectionMatch%22%3A%22%22%2C%22includeEvents%22%3A%22false%22%2C%22includeEquipmentStatus%22%3A%22true%22%2C%22includeSettings%22%3A%22true%22%2C%22includeRuntime%22%3A%22true%22%2C%22includeSensors%22%3A%22true%22%2C%22includeWeather%22%3A%22true%22%2C%22includeSettings%22%3A%22true%22%7D%7D\",\n    //        \"url\":\"https://api.ecobee.com/1/thermostat?format=json&body=%7B%22selection%22%3A%7B%22includeAlerts%22%3A%22true%22%2C%22selectionType%22%3A%22registered%22%2C%22selectionMatch%22%3A%22%22%2C%22includeEvents%22%3A%22false%22%2C%22includeEquipmentStatus%22%3A%22true%22%2C%22includeSettings%22%3A%22true%22%2C%22includeRuntime%22%3A%22true%22%2C%22includeSensors%22%3A%22true%22%2C%22includeWeather%22%3A%22true%22%2C%22includeSettings%22%3A%22true%22%7D%7D\",\n    //        \"url\":\"https://api.ecobee.com/1/thermostat?format=json&body=%7B%22selection%22%3A%7B%22selectionType%22%3A%22registered%22%2C%22selectionMatch%22%3A%22%22%2C%22includeEvents%22%3A%22false%22%2C%22includeEquipmentStatus%22%3A%22true%22%7D%7D\",\n            \"url\":\"https://api.ecobee.com/1/thermostat?format=json&body=%7B%22selection%22%3A%7B%22selectionType%22%3A%22registered%22%2C%22selectionMatch%22%3A%22%22%2C%22includeEvents%22%3A%22false%22%2C%22includeEquipmentStatus%22%3A%22true%22%2C%22includeRuntime%22%3A%22true%22%2C%22includeSensors%22%3A%22true%22%2C%22includeWeather%22%3A%22true%22%7D%7D\",\n            \"method\": \"GET\",\n            headers: {\n                \"Content-Type\":\"application/json;charset=UTF-8\",\n                \"Authorization\":\"Bearer \"+global.get(\"Ecobee.access_token\"),\n            }\n           }\n    } else {\n        var newMsg=null; // don't do anything if authorization is not done\n    //    var newMsg={\n    //        \"url\":\"127.0.0.1\",\n    //        \"method\":\"GET\"\n    //    }\n//    }\n//} else {\n//    var newMsg=null; // don't do anything if authorization is not done\n//    var newMsg={\n//        \"url\":\"127.0.0.1\",\n//        \"method\":\"GET\"\n//    }\n}\nreturn newMsg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 502.25,
-        "y": 399.5,
+        "x": 450,
+        "y": 400,
         "wires": [
             [
                 "10830111.cc29df"
@@ -979,8 +980,8 @@
         "ret": "obj",
         "url": "",
         "tls": "",
-        "x": 712.5,
-        "y": 399.5,
+        "x": 650,
+        "y": 400,
         "wires": [
             [
                 "b543311d.f82ef"
@@ -1057,7 +1058,7 @@
         "type": "debug",
         "z": "50466fda.5d00f",
         "name": "",
-        "active": false,
+        "active": true,
         "console": "false",
         "complete": "payload",
         "x": 970,
@@ -1243,8 +1244,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": true,
-        "x": 357.4166564941406,
-        "y": 399.91668701171875,
+        "x": 280,
+        "y": 400,
         "wires": [
             [
                 "7d405852.04f168"
@@ -1857,9 +1858,7 @@
         "name": "tapia/home/ related topics to Wonderware",
         "links": [
             "34b2b94.276a146",
-            "9cd45335.9c179",
-            "e520b0c4.168a8",
-            "f120ff8e.ebe99"
+            "e520b0c4.168a8"
         ],
         "x": 195,
         "y": 320,
@@ -1889,12 +1888,12 @@
         "z": "50466fda.5d00f",
         "name": "",
         "links": [
-            "cd635b32.ae5f48",
             "c30c472a.3b5e98",
-            "a1e76248.eab86"
+            "a1e76248.eab86",
+            "3a764f5e.e3f53"
         ],
-        "x": 1175,
-        "y": 400,
+        "x": 955,
+        "y": 480,
         "wires": []
     },
     {
@@ -1939,13 +1938,14 @@
         "type": "function",
         "z": "50466fda.5d00f",
         "name": "parse to [msg] array",
-        "func": "i=0;\nvar ts = new Date(msg.payload.thermostatList[i].utcTime+\" UTC\").getTime();\n\nvar msgarr = [];\nmsgarr.push({\n    payload:(msg.payload.thermostatList[i].runtime.actualTemperature/10),\n    topic: \"average/temperature\",\n    timestamp : ts\n});\n\nmsgarr.push({\n    payload:(msg.payload.thermostatList[i].runtime.desiredCool/10),\n    topic: \"average/temperature/setpoint/cool\",\n    timestamp : ts\n});\nmsgarr.push({\n    payload:(msg.payload.thermostatList[i].runtime.desiredHeat/10),\n    topic: \"average/temperature/setpoint/heat\",\n    timestamp : ts\n});\nmsgarr.push({\n    payload:(msg.payload.thermostatList[i].runtime.actualHumidity),\n    topic: \"average/humidity\",\n    timestamp : ts\n});\nmsgarr.push({\n    payload:(msg.payload.thermostatList[i].weather.forecasts[i].temperature/10),\n    topic: \"outside/temperature\",\n    timestamp : ts\n});\nmsgarr.push({\n    payload:(msg.payload.thermostatList[i].weather.forecasts[i].pressure/10),\n    topic: \"outside/pressure\",\n    timestamp : ts\n});\nmsgarr.push({\n    payload:(msg.payload.thermostatList[i].weather.forecasts[i].relativeHumidity),\n    topic: \"outside/humidity\",\n    timestamp : ts\n});\nmsgarr.push({\n    payload:(msg.payload.thermostatList[i].weather.forecasts[i].windSpeed/1000),\n    topic: \"outside/wind/speed\",\n    timestamp : ts\n});\nmsgarr.push({\n    payload:(msg.payload.thermostatList[i].weather.forecasts[i].windBearing/10),\n    topic: \"outside/wind/bearing\",\n    timestamp : ts\n});\n\ni=0;\nj=0;\nk=0;\nmsgarr.push({\n    payload:(msg.payload.thermostatList[i].remoteSensors[j].capability[k].value/10),\n    topic: \"familyroom/temperature\",\n    timestamp : ts\n});\n\ni=0;\nj=1;\nk=0;\nmsgarr.push({\n    payload:(msg.payload.thermostatList[i].remoteSensors[j].capability[k].value/10),\n    topic: \"basement/temperature\",\n    timestamp : ts\n});\n\ni=0;\nj=2;\nk=0;\nmsgarr.push({\n    payload:(msg.payload.thermostatList[i].remoteSensors[j].capability[k].value/10),\n    topic: \"kyleroom/temperature\",\n    timestamp : ts\n});\ni=0;\nj=3;\nk=0;\nmsgarr.push({\n    payload:(msg.payload.thermostatList[i].remoteSensors[j].capability[k].value/10),\n    topic: \"diningroom/temperature\",\n    timestamp : ts\n});\ni=0;\nj=0;\nk=1;\nmsgarr.push({\n    payload:(msg.payload.thermostatList[i].remoteSensors[j].capability[k].value),\n    topic: \"familyroom/occupancy\",\n    timestamp : ts\n});\ni=0;\nj=1;\nk=1;\nmsgarr.push({\n    payload:(msg.payload.thermostatList[i].remoteSensors[j].capability[k].value),\n    topic: \"basement/occupancy\",\n    timestamp : ts\n});\ni=0;\nj=2;\nk=1;\nmsgarr.push({\n    payload:(msg.payload.thermostatList[i].remoteSensors[j].capability[k].value),\n    topic: \"kyleroom/occupancy\",\n    timestamp : ts\n});\ni=0;\nj=3;\nk=2;\nmsgarr.push({\n    payload:(msg.payload.thermostatList[i].remoteSensors[j].capability[k].value),\n    topic: \"diningroom/occupancy\",\n    timestamp : ts\n});\n\ni=0;\nif (msg.payload.thermostatList[i].equipmentStatus === \"\") {\n    msg.payload.thermostatList[i].equipmentStatus = \"off\";\n}\nmsgarr.push({\n    payload:(msg.payload.thermostatList[i].equipmentStatus),\n    topic: \"thermostat/status\",\n    timestamp : ts\n});\n\nreturn [msgarr];",
+        "func": "var timestampfromthermostat;//timestamp\nvar thermostat = [];\nvar thermostatname = \"\";\nvar msgarr = [];\nvar remotesensor = [];\nvar remotesensorname;\nvar capability = [];\nvar capabilitytype;\nvar capabilityvalue;\n\nfor (thermostat of msg.payload.thermostatList) {//array so use \"of\" not \"in\"\n    timestampfromthermostat = new Date(thermostat.utcTime+\" UTC\").getTime();\n    thermostatname = thermostat.name.replace(/\\s+/g, '').toLowerCase();//remove spaces, if any, and set to lowercase.\n    //node.warn(\"completed replace with thermostatname = \"+ thermostatname);\n\n    if (thermostat.equipmentStatus === \"\") {\n        thermostat.equipmentStatus = \"off\";\n    }\n    msgarr.push({\n        payload:(thermostat.equipmentStatus),\n        topic: thermostatname + \"/thermostat/status\",\n        timestamp : timestampfromthermostat\n    });    \n\n    msgarr.push({\n        payload:(thermostat.runtime.actualTemperature/10),\n        topic: thermostatname + \"/average/temperature\",\n        timestamp : timestampfromthermostat\n    });\n    \n    msgarr.push({\n        payload:(thermostat.runtime.desiredCool/10),\n        topic: thermostatname + \"/average/temperature/setpoint/cool\",\n        timestamp : timestampfromthermostat\n    });\n    msgarr.push({\n        payload:(thermostat.runtime.desiredHeat/10),\n        topic: thermostatname + \"/average/temperature/setpoint/heat\",\n        timestamp : timestampfromthermostat\n    });\n    msgarr.push({\n        payload:(thermostat.runtime.actualHumidity),\n        topic: thermostatname + \"/average/humidity\",\n        timestamp : timestampfromthermostat\n    });\n    \n    // for weather stuff we only want the current weather (array element zero)\n    msgarr.push({\n        payload:(thermostat.weather.forecasts[0].temperature/10),\n        topic: thermostatname + \"/outside/temperature\",\n        timestamp : timestampfromthermostat\n    });\n    msgarr.push({\n        payload:(thermostat.weather.forecasts[0].pressure/10),\n        topic: thermostatname + \"/outside/pressure\",\n        timestamp : timestampfromthermostat\n    });\n    msgarr.push({\n        payload:(thermostat.weather.forecasts[0].relativeHumidity),\n        topic: thermostatname + \"/outside/humidity\",\n        timestamp : timestampfromthermostat\n    });\n    msgarr.push({\n        payload:(thermostat.weather.forecasts[0].windSpeed/1000),\n        topic: thermostatname + \"/outside/wind/speed\",\n        timestamp : timestampfromthermostat\n    });\n    msgarr.push({\n        payload:(thermostat.weather.forecasts[0].windBearing/10),\n        topic: thermostatname + \"/outside/wind/bearing\",\n        timestamp : timestampfromthermostat\n    });\n\n    for (remotesensor of thermostat.remoteSensors) {//array so use \"of\" not \"in\"\n        remotesensorname = remotesensor.name.replace(/\\s+/g, '').toLowerCase();//remove spaces, if any, and set to lowercase.\n        if (remotesensorname==thermostatname) {\n            if (remotesensorname==\"home\") { //my ecobee main unit is in the dining room\n                remotesensorname=\"diningroom\";\n            } else {\n                remotesensorname = \"main\";\n            }\n        }\n        //node.warn(\"remotesensorname = \" + remotesensorname);\n        for (capability of remotesensor.capability) { //array so use \"of\" not \"in\"\n            capabilitytype = capability.type.replace(/\\s+/g, '').toLowerCase();//remove spaces, if any, and set to lowercase.\n            //node.warn(\"capabilitytype = \" + capabilitytype);\n            \n            capabilityvalue = capability.value;\n            if (capabilitytype==\"temperature\") {\n                capabilityvalue = capabilityvalue/10;//temperatures need decimal shifted place left\n            }\n\n            msgarr.push({\n                payload:capabilityvalue,\n                topic: thermostatname + \"/\" + remotesensorname + \"/\" + capabilitytype,\n                timestamp : timestampfromthermostat\n            });\n        }\n    }\n}\n\nreturn [msgarr];\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 940,
+        "x": 860,
         "y": 400,
         "wires": [
             [
+                "e75b1948.c5f178",
                 "67b11cc1.5bfab4"
             ]
         ]
@@ -1955,11 +1955,11 @@
         "type": "debug",
         "z": "50466fda.5d00f",
         "name": "",
-        "active": true,
+        "active": false,
         "console": "false",
         "complete": "true",
         "x": 990,
-        "y": 340,
+        "y": 440,
         "wires": []
     },
     {
@@ -3098,7 +3098,7 @@
             "feef4a4e.553278"
         ],
         "x": 195,
-        "y": 280,
+        "y": 360,
         "wires": [
             [
                 "7de4fca4.680f64"
@@ -3109,16 +3109,15 @@
         "id": "7de4fca4.680f64",
         "type": "function",
         "z": "e8223701.eebbe8",
-        "name": "prefix tapia/home/",
-        "func": "var prefix = \"tapia/home/\";\nif (msg.topic.startsWith(prefix)){\n    \n}else{\n    msg.topic = prefix + msg.topic;\n}\nreturn msg;\n",
+        "name": "prefix home/",
+        "func": "var prefix = \"home/\";\nif (msg.topic.startsWith(prefix)){\n    \n}else{\n    msg.topic = prefix + msg.topic;\n}\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 430,
-        "y": 300,
+        "x": 350,
+        "y": 340,
         "wires": [
             [
-                "8b940ec1.056b4",
-                "1913fb4e.05ae35"
+                "2a07f92e.5f7b06"
             ]
         ]
     },
@@ -3193,12 +3192,12 @@
         "gap": "",
         "start": "",
         "inout": "out",
-        "x": 1090,
+        "x": 1050,
         "y": 400,
         "wires": [
             [
-                "9cd45335.9c179",
-                "cf55e901.124768"
+                "cf55e901.124768",
+                "9cd45335.9c179"
             ]
         ]
     },
@@ -3244,7 +3243,7 @@
         "crontab": "",
         "once": true,
         "x": 90,
-        "y": 500,
+        "y": 520,
         "wires": [
             [
                 "727637d9.5f7708"
@@ -3263,7 +3262,7 @@
         "oldrc": false,
         "name": "getCPUtemp",
         "x": 330,
-        "y": 480,
+        "y": 500,
         "wires": [
             [
                 "508af0fb.c62c4"
@@ -3281,7 +3280,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 540,
-        "y": 500,
+        "y": 520,
         "wires": [
             [
                 "7de4fca4.680f64"
@@ -3295,7 +3294,7 @@
         "name": "Check CPU's Temperature",
         "info": "",
         "x": 130,
-        "y": 460,
+        "y": 480,
         "wires": []
     },
     {
@@ -3544,8 +3543,8 @@
             "543addd1.376954",
             "3c87aa50.8e7256"
         ],
-        "x": 715,
-        "y": 300,
+        "x": 615,
+        "y": 280,
         "wires": []
     },
     {
@@ -5908,7 +5907,7 @@
         "qos": "2",
         "broker": "971eda83.260398",
         "x": 80,
-        "y": 380,
+        "y": 400,
         "wires": [
             [
                 "ef1bb868.c53928",
@@ -5957,7 +5956,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 790,
-        "y": 380,
+        "y": 400,
         "wires": [
             [
                 "c73faab4.97eef8"
@@ -5973,7 +5972,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 550,
-        "y": 380,
+        "y": 400,
         "wires": [
             [
                 "450cd6f0.b7c678"
@@ -5991,7 +5990,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 950,
-        "y": 380,
+        "y": 400,
         "wires": []
     },
     {
@@ -6003,7 +6002,7 @@
         "action": "obj",
         "pretty": false,
         "x": 350,
-        "y": 380,
+        "y": 400,
         "wires": [
             [
                 "b802be46.082e7"
@@ -6021,7 +6020,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 950,
-        "y": 420,
+        "y": 440,
         "wires": []
     },
     {
@@ -6088,7 +6087,7 @@
         "repair": false,
         "outputs": 2,
         "x": 230,
-        "y": 380,
+        "y": 400,
         "wires": [
             [
                 "60c14a65.0287d4"
@@ -6110,7 +6109,7 @@
             }
         ],
         "x": 530,
-        "y": 560,
+        "y": 580,
         "wires": [
             [
                 "307e7272.0da96e"
@@ -6124,7 +6123,7 @@
         "name": "Read REST API",
         "info": "",
         "x": 100,
-        "y": 560,
+        "y": 580,
         "wires": []
     },
     {
@@ -6137,7 +6136,7 @@
         "url": "",
         "tls": "",
         "x": 750,
-        "y": 640,
+        "y": 660,
         "wires": [
             [
                 "5825d936.db4968"
@@ -6157,7 +6156,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 100,
-        "y": 600,
+        "y": 620,
         "wires": [
             [
                 "4917e4e5.06bbbc"
@@ -6173,7 +6172,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 350,
-        "y": 640,
+        "y": 660,
         "wires": [
             [
                 "43ec985e.08bb38"
@@ -6191,7 +6190,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 950,
-        "y": 640,
+        "y": 660,
         "wires": []
     },
     {
@@ -6214,7 +6213,7 @@
         "to": "",
         "reg": false,
         "x": 440,
-        "y": 600,
+        "y": 620,
         "wires": [
             [
                 "7e76212d.f8ed5"
@@ -6241,7 +6240,7 @@
         "to": "",
         "reg": false,
         "x": 290,
-        "y": 600,
+        "y": 620,
         "wires": [
             [
                 "dbb8355c.ae2f88"
@@ -6268,7 +6267,7 @@
         "to": "",
         "reg": false,
         "x": 650,
-        "y": 600,
+        "y": 620,
         "wires": [
             [
                 "9a406cda.bd797"
@@ -6285,6 +6284,154 @@
         "complete": "true",
         "x": 910,
         "y": 460,
+        "wires": []
+    },
+    {
+        "id": "62b13164.f66a5",
+        "type": "inject",
+        "z": "88396424.c54498",
+        "name": "Get History Data",
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "x": 140,
+        "y": 640,
+        "wires": [
+            [
+                "b3d53724.20dc28"
+            ]
+        ]
+    },
+    {
+        "id": "b3d53724.20dc28",
+        "type": "function",
+        "z": "88396424.c54498",
+        "name": "Format request",
+        "func": "//Create Eagle command XML fragment\nvar command = \"<Command>\\n\";\ncommand += \"  <Name>get_history_data</Name>\\n\";\ncommand += \"  <StartTime>0x00000000</StartTime>\\n\";\ncommand += \"</Command>\\n\";\n\n//Modify header to include Gateway authentication\nif ((context.flow.Rainforest !== null) && (context.flow.Rainforest !== undefined) && (context.flow.Rainforest.headers !== null) && (context.flow.Rainforest.headers !== undefined)) {\n    msg.headers = context.flow.Rainforest.headers;\n    msg.payload = command;\n}\nelse {\n    msg = null;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 320,
+        "y": 640,
+        "wires": [
+            [
+                "da2bcced.52c5c"
+            ]
+        ]
+    },
+    {
+        "id": "da2bcced.52c5c",
+        "type": "http request",
+        "z": "88396424.c54498",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
+        "tls": "",
+        "x": 490,
+        "y": 640,
+        "wires": [
+            [
+                "ca0a8d40.8cebf",
+                "46b5c51e.3b900c"
+            ]
+        ]
+    },
+    {
+        "id": "ca0a8d40.8cebf",
+        "type": "xml",
+        "z": "88396424.c54498",
+        "name": "",
+        "attr": "",
+        "chr": "",
+        "x": 630,
+        "y": 660,
+        "wires": [
+            [
+                "46b5c51e.3b900c"
+            ]
+        ]
+    },
+    {
+        "id": "46b5c51e.3b900c",
+        "type": "debug",
+        "z": "88396424.c54498",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 910,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "2e5e419d.b21b5e",
+        "type": "debug",
+        "z": "88396424.c54498",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 870,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "7ec76d02.bc8684",
+        "type": "comment",
+        "z": "88396424.c54498",
+        "name": "Stuff below does not yet work.",
+        "info": "",
+        "x": 120,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "3a764f5e.e3f53",
+        "type": "link in",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "links": [
+            "9cd45335.9c179"
+        ],
+        "x": 195,
+        "y": 280,
+        "wires": [
+            [
+                "2a07f92e.5f7b06"
+            ]
+        ]
+    },
+    {
+        "id": "2a07f92e.5f7b06",
+        "type": "function",
+        "z": "e8223701.eebbe8",
+        "name": "prefix tapia/",
+        "func": "var prefix = \"tapia/\";\nif (msg.topic.startsWith(prefix)){\n    \n}else{\n    msg.topic = prefix + msg.topic;\n}\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 350,
+        "y": 280,
+        "wires": [
+            [
+                "1913fb4e.05ae35",
+                "8b940ec1.056b4"
+            ]
+        ]
+    },
+    {
+        "id": "e75b1948.c5f178",
+        "type": "debug",
+        "z": "50466fda.5d00f",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 1010,
+        "y": 360,
         "wires": []
     }
 ]
