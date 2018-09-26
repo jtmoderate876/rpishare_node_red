@@ -146,6 +146,36 @@
         "out": []
     },
     {
+        "id": "50b2a29d.f794ec",
+        "type": "subflow",
+        "name": "timestamp",
+        "info": "Adds msg.timestamp of now if it doesn't exist.",
+        "category": "",
+        "in": [
+            {
+                "x": 40,
+                "y": 20,
+                "wires": [
+                    {
+                        "id": "4580c7fc.d61bd8"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 580,
+                "y": 20,
+                "wires": [
+                    {
+                        "id": "84427a8a.39aea8",
+                        "port": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
         "id": "971eda83.260398",
         "type": "mqtt-broker",
         "z": "",
@@ -240,6 +270,95 @@
         "collapse": false
     },
     {
+        "id": "a7b3d632.a540a8",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
         "id": "71a47ab9.6044a4",
         "type": "mosca in",
         "z": "c201e10a.3d66f",
@@ -283,7 +402,8 @@
         "y": 100,
         "wires": [
             [
-                "dd27af28.c2e8e"
+                "dd27af28.c2e8e",
+                "570ea412.7b645c"
             ]
         ]
     },
@@ -292,7 +412,7 @@
         "type": "debug",
         "z": "c201e10a.3d66f",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -430,7 +550,8 @@
         "wires": [
             [
                 "868e0607.f251b8",
-                "d501ec36.ee936"
+                "d501ec36.ee936",
+                "d00dcdae.69de3"
             ]
         ]
     },
@@ -690,14 +811,15 @@
         "type": "function",
         "z": "88396424.c54498",
         "name": "Calculate Demand Value",
-        "func": "//ignore bad data\nif (!msg.payload.InstantaneousDemand) \n{\n    return;\n}\n\n//parse response\nstrDemand=msg.payload.InstantaneousDemand.Demand[0];\nintDemand=parseInt(strDemand,16);\n\nstrMultiplier=msg.payload.InstantaneousDemand.Multiplier[0];\nintMultiplier=parseInt(strMultiplier,16);\n\nstrDivisor=msg.payload.InstantaneousDemand.Divisor[0];\nintDivisor=parseInt(strDivisor,16);\n\nif (intDemand>2147483647) {\n    intDemand = 0;\n}\n\nif (intMultiplier===0) {\n    intMultiplier = 1;\n} \n\nif (intDivisor===0) {\n    intDivisor = 1;\n}\n\nmsg.payload = (intDemand * intMultiplier) / intDivisor;\nmsg.topic = \"power/consumption/instantaneous\";\n\n\nreturn msg;",
+        "func": "//ignore bad data\nif (!msg.payload.InstantaneousDemand) \n{\n    return;\n}\n\n//parse response\nstrDemand=msg.payload.InstantaneousDemand.Demand[0];\nintDemand=parseInt(strDemand,16);\n\nstrMultiplier=msg.payload.InstantaneousDemand.Multiplier[0];\nintMultiplier=parseInt(strMultiplier,16);\n\nstrDivisor=msg.payload.InstantaneousDemand.Divisor[0];\nintDivisor=parseInt(strDivisor,16);\n\nif (intDemand>2147483647) {\n    intDemand = 0;\n}\n\nif (intMultiplier===0) {\n    intMultiplier = 1;\n} \n\nif (intDivisor===0) {\n    intDivisor = 1;\n}\n\nstrTimeStamp = msg.payload.InstantaneousDemand.TimeStamp[0];\nintTimeStamp = parseInt(strTimeStamp,16);\ntimestamp=new Date(\"2000\");//rainforest timestamp is based upon seconds since 1/1/2000\n//the following would also work:\n//timestamp=new Date(\"2000-01-01T00:00:00Z\");//rainforest timestamp is based upon 1/1/2000\n//node.warn(timestamp.toUTCString());\ntimestamp.setUTCSeconds(timestamp.getUTCSeconds() + intTimeStamp);\n//node.warn(timestamp.toUTCString());\n\nmsg.payload = (intDemand * intMultiplier) / intDivisor;\nmsg.topic = \"power/consumption/instantaneous\";\nmsg.timestamp = timestamp;\n\nreturn msg;",
         "outputs": "1",
         "noerr": 0,
         "x": 450,
         "y": 220,
         "wires": [
             [
-                "6575f545.23b7fc"
+                "6575f545.23b7fc",
+                "2d4ad8bc.1d9788"
             ]
         ]
     },
@@ -839,7 +961,7 @@
         "type": "function",
         "z": "88396424.c54498",
         "name": "Calculate Consumption Total Value",
-        "func": "//ignore bad data\nif (!msg.payload.CurrentSummation || msg.payload.CurrentSummation===null || msg.payloadCurrentSummation==='' )\n{\n    return;\n} else {\n\n    //parse response\n    strConsumptionTotal=msg.payload.CurrentSummation.SummationDelivered[0];\n    intConsumptionTotal=parseInt(strConsumptionTotal,16);\n    \n    strMultiplier=msg.payload.CurrentSummation.Multiplier[0];\n    intMultiplier=parseInt(strMultiplier,16);\n    \n    strDivisor=msg.payload.CurrentSummation.Divisor[0];\n    intDivisor=parseInt(strDivisor,16);\n    \n    if (intConsumptionTotal>2147483647) {\n        intConsumptionTotal = 0;\n    }\n    \n    if (intMultiplier===0) {\n        intMultiplier = 1;\n    } \n    \n    if (intDivisor===0) {\n        intDivisor = 1;\n    }\n    \n    msg.payload = (intConsumptionTotal * intMultiplier) / intDivisor;\n    msg.topic = \"power/consumption/total\";\n    \n    if (msg.payload === 0)\n    {\n        return;\n    } else {\n        return msg;\n    }\n}",
+        "func": "//ignore bad data\nif (!msg.payload.CurrentSummation || msg.payload.CurrentSummation===null || msg.payloadCurrentSummation==='' )\n{\n    return;\n} else {\n\n    //parse response\n    strConsumptionTotal=msg.payload.CurrentSummation.SummationDelivered[0];\n    intConsumptionTotal=parseInt(strConsumptionTotal,16);\n    \n    strMultiplier=msg.payload.CurrentSummation.Multiplier[0];\n    intMultiplier=parseInt(strMultiplier,16);\n    \n    strDivisor=msg.payload.CurrentSummation.Divisor[0];\n    intDivisor=parseInt(strDivisor,16);\n    \n    if (intConsumptionTotal>2147483647) {\n        intConsumptionTotal = 0;\n    }\n    \n    if (intMultiplier===0) {\n        intMultiplier = 1;\n    } \n    \n    if (intDivisor===0) {\n        intDivisor = 1;\n    }\n    \n    strTimeStamp = msg.payload.CurrentSummation.TimeStamp[0];\n    intTimeStamp = parseInt(strTimeStamp,16);\n    timestamp=new Date(\"2000\");//rainforest timestamp is based upon seconds since 1/1/2000\n    //the following would also work:\n    //timestamp=new Date(\"2000-01-01T00:00:00Z\");//rainforest timestamp is based upon 1/1/2000\n    //node.warn(timestamp.toUTCString());\n    timestamp.setUTCSeconds(timestamp.getUTCSeconds() + intTimeStamp);\n    //node.warn(timestamp.toUTCString());\n    \n\n    \n    msg.payload = (intConsumptionTotal * intMultiplier) / intDivisor;\n    msg.topic = \"power/consumption/total\";\n    msg.timestamp = timestamp;\n    \n    if (msg.payload === 0)\n    {\n        return;\n    } else {\n        return msg;\n    }\n}",
         "outputs": "1",
         "noerr": 0,
         "x": 520,
@@ -1879,8 +2001,8 @@
             "34b2b94.276a146",
             "e520b0c4.168a8"
         ],
-        "x": 195,
-        "y": 320,
+        "x": 215,
+        "y": 280,
         "wires": [
             [
                 "7de4fca4.680f64"
@@ -1905,14 +2027,12 @@
         "id": "9cd45335.9c179",
         "type": "link out",
         "z": "50466fda.5d00f",
-        "name": "",
+        "name": "Ecobee side of Ecobee-to-Wonderware",
         "links": [
-            "c30c472a.3b5e98",
-            "a1e76248.eab86",
             "3a764f5e.e3f53"
         ],
-        "x": 955,
-        "y": 480,
+        "x": 935,
+        "y": 440,
         "wires": []
     },
     {
@@ -1965,7 +2085,7 @@
         "wires": [
             [
                 "e75b1948.c5f178",
-                "67b11cc1.5bfab4"
+                "9cd45335.9c179"
             ]
         ]
     },
@@ -1974,11 +2094,11 @@
         "type": "debug",
         "z": "50466fda.5d00f",
         "name": "",
-        "active": false,
+        "active": true,
         "console": "false",
         "complete": "true",
-        "x": 990,
-        "y": 440,
+        "x": 870,
+        "y": 360,
         "wires": []
     },
     {
@@ -3116,8 +3236,8 @@
         "links": [
             "feef4a4e.553278"
         ],
-        "x": 195,
-        "y": 360,
+        "x": 215,
+        "y": 320,
         "wires": [
             [
                 "7de4fca4.680f64"
@@ -3132,8 +3252,8 @@
         "func": "var prefix = \"home/\";\nif (msg.topic.startsWith(prefix)){\n    \n}else{\n    msg.topic = prefix + msg.topic;\n}\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 350,
-        "y": 340,
+        "x": 370,
+        "y": 300,
         "wires": [
             [
                 "2a07f92e.5f7b06"
@@ -3211,8 +3331,8 @@
         "gap": "",
         "start": "",
         "inout": "out",
-        "x": 1050,
-        "y": 400,
+        "x": 790,
+        "y": 460,
         "wires": [
             [
                 "cf55e901.124768",
@@ -3225,11 +3345,11 @@
         "type": "function",
         "z": "e8223701.eebbe8",
         "name": "wwQueue insert",
-        "func": "/*20171208 \ninput message should contain:\nmsg.timestamp ie 1514764800000 is an epoch milliseconds timestamp representing 2018.01.01. at 00:00:00.000\n (if msg.timestamp does not exist then \"now\" will be used)\neither single value-based payload:\n    msg.payload ie 72.1 or any string or number representing the value for the topic\n    msg.topic ie diningroom/temperature\nor multi-variable object-based payload containing property : value pairs (use . as delimiter)\n    https://stackoverflow.com/questions/1661197/what-characters-are-valid-for-javascript-variable-names\n    msg.payload ie {basement$temperature : 72.1, diningroom$temperature: 73.2}\n    msg.topic ie wisconsin/summerhome becomes the prefix for each item, creating final items such as wisconsin/summerhome/basement/temperature\n*/\nvar wwQueue = flow.get('wwQueue') ||{\"data\":[]};\n//var dt = new Date(); // defaults to now //var dtstring = dt.toISOString();\n//use timestamp if it exists otherwise default to now\nif ((typeof msg.timestamp !== 'undefined')){dtstring = new Date(msg.timestamp).toISOString();} \nelse {dtstring = new Date().toISOString();}\n\ni = 0;\nwhile (\n    (typeof wwQueue.data !== 'undefined') &&\n    (typeof wwQueue.data[i] !== 'undefined') &&\n    (typeof wwQueue.data[i].dateTime !== 'undefined') &&\n    (new Date(wwQueue.data[i].dateTime).getTime() > new Date(dtstring).getTime()) //while we find newer dates keep looking \n) {i++;}\n\nvar obj = {};\nif (\n    (typeof wwQueue.data !== 'undefined')&&\n    (typeof wwQueue.data[i] !== 'undefined')&&\n    (typeof wwQueue.data[i].dateTime !== 'undefined')&&\n    (new Date(wwQueue.data[i].dateTime).getTime() == new Date(dtstring).getTime()) //if exact date found then we need to handle existing\n) {\n    obj = wwQueue.data.splice(i,1)[0];\n} else {\n    obj.dateTime = dtstring;\n}\n\nif (typeof msg.payload !== \"object\"){\n    var tag = msg.topic.replace(/\\//g,\".\"); //globally replace / with .\n    obj[tag]=msg.payload;//add new tag and value to this dateTime record\n} else {\n    var prefix = msg.topic.replace(/\\//g,\".\") + \".\";\n    var tag = \"\";\n    for(var propertyName in msg.payload) {\n        tag = prefix  + propertyName;//propertyName.replace(/\\$/g,\".\") was going to use $ delimiter but dot \".\" works \n        obj[tag] = msg.payload[propertyName];\n//        node.error(JSON.stringify(obj,null, 4));\n    }\n}\nwwQueue.data.splice(i,0,obj); //add new, full dateTime record back to all record data in the right spot\n\nflow.set('wwQueue',wwQueue);\nmsg.topic = \"tapia/home\";\nmsg.payload = wwQueue;\n\nreturn msg;\n\n/*\nexample from online.wonderware.com\n{\n  \"data\": [\n    {\n      \"dateTime\": \"2017-03-20T12:21:12.199Z\",\n      \"Reactor3.Level\": 1.51860072870498,\n      \"Reactor3.Temp\": 27.1360543141452,\n      \"Reactor3.InletValve\": 0,\n      \"Reactor3.Step\": 7,\n      \"Line3.Units\": 1518,\n      \"Line3.Product\": \"BRN\"\n    }\n  ]\n}\n*/\n",
+        "func": "/*20171208 \ninput message should contain:\nmsg.timestamp ie 1514764800000 is an epoch milliseconds timestamp representing 2018.01.01. at 00:00:00.000\n (if msg.timestamp does not exist then \"now\" will be used)\neither single value-based payload:\n    msg.payload ie 72.1 or any string or number representing the value for the topic\n    msg.topic ie diningroom/temperature\nor multi-variable object-based payload containing property : value pairs (use . as delimiter)\n    https://stackoverflow.com/questions/1661197/what-characters-are-valid-for-javascript-variable-names\n    msg.payload ie {basement$temperature : 72.1, diningroom$temperature: 73.2}\n    msg.topic ie wisconsin/summerhome becomes the prefix for each item, creating final items such as wisconsin/summerhome/basement/temperature\n*/\nvar wwQueue = flow.get('wwQueue') ||{\"data\":[]};\n//var dt = new Date(); // defaults to now //var dtstring = dt.toISOString();\n//use timestamp if it exists otherwise default to now\n// this works and is efficient but I'm leaning toward \"non-function\", flow-based solutions\nif ((typeof msg.timestamp !== 'undefined')){dtstring = new Date(msg.timestamp).toISOString();} \nelse {dtstring = new Date().toISOString();}\n\ni = 0;\nwhile (\n    (typeof wwQueue.data !== 'undefined') &&\n    (typeof wwQueue.data[i] !== 'undefined') &&\n    (typeof wwQueue.data[i].dateTime !== 'undefined') &&\n    (new Date(wwQueue.data[i].dateTime).getTime() > new Date(dtstring).getTime()) //while we find newer dates keep looking \n) {i++;}\n\nvar obj = {};\nif (\n    (typeof wwQueue.data !== 'undefined')&&\n    (typeof wwQueue.data[i] !== 'undefined')&&\n    (typeof wwQueue.data[i].dateTime !== 'undefined')&&\n    (new Date(wwQueue.data[i].dateTime).getTime() == new Date(dtstring).getTime()) //if exact date found then we need to handle existing\n) {\n    obj = wwQueue.data.splice(i,1)[0];\n} else {\n    obj.dateTime = dtstring;\n}\n\nif (typeof msg.payload !== \"object\"){\n    var tag = msg.topic.replace(/\\//g,\".\"); //globally replace / with .\n    obj[tag]=msg.payload;//add new tag and value to this dateTime record\n} else {\n    var prefix = msg.topic.replace(/\\//g,\".\") + \".\";\n    var tag = \"\";\n    for(var propertyName in msg.payload) {\n        tag = prefix  + propertyName;//propertyName.replace(/\\$/g,\".\") was going to use $ delimiter but dot \".\" works \n        obj[tag] = msg.payload[propertyName];\n//        node.error(JSON.stringify(obj,null, 4));\n    }\n}\nwwQueue.data.splice(i,0,obj); //add new, full dateTime record back to all record data in the right spot\n\nflow.set('wwQueue',wwQueue);\nmsg.topic = \"tapia/home\";\nmsg.payload = wwQueue;\n\nreturn msg;\n\n/*\nexample from online.wonderware.com\n{\n  \"data\": [\n    {\n      \"dateTime\": \"2017-03-20T12:21:12.199Z\",\n      \"Reactor3.Level\": 1.51860072870498,\n      \"Reactor3.Temp\": 27.1360543141452,\n      \"Reactor3.InletValve\": 0,\n      \"Reactor3.Step\": 7,\n      \"Line3.Units\": 1518,\n      \"Line3.Product\": \"BRN\"\n    }\n  ]\n}\n*/\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 300,
-        "y": 200,
+        "x": 320,
+        "y": 80,
         "wires": [
             []
         ]
@@ -3261,8 +3381,8 @@
         "repeat": "60",
         "crontab": "",
         "once": true,
-        "x": 90,
-        "y": 520,
+        "x": 110,
+        "y": 480,
         "wires": [
             [
                 "727637d9.5f7708"
@@ -3280,8 +3400,8 @@
         "timer": "",
         "oldrc": false,
         "name": "getCPUtemp",
-        "x": 330,
-        "y": 500,
+        "x": 350,
+        "y": 460,
         "wires": [
             [
                 "508af0fb.c62c4"
@@ -3298,8 +3418,8 @@
         "func": "//msg.payload = {'d':{'temp': parseFloat(msg.payload.replace(\"temp=\",\"\").replace(\"'C\\n\",\"\"))}};\n//temp in F where max op of 85C = 185F\nmsg.payload = Math.round(\n    (parseFloat(msg.payload.replace(\"temp=\",\"\").replace(\"'C\\n\",\"\")) * 9/5 + 32)*10)/10;\nmsg.topic = \"rpishare/cpu/temperature\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 540,
-        "y": 520,
+        "x": 560,
+        "y": 480,
         "wires": [
             [
                 "7de4fca4.680f64"
@@ -3312,8 +3432,8 @@
         "z": "e8223701.eebbe8",
         "name": "Check CPU's Temperature",
         "info": "",
-        "x": 130,
-        "y": 480,
+        "x": 150,
+        "y": 440,
         "wires": []
     },
     {
@@ -3369,8 +3489,8 @@
         "z": "e8223701.eebbe8",
         "name": "Main inputs",
         "info": "",
-        "x": 90,
-        "y": 260,
+        "x": 110,
+        "y": 220,
         "wires": []
     },
     {
@@ -3379,8 +3499,8 @@
         "z": "e8223701.eebbe8",
         "name": "MQTT processing",
         "info": "",
-        "x": 910,
-        "y": 260,
+        "x": 930,
+        "y": 220,
         "wires": []
     },
     {
@@ -3563,7 +3683,7 @@
             "3c87aa50.8e7256"
         ],
         "x": 795,
-        "y": 280,
+        "y": 240,
         "wires": []
     },
     {
@@ -5925,8 +6045,8 @@
         "topic": "insteon/#",
         "qos": "2",
         "broker": "971eda83.260398",
-        "x": 80,
-        "y": 400,
+        "x": 100,
+        "y": 360,
         "wires": [
             [
                 "ef1bb868.c53928",
@@ -5974,8 +6094,8 @@
         "func": "var prefix = \"tapia/home/\";\nif (msg.topic.startsWith(prefix)){\n    \n}else{\n    msg.topic = prefix + msg.topic;\n}\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 810,
-        "y": 400,
+        "x": 830,
+        "y": 360,
         "wires": [
             [
                 "c73faab4.97eef8"
@@ -5990,8 +6110,8 @@
         "func": "/*\ninsteon-mqtt dimmer state contains complex json\n    insteon/mydimmer/state='{\"state\":\"ON\",\"Brightness\":255}''\nwe are breaking this down to be like switches where:\n    insteon/myswitch/state = \"ON\"\n*/\n\nvar suffix = \"/state\";\n\nif (msg.topic && msg.topic.endsWith(suffix) && (msg.payload !== null) && (msg.payload !== \"\") && (typeof msg.payload == \"object\") && (msg.payload.state) && (msg.payload.brightness)) {\n    var newmsg = [];\n    var prefix = msg.topic.replace(suffix,\"\")+\"/\";\n    for(var propertyName in msg.payload) {\n        newmsg.push({\n            topic : prefix  + propertyName,\n            payload : msg.payload[propertyName]\n        });\n    }\n    msg = newmsg;\n    return [msg];\n} else {\n    \n}\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 550,
-        "y": 400,
+        "x": 570,
+        "y": 360,
         "wires": [
             [
                 "450cd6f0.b7c678",
@@ -6009,8 +6129,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 950,
-        "y": 400,
+        "x": 970,
+        "y": 360,
         "wires": []
     },
     {
@@ -6021,8 +6141,8 @@
         "property": "payload",
         "action": "obj",
         "pretty": false,
-        "x": 350,
-        "y": 400,
+        "x": 370,
+        "y": 360,
         "wires": [
             [
                 "b802be46.082e7"
@@ -6039,8 +6159,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 950,
-        "y": 440,
+        "x": 970,
+        "y": 400,
         "wires": []
     },
     {
@@ -6106,8 +6226,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 230,
-        "y": 400,
+        "x": 250,
+        "y": 360,
         "wires": [
             [
                 "60c14a65.0287d4"
@@ -6128,8 +6248,8 @@
                 "type": "msg"
             }
         ],
-        "x": 530,
-        "y": 580,
+        "x": 550,
+        "y": 540,
         "wires": [
             [
                 "307e7272.0da96e"
@@ -6142,8 +6262,8 @@
         "z": "e8223701.eebbe8",
         "name": "Read REST API",
         "info": "",
-        "x": 100,
-        "y": 580,
+        "x": 120,
+        "y": 540,
         "wires": []
     },
     {
@@ -6155,8 +6275,8 @@
         "ret": "txt",
         "url": "",
         "tls": "",
-        "x": 750,
-        "y": 660,
+        "x": 770,
+        "y": 620,
         "wires": [
             [
                 "5825d936.db4968"
@@ -6175,8 +6295,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 100,
-        "y": 620,
+        "x": 120,
+        "y": 580,
         "wires": [
             [
                 "4917e4e5.06bbbc"
@@ -6191,8 +6311,8 @@
         "func": "//msg.url = \"https://online.wonderware.com/apis/Historian/v2/\";\n//msg.method = \"GET\";\n//msg.headers = {};\nmsg.headers.Authorization = msg.Authorization;  //copy Authorization to be under headers\ndelete msg.Authorization;                       // and remove from old location\n//msg.headers.ContentType = \"application/json\";\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 350,
-        "y": 660,
+        "x": 370,
+        "y": 620,
         "wires": [
             [
                 "43ec985e.08bb38"
@@ -6209,8 +6329,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 950,
-        "y": 660,
+        "x": 970,
+        "y": 620,
         "wires": []
     },
     {
@@ -6232,8 +6352,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 440,
-        "y": 620,
+        "x": 460,
+        "y": 580,
         "wires": [
             [
                 "7e76212d.f8ed5"
@@ -6259,8 +6379,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 290,
-        "y": 620,
+        "x": 310,
+        "y": 580,
         "wires": [
             [
                 "dbb8355c.ae2f88"
@@ -6286,8 +6406,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 650,
-        "y": 620,
+        "x": 670,
+        "y": 580,
         "wires": [
             [
                 "9a406cda.bd797"
@@ -6413,12 +6533,12 @@
         "id": "3a764f5e.e3f53",
         "type": "link in",
         "z": "e8223701.eebbe8",
-        "name": "",
+        "name": "Wonderware side of Ecobee-to-Wonderware",
         "links": [
             "9cd45335.9c179"
         ],
-        "x": 195,
-        "y": 280,
+        "x": 215,
+        "y": 240,
         "wires": [
             [
                 "2a07f92e.5f7b06"
@@ -6433,8 +6553,8 @@
         "func": "var prefix = \"tapia/\";\nif (msg.topic.startsWith(prefix)){\n    \n}else{\n    msg.topic = prefix + msg.topic;\n}\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 350,
-        "y": 280,
+        "x": 370,
+        "y": 240,
         "wires": [
             [
                 "177aecd1.040753"
@@ -6483,7 +6603,7 @@
         "links": [
             "a228dbb5.6bd0f8"
         ],
-        "x": 95,
+        "x": 135,
         "y": 480,
         "wires": [
             [
@@ -6515,7 +6635,7 @@
         "reset": "CANCEL",
         "bytopic": "all",
         "name": "",
-        "x": 380,
+        "x": 420,
         "y": 480,
         "wires": [
             [
@@ -6558,7 +6678,7 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 510,
+        "x": 550,
         "y": 520,
         "wires": [
             [
@@ -6578,7 +6698,7 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 330,
+        "x": 370,
         "y": 520,
         "wires": [
             [
@@ -6603,7 +6723,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 220,
+        "x": 260,
         "y": 480,
         "wires": [
             [
@@ -6658,7 +6778,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 520,
+        "x": 560,
         "y": 480,
         "wires": [
             [
@@ -6678,7 +6798,7 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 110,
+        "x": 150,
         "y": 520,
         "wires": [
             [
@@ -6698,8 +6818,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 90,
-        "y": 760,
+        "x": 110,
+        "y": 720,
         "wires": [
             [
                 "dde297b1.22f478"
@@ -6712,8 +6832,8 @@
         "z": "e8223701.eebbe8",
         "name": "null testing",
         "info": "",
-        "x": 80,
-        "y": 720,
+        "x": 100,
+        "y": 680,
         "wires": []
     },
     {
@@ -6728,8 +6848,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 90,
-        "y": 800,
+        "x": 110,
+        "y": 760,
         "wires": [
             [
                 "dde297b1.22f478"
@@ -6748,8 +6868,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 210,
-        "y": 720,
+        "x": 230,
+        "y": 680,
         "wires": [
             [
                 "c222c71e.ab18e8"
@@ -6775,8 +6895,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 570,
-        "y": 780,
+        "x": 590,
+        "y": 740,
         "wires": [
             [
                 "7de4fca4.680f64",
@@ -6792,8 +6912,8 @@
         "func": "msg.payload = null;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 350,
-        "y": 740,
+        "x": 370,
+        "y": 700,
         "wires": [
             [
                 "d2fec07e.6bc5a",
@@ -6816,8 +6936,8 @@
         "min": 0,
         "max": "100",
         "step": "0.5",
-        "x": 860,
-        "y": 780,
+        "x": 880,
+        "y": 740,
         "wires": [
             [
                 "e7381b04.284178"
@@ -6834,8 +6954,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 950,
-        "y": 720,
+        "x": 970,
+        "y": 680,
         "wires": []
     },
     {
@@ -6847,7 +6967,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 630,
-        "y": 860,
+        "y": 680,
         "wires": [
             [
                 "3acf5776.544708"
@@ -6864,8 +6984,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 750,
-        "y": 820,
+        "x": 770,
+        "y": 780,
         "wires": []
     },
     {
@@ -6887,8 +7007,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 370,
-        "y": 800,
+        "x": 390,
+        "y": 760,
         "wires": [
             [
                 "d2fec07e.6bc5a"
@@ -6903,12 +7023,138 @@
         "func": "/*\ncreating a report-by-exception type node but one that, when the value does change\nsends to messages, one with the old value and last timestamp for that value\nand a second with the new value and timestamp. This way Wonderware Online will have\na better data for visualization / interpolation.\n*/\nvar prevValue = {};\nvar topic = msg.topic;//.replace(/\\//g,\".\"); //globally replace / with .\nprevValue = context.get(topic);\n//create object with .topic, .payload, .timestamp\nvar currValue = {\n    topic : msg.topic,\n    payload : msg.payload,\n    timestamp : msg.timestamp\n};\n/*\nif (typeof prevValue !== 'undefined') {\n    node.warn(\"prevValue=\" + JSON.stringify(prevValue) );\n}\nif (typeof currValue !== 'undefined') {\n    node.warn(\"currValue=\" + JSON.stringify(currValue) );\n}\n*/\n\nif ((typeof prevValue !== 'undefined') && (typeof prevValue.payload !== 'undefined')) {\n    if (currValue.payload==prevValue.payload) {\n        //node.warn(\"Values the same!\")\n        prevValue = currValue;\n        context.set(topic, prevValue)\n        return null;// values the same, no need to process\n    } else {\n        var msgarr = [\n            {\n                timestamp: prevValue.timestamp,\n                topic: prevValue.topic,\n                payload: prevValue.payload\n            },\n            {\n                timestamp: currValue.timestamp,\n                topic: currValue.topic,\n                payload: currValue.payload\n            },\n        ];\n        node.log(msgarr.toString());\n        context.set(topic, currValue)\n        return [msgarr];\n    }\n} else {\n    prevValue = currValue;\n    context.set(topic, prevValue);\n    return msg;\n}\n\n//return msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 570,
-        "y": 280,
+        "x": 590,
+        "y": 240,
         "wires": [
             [
+                "c8c26955.8e6978"
+            ]
+        ]
+    },
+    {
+        "id": "51c255f0.079a2c",
+        "type": "debug",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 920,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "2d4ad8bc.1d9788",
+        "type": "debug",
+        "z": "88396424.c54498",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 850,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "d00dcdae.69de3",
+        "type": "debug",
+        "z": "88396424.c54498",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 850,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "4580c7fc.d61bd8",
+        "type": "switch",
+        "z": "50b2a29d.f794ec",
+        "name": "",
+        "property": "timestamp",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "null"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 150,
+        "y": 40,
+        "wires": [
+            [
+                "90c7422b.75087"
+            ],
+            [
+                "84427a8a.39aea8"
+            ]
+        ]
+    },
+    {
+        "id": "90c7422b.75087",
+        "type": "change",
+        "z": "50b2a29d.f794ec",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "timestamp",
+                "pt": "msg",
+                "to": "",
+                "tot": "date"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 310,
+        "y": 20,
+        "wires": [
+            [
+                "84427a8a.39aea8"
+            ]
+        ]
+    },
+    {
+        "id": "84427a8a.39aea8",
+        "type": "function",
+        "z": "50b2a29d.f794ec",
+        "name": "merge",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 470,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c8c26955.8e6978",
+        "type": "subflow:50b2a29d.f794ec",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "x": 580,
+        "y": 200,
+        "wires": [
+            [
+                "1913fb4e.05ae35",
                 "8b940ec1.056b4",
-                "1913fb4e.05ae35"
+                "51c255f0.079a2c"
             ]
         ]
     }
