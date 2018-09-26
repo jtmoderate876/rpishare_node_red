@@ -999,13 +999,13 @@
         "timeout": "5",
         "timeoutUnits": "seconds",
         "rate": "1",
-        "nbRateUnits": "1",
+        "nbRateUnits": "2",
         "rateUnits": "minute",
         "randomFirst": "1",
         "randomLast": "5",
         "randomUnits": "seconds",
-        "drop": false,
-        "x": 100,
+        "drop": true,
+        "x": 110,
         "y": 220,
         "wires": [
             [
