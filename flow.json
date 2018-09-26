@@ -5041,122 +5041,6 @@
         ]
     },
     {
-        "id": "e10c08e.dcd2ef8",
-        "type": "function",
-        "z": "984823b1.a0823",
-        "name": "parse ON/OFF",
-        "func": "msg.payload=JSON.parse(msg.payload);\nmsg.payload=msg.payload.state;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 400,
-        "y": 320,
-        "wires": [
-            [
-                "f94896ba.660248",
-                "19360f6a.58a911"
-            ]
-        ]
-    },
-    {
-        "id": "ff8110b3.5b0e",
-        "type": "trigger",
-        "z": "984823b1.a0823",
-        "op1": "",
-        "op2": "{\"payload\":\"OFF\"}",
-        "op1type": "nul",
-        "op2type": "json",
-        "duration": "10",
-        "extend": true,
-        "units": "min",
-        "reset": "CANCEL",
-        "bytopic": "all",
-        "name": "",
-        "x": 170,
-        "y": 380,
-        "wires": [
-            [
-                "836ef305.618c4"
-            ]
-        ]
-    },
-    {
-        "id": "836ef305.618c4",
-        "type": "function",
-        "z": "984823b1.a0823",
-        "name": "send OFF",
-        "func": "msg.payload=\"OFF\"\nreturn msg;\n\n/*\nswitch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"OFF\";\n        break;\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n        \n    default:\n        break;\n}\nreturn msg;\n*/\n\n",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 300,
-        "y": 380,
-        "wires": [
-            [
-                "d3cafade.95b7a8"
-            ]
-        ]
-    },
-    {
-        "id": "19360f6a.58a911",
-        "type": "function",
-        "z": "984823b1.a0823",
-        "name": "CANCEL if  OFF",
-        "func": "switch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"CANCEL\";\n        break;\n/*\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n*/        \n    default:\n        msg=null;\n        break;\n}\nreturn msg;\n\n\n/*\nswitch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"OFF\";\n        break;\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n        \n    default:\n        break;\n}\nreturn msg;\n*/\n\n",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 660,
-        "y": 360,
-        "wires": [
-            [
-                "ff8110b3.5b0e"
-            ]
-        ]
-    },
-    {
-        "id": "f94896ba.660248",
-        "type": "function",
-        "z": "984823b1.a0823",
-        "name": "pass on if ON",
-        "func": "switch (msg.payload)\n{\n/*\ncase 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"CANCEL\";\n        break;\n*/\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n\n    default:\n        msg=null;\n        break;\n}\nreturn msg;\n\n\n/*\nswitch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"OFF\";\n        break;\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n        \n    default:\n        break;\n}\nreturn msg;\n*/\n\n",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 660,
-        "y": 320,
-        "wires": [
-            [
-                "ff8110b3.5b0e"
-            ]
-        ]
-    },
-    {
-        "id": "3f300d40.eb63d2",
-        "type": "mqtt out",
-        "z": "984823b1.a0823",
-        "name": "",
-        "topic": "insteon/flr2_bath2/set/1",
-        "qos": "1",
-        "retain": "true",
-        "broker": "971eda83.260398",
-        "x": 910,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "d3cafade.95b7a8",
-        "type": "function",
-        "z": "984823b1.a0823",
-        "name": "stringify ON/OFF",
-        "func": "msg.payload=msg.payload.state;\nmsg.payload=JSON.stringify(msg.payload);\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 470,
-        "y": 380,
-        "wires": [
-            [
-                "3f300d40.eb63d2"
-            ]
-        ]
-    },
-    {
         "id": "4a533371.e09e7c",
         "type": "inject",
         "z": "984823b1.a0823",
@@ -6605,7 +6489,7 @@
             "a228dbb5.6bd0f8"
         ],
         "x": 135,
-        "y": 480,
+        "y": 440,
         "wires": [
             [
                 "8a99f153.54606"
@@ -6619,7 +6503,7 @@
         "name": "Handle Rainforest Eagle lock ups",
         "info": "",
         "x": 150,
-        "y": 440,
+        "y": 400,
         "wires": []
     },
     {
@@ -6637,7 +6521,7 @@
         "bytopic": "all",
         "name": "",
         "x": 420,
-        "y": 480,
+        "y": 440,
         "wires": [
             [
                 "c60c4f0e.5ed16"
@@ -6654,7 +6538,7 @@
         "retain": "true",
         "broker": "971eda83.260398",
         "x": 870,
-        "y": 440,
+        "y": 400,
         "wires": []
     },
     {
@@ -6680,7 +6564,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 550,
-        "y": 520,
+        "y": 480,
         "wires": [
             [
                 "2fe3dcad.5fea14"
@@ -6700,7 +6584,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 370,
-        "y": 520,
+        "y": 480,
         "wires": [
             [
                 "2fe3dcad.5fea14"
@@ -6725,7 +6609,7 @@
         "repair": false,
         "outputs": 1,
         "x": 260,
-        "y": 480,
+        "y": 440,
         "wires": [
             [
                 "a492e30a.883e4"
@@ -6752,7 +6636,7 @@
         "to": "",
         "reg": false,
         "x": 380,
-        "y": 440,
+        "y": 400,
         "wires": [
             [
                 "2fe3dcad.5fea14",
@@ -6780,7 +6664,7 @@
         "to": "",
         "reg": false,
         "x": 560,
-        "y": 480,
+        "y": 440,
         "wires": [
             [
                 "2fe3dcad.5fea14"
@@ -6800,7 +6684,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 150,
-        "y": 520,
+        "y": 480,
         "wires": [
             [
                 "8a99f153.54606"
