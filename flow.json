@@ -574,7 +574,7 @@
         "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
         "tls": "e7ec31a4.2aad",
         "x": 290,
-        "y": 180,
+        "y": 220,
         "wires": [
             [
                 "2bd6f5db.37729a"
@@ -586,11 +586,11 @@
         "type": "function",
         "z": "88396424.c54498",
         "name": "Format request",
-        "func": "//Create Eagle command XML fragment\nvar command = \"<Command>\\n\";\ncommand += \"  <Name>get_instantaneous_demand</Name>\\n\";\ncommand += \"</Command>\\n\";\n\n//Modify header to include Gateway authentication\n/*\nif ((context.flow.Rainforest !== null) && (context.flow.Rainforest !== undefined) && (context.flow.Rainforest.headers !== null) && (context.flow.Rainforest.headers !== undefined)) {\n    msg.headers = context.flow.Rainforest.headers;\n    msg.payload = command;\n}\nelse {\n    msg = null;\n}\n*/\nif ((flow.get(\"Rainforest\") !== null) && (flow.get(\"Rainforest\") !== undefined) && (flow.get(\"Rainforest.headers\") !== null) && (flow.get(\"Rainforest.headers\") !== undefined)) {\n    msg.headers = flow.get(\"Rainforest.headers\");\n    msg.payload = command;\n}\nelse {\n    msg = null;\n}\n\n\nreturn msg;",
+        "func": "//Create Eagle command XML fragment\nvar command = \"<Command>\\n\";\ncommand += \"  <Name>get_instantaneous_demand</Name>\\n\";\ncommand += \"</Command>\\n\";\n\n//Modify header to include Gateway authentication\nif ((flow.get(\"Rainforest\") !== null) && (flow.get(\"Rainforest\") !== undefined) && (flow.get(\"Rainforest.headers\") !== null) && (flow.get(\"Rainforest.headers\") !== undefined)) {\n    msg.headers = flow.get(\"Rainforest.headers\");\n    msg.payload = command;\n}\nelse {\n    msg = null;\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 120,
-        "y": 180,
+        "y": 220,
         "wires": [
             [
                 "21cc22c4.55b4ae"
@@ -605,7 +605,7 @@
         "attr": "",
         "chr": "",
         "x": 610,
-        "y": 180,
+        "y": 220,
         "wires": [
             [
                 "868e0607.f251b8",
@@ -623,7 +623,7 @@
         "gap": "",
         "start": "",
         "x": 820,
-        "y": 180,
+        "y": 220,
         "wires": [
             [
                 "dcc3af32.0832e"
@@ -653,14 +653,15 @@
         "type": "function",
         "z": "88396424.c54498",
         "name": "Format request",
-        "func": "//Create Eagle command XML fragment\nvar command = \"<Command>\\n\";\ncommand += \"  <Name>get_instantaneous_demand</Name>\\n\";\n// adding jeff tapia's eagle mac:\ncommand += \"  <MacId>0xd8d5b90000005c9e</MacId>\\n\";\ncommand += \"</Command>\\n\";\n\nmsg.payload = command;\n\nreturn msg;",
+        "func": "if ((flow.get(\"Rainforest\") !== null) && (flow.get(\"Rainforest\") !== undefined) && (flow.get(\"Rainforest.headers\") !== null) && (flow.get(\"Rainforest.local\") !== undefined) && (flow.get(\"Rainforest.local.MacId\") !== undefined)) {\n    var MacId = flow.get(\"local.MacId\");    msg.headers = flow.get(\"Rainforest.locals\");\n\n    //Create Eagle command XML fragment\n    var command = \"<Command>\\n\";\n    command += \"  <Name>get_instantaneous_demand</Name>\\n\";\n    // adding jeff tapia's eagle mac:\n    command += \"  <MacId>\"+MacId+\"</MacId>\\n\";\n    command += \"</Command>\\n\";\n    \n    msg.payload = command;\n}\nelse {\n    msg = null;\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 320,
         "y": 100,
         "wires": [
             [
-                "75a8294d.bbbfe8"
+                "75a8294d.bbbfe8",
+                "2e5e419d.b21b5e"
             ]
         ]
     },
@@ -677,7 +678,7 @@
         "once": false,
         "onceDelay": "",
         "x": 180,
-        "y": 140,
+        "y": 180,
         "wires": [
             [
                 "f4682478.b9e3f8",
@@ -697,7 +698,7 @@
         "crontab": "",
         "once": false,
         "x": 130,
-        "y": 380,
+        "y": 420,
         "wires": [
             [
                 "aecb869a.6a2788"
@@ -713,7 +714,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 367,
-        "y": 380,
+        "y": 420,
         "wires": [
             [
                 "c52ed3d0.50ab1"
@@ -730,7 +731,7 @@
         "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
         "tls": "",
         "x": 550,
-        "y": 380,
+        "y": 420,
         "wires": [
             [
                 "cb9e9993.cf95c8"
@@ -746,7 +747,7 @@
         "console": "false",
         "complete": "false",
         "x": 725,
-        "y": 380,
+        "y": 420,
         "wires": []
     },
     {
@@ -758,7 +759,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 500,
-        "y": 420,
+        "y": 460,
         "wires": [
             [
                 "73735df2.aaf524"
@@ -777,7 +778,7 @@
         "crontab": "",
         "once": false,
         "x": 220,
-        "y": 420,
+        "y": 460,
         "wires": [
             [
                 "d8d4385a.f6b1e8"
@@ -793,8 +794,8 @@
         "ret": "txt",
         "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
         "tls": "",
-        "x": 688,
-        "y": 420,
+        "x": 670,
+        "y": 460,
         "wires": [
             [
                 "548d883f.225e28"
@@ -809,8 +810,8 @@
         "active": true,
         "console": "false",
         "complete": "false",
-        "x": 860,
-        "y": 420,
+        "x": 830,
+        "y": 460,
         "wires": []
     },
     {
@@ -825,7 +826,7 @@
         "crontab": "",
         "once": false,
         "x": 130,
-        "y": 460,
+        "y": 500,
         "wires": [
             [
                 "31162c53.6e96f4"
@@ -840,8 +841,8 @@
         "func": "//Create Eagle command XML fragment\nvar command = \"<Command>\\n\";\ncommand += \"  <Name>get_schedule</Name>\\n\";\ncommand += \"  <Event>demand</Event>\\n\";\ncommand += \"</Command>\\n\";\n\n//Modify header to include Gateway authentication\n/* old\nif ((context.flow.Rainforest !== null) && (context.flow.Rainforest !== undefined) && (context.flow.Rainforest.headers !== null) && (context.flow.Rainforest.headers !== undefined)) {\n    msg.headers = context.flow.Rainforest.headers;\n    msg.payload = command;\n}\nelse {\n    msg = null;\n}\n*/\n\nif ((flow.get(\"Rainforest\") !== null) && (flow.get(\"Rainforest\") !== undefined) && (flow.get(\"Rainforest.headers\") !== null) && (flow.get(\"Rainforest.headers\") !== undefined)) {\n    msg.headers = flow.get(\"Rainforest.headers\");\n    msg.payload = command;\n}\nelse {\n    msg = null;\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 320,
-        "y": 460,
+        "x": 280,
+        "y": 500,
         "wires": [
             [
                 "b9effe4d.cdf4f"
@@ -857,8 +858,8 @@
         "ret": "txt",
         "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
         "tls": "",
-        "x": 490,
-        "y": 460,
+        "x": 430,
+        "y": 500,
         "wires": [
             [
                 "26359bd2.f695b4"
@@ -874,7 +875,7 @@
         "outputs": "1",
         "noerr": 0,
         "x": 450,
-        "y": 220,
+        "y": 260,
         "wires": [
             [
                 "6575f545.23b7fc",
@@ -891,7 +892,7 @@
         "active": true,
         "console": "false",
         "complete": "false",
-        "x": 870,
+        "x": 850,
         "y": 120,
         "wires": []
     },
@@ -904,7 +905,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 460,
-        "y": 180,
+        "y": 220,
         "wires": [
             [
                 "7ac1b8b0.a027a8"
@@ -918,8 +919,8 @@
         "name": "",
         "attr": "",
         "chr": "",
-        "x": 630,
-        "y": 460,
+        "x": 550,
+        "y": 500,
         "wires": [
             [
                 "d195ae4f.fde69"
@@ -934,8 +935,8 @@
         "func": "msg.payload = \"Demand Polling set for: \" + msg.payload.ScheduleList.ScheduleInfo[0].Frequency[0] + \" secs\"\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 770,
-        "y": 460,
+        "x": 670,
+        "y": 500,
         "wires": [
             [
                 "872c5b0d.507928"
@@ -962,7 +963,7 @@
         "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
         "tls": "e7ec31a4.2aad",
         "x": 290,
-        "y": 280,
+        "y": 320,
         "wires": [
             [
                 "2fed2a0a.50b9b6"
@@ -974,11 +975,11 @@
         "type": "function",
         "z": "88396424.c54498",
         "name": "Format request",
-        "func": "//Create Eagle command XML fragment\nvar command = \"<Command>\\n\";\ncommand += \"  <Name>get_current_summation</Name>\\n\";\ncommand += \"</Command>\\n\";\n\n//Modify header to include Gateway authentication\n/*old\nif ((context.flow.Rainforest !== null) && (context.flow.Rainforest !== undefined) && (context.flow.Rainforest.headers !== null) && (context.flow.Rainforest.headers !== undefined)) {\n    msg.headers = context.flow.Rainforest.headers;\n    msg.payload = command;\n}\nelse {\n    msg = null;\n}\n*/\n\nif ((flow.get(\"Rainforest\") !== null) && (flow.get(\"Rainforest\") !== undefined) && (flow.get(\"Rainforest.headers\") !== null) && (flow.get(\"Rainforest.headers\") !== undefined)) {\n    msg.headers = flow.get(\"Rainforest.headers\");\n    msg.payload = command;\n}\nelse {\n    msg = null;\n}\n\n\nreturn msg;",
+        "func": "//Create Eagle command XML fragment\nvar command = \"<Command>\\n\";\ncommand += \"  <Name>get_current_summation</Name>\\n\";\ncommand += \"</Command>\\n\";\n\n//Modify header to include Gateway authentication\nif ((flow.get(\"Rainforest\") !== null) && (flow.get(\"Rainforest\") !== undefined) && (flow.get(\"Rainforest.headers\") !== null) && (flow.get(\"Rainforest.headers\") !== undefined)) {\n    msg.headers = flow.get(\"Rainforest.headers\");\n    msg.payload = command;\n}\nelse {\n    msg = null;\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 120,
-        "y": 280,
+        "y": 320,
         "wires": [
             [
                 "7c9661a8.3f7bb"
@@ -993,7 +994,7 @@
         "attr": "",
         "chr": "",
         "x": 610,
-        "y": 280,
+        "y": 320,
         "wires": [
             [
                 "60e6b007.5ffc4"
@@ -1009,7 +1010,7 @@
         "gap": "",
         "start": "",
         "x": 780,
-        "y": 280,
+        "y": 320,
         "wires": [
             [
                 "84797666.6772c8"
@@ -1025,7 +1026,7 @@
         "outputs": "1",
         "noerr": 0,
         "x": 520,
-        "y": 320,
+        "y": 360,
         "wires": [
             [
                 "e1582874.335878",
@@ -1042,7 +1043,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 460,
-        "y": 280,
+        "y": 320,
         "wires": [
             [
                 "ec0d4a6f.6287e8"
@@ -1065,7 +1066,7 @@
         "randomUnits": "seconds",
         "drop": true,
         "x": 110,
-        "y": 220,
+        "y": 260,
         "wires": [
             [
                 "8d06c412.0f3b88"
@@ -1077,17 +1078,18 @@
         "type": "function",
         "z": "88396424.c54498",
         "name": "Reboot after 20 Request Timeout",
-        "func": "if (!context.get('count')) {\n    context.set('count',0);\n}\nvar i = context.get('count');\nif (!msg.payload.Error || msg.payload.Error===null || msg.payload.Error===''){\n    i=0;\n    context.set('count',i);\n    node.status({fill:\"green\",shape:\"dot\",text:\"error count = \" + i});\n    return;\n} else {\n//    if (msg.payload.Error.Text == 'Request Timeout'){\n        i++;\n        node.status({fill:\"yellow\",shape:\"dot\",text:\"error count = \" + i});\n        msg.payload.i=i;\n        if (i>20){\n            context.set('count',0);\n            return [msg,{payload:true}];\n        } else {\n            context.set('count',i);\n            return [msg,null];\n        }\n//    } else {\n//        context.set('count',0);\n//        msg.payload.MyText='Error Text did not evaluatate to \"Request Timeout\"';\n//        return [msg,null];    \n//    }\n}\n",
+        "func": "if (!context.get('count')) {\n    context.set('count',0);\n}\nvar i = context.get('count');\nif (!msg.payload.Error || msg.payload.Error===null || msg.payload.Error===''){\n    i=0;\n    context.set('count',i);\n    node.status({fill:\"green\",shape:\"dot\",text:\"error count = \" + i});\n    return;\n} else {\n//    if (msg.payload.Error.Text == 'Request Timeout'){\n        i++;\n        node.status({fill:\"yellow\",shape:\"dot\",text:\"error count = \" + i});\n        msg.payload.i=i;\n        if (i>15){ //15*20s = 300s or 5min\n            context.set('count',0);\n            return [msg,{payload:true}];\n        } else {\n            context.set('count',i);\n            return [msg,null];\n        }\n//    } else {\n//        context.set('count',0);\n//        msg.payload.MyText='Error Text did not evaluatate to \"Request Timeout\"';\n//        return [msg,null];    \n//    }\n}\n",
         "outputs": "2",
         "noerr": 0,
         "x": 180,
-        "y": 320,
+        "y": 360,
         "wires": [
             [],
             [
                 "aecb869a.6a2788",
                 "d07c6ad.e3c7298",
-                "a228dbb5.6bd0f8"
+                "a228dbb5.6bd0f8",
+                "3af4c367.0e73cc"
             ]
         ]
     },
@@ -1491,7 +1493,7 @@
         "active": false,
         "console": "false",
         "complete": "true",
-        "x": 890,
+        "x": 870,
         "y": 80,
         "wires": []
     },
@@ -2081,7 +2083,7 @@
             "a1e76248.eab86"
         ],
         "x": 875,
-        "y": 320,
+        "y": 360,
         "wires": []
     },
     {
@@ -2106,7 +2108,7 @@
         "start": "",
         "inout": "out",
         "x": 730,
-        "y": 340,
+        "y": 380,
         "wires": [
             [
                 "d07c6ad.e3c7298"
@@ -2123,7 +2125,7 @@
         "start": "",
         "inout": "out",
         "x": 630,
-        "y": 220,
+        "y": 260,
         "wires": [
             [
                 "1db1d842.642b08",
@@ -2147,18 +2149,6 @@
                 "9cd45335.9c179"
             ]
         ]
-    },
-    {
-        "id": "cf55e901.124768",
-        "type": "debug",
-        "z": "50466fda.5d00f",
-        "name": "",
-        "active": true,
-        "console": "false",
-        "complete": "true",
-        "x": 870,
-        "y": 480,
-        "wires": []
     },
     {
         "id": "5f122882.3b6d28",
@@ -3380,24 +3370,6 @@
         "x": 120,
         "y": 80,
         "wires": []
-    },
-    {
-        "id": "67b11cc1.5bfab4",
-        "type": "rbe",
-        "z": "50466fda.5d00f",
-        "name": "",
-        "func": "rbe",
-        "gap": "",
-        "start": "",
-        "inout": "out",
-        "x": 790,
-        "y": 580,
-        "wires": [
-            [
-                "cf55e901.124768",
-                "9cd45335.9c179"
-            ]
-        ]
     },
     {
         "id": "1913fb4e.05ae35",
@@ -4945,8 +4917,8 @@
         "start": "",
         "inout": "out",
         "property": "payload",
-        "x": 690,
-        "y": 120,
+        "x": 770,
+        "y": 180,
         "wires": [
             [
                 "d07c6ad.e3c7298"
@@ -5771,7 +5743,7 @@
         "id": "bd94c9c5.313818",
         "type": "credentials",
         "z": "88396424.c54498",
-        "name": "",
+        "name": "Rainforest Cloud Credentials",
         "props": [
             {
                 "value": "headers.Cloud-ID",
@@ -5786,11 +5758,11 @@
                 "type": "msg"
             }
         ],
-        "x": 310,
+        "x": 300,
         "y": 60,
         "wires": [
             [
-                "ec0115f7.414128"
+                "ee66ffc2.673e4"
             ]
         ]
     },
@@ -5819,11 +5791,11 @@
         "type": "function",
         "z": "88396424.c54498",
         "name": "store in flow context",
-        "func": "/*old syntax\ncontext.flow.Rainforest = {};\ncontext.flow.Rainforest.headers = msg.headers;\n\n*/\n\nflow.set(\"Rainforest\", {});\nflow.set(\"Rainforest.headers\", msg.headers);\n\n\n\nreturn msg;",
+        "func": "flow.set(\"Rainforest\", {});\nflow.set(\"Rainforest.headers\", msg.headers);\nflow.set(\"local\",{});\n\nflow.set(\"local.MacId\",msg.local.MacId);\n\n//flow.set(\"local\",{});\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 660,
-        "y": 60,
+        "x": 620,
+        "y": 20,
         "wires": [
             [
                 "d07c6ad.e3c7298"
@@ -6367,8 +6339,8 @@
         "active": true,
         "console": "false",
         "complete": "true",
-        "x": 910,
-        "y": 460,
+        "x": 790,
+        "y": 500,
         "wires": []
     },
     {
@@ -6384,7 +6356,7 @@
         "once": false,
         "onceDelay": "",
         "x": 140,
-        "y": 640,
+        "y": 680,
         "wires": [
             [
                 "b3d53724.20dc28"
@@ -6400,7 +6372,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 320,
-        "y": 640,
+        "y": 680,
         "wires": [
             [
                 "da2bcced.52c5c"
@@ -6417,7 +6389,7 @@
         "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
         "tls": "",
         "x": 490,
-        "y": 640,
+        "y": 680,
         "wires": [
             [
                 "ca0a8d40.8cebf",
@@ -6433,7 +6405,7 @@
         "attr": "",
         "chr": "",
         "x": 630,
-        "y": 660,
+        "y": 700,
         "wires": [
             [
                 "46b5c51e.3b900c"
@@ -6449,7 +6421,7 @@
         "console": "false",
         "complete": "true",
         "x": 910,
-        "y": 640,
+        "y": 680,
         "wires": []
     },
     {
@@ -6471,7 +6443,7 @@
         "name": "Stuff below does not yet work.",
         "info": "",
         "x": 120,
-        "y": 600,
+        "y": 640,
         "wires": []
     },
     {
@@ -6522,10 +6494,10 @@
         "id": "399523d5.0af1ec",
         "type": "comment",
         "z": "88396424.c54498",
-        "name": "Tell insteon to turn Rainforest Eagle on and off to reset it because it locked up again",
+        "name": "Tell insteon to turn Rainforest Eagle off and on to reset it because it locked up again",
         "info": "",
         "x": 430,
-        "y": 520,
+        "y": 560,
         "wires": []
     },
     {
@@ -6537,7 +6509,7 @@
             "530a8d76.498e64"
         ],
         "x": 540,
-        "y": 560,
+        "y": 600,
         "wires": []
     },
     {
@@ -6552,7 +6524,7 @@
         "y": 480,
         "wires": [
             [
-                "8a99f153.54606"
+                "a492e30a.883e4"
             ]
         ]
     },
@@ -6627,7 +6599,8 @@
         "y": 520,
         "wires": [
             [
-                "2fe3dcad.5fea14"
+                "2fe3dcad.5fea14",
+                "a1aea43a.05d268"
             ]
         ]
     },
@@ -6647,32 +6620,8 @@
         "y": 520,
         "wires": [
             [
-                "2fe3dcad.5fea14"
-            ]
-        ]
-    },
-    {
-        "id": "8a99f153.54606",
-        "type": "switch",
-        "z": "984823b1.a0823",
-        "name": "",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "true",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 260,
-        "y": 480,
-        "wires": [
-            [
-                "a492e30a.883e4"
+                "2fe3dcad.5fea14",
+                "a1aea43a.05d268"
             ]
         ]
     },
@@ -6700,7 +6649,8 @@
         "wires": [
             [
                 "2fe3dcad.5fea14",
-                "170f2749.593049"
+                "170f2749.593049",
+                "a1aea43a.05d268"
             ]
         ]
     },
@@ -6727,7 +6677,8 @@
         "y": 480,
         "wires": [
             [
-                "2fe3dcad.5fea14"
+                "2fe3dcad.5fea14",
+                "a1aea43a.05d268"
             ]
         ]
     },
@@ -6747,7 +6698,7 @@
         "y": 520,
         "wires": [
             [
-                "8a99f153.54606"
+                "a492e30a.883e4"
             ]
         ]
     },
@@ -6999,7 +6950,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 850,
-        "y": 240,
+        "y": 280,
         "wires": []
     },
     {
@@ -7013,7 +6964,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 850,
-        "y": 220,
+        "y": 260,
         "wires": []
     },
     {
@@ -9331,7 +9282,7 @@
         "z": "bc6012ce.56132",
         "name": "XXXXXXXX  add a timestamp if there isn't one XXXXXXXX",
         "info": "",
-        "x": 370,
+        "x": 270,
         "y": 80,
         "wires": []
     },
@@ -9374,5 +9325,91 @@
         "x": 740,
         "y": 100,
         "wires": []
+    },
+    {
+        "id": "a1aea43a.05d268",
+        "type": "debug",
+        "z": "984823b1.a0823",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 950,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "c85d6173.b8b3a",
+        "type": "inject",
+        "z": "88396424.c54498",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 120,
+        "y": 600,
+        "wires": [
+            [
+                "a9cb4ecb.8c829"
+            ]
+        ]
+    },
+    {
+        "id": "a9cb4ecb.8c829",
+        "type": "function",
+        "z": "88396424.c54498",
+        "name": "",
+        "func": "\nreturn [null,{payload:true}];",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 330,
+        "y": 600,
+        "wires": [
+            [
+                "3af4c367.0e73cc"
+            ],
+            [
+                "3af4c367.0e73cc"
+            ]
+        ]
+    },
+    {
+        "id": "3af4c367.0e73cc",
+        "type": "debug",
+        "z": "88396424.c54498",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 650,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "ee66ffc2.673e4",
+        "type": "credentials",
+        "z": "88396424.c54498",
+        "name": "Local Device Credentials",
+        "props": [
+            {
+                "value": "local.MacId",
+                "type": "msg"
+            }
+        ],
+        "x": 550,
+        "y": 60,
+        "wires": [
+            [
+                "ec0115f7.414128"
+            ]
+        ]
     }
 ]
