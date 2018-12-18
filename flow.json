@@ -104,6 +104,13 @@
         "info": "http://192.168.1.216:1880/mysite"
     },
     {
+        "id": "34a0f2ec.a39f9e",
+        "type": "tab",
+        "label": "Weather",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "b208d8af.feaa98",
         "type": "subflow",
         "name": "Delay with Cancel",
@@ -416,6 +423,23 @@
         "name": "Home",
         "icon": "fa-home",
         "order": "1"
+    },
+    {
+        "id": "a9e825b8.e8ce78",
+        "type": "ui_group",
+        "z": "",
+        "name": "forcast",
+        "tab": "9302ce6b.84da8",
+        "order": 2,
+        "disp": true,
+        "width": "35"
+    },
+    {
+        "id": "9302ce6b.84da8",
+        "type": "ui_tab",
+        "z": "",
+        "name": "wetter Grünhain-Beierfeld",
+        "icon": "dashboard"
     },
     {
         "id": "71a47ab9.6044a4",
@@ -9411,5 +9435,162 @@
                 "ec0115f7.414128"
             ]
         ]
+    },
+    {
+        "id": "62b313df.b15c0c",
+        "type": "http request",
+        "z": "34a0f2ec.a39f9e",
+        "name": "Data source",
+        "method": "GET",
+        "url": "http://www.aviationweather.gov{{{payload}}}",
+        "x": 290,
+        "y": 60,
+        "wires": [
+            [
+                "ae9cde5c.0ae59"
+            ]
+        ]
+    },
+    {
+        "id": "e1f34d27.1e7ad",
+        "type": "inject",
+        "z": "34a0f2ec.a39f9e",
+        "name": "Weather report",
+        "topic": "",
+        "payload": "/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&hoursBeforeNow=3&mostRecent=true&stationString=KORD",
+        "payloadType": "str",
+        "repeat": "600",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "x": 127,
+        "y": 60,
+        "wires": [
+            [
+                "62b313df.b15c0c"
+            ]
+        ]
+    },
+    {
+        "id": "ae9cde5c.0ae59",
+        "type": "xml",
+        "z": "34a0f2ec.a39f9e",
+        "name": "",
+        "x": 430,
+        "y": 60,
+        "wires": [
+            [
+                "ed704f2c.f22ba",
+                "7c5cb4b1.9788dc",
+                "2c7ebc95.074a04"
+            ]
+        ]
+    },
+    {
+        "id": "d5836136.04284",
+        "type": "debug",
+        "z": "34a0f2ec.a39f9e",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 770,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "ed704f2c.f22ba",
+        "type": "function",
+        "z": "34a0f2ec.a39f9e",
+        "name": "Parse METAR",
+        "func": "var METARdata = msg.payload.response.data[0].METAR[0];\nvar wind = METARdata.wind_speed_kt[0];\nvar gusts = wind; //if wind_gust_kt is not present, value defaults to wind_speed_kt\n   if (typeof METARdata.wind_gust_kt != \"undefined\") {\n\t   gusts = METARdata.wind_gust_kt[0];\n       }\nvar altim = METARdata.altim_in_hg[0];\nvar pressure = Math.round(altim * 33.8637526); //convert hg to mb\nvar dew = METARdata.dewpoint_c[0];\nvar temp = METARdata.temp_c[0];\n\n//August-Roche-Magnus approximation to calculate humidity\nvar constA = 17.625;\nvar constB = 243.04;\nvar rh_numer = 100.0*Math.exp((constA*eval(dew))/(eval(dew)+constB));\nvar rh_denom = Math.exp((constA*eval(temp))/(eval(temp)+constB));\n//var rh_numer = 100.0*Math.exp((constA*(dew))/((dew)+constB));\n//var rh_denom = Math.exp((constA*(temp))/((temp)+constB));\nvar rh_hum   = (rh_numer/rh_denom);\nvar humidity = Math.round(rh_hum);\n\nmsg.payload = ((wind) + (\",\") + (gusts) + (\",\") + (humidity) + (\",\") + (pressure) + (\",\") + (temp));\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 600,
+        "y": 60,
+        "wires": [
+            [
+                "d5836136.04284"
+            ]
+        ]
+    },
+    {
+        "id": "893f3564.0ecf38",
+        "type": "comment",
+        "z": "34a0f2ec.a39f9e",
+        "name": "NOAA Weather data",
+        "info": "Retrieving Airport METAR feed",
+        "x": 110,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "7c5cb4b1.9788dc",
+        "type": "debug",
+        "z": "34a0f2ec.a39f9e",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 590,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "2c7ebc95.074a04",
+        "type": "change",
+        "z": "34a0f2ec.a39f9e",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.response.data.0.METAR.0",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 260,
+        "y": 160,
+        "wires": [
+            [
+                "60c012f9.8810bc"
+            ]
+        ]
+    },
+    {
+        "id": "60c012f9.8810bc",
+        "type": "function",
+        "z": "34a0f2ec.a39f9e",
+        "name": "",
+        "func": "var station = msg.payload.station_id;\n\nvar msgarr = [];\nvar temp_f = msg.payload.temp_c*9/5 + 32;\n\nif ((typeof msg.observation_time !== 'undefined')){\n    dtstring = new Date.parse(msg.observation_time)\n} else {dtstring = new Date().toISOString();}\n\nmsgarr.push({\n    payload:(temp_f),\n    topic: station + \"/temperature\",\n    timestamp : dtstring\n});\n\nvar altim = msg.payload.altim_in_hg[0];\nvar pressure = Math.round(altim * 33.8637526); //convert hg to mb\nvar dew = msg.payload.dewpoint_c[0];\nvar temp = msg.payload.temp_c[0];\n\n//August-Roche-Magnus approximation to calculate humidity\nvar constA = 17.625;\nvar constB = 243.04;\nvar rh_numer = 100.0*Math.exp((constA*eval(dew))/(eval(dew)+constB));\nvar rh_denom = Math.exp((constA*eval(temp))/(eval(temp)+constB));\n//var rh_numer = 100.0*Math.exp((constA*(dew))/((dew)+constB));\n//var rh_denom = Math.exp((constA*(temp))/((temp)+constB));\nvar rh_hum   = (rh_numer/rh_denom);\nvar humidity = Math.round(rh_hum);\n\nmsgarr.push({\n    payload:(humidity),\n    topic: station + \"/humidity\",\n    timestamp : dtstring\n});    \n\nvar pressure = Math.round(altim * 33.8637526); //convert hg to mb\nmsgarr.push({\n    payload:(pressure),\n    topic: station + \"/pressure\",\n    timestamp : dtstring\n});    \n\n\nreturn [msgarr];\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 510,
+        "y": 160,
+        "wires": [
+            [
+                "8caa3aef.9eea88"
+            ]
+        ]
+    },
+    {
+        "id": "8caa3aef.9eea88",
+        "type": "debug",
+        "z": "34a0f2ec.a39f9e",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 680,
+        "y": 160,
+        "wires": []
     }
 ]
