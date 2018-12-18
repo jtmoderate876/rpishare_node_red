@@ -6943,7 +6943,7 @@
         "func": "/*\ncreating a report-by-exception type node but one that, when the value does change\nsends to messages, one with the old value and last timestamp for that value\nand a second with the new value and timestamp. This way Wonderware Online will have\na better data for visualization / interpolation.\n*/\nvar prevValue = {};\nvar topic = msg.topic;//.replace(/\\//g,\".\"); //globally replace / with .\nprevValue = context.get(topic);\n//create object with .topic, .payload, .timestamp\nvar currValue = {\n    topic : msg.topic,\n    payload : msg.payload,\n    timestamp : msg.timestamp\n};\n/*\nif (typeof prevValue !== 'undefined') {\n    node.warn(\"prevValue=\" + JSON.stringify(prevValue) );\n}\nif (typeof currValue !== 'undefined') {\n    node.warn(\"currValue=\" + JSON.stringify(currValue) );\n}\n*/\n\nif ((typeof prevValue !== 'undefined') && (typeof prevValue.payload !== 'undefined')) {\n    if (currValue.payload==prevValue.payload) {\n        //node.warn(\"Values the same!\")\n        prevValue = currValue;\n        context.set(topic, prevValue)\n        return null;// values the same, no need to process\n    } else {\n        var msgarr = [\n            {\n                timestamp: prevValue.timestamp,\n                topic: prevValue.topic,\n                payload: prevValue.payload\n            },\n            {\n                timestamp: currValue.timestamp,\n                topic: currValue.topic,\n                payload: currValue.payload\n            },\n        ];\n        node.log(msgarr.toString());\n        context.set(topic, currValue)\n        return [msgarr];\n    }\n} else {\n    prevValue = currValue;\n    context.set(topic, prevValue);\n    return msg;\n}\n\n//return msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 370,
+        "x": 390,
         "y": 220,
         "wires": [
             []
@@ -9491,7 +9491,7 @@
         "type": "debug",
         "z": "34a0f2ec.a39f9e",
         "name": "",
-        "active": true,
+        "active": false,
         "console": "false",
         "complete": "false",
         "x": 770,
@@ -9529,11 +9529,11 @@
         "type": "debug",
         "z": "34a0f2ec.a39f9e",
         "name": "",
-        "active": true,
+        "active": false,
         "console": "false",
         "complete": "false",
         "x": 590,
-        "y": 100,
+        "y": 20,
         "wires": []
     },
     {
@@ -9555,8 +9555,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 260,
-        "y": 160,
+        "x": 240,
+        "y": 100,
         "wires": [
             [
                 "60c012f9.8810bc"
@@ -9568,14 +9568,15 @@
         "type": "function",
         "z": "34a0f2ec.a39f9e",
         "name": "",
-        "func": "var station = msg.payload.station_id;\n\nvar msgarr = [];\nvar temp_f = msg.payload.temp_c*9/5 + 32;\n\nif ((typeof msg.observation_time !== 'undefined')){\n    dtstring = new Date.parse(msg.observation_time)\n} else {dtstring = new Date().toISOString();}\n\nmsgarr.push({\n    payload:(temp_f),\n    topic: station + \"/temperature\",\n    timestamp : dtstring\n});\n\nvar altim = msg.payload.altim_in_hg[0];\nvar pressure = Math.round(altim * 33.8637526); //convert hg to mb\nvar dew = msg.payload.dewpoint_c[0];\nvar temp = msg.payload.temp_c[0];\n\n//August-Roche-Magnus approximation to calculate humidity\nvar constA = 17.625;\nvar constB = 243.04;\nvar rh_numer = 100.0*Math.exp((constA*eval(dew))/(eval(dew)+constB));\nvar rh_denom = Math.exp((constA*eval(temp))/(eval(temp)+constB));\n//var rh_numer = 100.0*Math.exp((constA*(dew))/((dew)+constB));\n//var rh_denom = Math.exp((constA*(temp))/((temp)+constB));\nvar rh_hum   = (rh_numer/rh_denom);\nvar humidity = Math.round(rh_hum);\n\nmsgarr.push({\n    payload:(humidity),\n    topic: station + \"/humidity\",\n    timestamp : dtstring\n});    \n\nvar pressure = Math.round(altim * 33.8637526); //convert hg to mb\nmsgarr.push({\n    payload:(pressure),\n    topic: station + \"/pressure\",\n    timestamp : dtstring\n});    \n\n\nreturn [msgarr];\n",
+        "func": "var station = msg.payload.station_id;\n\nvar msgarr = [];\nvar temp_f = msg.payload.temp_c*9/5 + 32;\n\nif ((typeof msg.observation_time !== 'undefined')){\n    dtstring = new Date.parse(msg.observation_time)\n} else {dtstring = new Date().toISOString();}\n\nmsgarr.push({\n    payload:(temp_f),\n    topic: \"airport/\" + station + \"/temperature\",\n    timestamp : dtstring\n});\n\nvar pressure = parseFloat(msg.payload.altim_in_hg[0]); //inches hg\nvar dew = parseFloat(msg.payload.dewpoint_c[0]);\nvar temp = parseFloat(msg.payload.temp_c[0]);\n\n//August-Roche-Magnus approximation to calculate humidity\nvar constA = 17.625;\nvar constB = 243.04;\n//var rh_numer = 100.0*Math.exp((constA*eval(dew))/(eval(dew)+constB));\n//var rh_denom = Math.exp((constA*eval(temp))/(eval(temp)+constB));\nvar rh_numer = 100.0*Math.exp((constA*(dew))/((dew)+constB));\nvar rh_denom = Math.exp((constA*(temp))/((temp)+constB));\nvar rh_hum   = (rh_numer/rh_denom);\nvar humidity = Math.round(rh_hum);\n\nmsgarr.push({\n    payload:(humidity),\n    topic: \"airport/\" + station + \"/humidity\",\n    timestamp : dtstring\n});    \n\nmsgarr.push({\n    payload:(pressure),\n    topic: \"airport/\" + station + \"/pressure\",\n    timestamp : dtstring\n});    \n\n\nreturn [msgarr];\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 510,
-        "y": 160,
+        "x": 490,
+        "y": 100,
         "wires": [
             [
-                "8caa3aef.9eea88"
+                "8caa3aef.9eea88",
+                "63702d45.e76ef4"
             ]
         ]
     },
@@ -9589,8 +9590,36 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 680,
+        "x": 660,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "63702d45.e76ef4",
+        "type": "link out",
+        "z": "34a0f2ec.a39f9e",
+        "name": "FromWeatherToWonderwareOutput",
+        "links": [
+            "6ca1b15d.e06ae"
+        ],
+        "x": 640,
         "y": 160,
         "wires": []
+    },
+    {
+        "id": "6ca1b15d.e06ae",
+        "type": "link in",
+        "z": "e8223701.eebbe8",
+        "name": "FromWeatherToWonderwareInput",
+        "links": [
+            "63702d45.e76ef4"
+        ],
+        "x": 215,
+        "y": 200,
+        "wires": [
+            [
+                "c8c26955.8e6978"
+            ]
+        ]
     }
 ]
