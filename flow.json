@@ -111,6 +111,13 @@
         "info": ""
     },
     {
+        "id": "8b05f6ab.931a68",
+        "type": "tab",
+        "label": "sparkplug test (broken)",
+        "disabled": true,
+        "info": ""
+    },
+    {
         "id": "b208d8af.feaa98",
         "type": "subflow",
         "name": "Delay with Cancel",
@@ -2076,7 +2083,9 @@
         "x": 950,
         "y": 120,
         "wires": [
-            []
+            [
+                "387eba59.e6bb06"
+            ]
         ]
     },
     {
@@ -3775,7 +3784,7 @@
         "type": "function",
         "z": "c201e10a.3d66f",
         "name": "payload object to individual payloads",
-        "func": "if (typeof msg.payload == \"object\"){\n    var newmsg = [];\n    var prefix = msg.topic+\"/\";\n/*  two differ ways to iterate through payload.properties\n    1. with Object.keys(msg.payload)\n    2. with for propertyname in msg.payload\n    *went with 2*\n    var keys = Object.keys(msg.payload);\n    var obj = {};\n    for (i=0; i<keys.length; i++) { //    node.warn(\"iterating keys with keys[\"+i+\"]=\"+keys[i]);\n        obj[prefix+keys[i]] = msg.payload[keys[i]];\n    }\n*/\n    for(var propertyName in msg.payload) {\n        newmsg.push({\n            topic : prefix  + propertyName,\n            payload : msg.payload[propertyName]\n        });\n    }\n    msg = newmsg;\n}\nreturn [msg];\n",
+        "func": "/*\nIf payload is an object rather than a simple value such as a float, string, etc.\nthen assume payload has:\n{\n    propertyname1 : value1,\n    propertyname2 : value2,\n    propertyname3 : value3\n}\nand parse it into separate msgs, each in the form:\n    newmsg.topic = msg.topic + \"/\" + propertyname\n    newmsg.payload = msg.payload.[propertyname]\n*/\nif (typeof msg.payload == \"object\"){\n    var newmsg = [];\n    var prefix = msg.topic+\"/\";\n/*  two different ways to iterate through payload.properties\n    1. with Object.keys(msg.payload)\n    2. with for propertyname in msg.payload\n    *went with 2*\n    var keys = Object.keys(msg.payload);\n    var obj = {};\n    for (i=0; i<keys.length; i++) { //    node.warn(\"iterating keys with keys[\"+i+\"]=\"+keys[i]);\n        obj[prefix+keys[i]] = msg.payload[keys[i]];\n    }\n*/\n    for(var propertyName in msg.payload) {\n        newmsg.push({\n            topic : prefix  + propertyName,\n            payload : msg.payload[propertyName]\n        });\n    }\n    msg = newmsg;\n}\nreturn [msg];\n",
         "outputs": 1,
         "noerr": 0,
         "x": 365,
@@ -6982,7 +6991,7 @@
         "type": "debug",
         "z": "88396424.c54498",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -9620,6 +9629,197 @@
             [
                 "c8c26955.8e6978"
             ]
+        ]
+    },
+    {
+        "id": "387eba59.e6bb06",
+        "type": "debug",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 1090,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "1d6e111d.6c3cff",
+        "type": "sparkplug",
+        "z": "8b05f6ab.931a68",
+        "name": "",
+        "broker": "tcp://localhost",
+        "port": "1883",
+        "clientid": "Pinger",
+        "groupid": "Sparkplug Devices",
+        "edgenode": "Node-RED Edge Node",
+        "version": "spBv1.0",
+        "enablecache": "false",
+        "publishdeath": "true",
+        "user": "",
+        "password": "",
+        "x": 440,
+        "y": 300,
+        "wires": [
+            [
+                "8acd641e.3b1e38",
+                "f0384a59.d54c48"
+            ]
+        ]
+    },
+    {
+        "id": "6974d71a.2b7818",
+        "type": "inject",
+        "z": "8b05f6ab.931a68",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "x": 107.99994277954102,
+        "y": 284.6666507720947,
+        "wires": [
+            [
+                "b1ebc18c.308f7"
+            ]
+        ]
+    },
+    {
+        "id": "b1ebc18c.308f7",
+        "type": "function",
+        "z": "8b05f6ab.931a68",
+        "name": "",
+        "func": "msg.topic = \"pinger/DBIRTH\"\nmsg.payload = {\n    \"timestamp\" : Date.now(),\n    \"metrics\" : [\n        {\n            \"name\" : \"google/ping\",\n            \"value\" :-1,\n            \"type\" : \"float\"\n        },\n        {\n            \"name\" : \"facebook/ping\",\n            \"value\" :-1,\n            \"type\" : \"float\"\n        },\n        {\n            \"name\" : \"demo/writeable bool\",\n            \"value\" :false,\n            \"type\" : \"boolean\"\n        }\n    ]\n}\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 251.99995803833008,
+        "y": 285.9999942779541,
+        "wires": [
+            [
+                "1d6e111d.6c3cff"
+            ]
+        ]
+    },
+    {
+        "id": "7d68754c.70b6fc",
+        "type": "ping",
+        "z": "8b05f6ab.931a68",
+        "name": "",
+        "host": "www.google.com",
+        "timer": "1000",
+        "x": 135.99995803833008,
+        "y": 157.33332443237305,
+        "wires": [
+            [
+                "1145c9bc.7af076"
+            ]
+        ]
+    },
+    {
+        "id": "1145c9bc.7af076",
+        "type": "function",
+        "z": "8b05f6ab.931a68",
+        "name": "",
+        "func": "var np = {\n    \"timestamp\" : Date.now()\n};\nvar metrics = [];\nmetrics.push({\n    \"name\" : \"google/ping\",\n    \"value\" : msg.payload,\n    \"type\" : \"float\"\n});\n\nnp[\"metrics\"] = metrics\nmsg.payload = np\nmsg.topic = \"pinger/DDATA\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 303.99997329711914,
+        "y": 160.0000057220459,
+        "wires": [
+            [
+                "1d6e111d.6c3cff"
+            ]
+        ]
+    },
+    {
+        "id": "979d1ff7.c98d",
+        "type": "ping",
+        "z": "8b05f6ab.931a68",
+        "name": "",
+        "host": "www.facebook.com",
+        "timer": "1000",
+        "x": 138.83327102661133,
+        "y": 93.66665077209473,
+        "wires": [
+            [
+                "4b47f99b.f39138"
+            ]
+        ]
+    },
+    {
+        "id": "4b47f99b.f39138",
+        "type": "function",
+        "z": "8b05f6ab.931a68",
+        "name": "",
+        "func": "var np = {\n    \"timestamp\" : Date.now()\n};\nvar metrics = [];\nmetrics.push({\n    \"name\" : \"facebook/ping\",\n    \"value\" : msg.payload,\n    \"type\" : \"float\"\n});\n\nnp[\"metrics\"] = metrics\nmsg.payload = np\nmsg.topic = \"pinger/DDATA\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 294.8332710266113,
+        "y": 97.66665077209473,
+        "wires": [
+            [
+                "1d6e111d.6c3cff"
+            ]
+        ]
+    },
+    {
+        "id": "f0384a59.d54c48",
+        "type": "debug",
+        "z": "8b05f6ab.931a68",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 641.9999580383301,
+        "y": 281.6666507720947,
+        "wires": []
+    },
+    {
+        "id": "7417999f.5cd818",
+        "type": "function",
+        "z": "8b05f6ab.931a68",
+        "name": "",
+        "func": "var np = {\n    \"timestamp\" : Date.now()\n};\nvar metrics = [];\nmetrics.push({\n    \"name\" : \"demo/writeable bool\",\n    \"value\" : msg.payload.metrics[0].value,\n    \"type\" : \"boolean\"\n});\n\nnp[\"metrics\"] = metrics\nmsg.payload = np\nmsg.topic = \"pinger/DDATA\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 515.499927520752,
+        "y": 99.66665077209473,
+        "wires": [
+            [
+                "1d6e111d.6c3cff"
+            ]
+        ]
+    },
+    {
+        "id": "8acd641e.3b1e38",
+        "type": "switch",
+        "z": "8b05f6ab.931a68",
+        "name": "",
+        "property": "payload.metrics[0].name",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "demo/writeable bool",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "rebirth",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "outputs": 2,
+        "x": 548.6665916442871,
+        "y": 209.3333511352539,
+        "wires": [
+            [
+                "7417999f.5cd818"
+            ],
+            []
         ]
     }
 ]
