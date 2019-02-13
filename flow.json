@@ -13,13 +13,6 @@
         "disabled": false
     },
     {
-        "id": "f62d4af9.a6db78",
-        "type": "tab",
-        "label": "Flow 2",
-        "disabled": true,
-        "info": ""
-    },
-    {
         "id": "88396424.c54498",
         "type": "tab",
         "label": "Rainforest",
@@ -115,6 +108,13 @@
         "type": "tab",
         "label": "sparkplug test (broken)",
         "disabled": true,
+        "info": ""
+    },
+    {
+        "id": "bd01e33a.29756",
+        "type": "tab",
+        "label": "Azure IOT Hub",
+        "disabled": false,
         "info": ""
     },
     {
@@ -237,34 +237,15 @@
         "id": "ccbad4df.c6e028",
         "type": "tls-config",
         "z": "",
-        "name": "",
+        "name": "TLS for shfitr.io",
         "cert": "",
         "key": "",
         "ca": "",
         "certname": "",
         "keyname": "",
         "caname": "",
-        "verifyservercert": true
-    },
-    {
-        "id": "e7ec31a4.2aad",
-        "type": "tls-config",
-        "z": "",
-        "name": "",
-        "cert": "",
-        "key": "",
-        "ca": "",
-        "verifyservercert": true
-    },
-    {
-        "id": "34466473.e724fc",
-        "type": "tls-config",
-        "z": "",
-        "name": "",
-        "cert": "",
-        "key": "",
-        "ca": "",
-        "verifyservercert": true
+        "servername": "broker.shiftr.io",
+        "verifyservercert": false
     },
     {
         "id": "27dbe3bb.c30aec",
@@ -273,10 +254,10 @@
         "name": "",
         "broker": "broker.shiftr.io",
         "port": "8883",
-        "tls": "34466473.e724fc",
+        "tls": "ccbad4df.c6e028",
         "clientid": "rpi-node-red-MQTTtoShiftrPage-4c318920",
         "usetls": true,
-        "compatmode": true,
+        "compatmode": false,
         "keepalive": "60",
         "cleansession": true,
         "birthTopic": "",
@@ -449,6 +430,20 @@
         "icon": "dashboard"
     },
     {
+        "id": "74d52d37.cac784",
+        "type": "tls-config",
+        "z": "",
+        "name": "TLS Config Generic",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": true
+    },
+    {
         "id": "71a47ab9.6044a4",
         "type": "mosca in",
         "z": "c201e10a.3d66f",
@@ -492,8 +487,7 @@
         "y": 100,
         "wires": [
             [
-                "dd27af28.c2e8e",
-                "570ea412.7b645c"
+                "dd27af28.c2e8e"
             ]
         ]
     },
@@ -603,7 +597,7 @@
         "method": "POST",
         "ret": "txt",
         "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
-        "tls": "e7ec31a4.2aad",
+        "tls": "74d52d37.cac784",
         "x": 290,
         "y": 220,
         "wires": [
@@ -760,7 +754,7 @@
         "method": "POST",
         "ret": "txt",
         "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
-        "tls": "",
+        "tls": "74d52d37.cac784",
         "x": 550,
         "y": 420,
         "wires": [
@@ -824,7 +818,7 @@
         "method": "POST",
         "ret": "txt",
         "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
-        "tls": "",
+        "tls": "74d52d37.cac784",
         "x": 670,
         "y": 460,
         "wires": [
@@ -888,7 +882,7 @@
         "method": "POST",
         "ret": "txt",
         "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
-        "tls": "",
+        "tls": "74d52d37.cac784",
         "x": 430,
         "y": 500,
         "wires": [
@@ -992,7 +986,7 @@
         "method": "POST",
         "ret": "txt",
         "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
-        "tls": "e7ec31a4.2aad",
+        "tls": "74d52d37.cac784",
         "x": 290,
         "y": 320,
         "wires": [
@@ -1137,7 +1131,7 @@
         "once": false,
         "onceDelay": "",
         "x": 120,
-        "y": 520,
+        "y": 420,
         "wires": [
             [
                 "70a2249f.495bec"
@@ -1180,7 +1174,7 @@
         "method": "use",
         "ret": "obj",
         "url": "",
-        "tls": "",
+        "tls": "74d52d37.cac784",
         "x": 610,
         "y": 100,
         "wires": [
@@ -1198,7 +1192,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 450,
-        "y": 520,
+        "y": 420,
         "wires": [
             [
                 "10830111.cc29df"
@@ -1213,9 +1207,9 @@
         "method": "use",
         "ret": "obj",
         "url": "",
-        "tls": "",
+        "tls": "74d52d37.cac784",
         "x": 650,
-        "y": 520,
+        "y": 420,
         "wires": [
             [
                 "b543311d.f82ef"
@@ -1235,7 +1229,7 @@
         "once": false,
         "onceDelay": "",
         "x": 180,
-        "y": 420,
+        "y": 320,
         "wires": [
             [
                 "222cc17.3f3123e"
@@ -1251,7 +1245,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 400,
-        "y": 420,
+        "y": 320,
         "wires": [
             [
                 "8f53ba9e.62ee08"
@@ -1266,8 +1260,9 @@
         "method": "use",
         "ret": "obj",
         "url": "",
+        "tls": "74d52d37.cac784",
         "x": 570,
-        "y": 420,
+        "y": 320,
         "wires": [
             [
                 "89c2c2df.d2e5"
@@ -1283,7 +1278,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 880,
-        "y": 380,
+        "y": 280,
         "wires": [
             []
         ]
@@ -1297,7 +1292,7 @@
         "console": "false",
         "complete": "payload",
         "x": 970,
-        "y": 420,
+        "y": 320,
         "wires": []
     },
     {
@@ -1307,7 +1302,7 @@
         "name": "Step #3 - Refresh Token Flow a few times for good measure.",
         "info": "This flow will refresh your token every time the input button is pressed.\n\nGlobal variables set -- EcobeeAccessToken and EcobeeRefreshToken",
         "x": 240,
-        "y": 380,
+        "y": 280,
         "wires": []
     },
     {
@@ -1317,7 +1312,7 @@
         "name": "Step #4 - Get Thermostat Data - 1 minute polling works but Ecobee says only poll every 3 minutes or more",
         "info": "Get thermostat data\nEcobee reference to 3 minute interval:\nhttps://www.ecobee.com/home/developer/api/documentation/v1/operations/get-thermostat-summary.shtml\n",
         "x": 380,
-        "y": 480,
+        "y": 380,
         "wires": []
     },
     {
@@ -1358,7 +1353,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 270,
-        "y": 320,
+        "y": 220,
         "wires": [
             [
                 "2ffd018.f9c37fe"
@@ -1373,8 +1368,9 @@
         "method": "use",
         "ret": "obj",
         "url": "",
+        "tls": "74d52d37.cac784",
         "x": 490,
-        "y": 320,
+        "y": 220,
         "wires": [
             [
                 "4f85e128.2eaf3"
@@ -1388,7 +1384,7 @@
         "name": "Step #2 - Requesting the first access token - you must run Step 2 within 10 minutes of running Step 1.",
         "info": "Now that the app has been added to your \"My Apps\" - we need to request our first access token.",
         "x": 370,
-        "y": 280,
+        "y": 180,
         "wires": []
     },
     {
@@ -1416,7 +1412,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 720,
-        "y": 320,
+        "y": 220,
         "wires": [
             [
                 "67d81ca8.768654"
@@ -1432,7 +1428,7 @@
         "console": "false",
         "complete": "false",
         "x": 970,
-        "y": 320,
+        "y": 220,
         "wires": []
     },
     {
@@ -1453,7 +1449,7 @@
         "checkall": "true",
         "outputs": 2,
         "x": 740,
-        "y": 420,
+        "y": 320,
         "wires": [
             [
                 "c0a8cda1.94c0b"
@@ -1480,7 +1476,7 @@
         "randomUnits": "seconds",
         "drop": true,
         "x": 280,
-        "y": 520,
+        "y": 420,
         "wires": [
             [
                 "7d405852.04f168"
@@ -1509,7 +1505,7 @@
         "crontab": "",
         "once": false,
         "x": 90,
-        "y": 320,
+        "y": 220,
         "wires": [
             [
                 "5251da69.a11c34"
@@ -2127,8 +2123,8 @@
         "links": [
             "3a764f5e.e3f53"
         ],
-        "x": 935,
-        "y": 560,
+        "x": 895,
+        "y": 460,
         "wires": []
     },
     {
@@ -2175,11 +2171,10 @@
         "outputs": 1,
         "noerr": 0,
         "x": 860,
-        "y": 520,
+        "y": 420,
         "wires": [
             [
-                "e75b1948.c5f178",
-                "9cd45335.9c179"
+                "951eb9a4.4d2208"
             ]
         ]
     },
@@ -2194,8 +2189,8 @@
         "repeat": "",
         "crontab": "",
         "once": true,
-        "x": 108,
-        "y": 158,
+        "x": 90,
+        "y": 100,
         "wires": [
             [
                 "2525f2e3.ad6b6e",
@@ -2211,8 +2206,8 @@
         "func": "const getJoke = function (firstname=\"Chuck\", lastname=\"Norris\") {\n    \n    let promise = new Promise((resolve, reject) => {\n        msg.resolve = resolve;\n        msg.reject = reject;\n    });\n    \n    msg.url = `http://api.icndb.com/jokes/random?firstName=${firstname}&lastName=${lastname}`;\n    msg.method = 'GET';\n    \n    node.send(Object.assign({}, msg));\n    \n    return promise;\n};\n\nglobal.set('getJoke', getJoke);",
         "outputs": 1,
         "noerr": 0,
-        "x": 244,
-        "y": 159,
+        "x": 226,
+        "y": 101,
         "wires": [
             [
                 "32981db2.1ad1d2",
@@ -2229,8 +2224,8 @@
         "ret": "obj",
         "url": "",
         "tls": "",
-        "x": 390,
-        "y": 160,
+        "x": 372,
+        "y": 102,
         "wires": [
             [
                 "c4d63d77.0991a",
@@ -2246,8 +2241,8 @@
         "func": "const joke = global.get('getJoke')();\n\njoke.then(joke => {\n    node.warn(joke);\n}).catch(error => {\n    node.error(error);\n});",
         "outputs": "0",
         "noerr": 0,
-        "x": 244,
-        "y": 259,
+        "x": 226,
+        "y": 201,
         "wires": []
     },
     {
@@ -2261,8 +2256,8 @@
         "repeat": "",
         "crontab": "",
         "once": false,
-        "x": 114,
-        "y": 259,
+        "x": 96,
+        "y": 201,
         "wires": [
             [
                 "35bd9768.216c88"
@@ -2277,8 +2272,8 @@
         "func": "msg.resolve(msg.payload.value.joke);\n\n// reject\n// setTimeout(function () {\n//     msg.reject({message: 'Could not request joke'});\n// }, 2000);",
         "outputs": "0",
         "noerr": 0,
-        "x": 660,
-        "y": 173,
+        "x": 642,
+        "y": 115,
         "wires": []
     },
     {
@@ -2287,8 +2282,8 @@
         "z": "1fec4b90.1b56f4",
         "name": "use above flow",
         "info": "",
-        "x": 124,
-        "y": 219,
+        "x": 106,
+        "y": 161,
         "wires": []
     },
     {
@@ -2299,8 +2294,8 @@
         "active": true,
         "console": "false",
         "complete": "true",
-        "x": 377,
-        "y": 83,
+        "x": 359,
+        "y": 25,
         "wires": []
     },
     {
@@ -2311,8 +2306,8 @@
         "active": true,
         "console": "false",
         "complete": "true",
-        "x": 542,
-        "y": 91,
+        "x": 524,
+        "y": 33,
         "wires": []
     },
     {
@@ -2323,8 +2318,8 @@
         "active": true,
         "console": "false",
         "complete": "true",
-        "x": 754,
-        "y": 92,
+        "x": 736,
+        "y": 34,
         "wires": []
     },
     {
@@ -2335,8 +2330,8 @@
         "func": "msg.callback(msg.payload.value.joke.replace(/&quot;/g, '\"'));",
         "outputs": "0",
         "noerr": 0,
-        "x": 613,
-        "y": 558,
+        "x": 590,
+        "y": 320,
         "wires": []
     },
     {
@@ -2350,8 +2345,8 @@
         "repeat": "",
         "crontab": "",
         "once": true,
-        "x": 133,
-        "y": 558,
+        "x": 110,
+        "y": 320,
         "wires": [
             [
                 "c059123.379e7f"
@@ -2366,8 +2361,8 @@
         "func": "var getJoke = function(firstname, lastname, callback) {\n    firstname = firstname || 'Chuck';\n    lastname = lastname || 'Norris';\n    \n    // http request\n    msg.url = `http://api.icndb.com/jokes/random?firstName=${firstname}&lastName=${lastname}`;\n    msg.method = 'GET';\n    \n    // assign callback to msg\n    msg.callback = callback;\n    \n    // return copy of msg\n    node.send(Object.assign({}, msg));\n};\n\n\n// make global\nglobal.set('getJoke', getJoke);",
         "outputs": 1,
         "noerr": 0,
-        "x": 293,
-        "y": 558,
+        "x": 270,
+        "y": 320,
         "wires": [
             [
                 "e9d00c74.bbb9c"
@@ -2380,8 +2375,8 @@
         "z": "1fec4b90.1b56f4",
         "name": "Flow callback example",
         "info": "",
-        "x": 143,
-        "y": 518,
+        "x": 120,
+        "y": 280,
         "wires": []
     },
     {
@@ -2393,8 +2388,8 @@
         "ret": "obj",
         "url": "",
         "tls": "",
-        "x": 453,
-        "y": 558,
+        "x": 430,
+        "y": 320,
         "wires": [
             [
                 "308390c7.2af29"
@@ -2412,8 +2407,8 @@
         "repeat": "",
         "crontab": "",
         "once": false,
-        "x": 143,
-        "y": 598,
+        "x": 120,
+        "y": 360,
         "wires": [
             [
                 "e0837b3c.25c928"
@@ -2428,8 +2423,8 @@
         "func": "global.get('getJoke')('Wesley', 'Stam', function (joke) {\n    msg.payload = joke;\n    node.send(msg);\n});",
         "outputs": 1,
         "noerr": 0,
-        "x": 383,
-        "y": 598,
+        "x": 360,
+        "y": 360,
         "wires": [
             [
                 "1ec5ae1c.2c9112"
@@ -2444,8 +2439,8 @@
         "active": true,
         "console": "false",
         "complete": "false",
-        "x": 633,
-        "y": 598,
+        "x": 610,
+        "y": 360,
         "wires": []
     },
     {
@@ -3802,7 +3797,7 @@
         "type": "debug",
         "z": "c201e10a.3d66f",
         "name": "",
-        "active": false,
+        "active": true,
         "console": "false",
         "complete": "true",
         "x": 585,
@@ -3990,8 +3985,8 @@
         "y": 740,
         "wires": [
             [
-                "e454fb33.9a59f8",
-                "e62e3115.d5332"
+                "e62e3115.d5332",
+                "aaa0fb1c.faae18"
             ]
         ]
     },
@@ -4000,7 +3995,7 @@
         "type": "debug",
         "z": "984823b1.a0823",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -4199,9 +4194,9 @@
         "method": "POST",
         "ret": "obj",
         "url": "https://myqexternal.myqdevice.com/api/v4/User/Validate",
-        "tls": "ccbad4df.c6e028",
-        "x": 770,
-        "y": 140,
+        "tls": "74d52d37.cac784",
+        "x": 790,
+        "y": 100,
         "wires": [
             [
                 "795731b2.9f7f4"
@@ -4217,7 +4212,7 @@
         "console": "false",
         "complete": "true",
         "x": 950,
-        "y": 40,
+        "y": 60,
         "wires": []
     },
     {
@@ -4228,8 +4223,8 @@
         "func": "msg.payload = {\n    \"username\" : flow.get(\"myq.payload.username\"),\n    \"password\" : flow.get(\"myq.payload.password\")\n}\n\nmsg.headers = {\n    ContentType : \"application/json\",\n    Accept : \"application/json\",\n    MyQApplicationId : \"Vj8pQggXLhLy0WHahglCD4N1nAkkXQtGYpq2HrHD7H1nvmbT55KqtN6RSF4ILB/i\",\n    Culture : \"en\"\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 630,
-        "y": 140,
+        "x": 650,
+        "y": 100,
         "wires": [
             [
                 "e4163af7.d63848"
@@ -4244,8 +4239,8 @@
         "func": "\nif(msg.payload && msg.payload.desired_state) {\n    msg.desired_state = msg.payload.desired_state;\n}\n\n\nmsg.payload = {};\n\nvar myq = flow.get(\"myq\");\n\nif(myq && myq.SecurityToken) {\n    msg.payload.myq = myq; \n}\n\n\nreturn msg;\n",
         "outputs": "1",
         "noerr": 0,
-        "x": 330,
-        "y": 160,
+        "x": 350,
+        "y": 120,
         "wires": [
             [
                 "d2ff0087.35e4d",
@@ -4274,8 +4269,8 @@
         "active": false,
         "console": "false",
         "complete": "true",
-        "x": 610,
-        "y": 180,
+        "x": 630,
+        "y": 140,
         "wires": []
     },
     {
@@ -4286,8 +4281,8 @@
         "func": "\nif(msg.statusCode == 200 && msg.payload.SecurityToken) {\n    var myq = {\n        SecurityToken : msg.payload.SecurityToken\n    };\n    \n    flow.set(\"myq\", myq);\n    msg.payload.myq = myq;\n    return msg;\n} else {\n    return null;\n}\n\n\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 910,
-        "y": 140,
+        "x": 950,
+        "y": 100,
         "wires": [
             [
                 "83a330e4.d7b2c",
@@ -4312,8 +4307,8 @@
         ],
         "checkall": "false",
         "outputs": 2,
-        "x": 470,
-        "y": 140,
+        "x": 490,
+        "y": 120,
         "wires": [
             [
                 "ab1f61d1.f1759"
@@ -4344,8 +4339,8 @@
         "func": "var myq;\n\nif(msg.payload.myq) {\n    myq = msg.payload.myq;\n} else {\n    myq = flow.get(\"myq\");\n}\n\nif(!myq) return msg;\n\nmsg.headers = {\n    ContentType : \"application/json\",\n    Accept : \"application/json\",\n    MyQApplicationId : \"Vj8pQggXLhLy0WHahglCD4N1nAkkXQtGYpq2HrHD7H1nvmbT55KqtN6RSF4ILB/i\",\n    Culture : \"en\",\n    SecurityToken : myq.SecurityToken\n}\n\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 390,
-        "y": 260,
+        "x": 350,
+        "y": 180,
         "wires": [
             [
                 "18d389f6.096626"
@@ -4360,9 +4355,9 @@
         "method": "GET",
         "ret": "obj",
         "url": "https://myqexternal.myqdevice.com/api/v4/UserDeviceDetails/Get",
-        "tls": "ccbad4df.c6e028",
-        "x": 710,
-        "y": 260,
+        "tls": "74d52d37.cac784",
+        "x": 730,
+        "y": 220,
         "wires": [
             [
                 "7cb3ce78.23626",
@@ -4378,16 +4373,15 @@
         "func": "var myq = flow.get(\"myq\");\n\nmyq.devices = msg.payload.Devices;\nmyq.timestamp = new Date();\n\nflow.set(\"myq\", myq);\n\nmsg.payload.myq = myq;\n\nvar state = \"unknown\";\nfor(var d in myq.devices) {\n    var device = myq.devices[d];\n    if(device && device.MyQDeviceTypeName && device.MyQDeviceTypeName == \"GarageDoorOpener\" && device.Attributes) {\n        myq.garage = device;\n        for(var a in device.Attributes) {\n            var attribute = device.Attributes[a];\n            if(attribute && attribute.AttributeDisplayName == \"doorstate\") {\n                var state = attribute.Value + \"\";\n                myq.garage.state = \"unknown\";\n                if(state == \"1\") myq.garage.state = \"open\";\n                if(state == \"2\") myq.garage.state = \"closed\";\n                if(state == \"3\") myq.garage.state = \"stopped\";\n                if(state == \"4\") myq.garage.state = \"opening\";\n                if(state == \"5\") myq.garage.state = \"closing\";\n                if(state == \"8\") myq.garage.state = \"moving\";\n                if(state == \"9\") myq.garage.state = \"open\";\n            }\n        }\n    }\n}\nif(msg.headers) delete msg.headers;\nif(msg.statusCode) delete msg.statusCode;\nif(msg.responseUrl) delete msg.responseUrl;\nif(msg.responseCookies) delete msg.responseCookies;\n\nmsg.payload = msg.payload.myq;\n\nvar last = flow.get(\"myq_garage_last_known\")\nmsg.payload.garage.hasChanged = false;\nif(last && last != msg.payload.garage.state) {\n    msg.payload.garage.hasChanged = true;\n}\nflow.set(\"myq_garage_last_known\", msg.payload.garage.state);\n\nvar msg2 = {};\nmsg2.payload=myq.garage.state;\nmsg2.topic=\"garage/state\";\nmsg2.timestamp=myq.timestamp;\n\nreturn [msg,msg2];\n",
         "outputs": 2,
         "noerr": 0,
-        "x": 790,
-        "y": 400,
+        "x": 770,
+        "y": 360,
         "wires": [
             [
                 "3a9461a7.cd4a4e",
                 "bf6423aa.2e9ed"
             ],
             [
-                "6cfbef80.77ca7",
-                "3d19a9c0.0e8736"
+                "6cfbef80.77ca7"
             ]
         ]
     },
@@ -4400,7 +4394,7 @@
         "console": "false",
         "complete": "true",
         "x": 950,
-        "y": 280,
+        "y": 200,
         "wires": []
     },
     {
@@ -4420,8 +4414,8 @@
         ],
         "checkall": "false",
         "outputs": 2,
-        "x": 670,
-        "y": 380,
+        "x": 650,
+        "y": 340,
         "wires": [
             [
                 "c9319d60.746e"
@@ -4440,7 +4434,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 950,
-        "y": 240,
+        "y": 160,
         "wires": [
             [
                 "289ed2ed.db4a8e"
@@ -4455,8 +4449,8 @@
         "func": "if(msg.payload.ErrorMessage && msg.payload.ErrorMessage !== \"\") {\n    msg.payload.error = msg.payload.ErrorMessage;\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 690,
-        "y": 320,
+        "x": 710,
+        "y": 280,
         "wires": [
             [
                 "fce1223e.d0e64"
@@ -4472,7 +4466,7 @@
         "console": "false",
         "complete": "true",
         "x": 950,
-        "y": 320,
+        "y": 240,
         "wires": []
     },
     {
@@ -4514,7 +4508,7 @@
         "retain": "false",
         "broker": "971eda83.260398",
         "x": 960,
-        "y": 340,
+        "y": 280,
         "wires": []
     },
     {
@@ -4534,8 +4528,8 @@
         ],
         "checkall": "false",
         "outputs": 2,
-        "x": 790,
-        "y": 460,
+        "x": 750,
+        "y": 440,
         "wires": [
             [
                 "e266609d.8b1a2",
@@ -4554,8 +4548,8 @@
         "active": false,
         "console": "false",
         "complete": "true",
-        "x": 850,
-        "y": 540,
+        "x": 950,
+        "y": 500,
         "wires": []
     },
     {
@@ -4566,8 +4560,8 @@
         "active": false,
         "console": "false",
         "complete": "true",
-        "x": 850,
-        "y": 600,
+        "x": 950,
+        "y": 540,
         "wires": []
     },
     {
@@ -4578,7 +4572,7 @@
         "func": "\nmsg.payload = \"Garage door is \" + msg.payload.garage.state + \" at \" + msg.payload.timestamp;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 930,
+        "x": 730,
         "y": 500,
         "wires": [
             [
@@ -4598,7 +4592,7 @@
         "crontab": "",
         "once": false,
         "x": 90,
-        "y": 420,
+        "y": 300,
         "wires": [
             [
                 "e9a8bd7c.6f65"
@@ -4614,7 +4608,7 @@
         "console": "false",
         "complete": "true",
         "x": 430,
-        "y": 500,
+        "y": 300,
         "wires": []
     },
     {
@@ -4625,9 +4619,9 @@
         "method": "PUT",
         "ret": "obj",
         "url": "https://myqexternal.myqdevice.com/api/v4/DeviceAttribute/PutDeviceAttribute",
-        "tls": "ccbad4df.c6e028",
-        "x": 475,
-        "y": 432,
+        "tls": "74d52d37.cac784",
+        "x": 510,
+        "y": 240,
         "wires": [
             [
                 "8744e4ff.0ca488",
@@ -4643,8 +4637,8 @@
         "func": "var myq;\n\nif(msg.payload.myq) {\n    myq = msg.payload.myq;\n} else {\n    myq = flow.get(\"myq\");\n}\nvar open_close_state = 0; \nif (msg.desired_state && msg.desired_state == \"open\") open_close_state = 1;\n\nmsg.payload = {\n            \"attributeName\": \"desireddoorstate\",\n            \"myQDeviceId\": myq.garage.MyQDeviceId,\n            \"AttributeValue\": open_close_state\n        }\n\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 315,
-        "y": 412,
+        "x": 350,
+        "y": 240,
         "wires": [
             [
                 "533b9e9f.65d36",
@@ -4672,8 +4666,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 430,
-        "y": 320,
+        "x": 490,
+        "y": 180,
         "wires": [
             [
                 "f8b0bc9.b5bf34"
@@ -4692,8 +4686,8 @@
         "active": false,
         "console": "false",
         "complete": "true",
-        "x": 635,
-        "y": 452,
+        "x": 590,
+        "y": 380,
         "wires": []
     },
     {
@@ -4708,7 +4702,7 @@
         "crontab": "",
         "once": false,
         "x": 90,
-        "y": 460,
+        "y": 340,
         "wires": [
             [
                 "e9a8bd7c.6f65"
@@ -4724,8 +4718,8 @@
         "qos": "",
         "retain": "false",
         "broker": "971eda83.260398",
-        "x": 640,
-        "y": 500,
+        "x": 540,
+        "y": 460,
         "wires": []
     },
     {
@@ -4737,7 +4731,7 @@
         "qos": "2",
         "broker": "971eda83.260398",
         "x": 89.5,
-        "y": 510,
+        "y": 390,
         "wires": [
             [
                 "e9a8bd7c.6f65"
@@ -4932,7 +4926,7 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": true,
-        "x": 230,
+        "x": 430,
         "y": 740,
         "wires": [
             [
@@ -5910,7 +5904,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 140,
-        "y": 600,
+        "y": 560,
         "wires": [
             [
                 "971e7d8d.3ce8f"
@@ -5926,7 +5920,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 290,
-        "y": 600,
+        "y": 560,
         "wires": [
             [
                 "b1885fd7.f94e7"
@@ -5944,18 +5938,18 @@
         "tostatus": false,
         "complete": "true",
         "x": 450,
-        "y": 600,
+        "y": 560,
         "wires": []
     },
     {
         "id": "a93b4b21.260828",
         "type": "function",
         "z": "11aaf4c8.4bf33b",
-        "name": "",
+        "name": "set flow context variables",
         "func": "flow.set(\"myq\",\n    {\n    \"payload\" : {\n        \"username\" : msg.username,\n        \"password\" : msg.password\n        }\n    }\n);\n\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 710,
+        "x": 890,
         "y": 20,
         "wires": [
             []
@@ -5970,8 +5964,8 @@
         "qos": "",
         "retain": "",
         "broker": "971eda83.260398",
-        "x": 970,
-        "y": 440,
+        "x": 950,
+        "y": 340,
         "wires": []
     },
     {
@@ -6014,8 +6008,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 780,
-        "y": 220,
+        "x": 800,
+        "y": 180,
         "wires": []
     },
     {
@@ -6028,27 +6022,12 @@
         "start": "",
         "inout": "out",
         "property": "payload",
-        "x": 950,
+        "x": 930,
         "y": 400,
         "wires": [
             [
-                "84c4a650.1554a8"
-            ]
-        ]
-    },
-    {
-        "id": "450cd6f0.b7c678",
-        "type": "function",
-        "z": "e8223701.eebbe8",
-        "name": "prefix tapia/home/",
-        "func": "var prefix = \"tapia/home/\";\nif (msg.topic.startsWith(prefix)){\n    \n}else{\n    msg.topic = prefix + msg.topic;\n}\nreturn msg;\n",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 810,
-        "y": 380,
-        "wires": [
-            [
-                "c73faab4.97eef8"
+                "84c4a650.1554a8",
+                "3d19a9c0.0e8736"
             ]
         ]
     },
@@ -6057,31 +6036,17 @@
         "type": "function",
         "z": "e8223701.eebbe8",
         "name": "decomplexificate dimmer state",
-        "func": "/*\ninsteon-mqtt dimmer state contains complex json\n    insteon/mydimmer/state='{\"state\":\"ON\",\"Brightness\":255}''\nwe are breaking this down to be like switches where:\n    insteon/myswitch/state = \"ON\"\n*/\n\nvar suffix = \"/state\";\n\nif (msg.topic && msg.topic.endsWith(suffix) && (msg.payload !== null) && (msg.payload !== \"\") && (typeof msg.payload == \"object\") && (msg.payload.state) && (msg.payload.brightness)) {\n    var newmsg = [];\n    var prefix = msg.topic.replace(suffix,\"\")+\"/\";\n    for(var propertyName in msg.payload) {\n        newmsg.push({\n            topic : prefix  + propertyName,\n            payload : msg.payload[propertyName]\n        });\n    }\n    msg = newmsg;\n    return [msg];\n} else {\n    \n}\nreturn msg;\n",
+        "func": "/*\ninsteon-mqtt dimmer state contains complex json\n    insteon/mydimmer/state='{\"state\":\"ON\",\"Brightness\":255}''\nwe are breaking this down to be like switches where:\n    insteon/myswitch/state = \"ON\"\n*/\n\nvar suffix = \"/state\";\n\nif (msg.topic && msg.topic.endsWith(suffix) && (msg.payload !== null) && (msg.payload !== \"\") && (typeof msg.payload == \"object\")) {\n    //(msg.payload.state) && (msg.payload.brightness)) {\n    var newmsg = [];\n    var prefix = msg.topic.replace(suffix,\"\")+\"/\";\n    for(var propertyName in msg.payload) {\n        newmsg.push({\n            topic : prefix  + propertyName,\n            payload : msg.payload[propertyName]\n        });\n    }\n    msg = newmsg;\n    return [msg];\n} else {\n    \n}\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "x": 570,
         "y": 360,
         "wires": [
             [
-                "450cd6f0.b7c678",
-                "7de4fca4.680f64"
+                "7de4fca4.680f64",
+                "c73faab4.97eef8"
             ]
         ]
-    },
-    {
-        "id": "c73faab4.97eef8",
-        "type": "debug",
-        "z": "e8223701.eebbe8",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 950,
-        "y": 380,
-        "wires": []
     },
     {
         "id": "60c14a65.0287d4",
@@ -6420,7 +6385,7 @@
         "method": "POST",
         "ret": "txt",
         "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
-        "tls": "",
+        "tls": "74d52d37.cac784",
         "x": 490,
         "y": 680,
         "wires": [
@@ -6516,11 +6481,11 @@
         "type": "debug",
         "z": "50466fda.5d00f",
         "name": "",
-        "active": false,
+        "active": true,
         "console": "false",
         "complete": "true",
-        "x": 1010,
-        "y": 480,
+        "x": 990,
+        "y": 460,
         "wires": []
     },
     {
@@ -7251,7 +7216,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 950,
-        "y": 640,
+        "y": 460,
         "wires": []
     },
     {
@@ -7288,7 +7253,7 @@
         "type": "debug",
         "z": "984823b1.a0823",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -7347,7 +7312,7 @@
         "upload": false,
         "swaggerDoc": "",
         "x": 140,
-        "y": 820,
+        "y": 640,
         "wires": [
             [
                 "d7814f05.628a2"
@@ -7361,7 +7326,7 @@
         "name": "EXPERIMENTAL",
         "info": "\nAPI key:\ndgwVUt6rGJQAdVodrQrAyJAHyI1TKQGA\n",
         "x": 100,
-        "y": 700,
+        "y": 500,
         "wires": []
     },
     {
@@ -7376,7 +7341,7 @@
             }
         ],
         "x": 290,
-        "y": 760,
+        "y": 580,
         "wires": [
             [
                 "46d901e.7f27d"
@@ -7392,7 +7357,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 450,
-        "y": 700,
+        "y": 600,
         "wires": [
             [
                 "32377eb2.def472",
@@ -7413,7 +7378,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 120,
-        "y": 760,
+        "y": 580,
         "wires": [
             [
                 "6442fdda.f1c334"
@@ -7429,7 +7394,7 @@
         "console": "false",
         "complete": "payload",
         "x": 1050,
-        "y": 700,
+        "y": 600,
         "wires": []
     },
     {
@@ -7440,9 +7405,9 @@
         "method": "use",
         "ret": "obj",
         "url": "",
-        "tls": "",
+        "tls": "74d52d37.cac784",
         "x": 650,
-        "y": 720,
+        "y": 620,
         "wires": [
             [
                 "5b5969de.09b738",
@@ -7459,7 +7424,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 870,
-        "y": 700,
+        "y": 600,
         "wires": [
             [
                 "78a4fe50.0aa53"
@@ -7477,7 +7442,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 1030,
-        "y": 760,
+        "y": 660,
         "wires": []
     },
     {
@@ -7491,7 +7456,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 830,
-        "y": 740,
+        "y": 640,
         "wires": []
     },
     {
@@ -7505,1027 +7470,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 690,
-        "y": 660,
-        "wires": []
-    },
-    {
-        "id": "1582854a.394bfb",
-        "type": "http in",
-        "z": "f62d4af9.a6db78",
-        "name": "",
-        "url": "/google/oauth-auth",
-        "method": "get",
-        "swaggerDoc": "",
-        "x": 140,
-        "y": 260,
-        "wires": [
-            [
-                "38940cd8.c00ae4",
-                "306edcb7.5f6794"
-            ]
-        ]
-    },
-    {
-        "id": "a8c3c0e3.67b5f",
-        "type": "http response",
-        "z": "f62d4af9.a6db78",
-        "name": "",
-        "x": 990,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "5544db8a.acc3b4",
-        "type": "http in",
-        "z": "f62d4af9.a6db78",
-        "name": "",
-        "url": "/google/oauth-token",
-        "method": "get",
-        "swaggerDoc": "",
-        "x": 150,
-        "y": 700,
-        "wires": [
-            [
-                "251699ae.eafc56",
-                "9bae9630.b15118"
-            ]
-        ]
-    },
-    {
-        "id": "fe3667e0.606a68",
-        "type": "http response",
-        "z": "f62d4af9.a6db78",
-        "name": "",
-        "x": 1250,
-        "y": 800,
-        "wires": []
-    },
-    {
-        "id": "38940cd8.c00ae4",
-        "type": "switch",
-        "z": "f62d4af9.a6db78",
-        "name": "Check response_type",
-        "property": "req.query.response_type",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "neq",
-                "v": "code",
-                "vt": "str"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "false",
-        "outputs": 2,
-        "x": 400,
-        "y": 260,
-        "wires": [
-            [
-                "c5614f20.a1788"
-            ],
-            [
-                "f7121.b964cedf8"
-            ]
-        ]
-    },
-    {
-        "id": "c5614f20.a1788",
-        "type": "function",
-        "z": "f62d4af9.a6db78",
-        "name": "Error: response_type incorrect",
-        "func": "msg.statusCode = 500;\nmsg.payload = 'response_type ' + msg.req.query.response_type + ' must equal \"code\"';\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 670,
-        "y": 240,
-        "wires": [
-            [
-                "a8c3c0e3.67b5f"
-            ]
-        ]
-    },
-    {
-        "id": "f7121.b964cedf8",
-        "type": "switch",
-        "z": "f62d4af9.a6db78",
-        "name": "Check client_id",
-        "property": "req.query.client_id",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "neq",
-                "v": "googleClientId",
-                "vt": "flow"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 380,
-        "y": 300,
-        "wires": [
-            [
-                "143b1e4c.e469f2"
-            ],
-            [
-                "6e8aa8c8.deea28"
-            ]
-        ]
-    },
-    {
-        "id": "143b1e4c.e469f2",
-        "type": "function",
-        "z": "f62d4af9.a6db78",
-        "name": "Error: client_id incorrect",
-        "func": "msg.statusCode = 500;\nmsg.payload = 'client_id ' + msg.req.query.client_id + ' invalid';\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 650,
-        "y": 280,
-        "wires": [
-            [
-                "a8c3c0e3.67b5f"
-            ]
-        ]
-    },
-    {
-        "id": "6e8aa8c8.deea28",
-        "type": "switch",
-        "z": "f62d4af9.a6db78",
-        "name": "Check auth_code",
-        "property": "req.query.code",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "nnull"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "false",
-        "outputs": 2,
-        "x": 390,
-        "y": 340,
-        "wires": [
-            [
-                "ef7186e.1195a78"
-            ],
-            [
-                "6e8b65c1.445c0c"
-            ]
-        ]
-    },
-    {
-        "id": "ef7186e.1195a78",
-        "type": "function",
-        "z": "f62d4af9.a6db78",
-        "name": "Return existing code",
-        "func": "msg.statusCode = 302;\nmsg.headers = {\n    \"Location\": msg.req.query.redirect_uri + '?code=' + msg.req.query.code + '&state=' + msg.req.query.state\n};\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 640,
-        "y": 320,
-        "wires": [
-            [
-                "a8c3c0e3.67b5f"
-            ]
-        ]
-    },
-    {
-        "id": "dc588e8d.3c614",
-        "type": "switch",
-        "z": "f62d4af9.a6db78",
-        "name": "Check client_id",
-        "property": "client_id",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "neq",
-                "v": "googleClientId",
-                "vt": "flow"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 420,
-        "y": 780,
-        "wires": [
-            [
-                "aa92cfa7.5b48c"
-            ],
-            [
-                "9b3996df.dd6068"
-            ]
-        ]
-    },
-    {
-        "id": "aa92cfa7.5b48c",
-        "type": "function",
-        "z": "f62d4af9.a6db78",
-        "name": "Error: client_id invalid",
-        "func": "msg.statusCode = 400;\nmsg.payload = 'client_id invalid';\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 680,
-        "y": 760,
-        "wires": [
-            [
-                "fe3667e0.606a68"
-            ]
-        ]
-    },
-    {
-        "id": "9b3996df.dd6068",
-        "type": "switch",
-        "z": "f62d4af9.a6db78",
-        "name": "Check client_secret",
-        "property": "client_secret",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "neq",
-                "v": "googleClientSecret",
-                "vt": "flow"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 430,
-        "y": 820,
-        "wires": [
-            [
-                "d85832cc.342c6"
-            ],
-            [
-                "506a2c20.c98da4"
-            ]
-        ]
-    },
-    {
-        "id": "d85832cc.342c6",
-        "type": "function",
-        "z": "f62d4af9.a6db78",
-        "name": "Error: client_secret invalid",
-        "func": "msg.statusCode = 400;\nmsg.payload = 'client_secret invalid';\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 690,
-        "y": 800,
-        "wires": [
-            [
-                "fe3667e0.606a68"
-            ]
-        ]
-    },
-    {
-        "id": "506a2c20.c98da4",
-        "type": "switch",
-        "z": "f62d4af9.a6db78",
-        "name": "grant_type",
-        "property": "grant_type",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "authorization_code",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "refresh_token",
-                "vt": "str"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "false",
-        "outputs": 3,
-        "x": 410,
-        "y": 900,
-        "wires": [
-            [
-                "31ac40c0.46e94"
-            ],
-            [
-                "ef31a37.e6e9d6"
-            ],
-            [
-                "2b7a8560.f95c1a"
-            ]
-        ]
-    },
-    {
-        "id": "2b7a8560.f95c1a",
-        "type": "function",
-        "z": "f62d4af9.a6db78",
-        "name": "Error: grant_type unsupported",
-        "func": "msg.statusCode = 400;\nmsg.payload = 'grant_type ' + msg.req.query.grant_type + ' is not supported';\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 850,
-        "y": 960,
-        "wires": [
-            [
-                "5b5494da.509d0c"
-            ]
-        ]
-    },
-    {
-        "id": "416be04b.6d3d6",
-        "type": "inject",
-        "z": "f62d4af9.a6db78",
-        "name": "On Startup",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "",
-        "x": 110,
-        "y": 120,
-        "wires": [
-            [
-                "5327b45c.98ad5c",
-                "ca8a947a.8007e8",
-                "8e52ef5d.56eb5"
-            ]
-        ]
-    },
-    {
-        "id": "4ce01c88.252364",
-        "type": "function",
-        "z": "f62d4af9.a6db78",
-        "name": "Handle refresh_token",
-        "func": "let refreshTokenStore = global.get(\"googleRefreshTokenStore\") || {};\nlet refreshToken = refreshTokenStore[msg.refresh_token];\nif (refreshToken === null) {\n    msg.statusCode = 400;\n    msg.payload = 'invalid code';\n    return msg;\n}\n\nif (new Date(refreshToken.expiresAt) < Date.now()) {\n    // Remove bad auth code\n    delete refreshTokenStore[msg.refresh_token];\n    \n    msg.statusCode = 400;\n    msg.payload = 'expired code';\n    return msg;\n}\n\nif (refreshToken.clientId != msg.client_id) {\n    msg.statusCode = 400;\n    msg.payload = 'invalid code - wrong client';\n    return msg;\n}\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 820,
-        "y": 880,
-        "wires": [
-            [
-                "b3b987ca.cd2618"
-            ]
-        ]
-    },
-    {
-        "id": "31ac40c0.46e94",
-        "type": "function",
-        "z": "f62d4af9.a6db78",
-        "name": "Handle authorization_code",
-        "func": "let authStore = flow.get(\"authStore\") || {};\nlet authCode = authStore[msg.code];\nif (authCode === null) {\n    msg.statusCode = 400;\n    msg.payload = 'invalid code';\n    return msg;\n}\n\nif (new Date(authCode.expiresAt) < Date.now()) {\n    // Remove expired auth code\n    delete authStore[msg.code];\n    flow.set(\"authStore\", authStore);\n    \n    msg.statusCode = 400;\n    msg.payload = 'expired code';\n    return msg;\n}\n\nif (authCode.clientId != msg.client_id) {\n    msg.statusCode = 400;\n    msg.payload = 'invalid code - wrong client';\n    return msg;\n}\n\n// Remove used auth code\ndelete authStore[msg.code];\nflow.set(\"authStore\", authStore);\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 840,
-        "y": 840,
-        "wires": [
-            [
-                "b3b987ca.cd2618"
-            ]
-        ]
-    },
-    {
-        "id": "ef31a37.e6e9d6",
-        "type": "switch",
-        "z": "f62d4af9.a6db78",
-        "name": "refresh_token?",
-        "property": "refresh_token",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "nnull"
-            },
-            {
-                "t": "null"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 600,
-        "y": 900,
-        "wires": [
-            [
-                "4ce01c88.252364"
-            ],
-            [
-                "66b0dcd7.676944"
-            ]
-        ]
-    },
-    {
-        "id": "66b0dcd7.676944",
-        "type": "function",
-        "z": "f62d4af9.a6db78",
-        "name": "Error: refresh_token incorrect",
-        "func": "msg.statusCode = 400;\nmsg.payload = 'missing required parameter';\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 840,
-        "y": 920,
-        "wires": [
-            [
-                "5b5494da.509d0c"
-            ]
-        ]
-    },
-    {
-        "id": "8815901f.28df1",
-        "type": "comment",
-        "z": "f62d4af9.a6db78",
-        "name": "OAuth Auth",
-        "info": "Google will direct the client to this endpoint to do\nlogin and generation of a temporary authorization code\nfor a specific user.",
-        "x": 110,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "d3d55456.319b18",
-        "type": "comment",
-        "z": "f62d4af9.a6db78",
-        "name": "OAuth Token",
-        "info": "",
-        "x": 110,
-        "y": 660,
-        "wires": []
-    },
-    {
-        "id": "306edcb7.5f6794",
-        "type": "debug",
-        "z": "f62d4af9.a6db78",
-        "name": "",
-        "active": false,
-        "console": "false",
-        "complete": "true",
-        "x": 350,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "251699ae.eafc56",
-        "type": "debug",
-        "z": "f62d4af9.a6db78",
-        "name": "",
-        "active": false,
-        "console": "false",
-        "complete": "true",
-        "x": 390,
-        "y": 700,
-        "wires": []
-    },
-    {
-        "id": "aa1fde8f.afceb",
-        "type": "http in",
-        "z": "f62d4af9.a6db78",
-        "name": "",
-        "url": "/google/oauth-token",
-        "method": "post",
-        "swaggerDoc": "",
-        "x": 150,
-        "y": 740,
-        "wires": [
-            [
-                "251699ae.eafc56",
-                "9bae9630.b15118"
-            ]
-        ]
-    },
-    {
-        "id": "9bae9630.b15118",
-        "type": "function",
-        "z": "f62d4af9.a6db78",
-        "name": "Unify GET / POST",
-        "func": "msg.client_id = msg.req.query.client_id ? msg.req.query.client_id : msg.req.body.client_id;\nmsg.client_secret = msg.req.query.client_secret ? msg.req.query.client_secret  : msg.req.body.client_secret ;\nmsg.grant_type = msg.req.query.grant_type ? msg.req.query.grant_type : msg.req.body.grant_type;\nmsg.refresh_token = msg.req.query.refresh_token ? msg.req.query.refresh_token : msg.req.body.refresh_token;\nmsg.code = msg.req.query.code ? msg.req.query.code : msg.req.body.code;\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 430,
-        "y": 740,
-        "wires": [
-            [
-                "dc588e8d.3c614"
-            ]
-        ]
-    },
-    {
-        "id": "c6279466.a58e58",
-        "type": "inject",
-        "z": "f62d4af9.a6db78",
-        "name": "Debug",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "x": 90,
-        "y": 40,
-        "wires": [
-            [
-                "81482a30.b20758"
-            ]
-        ]
-    },
-    {
-        "id": "81482a30.b20758",
-        "type": "function",
-        "z": "f62d4af9.a6db78",
-        "name": "Check stores",
-        "func": "let authStore = flow.get(\"authStore\") || {};\nlet accessTokenStore = global.get(\"googleAccessTokenStore\") || {};\nlet refreshTokenStore = global.get(\"googleRefreshTokenStore\") || {};\nlet googleClientId = flow.get(\"googleClientId\");\nlet googleClientSecret = flow.get(\"googleClientSecret\");\nlet older = new Date(Date.now() - (60 * 60000));\n\nfor (let code in authStore)\n    if (new Date(authStore[code].expiresAt) <= older)\n        delete authStore[code];\n\nfor (let code in accessTokenStore)\n    if (new Date(accessTokenStore[code].expiresAt) <= older)\n        delete accessTokenStore[code];\n\nfor (let code in refreshTokenStore)\n    if (new Date(refreshTokenStore[code].expiresAt) <= older)\n        delete refreshTokenStore[code];\n\nreturn { \n    payload: {\n        googleClientId: googleClientId,\n        googleClientSecret: googleClientSecret,\n        authStore: authStore,\n        accessTokenStore: accessTokenStore,\n        refreshTokenStore: refreshTokenStore\n    } \n};",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 330,
-        "y": 40,
-        "wires": [
-            [
-                "7cbef067.1205a"
-            ]
-        ]
-    },
-    {
-        "id": "7cbef067.1205a",
-        "type": "debug",
-        "z": "f62d4af9.a6db78",
-        "name": "",
-        "active": true,
-        "console": "false",
-        "complete": "false",
-        "x": 1010,
-        "y": 40,
-        "wires": []
-    },
-    {
-        "id": "d88cda37.705148",
-        "type": "comment",
-        "z": "f62d4af9.a6db78",
-        "name": "Login method",
-        "info": "Login page will post to this, which will generate a temporary\nauthorization code and redirect back to the Google endpoint.",
-        "x": 110,
-        "y": 420,
-        "wires": []
-    },
-    {
-        "id": "9d5aab76.3c5ac8",
-        "type": "http in",
-        "z": "f62d4af9.a6db78",
-        "name": "",
-        "url": "/google/oauth-login",
-        "method": "post",
-        "swaggerDoc": "",
-        "x": 150,
-        "y": 460,
-        "wires": [
-            [
-                "d95057c3.b05478"
-            ]
-        ]
-    },
-    {
-        "id": "d95057c3.b05478",
-        "type": "switch",
-        "z": "f62d4af9.a6db78",
-        "name": "Check redirect_uri",
-        "property": "req.body.redirect_uri",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "null"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "false",
-        "outputs": 2,
-        "x": 390,
-        "y": 460,
-        "wires": [
-            [
-                "da28cae.da38c38"
-            ],
-            [
-                "d5ef508b.86ae8"
-            ]
-        ]
-    },
-    {
-        "id": "e79d135a.80772",
-        "type": "function",
-        "z": "f62d4af9.a6db78",
-        "name": "Generate new code",
-        "func": "// Validate auth_key\nlet authKey = flow.get(\"authKey\") || \"NONE\";\nif (msg.req.body.auth_key != authKey || authKey === \"NONE\") {\n    msg.statusCode = 403;\n    msg.payload = \"Incorrect key\";\n\n    return msg;\n}\n\n// Validated, grant auth_code\nlet authCode = Math.floor(Math.random() * 10000000000000000000000000000000000000000).toString(36);\nlet authStore = flow.get(\"authStore\") || {};\n\nauthStore[authCode] = {\n    type: 'AUTH_CODE',\n    uid: 'homeautio',\n    clientId: msg.req.body.client_id,\n    expiresAt: new Date(Date.now() + (60 * 10000))\n};\n\nflow.set(\"authStore\", authStore);\n\nmsg.statusCode = 302;\nmsg.headers = {\n    \"Location\": msg.req.body.redirect_uri + '?code=' + authCode + '&state=' + msg.req.body.state\n};\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 630,
-        "y": 600,
-        "wires": [
-            [
-                "e7bdffd.a53e4"
-            ]
-        ]
-    },
-    {
-        "id": "e7bdffd.a53e4",
-        "type": "http response",
-        "z": "f62d4af9.a6db78",
-        "name": "",
-        "x": 990,
-        "y": 520,
-        "wires": []
-    },
-    {
-        "id": "da28cae.da38c38",
-        "type": "function",
-        "z": "f62d4af9.a6db78",
-        "name": "Error: redirect_uri missing",
-        "func": "msg.statusCode = 500;\nmsg.payload = 'redirect_uri missing';\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 650,
-        "y": 440,
-        "wires": [
-            [
-                "e7bdffd.a53e4"
-            ]
-        ]
-    },
-    {
-        "id": "d5ef508b.86ae8",
-        "type": "switch",
-        "z": "f62d4af9.a6db78",
-        "name": "Check state",
-        "property": "req.body.state",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "null"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "false",
-        "outputs": 2,
-        "x": 370,
-        "y": 500,
-        "wires": [
-            [
-                "d30ade04.eb6df"
-            ],
-            [
-                "e7f05f98.81244"
-            ]
-        ]
-    },
-    {
-        "id": "d30ade04.eb6df",
-        "type": "function",
-        "z": "f62d4af9.a6db78",
-        "name": "Error: state missing",
-        "func": "msg.statusCode = 500;\nmsg.payload = 'state missing';\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 630,
-        "y": 480,
-        "wires": [
-            [
-                "e7bdffd.a53e4"
-            ]
-        ]
-    },
-    {
-        "id": "b3effd4c.f0372",
-        "type": "switch",
-        "z": "f62d4af9.a6db78",
-        "name": "Check auth_key",
-        "property": "req.body.auth_key",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "null"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "false",
-        "outputs": 2,
-        "x": 380,
-        "y": 580,
-        "wires": [
-            [
-                "659e2ef0.26354"
-            ],
-            [
-                "e79d135a.80772"
-            ]
-        ]
-    },
-    {
-        "id": "659e2ef0.26354",
-        "type": "function",
-        "z": "f62d4af9.a6db78",
-        "name": "Error: auth_key missing",
-        "func": "msg.statusCode = 500;\nmsg.payload = 'auth_key missing';\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 650,
         "y": 560,
-        "wires": [
-            [
-                "e7bdffd.a53e4"
-            ]
-        ]
-    },
-    {
-        "id": "e7f05f98.81244",
-        "type": "switch",
-        "z": "f62d4af9.a6db78",
-        "name": "Check client_id",
-        "property": "req.body.client_id",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "null"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "false",
-        "outputs": 2,
-        "x": 380,
-        "y": 540,
-        "wires": [
-            [
-                "b83c35b2.132fd8"
-            ],
-            [
-                "b3effd4c.f0372"
-            ]
-        ]
-    },
-    {
-        "id": "b83c35b2.132fd8",
-        "type": "function",
-        "z": "f62d4af9.a6db78",
-        "name": "Error: client_id missing",
-        "func": "msg.statusCode = 500;\nmsg.payload = 'client_id ' + msg.req.body.client_id + ' invalid';\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 640,
-        "y": 520,
-        "wires": [
-            [
-                "e7bdffd.a53e4"
-            ]
-        ]
-    },
-    {
-        "id": "6e8b65c1.445c0c",
-        "type": "template",
-        "z": "f62d4af9.a6db78",
-        "name": "Display login form",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "<html>\n    <head>\n        <title>Login</title>\n    </head>\n    <body>\n        <form action=\"/google/oauth-login\" method=\"post\">\n            <input type=\"hidden\" name=\"redirect_uri\" value=\"{{req.query.redirect_uri}}\" />\n            <input type=\"hidden\" name=\"state\" value=\"{{req.query.state}}\" />\n            <input type=\"hidden\" name=\"client_id\" value=\"{{req.query.client_id}}\" />\n            Key: <input type=\"text\" name=\"auth_key\"> \n            <input type=\"submit\" value=\"Submit\" />\n        </form>\n    </body>\n</html>",
-        "x": 630,
-        "y": 360,
-        "wires": [
-            [
-                "a8c3c0e3.67b5f"
-            ]
-        ]
-    },
-    {
-        "id": "b3b987ca.cd2618",
-        "type": "function",
-        "z": "f62d4af9.a6db78",
-        "name": "Generate token",
-        "func": "// Carry through errors\nif (msg.statusCode == 400 || msg.statusCode == 500)\n    return msg;\n\n// Create tokens\nlet accessTokenStore = global.get(\"googleAccessTokenStore\") || {};\nlet accessTokenId = Math.floor(Math.random() * 10000000000000000000000000000000000000000).toString(36);\naccessTokenStore[accessTokenId] = {\n    type: 'ACCESS',\n    uid: 'homeautio',\n    clientId: msg.client_id,\n    expiresAt: new Date(Date.now() + (60 * 30000))\n};\n\nlet refreshTokenStore = global.get(\"googleRefreshTokenStore\") || {};\nlet refreshTokenId = Math.floor(Math.random() * 10000000000000000000000000000000000000000).toString(36);\nrefreshTokenStore[refreshTokenId] = {\n    type: 'REFRESH',\n    uid: 'homeautio',\n    clientId: msg.client_id,\n    expiresAt: new Date(Date.now() + (60 * 60000 * 336))\n};\n\nlet access_token = {\n    accessToken: accessTokenId,\n    refreshToken: refreshTokenId\n};\n\nglobal.set(\"googleAccessTokenStore\", accessTokenStore);\n\n// Success\nmsg.statusCode = 200;\nmsg.payload = {\n    token_type: \"bearer\",\n    access_token: access_token.accessToken,\n    refresh_token: access_token.refreshToken,\n    expires_in: 600\n};\n\n// Remove now invalid auth code\nif (msg.refresh_token !== null)\n    delete refreshTokenStore[msg.refresh_token];\n\nglobal.set(\"googleRefreshTokenStore\", refreshTokenStore);\n\nreturn [ \n    msg,  \n    { payload: accessTokenStore }, \n    { payload: refreshTokenStore}\n];",
-        "outputs": "3",
-        "noerr": 0,
-        "x": 1080,
-        "y": 840,
-        "wires": [
-            [
-                "8836b44.64d7848",
-                "fe3667e0.606a68"
-            ],
-            [
-                "44c8e04a.620ca",
-                "8836b44.64d7848"
-            ],
-            [
-                "a8019fe9.5fdac",
-                "8836b44.64d7848"
-            ]
-        ]
-    },
-    {
-        "id": "da20ce94.aad69",
-        "type": "debug",
-        "z": "f62d4af9.a6db78",
-        "name": "",
-        "active": false,
-        "console": "false",
-        "complete": "true",
-        "x": 990,
-        "y": 120,
-        "wires": []
-    },
-    {
-        "id": "5327b45c.98ad5c",
-        "type": "file in",
-        "z": "f62d4af9.a6db78",
-        "name": "Read file",
-        "filename": "/data/flowData/googleAccessTokenStore",
-        "format": "utf8",
-        "sendError": true,
-        "x": 320,
-        "y": 120,
-        "wires": [
-            [
-                "a39b8644.4a6008"
-            ]
-        ]
-    },
-    {
-        "id": "a39b8644.4a6008",
-        "type": "json",
-        "z": "f62d4af9.a6db78",
-        "name": "",
-        "x": 470,
-        "y": 120,
-        "wires": [
-            [
-                "cd587af7.fe0608"
-            ]
-        ]
-    },
-    {
-        "id": "cd587af7.fe0608",
-        "type": "function",
-        "z": "f62d4af9.a6db78",
-        "name": "Update googleAccessTokenStore",
-        "func": "if (msg.payload !== null) {\n    global.set(\"googleAccessTokenStore\", msg.payload);\n}\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 700,
-        "y": 120,
-        "wires": [
-            [
-                "da20ce94.aad69"
-            ]
-        ]
-    },
-    {
-        "id": "d8b48954.f79ab8",
-        "type": "debug",
-        "z": "f62d4af9.a6db78",
-        "name": "",
-        "active": false,
-        "console": "false",
-        "complete": "true",
-        "x": 990,
-        "y": 160,
-        "wires": []
-    },
-    {
-        "id": "ca8a947a.8007e8",
-        "type": "file in",
-        "z": "f62d4af9.a6db78",
-        "name": "Read file",
-        "filename": "/data/flowData/googleRefreshTokenStore",
-        "format": "utf8",
-        "sendError": true,
-        "x": 320,
-        "y": 160,
-        "wires": [
-            [
-                "577d54d1.57da1c"
-            ]
-        ]
-    },
-    {
-        "id": "577d54d1.57da1c",
-        "type": "json",
-        "z": "f62d4af9.a6db78",
-        "name": "",
-        "x": 470,
-        "y": 160,
-        "wires": [
-            [
-                "94a08d49.cf2bc"
-            ]
-        ]
-    },
-    {
-        "id": "94a08d49.cf2bc",
-        "type": "function",
-        "z": "f62d4af9.a6db78",
-        "name": "Update googleRefreshTokenStore",
-        "func": "if (msg.payload !== null) {\n    global.set(\"googleRefreshTokenStore\", msg.payload);\n}\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 700,
-        "y": 160,
-        "wires": [
-            [
-                "d8b48954.f79ab8"
-            ]
-        ]
-    },
-    {
-        "id": "44c8e04a.620ca",
-        "type": "file",
-        "z": "f62d4af9.a6db78",
-        "name": "Write file",
-        "filename": "/data/flowData/googleAccessTokenStore",
-        "appendNewline": false,
-        "createDir": false,
-        "overwriteFile": "true",
-        "x": 1260,
-        "y": 840,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "a8019fe9.5fdac",
-        "type": "file",
-        "z": "f62d4af9.a6db78",
-        "name": "Write file",
-        "filename": "/data/flowData/googleRefreshTokenStore",
-        "appendNewline": false,
-        "createDir": false,
-        "overwriteFile": "true",
-        "x": 1260,
-        "y": 880,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "8836b44.64d7848",
-        "type": "debug",
-        "z": "f62d4af9.a6db78",
-        "name": "",
-        "active": false,
-        "console": "false",
-        "complete": "false",
-        "x": 1270,
-        "y": 920,
-        "wires": []
-    },
-    {
-        "id": "8e52ef5d.56eb5",
-        "type": "credentials",
-        "z": "f62d4af9.a6db78",
-        "name": "",
-        "props": [
-            {
-                "value": "googleClientId",
-                "type": "flow"
-            },
-            {
-                "value": "googleClientSecret",
-                "type": "flow"
-            },
-            {
-                "value": "authKey",
-                "type": "flow"
-            }
-        ],
-        "x": 330,
-        "y": 80,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "5b5494da.509d0c",
-        "type": "http response",
-        "z": "f62d4af9.a6db78",
-        "name": "",
-        "x": 1070,
-        "y": 920,
         "wires": []
     },
     {
@@ -8538,7 +7483,7 @@
         "upload": false,
         "swaggerDoc": "",
         "x": 150,
-        "y": 900,
+        "y": 720,
         "wires": [
             [
                 "f056d65f.583b58",
@@ -8552,7 +7497,7 @@
         "z": "50466fda.5d00f",
         "name": "",
         "x": 990,
-        "y": 940,
+        "y": 760,
         "wires": []
     },
     {
@@ -8575,7 +7520,7 @@
         "checkall": "false",
         "outputs": 2,
         "x": 400,
-        "y": 900,
+        "y": 720,
         "wires": [
             [
                 "8c06e895.156568"
@@ -8594,7 +7539,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 670,
-        "y": 880,
+        "y": 700,
         "wires": [
             [
                 "f7e1a9aa.0479a8"
@@ -8622,7 +7567,7 @@
         "repair": false,
         "outputs": 2,
         "x": 380,
-        "y": 940,
+        "y": 760,
         "wires": [
             [
                 "95a1e2b5.7fa9d"
@@ -8641,7 +7586,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 650,
-        "y": 920,
+        "y": 740,
         "wires": [
             [
                 "f7e1a9aa.0479a8"
@@ -8667,7 +7612,7 @@
         "repair": false,
         "outputs": 2,
         "x": 390,
-        "y": 980,
+        "y": 800,
         "wires": [
             [
                 "5bf4c487.309c5c"
@@ -8686,7 +7631,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 640,
-        "y": 960,
+        "y": 780,
         "wires": [
             [
                 "f7e1a9aa.0479a8"
@@ -8700,7 +7645,7 @@
         "name": "OAuth Auth",
         "info": "Google will direct the client to this endpoint to do\nlogin and generation of a temporary authorization code\nfor a specific user.",
         "x": 110,
-        "y": 860,
+        "y": 680,
         "wires": []
     },
     {
@@ -8712,24 +7657,8 @@
         "console": "false",
         "complete": "true",
         "x": 350,
-        "y": 860,
+        "y": 680,
         "wires": []
-    },
-    {
-        "id": "cc5596ee.a1d218",
-        "type": "template",
-        "z": "50466fda.5d00f",
-        "name": "Display login form",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "<html>\n    <head>\n        <title>Login</title>\n    </head>\n    <body>\n        <form action=\"/google/oauth-login\" method=\"post\">\n            <input type=\"hidden\" name=\"redirect_uri\" value=\"{{req.query.redirect_uri}}\" />\n            <input type=\"hidden\" name=\"state\" value=\"{{req.query.state}}\" />\n            <input type=\"hidden\" name=\"client_id\" value=\"{{req.query.client_id}}\" />\n            Key: <input type=\"text\" name=\"auth_key\"> \n            <input type=\"submit\" value=\"Submit\" />\n        </form>\n    </body>\n</html>",
-        "x": 650,
-        "y": 1040,
-        "wires": [
-            []
-        ]
     },
     {
         "id": "2b237f44.2d2e3",
@@ -8739,8 +7668,9 @@
         "method": "use",
         "ret": "obj",
         "url": "",
-        "x": 970,
-        "y": 640,
+        "tls": "74d52d37.cac784",
+        "x": 950,
+        "y": 520,
         "wires": [
             []
         ]
@@ -8757,8 +7687,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 200,
-        "y": 660,
+        "x": 280,
+        "y": 520,
         "wires": [
             [
                 "5f703583.b48eec"
@@ -8774,7 +7704,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 430,
-        "y": 640,
+        "y": 520,
         "wires": [
             [
                 "2b237f44.2d2e3"
@@ -8843,7 +7773,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 690,
-        "y": 1000,
+        "y": 820,
         "wires": [
             [
                 "f7e1a9aa.0479a8",
@@ -8860,7 +7790,7 @@
         "console": "false",
         "complete": "true",
         "x": 810,
-        "y": 1020,
+        "y": 840,
         "wires": []
     },
     {
@@ -9821,5 +8751,147 @@
             ],
             []
         ]
+    },
+    {
+        "id": "a1bdddf7.e96f7",
+        "type": "azureiothub",
+        "z": "bd01e33a.29756",
+        "name": "Azure IoT Hub",
+        "protocol": "amqp",
+        "x": 260,
+        "y": 60,
+        "wires": [
+            [
+                "9a5ad81f.b82898"
+            ]
+        ]
+    },
+    {
+        "id": "344e0ea8.ca31c2",
+        "type": "inject",
+        "z": "bd01e33a.29756",
+        "name": "Inject data",
+        "topic": "",
+        "payload": "Hello from device",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 100,
+        "y": 60,
+        "wires": [
+            [
+                "a1bdddf7.e96f7"
+            ]
+        ]
+    },
+    {
+        "id": "9a5ad81f.b82898",
+        "type": "function",
+        "z": "bd01e33a.29756",
+        "name": "Convert Bytes to String",
+        "func": "msg.payload = msg.payload.toString();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 470,
+        "y": 60,
+        "wires": [
+            [
+                "436481db.9c9c1"
+            ]
+        ]
+    },
+    {
+        "id": "436481db.9c9c1",
+        "type": "debug",
+        "z": "bd01e33a.29756",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 670,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "91b4b42c.9b76c8",
+        "type": "play audio",
+        "z": "984823b1.a0823",
+        "name": "",
+        "voice": "0",
+        "x": 930,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "a59b055a.7af618",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "",
+        "payload": "This is just a test.",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 130,
+        "y": 560,
+        "wires": [
+            [
+                "91b4b42c.9b76c8"
+            ]
+        ]
+    },
+    {
+        "id": "aaa0fb1c.faae18",
+        "type": "rbe",
+        "z": "984823b1.a0823",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 230,
+        "y": 740,
+        "wires": [
+            [
+                "e454fb33.9a59f8"
+            ]
+        ]
+    },
+    {
+        "id": "951eb9a4.4d2208",
+        "type": "rbe",
+        "z": "50466fda.5d00f",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 790,
+        "y": 460,
+        "wires": [
+            [
+                "9cd45335.9c179",
+                "e75b1948.c5f178"
+            ]
+        ]
+    },
+    {
+        "id": "c73faab4.97eef8",
+        "type": "debug",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 910,
+        "y": 360,
+        "wires": []
     }
 ]
