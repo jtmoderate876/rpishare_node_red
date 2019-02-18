@@ -118,6 +118,13 @@
         "info": ""
     },
     {
+        "id": "86afe1c1.5743a",
+        "type": "tab",
+        "label": "MQTT TO WOL",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "b208d8af.feaa98",
         "type": "subflow",
         "name": "Delay with Cancel",
@@ -444,6 +451,29 @@
         "verifyservercert": true
     },
     {
+        "id": "ae4684bb.dcb9a8",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "rpishare_for_shiftr_direct_to_wwonline",
+        "broker": "broker.shiftr.io",
+        "port": "8883",
+        "tls": "ccbad4df.c6e028",
+        "clientid": "rpishare_for_shiftr_direct_to_wwonline",
+        "usetls": true,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
         "id": "71a47ab9.6044a4",
         "type": "mosca in",
         "z": "c201e10a.3d66f",
@@ -599,7 +629,7 @@
         "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
         "tls": "74d52d37.cac784",
         "x": 290,
-        "y": 220,
+        "y": 180,
         "wires": [
             [
                 "2bd6f5db.37729a"
@@ -615,7 +645,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 120,
-        "y": 220,
+        "y": 180,
         "wires": [
             [
                 "21cc22c4.55b4ae"
@@ -630,7 +660,7 @@
         "attr": "",
         "chr": "",
         "x": 610,
-        "y": 220,
+        "y": 180,
         "wires": [
             [
                 "868e0607.f251b8",
@@ -648,7 +678,7 @@
         "gap": "",
         "start": "",
         "x": 820,
-        "y": 220,
+        "y": 180,
         "wires": [
             [
                 "dcc3af32.0832e"
@@ -703,7 +733,7 @@
         "once": false,
         "onceDelay": "",
         "x": 180,
-        "y": 180,
+        "y": 140,
         "wires": [
             [
                 "f4682478.b9e3f8",
@@ -723,7 +753,7 @@
         "crontab": "",
         "once": false,
         "x": 130,
-        "y": 420,
+        "y": 380,
         "wires": [
             [
                 "aecb869a.6a2788"
@@ -739,7 +769,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 367,
-        "y": 420,
+        "y": 380,
         "wires": [
             [
                 "c52ed3d0.50ab1"
@@ -756,7 +786,7 @@
         "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
         "tls": "74d52d37.cac784",
         "x": 550,
-        "y": 420,
+        "y": 380,
         "wires": [
             [
                 "cb9e9993.cf95c8"
@@ -772,7 +802,7 @@
         "console": "false",
         "complete": "false",
         "x": 725,
-        "y": 420,
+        "y": 380,
         "wires": []
     },
     {
@@ -784,7 +814,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 500,
-        "y": 460,
+        "y": 420,
         "wires": [
             [
                 "73735df2.aaf524"
@@ -803,7 +833,7 @@
         "crontab": "",
         "once": false,
         "x": 220,
-        "y": 460,
+        "y": 420,
         "wires": [
             [
                 "d8d4385a.f6b1e8"
@@ -820,7 +850,7 @@
         "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
         "tls": "74d52d37.cac784",
         "x": 670,
-        "y": 460,
+        "y": 420,
         "wires": [
             [
                 "548d883f.225e28"
@@ -836,7 +866,7 @@
         "console": "false",
         "complete": "false",
         "x": 830,
-        "y": 460,
+        "y": 420,
         "wires": []
     },
     {
@@ -851,7 +881,7 @@
         "crontab": "",
         "once": false,
         "x": 130,
-        "y": 500,
+        "y": 460,
         "wires": [
             [
                 "31162c53.6e96f4"
@@ -867,7 +897,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 280,
-        "y": 500,
+        "y": 460,
         "wires": [
             [
                 "b9effe4d.cdf4f"
@@ -884,7 +914,7 @@
         "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
         "tls": "74d52d37.cac784",
         "x": 430,
-        "y": 500,
+        "y": 460,
         "wires": [
             [
                 "26359bd2.f695b4"
@@ -900,7 +930,7 @@
         "outputs": "1",
         "noerr": 0,
         "x": 450,
-        "y": 260,
+        "y": 220,
         "wires": [
             [
                 "6575f545.23b7fc",
@@ -918,7 +948,7 @@
         "console": "false",
         "complete": "false",
         "x": 850,
-        "y": 120,
+        "y": 100,
         "wires": []
     },
     {
@@ -930,7 +960,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 460,
-        "y": 220,
+        "y": 180,
         "wires": [
             [
                 "7ac1b8b0.a027a8"
@@ -945,7 +975,7 @@
         "attr": "",
         "chr": "",
         "x": 550,
-        "y": 500,
+        "y": 460,
         "wires": [
             [
                 "d195ae4f.fde69"
@@ -961,7 +991,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 670,
-        "y": 500,
+        "y": 460,
         "wires": [
             [
                 "872c5b0d.507928"
@@ -988,7 +1018,7 @@
         "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
         "tls": "74d52d37.cac784",
         "x": 290,
-        "y": 320,
+        "y": 280,
         "wires": [
             [
                 "2fed2a0a.50b9b6"
@@ -1004,7 +1034,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 120,
-        "y": 320,
+        "y": 280,
         "wires": [
             [
                 "7c9661a8.3f7bb"
@@ -1019,7 +1049,7 @@
         "attr": "",
         "chr": "",
         "x": 610,
-        "y": 320,
+        "y": 280,
         "wires": [
             [
                 "60e6b007.5ffc4"
@@ -1035,7 +1065,7 @@
         "gap": "",
         "start": "",
         "x": 780,
-        "y": 320,
+        "y": 280,
         "wires": [
             [
                 "84797666.6772c8"
@@ -1051,7 +1081,7 @@
         "outputs": "1",
         "noerr": 0,
         "x": 520,
-        "y": 360,
+        "y": 320,
         "wires": [
             [
                 "e1582874.335878",
@@ -1068,7 +1098,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 460,
-        "y": 320,
+        "y": 280,
         "wires": [
             [
                 "ec0d4a6f.6287e8"
@@ -1091,7 +1121,7 @@
         "randomUnits": "seconds",
         "drop": true,
         "x": 110,
-        "y": 260,
+        "y": 220,
         "wires": [
             [
                 "8d06c412.0f3b88"
@@ -1107,7 +1137,7 @@
         "outputs": "2",
         "noerr": 0,
         "x": 180,
-        "y": 360,
+        "y": 320,
         "wires": [
             [],
             [
@@ -1521,7 +1551,7 @@
         "console": "false",
         "complete": "true",
         "x": 870,
-        "y": 80,
+        "y": 60,
         "wires": []
     },
     {
@@ -2112,7 +2142,7 @@
             "a1e76248.eab86"
         ],
         "x": 875,
-        "y": 360,
+        "y": 320,
         "wires": []
     },
     {
@@ -2137,7 +2167,7 @@
         "start": "",
         "inout": "out",
         "x": 730,
-        "y": 380,
+        "y": 340,
         "wires": [
             [
                 "d07c6ad.e3c7298"
@@ -2154,7 +2184,7 @@
         "start": "",
         "inout": "out",
         "x": 630,
-        "y": 260,
+        "y": 220,
         "wires": [
             [
                 "1db1d842.642b08",
@@ -3362,9 +3392,10 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "repeat": "10",
+        "repeat": "20",
         "crontab": "",
         "once": false,
+        "onceDelay": "",
         "x": 110,
         "y": 120,
         "wires": [
@@ -4945,7 +4976,7 @@
         "inout": "out",
         "property": "payload",
         "x": 770,
-        "y": 180,
+        "y": 140,
         "wires": [
             [
                 "d07c6ad.e3c7298"
@@ -6338,7 +6369,7 @@
         "console": "false",
         "complete": "true",
         "x": 790,
-        "y": 500,
+        "y": 460,
         "wires": []
     },
     {
@@ -6354,7 +6385,7 @@
         "once": false,
         "onceDelay": "",
         "x": 140,
-        "y": 680,
+        "y": 640,
         "wires": [
             [
                 "b3d53724.20dc28"
@@ -6370,7 +6401,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 320,
-        "y": 680,
+        "y": 640,
         "wires": [
             [
                 "da2bcced.52c5c"
@@ -6387,7 +6418,7 @@
         "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
         "tls": "74d52d37.cac784",
         "x": 490,
-        "y": 680,
+        "y": 640,
         "wires": [
             [
                 "ca0a8d40.8cebf",
@@ -6403,7 +6434,7 @@
         "attr": "",
         "chr": "",
         "x": 630,
-        "y": 700,
+        "y": 620,
         "wires": [
             [
                 "46b5c51e.3b900c"
@@ -6418,8 +6449,8 @@
         "active": true,
         "console": "false",
         "complete": "true",
-        "x": 910,
-        "y": 680,
+        "x": 850,
+        "y": 640,
         "wires": []
     },
     {
@@ -6428,10 +6459,11 @@
         "z": "88396424.c54498",
         "name": "",
         "active": true,
-        "console": "false",
+        "tosidebar": true,
+        "console": false,
         "complete": "true",
         "x": 870,
-        "y": 40,
+        "y": 20,
         "wires": []
     },
     {
@@ -6441,7 +6473,7 @@
         "name": "Stuff below does not yet work.",
         "info": "",
         "x": 120,
-        "y": 640,
+        "y": 600,
         "wires": []
     },
     {
@@ -6495,7 +6527,7 @@
         "name": "Tell insteon to turn Rainforest Eagle off and on to reset it because it locked up again",
         "info": "",
         "x": 430,
-        "y": 560,
+        "y": 520,
         "wires": []
     },
     {
@@ -6507,7 +6539,7 @@
             "530a8d76.498e64"
         ],
         "x": 540,
-        "y": 600,
+        "y": 560,
         "wires": []
     },
     {
@@ -6948,7 +6980,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 850,
-        "y": 280,
+        "y": 240,
         "wires": []
     },
     {
@@ -6962,7 +6994,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 850,
-        "y": 260,
+        "y": 220,
         "wires": []
     },
     {
@@ -8316,7 +8348,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 120,
-        "y": 600,
+        "y": 560,
         "wires": [
             [
                 "a9cb4ecb.8c829"
@@ -8332,7 +8364,7 @@
         "outputs": 2,
         "noerr": 0,
         "x": 330,
-        "y": 600,
+        "y": 560,
         "wires": [
             [
                 "3af4c367.0e73cc"
@@ -8353,7 +8385,7 @@
         "tostatus": false,
         "complete": "false",
         "x": 650,
-        "y": 600,
+        "y": 560,
         "wires": []
     },
     {
@@ -8892,6 +8924,308 @@
         "complete": "true",
         "x": 910,
         "y": 360,
+        "wires": []
+    },
+    {
+        "id": "dba6d2d2.e0fea",
+        "type": "mqtt in",
+        "z": "86afe1c1.5743a",
+        "name": "",
+        "topic": "#",
+        "qos": "1",
+        "broker": "ae4684bb.dcb9a8",
+        "x": 70,
+        "y": 160,
+        "wires": [
+            [
+                "ffc9519e.051dd"
+            ]
+        ]
+    },
+    {
+        "id": "ffc9519e.051dd",
+        "type": "function",
+        "z": "86afe1c1.5743a",
+        "name": "prefix mqtt/to/wwol/tests/",
+        "func": "var prefix = \"mqtt/to/wwol/tests/\";\nif (msg.topic.startsWith(prefix)){\n    \n}else{\n    msg.topic = prefix + msg.topic;\n}\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 230,
+        "y": 160,
+        "wires": [
+            [
+                "9e9f9ada.4588a8"
+            ]
+        ]
+    },
+    {
+        "id": "9e9f9ada.4588a8",
+        "type": "subflow:50b2a29d.f794ec",
+        "z": "86afe1c1.5743a",
+        "name": "",
+        "x": 410,
+        "y": 160,
+        "wires": [
+            [
+                "c75340b2.75b99",
+                "d21328.d1fa0cd8"
+            ]
+        ]
+    },
+    {
+        "id": "d21328.d1fa0cd8",
+        "type": "function",
+        "z": "86afe1c1.5743a",
+        "name": "wwQueue insert",
+        "func": "/*20171208 \ninput message should contain:\nmsg.timestamp ie 1514764800000 is an epoch milliseconds timestamp representing 2018.01.01. at 00:00:00.000\n (if msg.timestamp does not exist then \"now\" will be used)\neither single value-based payload:\n    msg.payload ie 72.1 or any string or number representing the value for the topic\n    msg.topic ie diningroom/temperature\nor multi-variable object-based payload containing property : value pairs (use . as delimiter)\n    https://stackoverflow.com/questions/1661197/what-characters-are-valid-for-javascript-variable-names\n    msg.payload ie {basement.temperature : 72.1, diningroom.temperature: 73.2}\n    msg.topic ie wisconsin/summerhome becomes the prefix for each item, creating final items such as wisconsin/summerhome/basement/temperature\n*/\nvar wwQueue = flow.get('wwQueue') || {\"data\":[]};\n//var dt = new Date(); // defaults to now //var dtstring = dt.toISOString();\n//use timestamp if it exists otherwise default to now\n// this works and is efficient but I'm leaning toward \"non-function\", flow-based solutions\nif ((typeof msg.timestamp !== 'undefined')){dtstring = new Date(msg.timestamp).toISOString();} \nelse {dtstring = new Date().toISOString();}\n\ni = 0;\nwhile (\n    (typeof wwQueue.data !== 'undefined') &&\n    (typeof wwQueue.data[i] !== 'undefined') &&\n    (typeof wwQueue.data[i].dateTime !== 'undefined') &&\n    (new Date(wwQueue.data[i].dateTime).getTime() > new Date(dtstring).getTime()) //while we find newer dates keep looking \n) {i++;}\n\nvar obj = {};\nif (\n    (typeof wwQueue.data !== 'undefined')&&\n    (typeof wwQueue.data[i] !== 'undefined')&&\n    (typeof wwQueue.data[i].dateTime !== 'undefined')&&\n    (new Date(wwQueue.data[i].dateTime).getTime() == new Date(dtstring).getTime()) //if exact date found then we need to handle existing\n) {\n    obj = wwQueue.data.splice(i,1)[0];\n} else {\n    obj.dateTime = dtstring;\n}\n\nif (typeof msg.payload !== \"object\"){\n    var tag = msg.topic.replace(/\\//g,\".\"); //globally replace / with .\n    obj[tag]=msg.payload;//add new tag and value to this dateTime record\n} else {\n    var prefix = msg.topic.replace(/\\//g,\".\") + \".\";\n    var tag = \"\";\n    for(var propertyName in msg.payload) {\n        tag = prefix  + propertyName;//propertyName.replace(/\\$/g,\".\") was going to use $ delimiter but dot \".\" works \n        obj[tag] = msg.payload[propertyName];\n//        node.error(JSON.stringify(obj,null, 4));\n    }\n}\nwwQueue.data.splice(i,0,obj); //add new, full dateTime record back to all record data in the right spot\n\nflow.set('wwQueue',wwQueue);\n//msg.topic = \"tapia/home\";\nmsg.payload = wwQueue;\n\nreturn msg;\n\n/*\nexample from online.wonderware.com\n{\n  \"data\": [\n    {\n      \"dateTime\": \"2017-03-20T12:21:12.199Z\",\n      \"Reactor3.Level\": 1.51860072870498,\n      \"Reactor3.Temp\": 27.1360543141452,\n      \"Reactor3.InletValve\": 0,\n      \"Reactor3.Step\": 7,\n      \"Line3.Units\": 1518,\n      \"Line3.Product\": \"BRN\"\n    }\n  ]\n}\n*/\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 580,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c75340b2.75b99",
+        "type": "debug",
+        "z": "86afe1c1.5743a",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 890,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "ef1d5aaf.d0d098",
+        "type": "http request",
+        "z": "86afe1c1.5743a",
+        "name": "",
+        "method": "use",
+        "ret": "txt",
+        "url": "",
+        "tls": "",
+        "x": 830,
+        "y": 280,
+        "wires": [
+            [
+                "8d04c53a.ee1808"
+            ]
+        ]
+    },
+    {
+        "id": "ad8d3235.3dc49",
+        "type": "function",
+        "z": "86afe1c1.5743a",
+        "name": "config http",
+        "func": "// configure http (headers,url,method)\nmsg.headers = {\n//    \"Authorization\" : msg.authorization,\n    \"Content-type\" : \"application/json\"\n};\nmsg.url = \"https://online.wonderware.com/apis/upload/datasource\";\nmsg.method = \"POST\";\n\nmsg.headers.Authorization = flow.get(\"wwol.payload.Authorization\")\n\nreturn msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 690,
+        "y": 280,
+        "wires": [
+            [
+                "ef1d5aaf.d0d098",
+                "8d04c53a.ee1808"
+            ]
+        ]
+    },
+    {
+        "id": "906c4fa6.67a06",
+        "type": "inject",
+        "z": "86afe1c1.5743a",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "x": 110,
+        "y": 280,
+        "wires": [
+            [
+                "9a5e05ff.7073c8"
+            ]
+        ]
+    },
+    {
+        "id": "8ee6d566.808568",
+        "type": "function",
+        "z": "86afe1c1.5743a",
+        "name": "Format WW payload",
+        "func": "msg.payload = JSON.stringify(msg.payload,null,\"\\t\");\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 520,
+        "y": 280,
+        "wires": [
+            [
+                "ad8d3235.3dc49"
+            ]
+        ]
+    },
+    {
+        "id": "5c65637.93c0c9c",
+        "type": "comment",
+        "z": "86afe1c1.5743a",
+        "name": "wwQueue processing",
+        "info": "",
+        "x": 120,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "9a5e05ff.7073c8",
+        "type": "function",
+        "z": "86afe1c1.5743a",
+        "name": "wwQueue process",
+        "func": "\nvar wwQueue = flow.get('wwQueue') || null;\nflow.set('wwQueue',null); //delete processed json from global context\nmsg.payload = wwQueue;\nif (!msg.payload) {\n    msg = null;\n}\n//msg.payload = JSON.stringify(wwQueue,null,\"\\t\");\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 310,
+        "y": 280,
+        "wires": [
+            [
+                "8ee6d566.808568"
+            ]
+        ]
+    },
+    {
+        "id": "7849dfc.885502",
+        "type": "inject",
+        "z": "86afe1c1.5743a",
+        "name": "show queue",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 110,
+        "y": 320,
+        "wires": [
+            [
+                "284abb6b.f89044"
+            ]
+        ]
+    },
+    {
+        "id": "284abb6b.f89044",
+        "type": "function",
+        "z": "86afe1c1.5743a",
+        "name": "show wwQueue",
+        "func": "var wwQueue = flow.get('wwQueue') || null;\nmsg.payload = wwQueue;\nif (!msg.payload) {\n    msg = null;\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 300,
+        "y": 320,
+        "wires": [
+            [
+                "3873f830.431ea8"
+            ]
+        ]
+    },
+    {
+        "id": "3873f830.431ea8",
+        "type": "debug",
+        "z": "86afe1c1.5743a",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 890,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "8d04c53a.ee1808",
+        "type": "debug",
+        "z": "86afe1c1.5743a",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 890,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "2aef2e06.9aaba2",
+        "type": "credentials",
+        "z": "86afe1c1.5743a",
+        "name": "ENTER YOUR Wonderware Data Source (Data Upload) Bearer Token HERE",
+        "props": [
+            {
+                "value": "Authorization",
+                "type": "msg"
+            }
+        ],
+        "x": 450,
+        "y": 60,
+        "wires": [
+            [
+                "170752f1.c6c53d"
+            ]
+        ]
+    },
+    {
+        "id": "33d9e84d.9e83a8",
+        "type": "comment",
+        "z": "86afe1c1.5743a",
+        "name": "Configure YOUR Wonderware connection below",
+        "info": "This is essentiall a data pump from MQTT to\nOnline.Wonderware.com",
+        "x": 360,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "24e08303.e88bec",
+        "type": "inject",
+        "z": "86afe1c1.5743a",
+        "name": "initialize",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 100,
+        "y": 60,
+        "wires": [
+            [
+                "2aef2e06.9aaba2"
+            ]
+        ]
+    },
+    {
+        "id": "170752f1.c6c53d",
+        "type": "function",
+        "z": "86afe1c1.5743a",
+        "name": "set flow context variables",
+        "func": "flow.set(\"wwol\",\n    {\n    \"payload\" : {\n        \"Authorization\" : msg.Authorization,\n        }\n    }\n);\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 850,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2f4dc24c.03b67e",
+        "type": "comment",
+        "z": "86afe1c1.5743a",
+        "name": "wwQueue creation / insertion",
+        "info": "",
+        "x": 140,
+        "y": 120,
         "wires": []
     }
 ]
