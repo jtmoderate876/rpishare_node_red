@@ -125,6 +125,13 @@
         "info": ""
     },
     {
+        "id": "50283593.060cac",
+        "type": "tab",
+        "label": "Particle",
+        "disabled": true,
+        "info": ""
+    },
+    {
         "id": "b208d8af.feaa98",
         "type": "subflow",
         "name": "Delay with Cancel",
@@ -212,6 +219,66 @@
                 "wires": [
                     {
                         "id": "84427a8a.39aea8",
+                        "port": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "b18f3ab.a85cbc8",
+        "type": "subflow",
+        "name": "cvt insteon-mqtt payload<>object",
+        "info": "\n\n",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 40,
+                "wires": [
+                    {
+                        "id": "1d93091.5efb1f7"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 380,
+                "y": 40,
+                "wires": [
+                    {
+                        "id": "1d93091.5efb1f7",
+                        "port": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "890e96a.df28a68",
+        "type": "subflow",
+        "name": "insteon-mqtt 10m off timer",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 40,
+                "y": 40,
+                "wires": [
+                    {
+                        "id": "3f9524a3.3189fc"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 640,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "56f44cc9.60f794",
                         "port": 0
                     }
                 ]
@@ -472,6 +539,15 @@
         "willTopic": "",
         "willQos": "0",
         "willPayload": ""
+    },
+    {
+        "id": "f3bf7edb.a757e",
+        "type": "particle-cloud",
+        "z": "",
+        "host": "https://api.particle.io",
+        "port": "443",
+        "accesstoken": "277c406e78b07c861042898e02546c0ce6a81a0a",
+        "name": ""
     },
     {
         "id": "71a47ab9.6044a4",
@@ -1161,7 +1237,7 @@
         "once": false,
         "onceDelay": "",
         "x": 120,
-        "y": 420,
+        "y": 340,
         "wires": [
             [
                 "70a2249f.495bec"
@@ -1222,7 +1298,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 450,
-        "y": 420,
+        "y": 340,
         "wires": [
             [
                 "10830111.cc29df"
@@ -1239,7 +1315,7 @@
         "url": "",
         "tls": "74d52d37.cac784",
         "x": 650,
-        "y": 420,
+        "y": 340,
         "wires": [
             [
                 "b543311d.f82ef"
@@ -1259,7 +1335,7 @@
         "once": false,
         "onceDelay": "",
         "x": 180,
-        "y": 320,
+        "y": 260,
         "wires": [
             [
                 "222cc17.3f3123e"
@@ -1275,7 +1351,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 400,
-        "y": 320,
+        "y": 260,
         "wires": [
             [
                 "8f53ba9e.62ee08"
@@ -1292,7 +1368,7 @@
         "url": "",
         "tls": "74d52d37.cac784",
         "x": 570,
-        "y": 320,
+        "y": 260,
         "wires": [
             [
                 "89c2c2df.d2e5"
@@ -1308,7 +1384,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 880,
-        "y": 280,
+        "y": 220,
         "wires": [
             []
         ]
@@ -1322,7 +1398,7 @@
         "console": "false",
         "complete": "payload",
         "x": 970,
-        "y": 320,
+        "y": 260,
         "wires": []
     },
     {
@@ -1332,7 +1408,7 @@
         "name": "Step #3 - Refresh Token Flow a few times for good measure.",
         "info": "This flow will refresh your token every time the input button is pressed.\n\nGlobal variables set -- EcobeeAccessToken and EcobeeRefreshToken",
         "x": 240,
-        "y": 280,
+        "y": 220,
         "wires": []
     },
     {
@@ -1342,7 +1418,7 @@
         "name": "Step #4 - Get Thermostat Data - 1 minute polling works but Ecobee says only poll every 3 minutes or more",
         "info": "Get thermostat data\nEcobee reference to 3 minute interval:\nhttps://www.ecobee.com/home/developer/api/documentation/v1/operations/get-thermostat-summary.shtml\n",
         "x": 380,
-        "y": 380,
+        "y": 300,
         "wires": []
     },
     {
@@ -1370,7 +1446,7 @@
         "z": "50466fda.5d00f",
         "name": "Step #1 - Requesting the 4-digit ecobeePin - Log in to Ecobee.com and go to your \"My Apps\" before clicking the Inject node.",
         "info": "The ecobeePin must be entered into your \"My Apps\" in Ecobee.com within 10 minutes.",
-        "x": 440,
+        "x": 430,
         "y": 20,
         "wires": []
     },
@@ -1383,7 +1459,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 270,
-        "y": 220,
+        "y": 180,
         "wires": [
             [
                 "2ffd018.f9c37fe"
@@ -1400,7 +1476,7 @@
         "url": "",
         "tls": "74d52d37.cac784",
         "x": 490,
-        "y": 220,
+        "y": 180,
         "wires": [
             [
                 "4f85e128.2eaf3"
@@ -1414,7 +1490,7 @@
         "name": "Step #2 - Requesting the first access token - you must run Step 2 within 10 minutes of running Step 1.",
         "info": "Now that the app has been added to your \"My Apps\" - we need to request our first access token.",
         "x": 370,
-        "y": 180,
+        "y": 140,
         "wires": []
     },
     {
@@ -1442,7 +1518,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 720,
-        "y": 220,
+        "y": 180,
         "wires": [
             [
                 "67d81ca8.768654"
@@ -1458,7 +1534,7 @@
         "console": "false",
         "complete": "false",
         "x": 970,
-        "y": 220,
+        "y": 180,
         "wires": []
     },
     {
@@ -1479,7 +1555,7 @@
         "checkall": "true",
         "outputs": 2,
         "x": 740,
-        "y": 320,
+        "y": 260,
         "wires": [
             [
                 "c0a8cda1.94c0b"
@@ -1506,7 +1582,7 @@
         "randomUnits": "seconds",
         "drop": true,
         "x": 280,
-        "y": 420,
+        "y": 340,
         "wires": [
             [
                 "7d405852.04f168"
@@ -1519,7 +1595,7 @@
         "z": "50466fda.5d00f",
         "name": "You will have 2 minutes to enter the 4-digit pin into Ecobee.com and authorize the application. (Ecobee disgards the 4-pin code after 10 minutes!)",
         "info": "",
-        "x": 510,
+        "x": 500,
         "y": 60,
         "wires": []
     },
@@ -1535,7 +1611,7 @@
         "crontab": "",
         "once": false,
         "x": 90,
-        "y": 220,
+        "y": 180,
         "wires": [
             [
                 "5251da69.a11c34"
@@ -2154,7 +2230,7 @@
             "3a764f5e.e3f53"
         ],
         "x": 895,
-        "y": 460,
+        "y": 300,
         "wires": []
     },
     {
@@ -2201,7 +2277,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 860,
-        "y": 420,
+        "y": 340,
         "wires": [
             [
                 "951eb9a4.4d2208"
@@ -3849,8 +3925,8 @@
         "reset": "CANCEL",
         "bytopic": "all",
         "name": "",
-        "x": 650,
-        "y": 120,
+        "x": 390,
+        "y": 180,
         "wires": [
             [
                 "4f19939b.8c2abc"
@@ -3861,11 +3937,11 @@
         "id": "97c86336.23be6",
         "type": "function",
         "z": "984823b1.a0823",
-        "name": "only if  OFF",
-        "func": "switch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"OFF\";\n        break;\n/*\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n*/        \n    default:\n        msg=null;\n        break;\n}\nreturn msg;\n\n\n/*\nswitch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"OFF\";\n        break;\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n        \n    default:\n        break;\n}\nreturn msg;\n*/\n\n",
+        "name": "only if off",
+        "func": "switch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"off\";\n        break;\n/*\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"on\";\n        break;\n*/        \n    default:\n        msg=null;\n        break;\n}\nreturn msg;\n\n\n/*\nswitch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"OFF\";\n        break;\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n        \n    default:\n        break;\n}\nreturn msg;\n*/\n\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 590,
+        "x": 580,
         "y": 60,
         "wires": [
             [
@@ -3878,16 +3954,16 @@
         "id": "43593966.b74ba8",
         "type": "function",
         "z": "984823b1.a0823",
-        "name": "send ON",
-        "func": "msg.payload=\"ON\"\nreturn msg;\n\n/*\nswitch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"OFF\";\n        break;\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n        \n    default:\n        break;\n}\nreturn msg;\n*/\n\n",
+        "name": "send on",
+        "func": "msg.payload=\"on\"\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 740,
+        "x": 760,
         "y": 60,
         "wires": [
             [
-                "5d6b642d.dc6f4c",
-                "f70a39ef.e5f2f8"
+                "f70a39ef.e5f2f8",
+                "94ece673.74ebc8"
             ]
         ]
     },
@@ -3902,29 +3978,19 @@
         "wires": []
     },
     {
-        "id": "1a556d94.a97882",
-        "type": "comment",
-        "z": "984823b1.a0823",
-        "name": "Master VanityLight OFF after time",
-        "info": "",
-        "x": 150,
-        "y": 240,
-        "wires": []
-    },
-    {
         "id": "4f19939b.8c2abc",
         "type": "function",
         "z": "984823b1.a0823",
         "name": "send OFF",
-        "func": "msg.payload=\"OFF\"\nreturn msg;\n\n/*\nswitch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"OFF\";\n        break;\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n        \n    default:\n        break;\n}\nreturn msg;\n*/\n\n",
+        "func": "msg.payload=\"off\"\nreturn msg;\n\n/*\nswitch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"OFF\";\n        break;\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n        \n    default:\n        break;\n}\nreturn msg;\n*/\n\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 780,
+        "x": 700,
         "y": 120,
         "wires": [
             [
-                "5d6b642d.dc6f4c",
-                "f70a39ef.e5f2f8"
+                "f70a39ef.e5f2f8",
+                "94ece673.74ebc8"
             ]
         ]
     },
@@ -3932,7 +3998,7 @@
         "id": "284b6a26.2a1196",
         "type": "function",
         "z": "984823b1.a0823",
-        "name": "CANCEL if  OFF",
+        "name": "CANCEL if OFF",
         "func": "switch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"CANCEL\";\n        break;\n/*\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n*/        \n    default:\n        msg=null;\n        break;\n}\nreturn msg;\n\n\n/*\nswitch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"OFF\";\n        break;\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n        \n    default:\n        break;\n}\nreturn msg;\n*/\n\n",
         "outputs": 1,
         "noerr": 0,
@@ -3956,7 +4022,8 @@
         "y": 60,
         "wires": [
             [
-                "2c54d816.9b6ae8"
+                "2c54d816.9b6ae8",
+                "f70a39ef.e5f2f8"
             ]
         ]
     },
@@ -3970,8 +4037,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 930,
-        "y": 60,
+        "x": 970,
+        "y": 120,
         "wires": []
     },
     {
@@ -4121,7 +4188,7 @@
         "name": "plm tests 14.84.1c",
         "info": "",
         "x": 110,
-        "y": 1620,
+        "y": 1580,
         "wires": []
     },
     {
@@ -4133,8 +4200,8 @@
         "qos": "",
         "retain": "",
         "broker": "971eda83.260398",
-        "x": 610,
-        "y": 1660,
+        "x": 590,
+        "y": 1620,
         "wires": []
     },
     {
@@ -4150,7 +4217,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 150,
-        "y": 1660,
+        "y": 1620,
         "wires": [
             [
                 "357d8636.7d764a"
@@ -4867,11 +4934,11 @@
         "id": "c5f1953a.314208",
         "type": "function",
         "z": "984823b1.a0823",
-        "name": "parse to ON/OFF",
+        "name": "parse to on/off",
         "func": "msg.payload=JSON.parse(msg.payload);\nmsg.payload=msg.payload.state;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 510,
+        "x": 500,
         "y": 800,
         "wires": [
             [
@@ -4938,7 +5005,7 @@
         "qos": "1",
         "retain": "true",
         "broker": "971eda83.260398",
-        "x": 860,
+        "x": 980,
         "y": 180,
         "wires": []
     },
@@ -4984,107 +5051,6 @@
         ]
     },
     {
-        "id": "d883200.6217ae",
-        "type": "trigger",
-        "z": "984823b1.a0823",
-        "op1": "",
-        "op2": "{\"payload\":\"OFF\"}",
-        "op1type": "nul",
-        "op2type": "json",
-        "duration": "10",
-        "extend": true,
-        "units": "min",
-        "reset": "CANCEL",
-        "bytopic": "all",
-        "name": "",
-        "x": 650,
-        "y": 280,
-        "wires": [
-            [
-                "10a2184c.d4f048"
-            ]
-        ]
-    },
-    {
-        "id": "10a2184c.d4f048",
-        "type": "function",
-        "z": "984823b1.a0823",
-        "name": "send OFF",
-        "func": "msg.payload=\"OFF\"\nreturn msg;\n\n/*\nswitch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"OFF\";\n        break;\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n        \n    default:\n        break;\n}\nreturn msg;\n*/\n\n",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 780,
-        "y": 280,
-        "wires": [
-            [
-                "52cb2a5a.ea7634",
-                "f70a39ef.e5f2f8"
-            ]
-        ]
-    },
-    {
-        "id": "a8bcdca7.3815",
-        "type": "function",
-        "z": "984823b1.a0823",
-        "name": "CANCEL if  OFF",
-        "func": "switch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"CANCEL\";\n        break;\n/*\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n*/        \n    default:\n        msg=null;\n        break;\n}\nreturn msg;\n\n\n/*\nswitch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"OFF\";\n        break;\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n        \n    default:\n        break;\n}\nreturn msg;\n*/\n\n",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 480,
-        "y": 280,
-        "wires": [
-            [
-                "d883200.6217ae"
-            ]
-        ]
-    },
-    {
-        "id": "acfab7d6.73bea8",
-        "type": "mqtt in",
-        "z": "984823b1.a0823",
-        "name": "",
-        "topic": "insteon/flr2_masterbath_vanity/state",
-        "qos": "1",
-        "broker": "971eda83.260398",
-        "x": 160,
-        "y": 280,
-        "wires": [
-            [
-                "f93f9127.237d4",
-                "a8bcdca7.3815"
-            ]
-        ]
-    },
-    {
-        "id": "52cb2a5a.ea7634",
-        "type": "mqtt out",
-        "z": "984823b1.a0823",
-        "name": "",
-        "topic": "insteon/flr2_masterbath_vanity/set",
-        "qos": "1",
-        "retain": "true",
-        "broker": "971eda83.260398",
-        "x": 860,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "f93f9127.237d4",
-        "type": "function",
-        "z": "984823b1.a0823",
-        "name": "pass on ON",
-        "func": "switch (msg.payload)\n{\n/*\ncase 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"CANCEL\";\n        break;\n*/\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n\n    default:\n        msg=null;\n        break;\n}\nreturn msg;\n\n\n/*\nswitch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"OFF\";\n        break;\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n        \n    default:\n        break;\n}\nreturn msg;\n*/\n\n",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 470,
-        "y": 240,
-        "wires": [
-            [
-                "d883200.6217ae"
-            ]
-        ]
-    },
-    {
         "id": "4176eaef.dc79a4",
         "type": "comment",
         "z": "984823b1.a0823",
@@ -5119,7 +5085,7 @@
         "type": "mqtt in",
         "z": "984823b1.a0823",
         "name": "",
-        "topic": "insteon/flr2_bath2/state/1",
+        "topic": "insteon/flr2_bath2/1/state",
         "qos": "2",
         "broker": "971eda83.260398",
         "x": 130,
@@ -6517,7 +6483,7 @@
         "console": "false",
         "complete": "true",
         "x": 990,
-        "y": 460,
+        "y": 300,
         "wires": []
     },
     {
@@ -6619,7 +6585,7 @@
         "z": "984823b1.a0823",
         "name": "",
         "topic": "",
-        "payload": "OFF",
+        "payload": "off",
         "payloadType": "str",
         "repeat": "",
         "crontab": "",
@@ -6640,7 +6606,7 @@
         "z": "984823b1.a0823",
         "name": "",
         "topic": "",
-        "payload": "ON",
+        "payload": "on",
         "payloadType": "str",
         "repeat": "",
         "crontab": "",
@@ -6659,13 +6625,13 @@
         "id": "a492e30a.883e4",
         "type": "change",
         "z": "984823b1.a0823",
-        "name": "send OFF",
+        "name": "send off",
         "rules": [
             {
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "OFF",
+                "to": "off",
                 "tot": "str"
             }
         ],
@@ -6688,13 +6654,13 @@
         "id": "c60c4f0e.5ed16",
         "type": "change",
         "z": "984823b1.a0823",
-        "name": "send ON",
+        "name": "send on",
         "rules": [
             {
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "ON",
+                "to": "on",
                 "tot": "str"
             }
         ],
@@ -7125,7 +7091,7 @@
         "type": "mqtt in",
         "z": "984823b1.a0823",
         "name": "",
-        "topic": "insteon/bsmt_hall/state/1",
+        "topic": "insteon/bsmt_hall/1/state",
         "qos": "2",
         "broker": "971eda83.260398",
         "x": 130,
@@ -7831,7 +7797,7 @@
         "z": "50466fda.5d00f",
         "name": "",
         "x": 1010,
-        "y": 140,
+        "y": 460,
         "wires": []
     },
     {
@@ -7844,7 +7810,7 @@
         "upload": false,
         "swaggerDoc": "",
         "x": 110,
-        "y": 140,
+        "y": 460,
         "wires": [
             [
                 "4c48c741.7bd9c8"
@@ -7862,7 +7828,7 @@
         "syntax": "mustache",
         "template": "<html>\n    <head>\n        <title>Ecobee Pin</title>\n    </head>\n    <body>\n        <form action=\"/ecobee/webpin\" method=\"post\">\n            <input type=\"hidden\" name=\"redirect_uri\" value=\"{{req.query.redirect_uri}}\" />\n            <input type=\"hidden\" name=\"state\" value=\"{{req.query.state}}\" />\n            <input type=\"hidden\" name=\"client_id\" value=\"{{req.query.client_id}}\" />\n            Key: <input type=\"text\" name=\"auth_key\"> \n            <input type=\"submit\" value=\"Submit\" />\n        </form>\n    </body>\n</html>",
         "x": 830,
-        "y": 140,
+        "y": 460,
         "wires": [
             [
                 "b2302cff.6a376"
@@ -8867,7 +8833,7 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 130,
+        "x": 120,
         "y": 560,
         "wires": [
             [
@@ -8903,8 +8869,8 @@
         "start": "",
         "inout": "out",
         "property": "payload",
-        "x": 790,
-        "y": 460,
+        "x": 830,
+        "y": 300,
         "wires": [
             [
                 "9cd45335.9c179",
@@ -9227,5 +9193,933 @@
         "x": 140,
         "y": 120,
         "wires": []
+    },
+    {
+        "id": "94ece673.74ebc8",
+        "type": "function",
+        "z": "984823b1.a0823",
+        "name": "format {\"cmd\":\"on/off\",\"mode\":\"normal\"}",
+        "func": "// converts format of a simple on/off payload to\n// the more complex payload needed by my\n// insteon-mqtt diver of:\n// {\"cmd\":\"on/off\",\"mode\":\"normal\"}\n\n\n//if ((msg.payload==\"on\") || (msg.payload==\"off\")){\n//    var payload = {\n//        \"cmd\" : msg.payload,\n//        \"mode\" : \"normal\"\n//   }\n//    var payload = {\n//        \"cmd\" : msg.payload\n//    }\n//    msg.payload = JSON.stringify(payload);\n//}\n\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 690,
+        "y": 180,
+        "wires": [
+            [
+                "5d6b642d.dc6f4c"
+            ]
+        ]
+    },
+    {
+        "id": "d22cc9de.1b0b68",
+        "type": "mqtt out",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "insteon/flr1_powderroom_fan/set",
+        "qos": "1",
+        "retain": "true",
+        "broker": "971eda83.260398",
+        "x": 980,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "9092887b.01e8e8",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "PowderRoomFastOnOff",
+        "topic": "insteon/flr1_powderroom_fan/state",
+        "payload": "on",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 140,
+        "y": 600,
+        "wires": [
+            [
+                "7ab4f062.a0adc"
+            ]
+        ]
+    },
+    {
+        "id": "7ab4f062.a0adc",
+        "type": "function",
+        "z": "984823b1.a0823",
+        "name": "format {\"cmd\":\"on/off\",\"mode\":\"normal\"}",
+        "func": "// converts format of a simple on/off payload to\n// the more complex payload needed by my\n// insteon-mqtt diver of:\n// {\"cmd\":\"on/off\",\"mode\":\"normal\"}\n\nif ((msg.payload==\"on\") || (msg.payload==\"off\")){\n    var payload = {\n        \"cmd\" : msg.payload,\n        \"mode\" : \"normal\"\n    }\n    msg.payload = JSON.stringify(payload);\n}\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 510,
+        "y": 600,
+        "wires": [
+            [
+                "d22cc9de.1b0b68",
+                "a1aea43a.05d268"
+            ]
+        ]
+    },
+    {
+        "id": "9fd84828.b17f18",
+        "type": "mqtt out",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "insteon/bsmt_officesmall_spare/set",
+        "qos": "1",
+        "retain": "true",
+        "broker": "971eda83.260398",
+        "x": 1140,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "5170420f.f30e7c",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "",
+        "payload": "on",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 930,
+        "y": 660,
+        "wires": [
+            [
+                "1a8368b0.a56ed7"
+            ]
+        ]
+    },
+    {
+        "id": "9463b03f.f9dc4",
+        "type": "debug",
+        "z": "984823b1.a0823",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1190,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "1a8368b0.a56ed7",
+        "type": "function",
+        "z": "984823b1.a0823",
+        "name": "format {\"cmd\":\"on/off\",\"mode\":\"normal\"}",
+        "func": "// converts format of a simple on/off payload to\n// the more complex payload needed by my\n// insteon-mqtt diver of:\n// {\"cmd\":\"on/off\",\"mode\":\"normal\"}\n\n/*\nif ((msg.payload==\"on\") || (msg.payload==\"off\")){\n    var payload = {\n        \"cmd\" : msg.payload,\n        \"mode\" : \"normal\"\n    }\n    msg.payload = JSON.stringify(payload);\n}\n*/\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1050,
+        "y": 740,
+        "wires": [
+            [
+                "9fd84828.b17f18",
+                "9463b03f.f9dc4"
+            ]
+        ]
+    },
+    {
+        "id": "3e8ca4e6.becf2c",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "",
+        "payload": "off",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 930,
+        "y": 700,
+        "wires": [
+            [
+                "1a8368b0.a56ed7"
+            ]
+        ]
+    },
+    {
+        "id": "4ff0671f.741418",
+        "type": "inject",
+        "z": "50283593.060cac",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 140,
+        "y": 80,
+        "wires": [
+            [
+                "abcf88f.0319278"
+            ]
+        ]
+    },
+    {
+        "id": "24a525a.3040ada",
+        "type": "debug",
+        "z": "50283593.060cac",
+        "name": "result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 530,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "abcf88f.0319278",
+        "type": "particle-pub",
+        "z": "50283593.060cac",
+        "pcloud": "f3bf7edb.a757e",
+        "evtname": "myEvent",
+        "param": "",
+        "productIdOrSlug": "",
+        "private": false,
+        "evtnametopic": false,
+        "ttl": 60,
+        "repeat": 0,
+        "once": false,
+        "x": 320,
+        "y": 80,
+        "wires": [
+            [
+                "e5153954.869048"
+            ]
+        ]
+    },
+    {
+        "id": "459c349b.8f982c",
+        "type": "particle-SSE",
+        "z": "50283593.060cac",
+        "pcloud": "f3bf7edb.a757e",
+        "subscribetype": "mine",
+        "devprodslug": "__DEVPRODSLUG__",
+        "devid": "",
+        "evtname": "myEvent",
+        "strict": 0,
+        "x": 340,
+        "y": 160,
+        "wires": [
+            [
+                "24a525a.3040ada"
+            ]
+        ]
+    },
+    {
+        "id": "e5153954.869048",
+        "type": "debug",
+        "z": "50283593.060cac",
+        "name": "result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 490,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "1210e795.257f78",
+        "type": "inject",
+        "z": "50283593.060cac",
+        "name": "LED on",
+        "topic": "param",
+        "payload": "1",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 130,
+        "y": 260,
+        "wires": [
+            [
+                "fc54958d.552fd8"
+            ]
+        ]
+    },
+    {
+        "id": "9e786e25.b0093",
+        "type": "inject",
+        "z": "50283593.060cac",
+        "name": "LED off",
+        "topic": "param",
+        "payload": "0",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 130,
+        "y": 300,
+        "wires": [
+            [
+                "fc54958d.552fd8"
+            ]
+        ]
+    },
+    {
+        "id": "9c70e220.93ea2",
+        "type": "debug",
+        "z": "50283593.060cac",
+        "name": "result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 530,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "df7cb5bb.08f478",
+        "type": "inject",
+        "z": "50283593.060cac",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 120,
+        "y": 380,
+        "wires": [
+            [
+                "4b863aa5.593324"
+            ]
+        ]
+    },
+    {
+        "id": "e580ff4d.3391c",
+        "type": "debug",
+        "z": "50283593.060cac",
+        "name": "result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 530,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "fc54958d.552fd8",
+        "type": "particle-func",
+        "z": "50283593.060cac",
+        "pcloud": "f3bf7edb.a757e",
+        "devid": "photon2",
+        "fname": "doLED",
+        "param": "",
+        "productIdOrSlug": "",
+        "repeat": 0,
+        "once": false,
+        "x": 320,
+        "y": 280,
+        "wires": [
+            [
+                "9c70e220.93ea2"
+            ]
+        ]
+    },
+    {
+        "id": "4b863aa5.593324",
+        "type": "particle-var",
+        "z": "50283593.060cac",
+        "pcloud": "f3bf7edb.a757e",
+        "devid": "photon2",
+        "getvar": "aValue",
+        "productIdOrSlug": "",
+        "repeat": 0,
+        "once": false,
+        "x": 320,
+        "y": 380,
+        "wires": [
+            [
+                "e580ff4d.3391c"
+            ]
+        ]
+    },
+    {
+        "id": "d12f9015.49e76",
+        "type": "trigger",
+        "z": "984823b1.a0823",
+        "op1": "",
+        "op2": "{\"payload\":\"OFF\"}",
+        "op1type": "nul",
+        "op2type": "json",
+        "duration": "10",
+        "extend": true,
+        "units": "s",
+        "reset": "CANCEL",
+        "bytopic": "all",
+        "name": "",
+        "x": 650,
+        "y": 1760,
+        "wires": [
+            [
+                "60b37ef9.5d12a"
+            ]
+        ]
+    },
+    {
+        "id": "60b37ef9.5d12a",
+        "type": "function",
+        "z": "984823b1.a0823",
+        "name": "send off",
+        "func": "msg.payload=\"off\"\nreturn msg;\n\n/*\nswitch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"OFF\";\n        break;\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n        \n    default:\n        break;\n}\nreturn msg;\n*/\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 780,
+        "y": 1760,
+        "wires": [
+            [
+                "3d07acb2.641154",
+                "c692a8e4.1677d8"
+            ]
+        ]
+    },
+    {
+        "id": "e25bf80.63ecc08",
+        "type": "function",
+        "z": "984823b1.a0823",
+        "name": "CANCEL if  off",
+        "func": "switch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"CANCEL\";\n        break;\n/*\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"on\";\n        break;\n*/        \n    default:\n        msg=null;\n        break;\n}\nreturn msg;\n\n\n/*\nswitch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"OFF\";\n        break;\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n        \n    default:\n        break;\n}\nreturn msg;\n*/\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 480,
+        "y": 1760,
+        "wires": [
+            [
+                "d12f9015.49e76",
+                "c692a8e4.1677d8"
+            ]
+        ]
+    },
+    {
+        "id": "33c718bb.7015c8",
+        "type": "mqtt in",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "insteon/flr1_powderroom_fan/state",
+        "qos": "1",
+        "broker": "971eda83.260398",
+        "x": 140,
+        "y": 1760,
+        "wires": [
+            [
+                "c692a8e4.1677d8",
+                "3bd63e03.e17102"
+            ]
+        ]
+    },
+    {
+        "id": "bd7af301.73198",
+        "type": "mqtt out",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "insteon/flr1_powderroom_fan/set",
+        "qos": "1",
+        "retain": "true",
+        "broker": "971eda83.260398",
+        "x": 720,
+        "y": 1820,
+        "wires": []
+    },
+    {
+        "id": "beb86460.4cd8e8",
+        "type": "function",
+        "z": "984823b1.a0823",
+        "name": "pass on \"on\"",
+        "func": "switch (msg.payload)\n{\n/*\ncase 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"CANCEL\";\n        break;\n*/\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"on\";\n        break;\n\n    default:\n        msg=null;\n        break;\n}\nreturn msg;\n\n\n/*\nswitch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"OFF\";\n        break;\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n        \n    default:\n        break;\n}\nreturn msg;\n*/\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 470,
+        "y": 1720,
+        "wires": [
+            [
+                "d12f9015.49e76",
+                "c692a8e4.1677d8",
+                "e8315e8e.4be8"
+            ]
+        ]
+    },
+    {
+        "id": "3d07acb2.641154",
+        "type": "function",
+        "z": "984823b1.a0823",
+        "name": "format {\"cmd\":\"on/off\",\"mode\":\"normal\"}",
+        "func": "// converts format of a simple on/off payload to\n// the more complex payload needed by my\n// insteon-mqtt diver of:\n// {\"cmd\":\"on/off\",\"mode\":\"normal\"}\n\n\n//if ((msg.payload==\"on\") || (msg.payload==\"off\")){\n//    var payload = {\n//        \"cmd\" : msg.payload,\n//        \"mode\" : \"normal\"\n//   }\n//    var payload = {\n//        \"cmd\" : msg.payload\n//    }\n//    msg.payload = JSON.stringify(payload);\n//}\n\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 270,
+        "y": 1820,
+        "wires": [
+            [
+                "bd7af301.73198",
+                "c692a8e4.1677d8"
+            ]
+        ]
+    },
+    {
+        "id": "c692a8e4.1677d8",
+        "type": "debug",
+        "z": "984823b1.a0823",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 790,
+        "y": 1900,
+        "wires": []
+    },
+    {
+        "id": "75547bcd.d6ad64",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "",
+        "payload": "{\"state\":\"on\",\"mode\":\"normal\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 90,
+        "y": 1880,
+        "wires": [
+            [
+                "1af3f48f.5a244b"
+            ]
+        ]
+    },
+    {
+        "id": "a79903b4.1778d",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "",
+        "payload": "off",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 90,
+        "y": 1920,
+        "wires": [
+            [
+                "1af3f48f.5a244b"
+            ]
+        ]
+    },
+    {
+        "id": "1af3f48f.5a244b",
+        "type": "function",
+        "z": "984823b1.a0823",
+        "name": "",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 220,
+        "y": 1900,
+        "wires": [
+            [
+                "aba1942b.6aba78"
+            ]
+        ]
+    },
+    {
+        "id": "e8315e8e.4be8",
+        "type": "debug",
+        "z": "984823b1.a0823",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 870,
+        "y": 1860,
+        "wires": []
+    },
+    {
+        "id": "3bd63e03.e17102",
+        "type": "json",
+        "z": "984823b1.a0823",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 330,
+        "y": 1680,
+        "wires": [
+            [
+                "ded1d8b3.dcedb8"
+            ]
+        ]
+    },
+    {
+        "id": "1d93091.5efb1f7",
+        "type": "function",
+        "z": "b18f3ab.a85cbc8",
+        "name": "cvt insteon-mqtt payload<>object",
+        "func": "// converts format of a simple on/off payload to\n// the more complex payload needed by my\n// insteon-mqtt diver of:\n// {\"cmd\":\"on/off\",\"mode\":\"normal\"}\n\nif ( (typeof msg.payload !== 'undefined') && (msg.payload !== null) && (msg.payload !== \"\") ) {\n    if ((msg.payload==\"on\") || (msg.payload==\"off\")){\n        var payload = {\n            \"cmd\" : msg.payload,\n            \"mode\" : \"normal\"\n        };\n        msg.payload = JSON.stringify(payload);\n    } else if ( (typeof msg.payload == \"object\") && (typeof msg.payload.state !== 'undefined') && (msg.payload.state !== null) ) {\n        switch (msg.payload.state)\n        {\n            case \"off\":\n                msg.payload = \"off\";\n                break;\n            case \"on\":\n                msg.payload = \"on\";\n                break;\n                \n            default:\n                break;\n        }\n    }\n//    \n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 220,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "aba1942b.6aba78",
+        "type": "subflow:b18f3ab.a85cbc8",
+        "z": "984823b1.a0823",
+        "name": "",
+        "x": 470,
+        "y": 1900,
+        "wires": [
+            [
+                "c692a8e4.1677d8"
+            ]
+        ]
+    },
+    {
+        "id": "ded1d8b3.dcedb8",
+        "type": "subflow:b18f3ab.a85cbc8",
+        "z": "984823b1.a0823",
+        "name": "",
+        "x": 550,
+        "y": 1680,
+        "wires": [
+            [
+                "ddb9073e.a4e4b8"
+            ]
+        ]
+    },
+    {
+        "id": "ddb9073e.a4e4b8",
+        "type": "function",
+        "z": "984823b1.a0823",
+        "name": "",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 730,
+        "y": 1680,
+        "wires": [
+            [
+                "c692a8e4.1677d8",
+                "e25bf80.63ecc08",
+                "beb86460.4cd8e8"
+            ]
+        ]
+    },
+    {
+        "id": "32a87e1a.d102c2",
+        "type": "comment",
+        "z": "984823b1.a0823",
+        "name": "Master VanityLight OFF after time",
+        "info": "",
+        "x": 150,
+        "y": 2000,
+        "wires": []
+    },
+    {
+        "id": "d5f101c3.dec7b",
+        "type": "trigger",
+        "z": "984823b1.a0823",
+        "op1": "",
+        "op2": "{\"payload\":\"OFF\"}",
+        "op1type": "nul",
+        "op2type": "json",
+        "duration": "10",
+        "extend": true,
+        "units": "min",
+        "reset": "CANCEL",
+        "bytopic": "all",
+        "name": "",
+        "x": 650,
+        "y": 2040,
+        "wires": [
+            [
+                "2c23b597.c94fea"
+            ]
+        ]
+    },
+    {
+        "id": "2c23b597.c94fea",
+        "type": "function",
+        "z": "984823b1.a0823",
+        "name": "send off",
+        "func": "msg.payload=\"off\"\nreturn msg;\n\n/*\nswitch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"OFF\";\n        break;\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n        \n    default:\n        break;\n}\nreturn msg;\n*/\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 780,
+        "y": 2040,
+        "wires": [
+            [
+                "2614a627.cb250a"
+            ]
+        ]
+    },
+    {
+        "id": "db15b645.b3e828",
+        "type": "function",
+        "z": "984823b1.a0823",
+        "name": "CANCEL if  off",
+        "func": "switch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"CANCEL\";\n        break;\n/*\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"on\";\n        break;\n*/        \n    default:\n        msg=null;\n        break;\n}\nreturn msg;\n\n\n/*\nswitch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"OFF\";\n        break;\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n        \n    default:\n        break;\n}\nreturn msg;\n*/\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 480,
+        "y": 2040,
+        "wires": [
+            [
+                "d5f101c3.dec7b"
+            ]
+        ]
+    },
+    {
+        "id": "ee799632.b162f8",
+        "type": "mqtt in",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "insteon/flr2_masterbath_vanity/state",
+        "qos": "1",
+        "broker": "971eda83.260398",
+        "x": 160,
+        "y": 2040,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2614a627.cb250a",
+        "type": "mqtt out",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "insteon/flr2_masterbath_vanity/set",
+        "qos": "1",
+        "retain": "true",
+        "broker": "971eda83.260398",
+        "x": 780,
+        "y": 2100,
+        "wires": []
+    },
+    {
+        "id": "9fa6b8af.f83248",
+        "type": "function",
+        "z": "984823b1.a0823",
+        "name": "pass on \"on\"",
+        "func": "switch (msg.payload)\n{\n/*\ncase 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"CANCEL\";\n        break;\n*/\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"on\";\n        break;\n\n    default:\n        msg=null;\n        break;\n}\nreturn msg;\n\n\n/*\nswitch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"OFF\";\n        break;\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n        \n    default:\n        break;\n}\nreturn msg;\n*/\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 470,
+        "y": 2000,
+        "wires": [
+            [
+                "d5f101c3.dec7b"
+            ]
+        ]
+    },
+    {
+        "id": "d9858a48.fc68e8",
+        "type": "json",
+        "z": "984823b1.a0823",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 390,
+        "y": 1960,
+        "wires": [
+            [
+                "c154f611.31b888"
+            ]
+        ]
+    },
+    {
+        "id": "c154f611.31b888",
+        "type": "subflow:b18f3ab.a85cbc8",
+        "z": "984823b1.a0823",
+        "name": "",
+        "x": 610,
+        "y": 1960,
+        "wires": [
+            [
+                "9fa6b8af.f83248",
+                "db15b645.b3e828"
+            ]
+        ]
+    },
+    {
+        "id": "16524858.0f5f78",
+        "type": "trigger",
+        "z": "890e96a.df28a68",
+        "op1": "",
+        "op2": "{\"payload\":\"OFF\"}",
+        "op1type": "nul",
+        "op2type": "json",
+        "duration": "10",
+        "extend": true,
+        "units": "min",
+        "reset": "CANCEL",
+        "bytopic": "all",
+        "name": "",
+        "x": 390,
+        "y": 120,
+        "wires": [
+            [
+                "56f44cc9.60f794"
+            ]
+        ]
+    },
+    {
+        "id": "56f44cc9.60f794",
+        "type": "function",
+        "z": "890e96a.df28a68",
+        "name": "send off",
+        "func": "msg.payload=\"off\"\nreturn msg;\n\n/*\nswitch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"OFF\";\n        break;\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n        \n    default:\n        break;\n}\nreturn msg;\n*/\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 520,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4f51f620.a05388",
+        "type": "function",
+        "z": "890e96a.df28a68",
+        "name": "CANCEL if  off",
+        "func": "switch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"CANCEL\";\n        break;\n/*\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"on\";\n        break;\n*/        \n    default:\n        msg=null;\n        break;\n}\nreturn msg;\n\n\n/*\nswitch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"OFF\";\n        break;\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n        \n    default:\n        break;\n}\nreturn msg;\n*/\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 220,
+        "y": 120,
+        "wires": [
+            [
+                "16524858.0f5f78"
+            ]
+        ]
+    },
+    {
+        "id": "21fc6a71.91bc56",
+        "type": "function",
+        "z": "890e96a.df28a68",
+        "name": "pass on \"on\"",
+        "func": "switch (msg.payload)\n{\n/*\ncase 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"CANCEL\";\n        break;\n*/\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"on\";\n        break;\n\n    default:\n        msg=null;\n        break;\n}\nreturn msg;\n\n\n/*\nswitch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"OFF\";\n        break;\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n        \n    default:\n        break;\n}\nreturn msg;\n*/\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 210,
+        "y": 80,
+        "wires": [
+            [
+                "16524858.0f5f78"
+            ]
+        ]
+    },
+    {
+        "id": "3f9524a3.3189fc",
+        "type": "json",
+        "z": "890e96a.df28a68",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 130,
+        "y": 40,
+        "wires": [
+            [
+                "6adf0cea.01baf4"
+            ]
+        ]
+    },
+    {
+        "id": "6adf0cea.01baf4",
+        "type": "subflow:b18f3ab.a85cbc8",
+        "z": "890e96a.df28a68",
+        "name": "",
+        "x": 350,
+        "y": 40,
+        "wires": [
+            [
+                "21fc6a71.91bc56",
+                "4f51f620.a05388"
+            ]
+        ]
+    },
+    {
+        "id": "b42bba5c.9a37a8",
+        "type": "comment",
+        "z": "984823b1.a0823",
+        "name": "Master VanityLight OFF after time",
+        "info": "",
+        "x": 150,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "51a1621b.e578ec",
+        "type": "mqtt in",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "insteon/flr2_masterbath_vanity/state",
+        "qos": "1",
+        "broker": "971eda83.260398",
+        "x": 160,
+        "y": 280,
+        "wires": [
+            [
+                "9f5b0f8e.4f622"
+            ]
+        ]
+    },
+    {
+        "id": "80d1fdc.075d7",
+        "type": "mqtt out",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "insteon/flr2_masterbath_vanity/set",
+        "qos": "1",
+        "retain": "true",
+        "broker": "971eda83.260398",
+        "x": 780,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "9f5b0f8e.4f622",
+        "type": "subflow:890e96a.df28a68",
+        "z": "984823b1.a0823",
+        "name": "",
+        "x": 460,
+        "y": 280,
+        "wires": [
+            [
+                "80d1fdc.075d7"
+            ]
+        ]
     }
 ]
