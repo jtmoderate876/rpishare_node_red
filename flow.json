@@ -141,8 +141,8 @@
     {
         "id": "d0d30a38.451ae8",
         "type": "tab",
-        "label": "Rainforest Temp",
-        "disabled": true,
+        "label": "Temp",
+        "disabled": false,
         "info": ""
     },
     {
@@ -727,7 +727,7 @@
         "crontab": "",
         "once": false,
         "x": 130,
-        "y": 380,
+        "y": 360,
         "wires": [
             [
                 "aecb869a.6a2788"
@@ -743,7 +743,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 367,
-        "y": 380,
+        "y": 360,
         "wires": [
             [
                 "c52ed3d0.50ab1"
@@ -760,7 +760,7 @@
         "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
         "tls": "74d52d37.cac784",
         "x": 550,
-        "y": 380,
+        "y": 360,
         "wires": [
             [
                 "cb9e9993.cf95c8"
@@ -776,7 +776,7 @@
         "console": "false",
         "complete": "false",
         "x": 725,
-        "y": 380,
+        "y": 360,
         "wires": []
     },
     {
@@ -788,7 +788,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 500,
-        "y": 420,
+        "y": 400,
         "wires": [
             [
                 "73735df2.aaf524"
@@ -807,7 +807,7 @@
         "crontab": "",
         "once": false,
         "x": 220,
-        "y": 420,
+        "y": 400,
         "wires": [
             [
                 "d8d4385a.f6b1e8"
@@ -824,7 +824,7 @@
         "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
         "tls": "74d52d37.cac784",
         "x": 670,
-        "y": 420,
+        "y": 400,
         "wires": [
             [
                 "548d883f.225e28"
@@ -840,7 +840,7 @@
         "console": "false",
         "complete": "false",
         "x": 830,
-        "y": 420,
+        "y": 400,
         "wires": []
     },
     {
@@ -855,7 +855,7 @@
         "crontab": "",
         "once": false,
         "x": 130,
-        "y": 460,
+        "y": 440,
         "wires": [
             [
                 "31162c53.6e96f4"
@@ -871,7 +871,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 280,
-        "y": 460,
+        "y": 440,
         "wires": [
             [
                 "b9effe4d.cdf4f"
@@ -888,7 +888,7 @@
         "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
         "tls": "74d52d37.cac784",
         "x": 430,
-        "y": 460,
+        "y": 440,
         "wires": [
             [
                 "26359bd2.f695b4"
@@ -950,7 +950,7 @@
         "attr": "",
         "chr": "",
         "x": 550,
-        "y": 460,
+        "y": 440,
         "wires": [
             [
                 "d195ae4f.fde69"
@@ -966,7 +966,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 670,
-        "y": 460,
+        "y": 440,
         "wires": [
             [
                 "872c5b0d.507928"
@@ -993,7 +993,7 @@
         "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
         "tls": "74d52d37.cac784",
         "x": 290,
-        "y": 280,
+        "y": 260,
         "wires": [
             [
                 "2fed2a0a.50b9b6"
@@ -1009,7 +1009,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 120,
-        "y": 280,
+        "y": 260,
         "wires": [
             [
                 "7c9661a8.3f7bb"
@@ -1024,7 +1024,7 @@
         "attr": "",
         "chr": "",
         "x": 610,
-        "y": 280,
+        "y": 260,
         "wires": [
             [
                 "60e6b007.5ffc4"
@@ -1040,7 +1040,7 @@
         "gap": "",
         "start": "",
         "x": 780,
-        "y": 280,
+        "y": 260,
         "wires": [
             [
                 "84797666.6772c8"
@@ -1056,7 +1056,7 @@
         "outputs": "1",
         "noerr": 0,
         "x": 520,
-        "y": 320,
+        "y": 300,
         "wires": [
             [
                 "e1582874.335878",
@@ -1073,7 +1073,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 460,
-        "y": 280,
+        "y": 260,
         "wires": [
             [
                 "ec0d4a6f.6287e8"
@@ -1112,7 +1112,7 @@
         "outputs": "2",
         "noerr": 0,
         "x": 180,
-        "y": 320,
+        "y": 300,
         "wires": [
             [],
             [
@@ -2102,7 +2102,7 @@
             "a1e76248.eab86"
         ],
         "x": 875,
-        "y": 320,
+        "y": 300,
         "wires": []
     },
     {
@@ -2127,7 +2127,7 @@
         "start": "",
         "inout": "out",
         "x": 730,
-        "y": 340,
+        "y": 320,
         "wires": [
             [
                 "d07c6ad.e3c7298"
@@ -5864,7 +5864,7 @@
         "console": "false",
         "complete": "true",
         "x": 790,
-        "y": 460,
+        "y": 440,
         "wires": []
     },
     {
@@ -5880,7 +5880,7 @@
         "once": false,
         "onceDelay": "",
         "x": 140,
-        "y": 640,
+        "y": 620,
         "wires": [
             [
                 "b3d53724.20dc28"
@@ -5896,7 +5896,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 320,
-        "y": 640,
+        "y": 620,
         "wires": [
             [
                 "da2bcced.52c5c"
@@ -5913,7 +5913,7 @@
         "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
         "tls": "74d52d37.cac784",
         "x": 490,
-        "y": 640,
+        "y": 620,
         "wires": [
             [
                 "ca0a8d40.8cebf",
@@ -5929,7 +5929,7 @@
         "attr": "",
         "chr": "",
         "x": 630,
-        "y": 620,
+        "y": 600,
         "wires": [
             [
                 "46b5c51e.3b900c"
@@ -5945,7 +5945,7 @@
         "console": "false",
         "complete": "true",
         "x": 850,
-        "y": 640,
+        "y": 620,
         "wires": []
     },
     {
@@ -5968,7 +5968,7 @@
         "name": "Stuff below does not yet work.",
         "info": "",
         "x": 120,
-        "y": 600,
+        "y": 580,
         "wires": []
     },
     {
@@ -6022,7 +6022,7 @@
         "name": "Tell insteon to turn Rainforest Eagle off and on to reset it because it locked up again",
         "info": "",
         "x": 430,
-        "y": 520,
+        "y": 500,
         "wires": []
     },
     {
@@ -6034,7 +6034,7 @@
             "530a8d76.498e64"
         ],
         "x": 540,
-        "y": 560,
+        "y": 540,
         "wires": []
     },
     {
@@ -6460,8 +6460,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 850,
-        "y": 240,
+        "x": 690,
+        "y": 100,
         "wires": []
     },
     {
@@ -7552,15 +7552,16 @@
         "name": "Wonderware Bearer Token",
         "props": [
             {
-                "value": "Authorization",
+                "value": "headers.Authorization",
                 "type": "msg"
             }
         ],
-        "x": 300,
+        "x": 420,
         "y": 200,
         "wires": [
             [
-                "f00d388d.8e2c58"
+                "486b4641.981d08",
+                "6399b6ad.e98fb8"
             ]
         ]
     },
@@ -7625,14 +7626,14 @@
         "type": "function",
         "z": "bc6012ce.56132",
         "name": "prepare htttp",
-        "func": "/* Example of syntax (replace token with real one):\nmsg.headers = {\n    \"Authorization\" : \"Bearer aThisIsMyFakeTokenYoursWillBeLonger-AjsTIEvRKKQ\",\n    \"Content-type\" : \"application/json\"\n    };\nmsg.url = \"https://online.wonderware.com/apis/upload/datasource\";\nmsg.method = \"POST\";\n*/\n\nmsg.headers = {\n    \"Content-type\" : \"application/json\"\n};\nmsg.url = \"https://online.wonderware.com/apis/upload/datasource\";\nmsg.method = \"POST\";\n\n//move Athorization inside headers:\nmsg.headers.Authorization = msg.Authorization;  //copy Authorization to be under headers\ndelete msg.Authorization;                       // and remove from old location\nreturn msg;\n\n\nreturn msg;",
+        "func": "/* Example of syntax (replace token with real one):\nmsg.headers = {\n    \"Authorization\" : \"Bearer aThisIsMyFakeTokenYoursWillBeLonger-AjsTIEvRKKQ\",\n    \"Content-type\" : \"application/json\"\n    };\nmsg.url = \"https://online.wonderware.com/apis/upload/datasource\";\nmsg.method = \"POST\";\n*/\nmsg.headers = {\n    \"Content-type\" : \"application/json\",\n    \"x-filename\" : \"rpishare_nodered_wonderware_simple_\"+msg.timestamp+\".json\"\n};\nmsg.url = \"https://online.wonderware.com/apis/upload/datasource\";\nmsg.method = \"POST\";\n\n//move Athorization inside headers:\n//msg.headers.Authorization = msg.Authorization;  //copy Authorization to be under headers\n//delete msg.Authorization;                       // and remove from old location\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 510,
+        "x": 210,
         "y": 200,
         "wires": [
             [
-                "486b4641.981d08"
+                "54df6fdf.75846"
             ]
         ]
     },
@@ -7761,7 +7762,7 @@
         "y": 140,
         "wires": [
             [
-                "54df6fdf.75846"
+                "f00d388d.8e2c58"
             ]
         ]
     },
@@ -7802,7 +7803,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 120,
-        "y": 560,
+        "y": 540,
         "wires": [
             [
                 "a9cb4ecb.8c829"
@@ -7818,7 +7819,7 @@
         "outputs": 2,
         "noerr": 0,
         "x": 330,
-        "y": 560,
+        "y": 540,
         "wires": [
             [
                 "3af4c367.0e73cc"
@@ -7839,7 +7840,7 @@
         "tostatus": false,
         "complete": "false",
         "x": 650,
-        "y": 560,
+        "y": 540,
         "wires": []
     },
     {
@@ -9652,414 +9653,7 @@
             "ce1d314c.f8908"
         ],
         "x": 875,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "6621fd48.e72e54",
-        "type": "inject",
-        "z": "d0d30a38.451ae8",
-        "name": "Local Eagle request",
-        "topic": "",
-        "payload": "",
-        "payloadType": "str",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "x": 130,
-        "y": 140,
-        "wires": [
-            [
-                "683516bf.3504f8"
-            ]
-        ]
-    },
-    {
-        "id": "15052b1c.6b0655",
-        "type": "http request",
-        "z": "d0d30a38.451ae8",
-        "name": "",
-        "method": "POST",
-        "ret": "txt",
-        "url": "https://rainforestcloud.com:9445/cgi-bin/post_manager",
-        "x": 590,
-        "y": 244,
-        "wires": [
-            [
-                "b09a87d7.632718"
-            ]
-        ]
-    },
-    {
-        "id": "4b9fd672.2ad388",
-        "type": "function",
-        "z": "d0d30a38.451ae8",
-        "name": "Format request",
-        "func": "//Create Eagle command XML fragment\nvar command = \"<Command>\\n\";\ncommand += \"  <Name>get_instantaneous_demand</Name>\\n\";\ncommand += \"</Command>\\n\";\n\n//Modify header to include Gateway authentication\nmsg.headers = {\n    \"Cloud-ID\" : \"000abc\",\n    \"User\" : \"myemail@address\",\n    \"Password\" : \"MyPasssword\"\n    };\n    \nmsg.payload = command;\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 421,
-        "y": 244,
-        "wires": [
-            [
-                "15052b1c.6b0655"
-            ]
-        ]
-    },
-    {
-        "id": "b6fdd9d1.1719e8",
-        "type": "xml",
-        "z": "d0d30a38.451ae8",
-        "name": "",
-        "attr": "",
-        "chr": "",
-        "x": 795,
-        "y": 275,
-        "wires": [
-            [
-                "22ef6912.57bb76"
-            ]
-        ]
-    },
-    {
-        "id": "711d7719.8ceec8",
-        "type": "rbe",
-        "z": "d0d30a38.451ae8",
-        "name": "Ignore repeat values",
-        "func": "rbe",
-        "gap": "",
-        "start": "",
-        "x": 1038,
-        "y": 189,
-        "wires": [
-            [
-                "b6fdd9d1.1719e8"
-            ]
-        ]
-    },
-    {
-        "id": "4666e703.c5ed58",
-        "type": "http request",
-        "z": "d0d30a38.451ae8",
-        "name": "",
-        "method": "POST",
-        "ret": "txt",
-        "url": "http://192.168.2.4/cgi-bin/post_manager",
-        "x": 582,
-        "y": 140,
-        "wires": [
-            [
-                "b09a87d7.632718"
-            ]
-        ]
-    },
-    {
-        "id": "683516bf.3504f8",
-        "type": "function",
-        "z": "d0d30a38.451ae8",
-        "name": "Format request",
-        "func": "//Create Eagle command XML fragment\nvar command = \"<Command>\\n\";\ncommand += \"  <Name>get_instantaneous_demand</Name>\\n\";\ncommand += \"  <MacId>0xabcdef0000001234</MacId>\\n\";\ncommand += \"</Command>\\n\";\n\nmsg.payload = command;\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 374,
-        "y": 140,
-        "wires": [
-            [
-                "4666e703.c5ed58"
-            ]
-        ]
-    },
-    {
-        "id": "587750ec.f0f57",
-        "type": "inject",
-        "z": "d0d30a38.451ae8",
-        "name": "Rainforest Relay Gateway request",
-        "topic": "",
-        "payload": "",
-        "payloadType": "str",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "x": 182,
-        "y": 244,
-        "wires": [
-            [
-                "4b9fd672.2ad388"
-            ]
-        ]
-    },
-    {
-        "id": "529066b.d187098",
-        "type": "inject",
-        "z": "d0d30a38.451ae8",
-        "name": "Reboot Eagle",
-        "topic": "",
-        "payload": "",
-        "payloadType": "str",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "x": 129,
-        "y": 443,
-        "wires": [
-            [
-                "43dfcb3.c2cb334"
-            ]
-        ]
-    },
-    {
-        "id": "43dfcb3.c2cb334",
-        "type": "function",
-        "z": "d0d30a38.451ae8",
-        "name": "Format request",
-        "func": "//Create Eagle command XML fragment\nvar command = \"<Command>\\n\";\ncommand += \"  <Name>reboot</Name>\\n\";\ncommand += \"  <MacId>0xabcdef0000001234</MacId>\\n\";\ncommand += \"  <Target>Eagle</Target>\\n\";\ncommand += \"</Command>\\n\";\n\nmsg.payload = command;\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 366,
-        "y": 443,
-        "wires": [
-            [
-                "c57bcd89.18f3e"
-            ]
-        ]
-    },
-    {
-        "id": "c57bcd89.18f3e",
-        "type": "http request",
-        "z": "d0d30a38.451ae8",
-        "name": "",
-        "method": "POST",
-        "ret": "txt",
-        "url": "http://192.168.2.4/cgi-bin/post_manager",
-        "x": 549,
-        "y": 443,
-        "wires": [
-            [
-                "60ddb143.d6e42"
-            ]
-        ]
-    },
-    {
-        "id": "60ddb143.d6e42",
-        "type": "debug",
-        "z": "d0d30a38.451ae8",
-        "name": "",
-        "active": true,
-        "console": "false",
-        "complete": "false",
-        "x": 724,
-        "y": 443,
-        "wires": []
-    },
-    {
-        "id": "30bb4f2b.0a07",
-        "type": "function",
-        "z": "d0d30a38.451ae8",
-        "name": "Format request",
-        "func": "//Create Eagle command XML fragment\nvar command = \"<Command>\\n\";\ncommand += \"  <Name>set_schedule</Name>\\n\";\ncommand += \"  <MacId>0xabcdef0000001234</MacId>\\n\";\ncommand += \"  <Event>demand</Event>\\n\";\ncommand += \"  <Frequency>5</Frequency>\\n\";\ncommand += \"  <Enabled>Y</Enabled>\\n\";\ncommand += \"</Command>\\n\";\n\nmsg.payload = command;\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 494,
-        "y": 528,
-        "wires": [
-            [
-                "6a672ff6.849f8"
-            ]
-        ]
-    },
-    {
-        "id": "a02babe0.facfb8",
-        "type": "inject",
-        "z": "d0d30a38.451ae8",
-        "name": "Set Demand Poll Schedule to 5 seconds",
-        "topic": "",
-        "payload": "",
-        "payloadType": "str",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "x": 221,
-        "y": 528,
-        "wires": [
-            [
-                "30bb4f2b.0a07"
-            ]
-        ]
-    },
-    {
-        "id": "6a672ff6.849f8",
-        "type": "http request",
-        "z": "d0d30a38.451ae8",
-        "name": "",
-        "method": "POST",
-        "ret": "txt",
-        "url": "http://192.168.2.4/cgi-bin/post_manager",
-        "x": 682,
-        "y": 528,
-        "wires": [
-            [
-                "e6a8f059.e179f"
-            ]
-        ]
-    },
-    {
-        "id": "e6a8f059.e179f",
-        "type": "debug",
-        "z": "d0d30a38.451ae8",
-        "name": "",
-        "active": true,
-        "console": "false",
-        "complete": "false",
-        "x": 854,
-        "y": 528,
-        "wires": []
-    },
-    {
-        "id": "2fec6947.17f4f6",
-        "type": "inject",
-        "z": "d0d30a38.451ae8",
-        "name": "Get Schedule",
-        "topic": "",
-        "payload": "",
-        "payloadType": "str",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "x": 132,
-        "y": 605,
-        "wires": [
-            [
-                "a54cbcd8.6b361"
-            ]
-        ]
-    },
-    {
-        "id": "a54cbcd8.6b361",
-        "type": "function",
-        "z": "d0d30a38.451ae8",
-        "name": "Format request",
-        "func": "//Create Eagle command XML fragment\nvar command = \"<Command>\\n\";\ncommand += \"  <Name>get_schedule</Name>\\n\";\ncommand += \"  <MacId>0xabcdef0000001234</MacId>\\n\";\ncommand += \"  <Event>demand</Event>\\n\";\ncommand += \"</Command>\\n\";\n\nmsg.payload = command;\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 345,
-        "y": 605,
-        "wires": [
-            [
-                "300e0f76.2d311"
-            ]
-        ]
-    },
-    {
-        "id": "300e0f76.2d311",
-        "type": "http request",
-        "z": "d0d30a38.451ae8",
-        "name": "",
-        "method": "POST",
-        "ret": "txt",
-        "url": "http://192.168.2.4/cgi-bin/post_manager",
-        "x": 548,
-        "y": 605,
-        "wires": [
-            [
-                "8ff6b28d.90edd"
-            ]
-        ]
-    },
-    {
-        "id": "9a5c661e.a2e1c8",
-        "type": "debug",
-        "z": "d0d30a38.451ae8",
-        "name": "",
-        "active": true,
-        "console": "false",
-        "complete": "false",
-        "x": 1056,
-        "y": 605,
-        "wires": []
-    },
-    {
-        "id": "22ef6912.57bb76",
-        "type": "function",
-        "z": "d0d30a38.451ae8",
-        "name": "Calculate Demand Value",
-        "func": "//ignore bad data\nif (!msg.payload.InstantaneousDemand) \n{\n    return;\n}\n\n//parse response\nstrDemand=msg.payload.InstantaneousDemand.Demand[0];\nintDemand=parseInt(strDemand,16);\n\nstrMultiplier=msg.payload.InstantaneousDemand.Multiplier[0];\nintMultiplier=parseInt(strMultiplier,16);\n\nstrDivisor=msg.payload.InstantaneousDemand.Divisor[0];\nintDivisor=parseInt(strDivisor,16);\n\nif (intDemand>2147483647) {\n    intDemand = 0;\n}\n\nif (intMultiplier===0) {\n    intMultiplier = 1;\n} \n\nif (intDivisor===0) {\n    intDivisor = 1;\n}\n\nmsg.payload = (intDemand * intMultiplier) / intDivisor;\n\nreturn msg;",
-        "outputs": "1",
-        "noerr": 0,
-        "x": 897,
-        "y": 350,
-        "wires": [
-            [
-                "79fc2383.24e58c"
-            ]
-        ]
-    },
-    {
-        "id": "79fc2383.24e58c",
-        "type": "debug",
-        "z": "d0d30a38.451ae8",
-        "name": "",
-        "active": true,
-        "console": "false",
-        "complete": "false",
-        "x": 1036,
-        "y": 272,
-        "wires": []
-    },
-    {
-        "id": "b09a87d7.632718",
-        "type": "function",
-        "z": "d0d30a38.451ae8",
-        "name": "Ignore bad data",
-        "func": "//ignore bad data\nif (!msg.payload || msg.payload === null || msg.payload === '') \n{\n    return;\n}\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 812,
-        "y": 189,
-        "wires": [
-            [
-                "711d7719.8ceec8"
-            ]
-        ]
-    },
-    {
-        "id": "8ff6b28d.90edd",
-        "type": "xml",
-        "z": "d0d30a38.451ae8",
-        "name": "",
-        "attr": "",
-        "chr": "",
-        "x": 707,
-        "y": 605,
-        "wires": [
-            [
-                "c1461dfc.93284"
-            ]
-        ]
-    },
-    {
-        "id": "c1461dfc.93284",
-        "type": "function",
-        "z": "d0d30a38.451ae8",
-        "name": "Extract Value",
-        "func": "msg.payload = \"Demand Polling set for: \" + msg.payload.ScheduleList.ScheduleInfo[0].Frequency[0] + \" secs\"\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 873,
-        "y": 605,
-        "wires": [
-            [
-                "9a5c661e.a2e1c8"
-            ]
-        ]
-    },
-    {
-        "id": "bd7088b.c32a178",
-        "type": "comment",
-        "z": "d0d30a38.451ae8",
-        "name": "Read Me: Notes (please retain these notes if distributing the flows)",
-        "info": "Author: Mike Thompson, GitHub: mike-linus\nDate: 24/2/2016\n\nThese examples show how to extract data and control the Rainforest Eagle using the recommended HTTP Rest API both locally and via the Internet Gateway.\n\nFor those of you trying to get the most out of the Rainforest Eagle, these example Node-Red flows should get you going. Having the flows in Node-Red opens up a huge range of automation possibilities. Enjoy :)\n\nTo use the flows:\n1. Modify the 'Format Request' function nodes to your specific credentials. For local requests, you need to add your own MAC address. For the Relay Gateway, the message headers need to be altered to your Gateway account.\n2. For all flows except the Gateway flow, modify the 'http request' nodes, tick  'use basic authentication?', add your 'Cloud ID' as the username, your 'Installation Code' as the password and your Eagle's IP address.\n3. For the Gateway flow, basic authentication is not used as the credentials are passed in the message header.\n4. To automate the flows, simply modify the 'inject node' to repeat at the required interval.\n5. To publish the data on a MQTT topic, just replace the debug node with an MQTT node.\n\nCreating your own commands simply requires creating the appropriate command string in the 'Format request' node. Refer to the Eagle Rest API documentation for more information.",
-        "x": 256,
-        "y": 37,
+        "y": 360,
         "wires": []
     },
     {
@@ -10073,6 +9667,70 @@
         "complete": "true",
         "x": 570,
         "y": 140,
+        "wires": []
+    },
+    {
+        "id": "943a111f.ec936",
+        "type": "inject",
+        "z": "d0d30a38.451ae8",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 80,
+        "y": 40,
+        "wires": [
+            [
+                "b3d73c8e.3c21"
+            ]
+        ]
+    },
+    {
+        "id": "db9500c2.5a57b",
+        "type": "debug",
+        "z": "d0d30a38.451ae8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 390,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "b3d73c8e.3c21",
+        "type": "function",
+        "z": "d0d30a38.451ae8",
+        "name": "EPOCH example",
+        "func": "var string_lastseen  = \"1554625504\";\nvar lastseen = 7200000+Number(string_lastseen)*1000;//convert from seconds to milliseconds and add 2 hours\nmsg.payload = (new Date(lastseen)).toUTCString();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 230,
+        "y": 40,
+        "wires": [
+            [
+                "db9500c2.5a57b"
+            ]
+        ]
+    },
+    {
+        "id": "6399b6ad.e98fb8",
+        "type": "debug",
+        "z": "bc6012ce.56132",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 570,
+        "y": 300,
         "wires": []
     }
 ]
