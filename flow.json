@@ -41,6 +41,13 @@
         "info": "A simplified version connecting data to\nonline.wonderware.com\n\nThis version writes data as it is received and\ndoesnt' have the caching and remote timestamp\nfeatures."
     },
     {
+        "id": "cd1c037.be287",
+        "type": "tab",
+        "label": "Wonderware Performance",
+        "disabled": true,
+        "info": ""
+    },
+    {
         "id": "c201e10a.3d66f",
         "type": "tab",
         "label": "MQTT",
@@ -508,6 +515,58 @@
         "proxy_type": "no",
         "proxy_url": "",
         "enabled": true
+    },
+    {
+        "id": "5542d50e.ad747c",
+        "type": "ui_group",
+        "z": "",
+        "name": "CPU",
+        "tab": "4ecd9e02.5ac23",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": true
+    },
+    {
+        "id": "ddc0a4d2.dda318",
+        "type": "ui_group",
+        "z": "",
+        "name": "SD card",
+        "tab": "4ecd9e02.5ac23",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": true
+    },
+    {
+        "id": "6cda21c9.434ea",
+        "type": "ui_group",
+        "z": "",
+        "name": "Memory",
+        "tab": "4ecd9e02.5ac23",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": true
+    },
+    {
+        "id": "22c35f28.9041f",
+        "type": "ui_group",
+        "z": "",
+        "name": "Buttons",
+        "tab": "4ecd9e02.5ac23",
+        "order": 1,
+        "disp": false,
+        "width": "3",
+        "collapse": false
+    },
+    {
+        "id": "4ecd9e02.5ac23",
+        "type": "ui_tab",
+        "z": "",
+        "name": "System",
+        "icon": "settings",
+        "order": 2
     },
     {
         "id": "71a47ab9.6044a4",
@@ -3450,8 +3509,8 @@
         "timer": "",
         "oldrc": false,
         "name": "getCPUtemp",
-        "x": 350,
-        "y": 520,
+        "x": 330,
+        "y": 540,
         "wires": [
             [
                 "508af0fb.c62c4"
@@ -3604,7 +3663,7 @@
         "type": "debug",
         "z": "e8223701.eebbe8",
         "name": "",
-        "active": false,
+        "active": true,
         "console": "false",
         "complete": "true",
         "x": 950,
@@ -3715,13 +3774,15 @@
         "type": "mqtt in",
         "z": "c201e10a.3d66f",
         "name": "CONFIGURE YOUR REMOTE (like shiftr.io) MQTT BROKER INFO HERE",
-        "topic": "$SYS/#",
+        "topic": "#",
         "qos": "0",
         "broker": "27dbe3bb.c30aec",
         "x": 280,
         "y": 300,
         "wires": [
-            []
+            [
+                "1c1d968d.f8d229"
+            ]
         ]
     },
     {
@@ -3789,7 +3850,7 @@
         "type": "debug",
         "z": "c201e10a.3d66f",
         "name": "",
-        "active": true,
+        "active": false,
         "console": "false",
         "complete": "true",
         "x": 585,
@@ -8066,7 +8127,7 @@
         "type": "debug",
         "z": "e8223701.eebbe8",
         "name": "",
-        "active": false,
+        "active": true,
         "console": "false",
         "complete": "true",
         "x": 1090,
@@ -9708,7 +9769,7 @@
         "type": "function",
         "z": "d0d30a38.451ae8",
         "name": "EPOCH example",
-        "func": "var string_lastseen  = \"1554625504\";\nvar lastseen = 7200000+Number(string_lastseen)*1000;//convert from seconds to milliseconds and add 2 hours\nmsg.payload = (new Date(lastseen)).toUTCString();\nreturn msg;",
+        "func": "//var string_lastseen  = \"1554625504\";\nvar string_lastseen  = msg.payload;\nvar lastseen = 7200000+Number(string_lastseen)*1000;//convert from seconds to milliseconds and add 2 hours\nmsg.payload = (new Date(lastseen)).toUTCString();\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 230,
@@ -9732,5 +9793,965 @@
         "x": 570,
         "y": 300,
         "wires": []
+    },
+    {
+        "id": "e2b64bce.4d7cf8",
+        "type": "comment",
+        "z": "cd1c037.be287",
+        "name": "Configure YOUR Wonderware connection here -->",
+        "info": "This is essentiall a data pump from MQTT to\nOnline.Wonderware.com",
+        "x": 210,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "c4efb0c9.20fd1",
+        "type": "http request",
+        "z": "cd1c037.be287",
+        "name": "",
+        "method": "use",
+        "ret": "txt",
+        "url": "",
+        "tls": "",
+        "x": 950,
+        "y": 120,
+        "wires": [
+            [
+                "624ad010.36cc8"
+            ]
+        ]
+    },
+    {
+        "id": "a6d8f701.5b6538",
+        "type": "function",
+        "z": "cd1c037.be287",
+        "name": "prefix home/",
+        "func": "var prefix = \"home/\";\nif (msg.topic.startsWith(prefix)){\n    \n}else{\n    msg.topic = prefix + msg.topic;\n}\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 410,
+        "y": 240,
+        "wires": [
+            [
+                "b57238db.23f2a8"
+            ]
+        ]
+    },
+    {
+        "id": "ac677f9c.f3ab4",
+        "type": "function",
+        "z": "cd1c037.be287",
+        "name": "config http",
+        "func": "// configure http (headers,url,method)\nmsg.headers = {\n//    \"Authorization\" : msg.authorization,\n    \"Content-type\" : \"application/json\",\n    \"x-filename\" : \"rpishare_wonderware_\"+msg.timestamp+\".json\"\n};\nmsg.url = \"https://online.wonderware.com/apis/upload/datasource\";\nmsg.method = \"POST\";\n\nmsg.headers.Authorization = msg.Authorization;  //copy Authorization to be under headers\ndelete msg.Authorization;                       // and remove from old location\nreturn msg;\n\n\n/*\nThe following works (replace token with real one):\nmsg.headers = {\n    \"Authorization\" : \"Bearer aThisIsMyFakeTokenYourWillBeLonger-AjsTIEvRKKQ\",\n    \"Content-type\" : \"application/json\"\n    };\nmsg.url = \"https://online.wonderware.com/apis/upload/datasource\";\nmsg.method = \"POST\";\n*/\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 750,
+        "y": 120,
+        "wires": [
+            [
+                "c4efb0c9.20fd1",
+                "d9f3f6a0.22b7c8"
+            ]
+        ]
+    },
+    {
+        "id": "16c28e39.e34512",
+        "type": "inject",
+        "z": "cd1c037.be287",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "x": 100,
+        "y": 120,
+        "wires": [
+            [
+                "82437fb4.1b797"
+            ]
+        ]
+    },
+    {
+        "id": "1c4b4b4e.c18425",
+        "type": "function",
+        "z": "cd1c037.be287",
+        "name": "Format WW payload",
+        "func": "msg.payload = JSON.stringify(msg.payload,null,\"\\t\");\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 520,
+        "y": 120,
+        "wires": [
+            [
+                "6e39894.5f35178"
+            ]
+        ]
+    },
+    {
+        "id": "482d8086.0053e",
+        "type": "comment",
+        "z": "cd1c037.be287",
+        "name": "wwQueue processing",
+        "info": "",
+        "x": 120,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "13a00c90.7a3ab3",
+        "type": "function",
+        "z": "cd1c037.be287",
+        "name": "wwQueue insert",
+        "func": "/*20171208 \ninput message should contain:\nmsg.timestamp ie 1514764800000 is an epoch milliseconds timestamp representing 2018.01.01. at 00:00:00.000\n (if msg.timestamp does not exist then \"now\" will be used)\neither single value-based payload:\n    msg.payload ie 72.1 or any string or number representing the value for the topic\n    msg.topic ie diningroom/temperature\nor multi-variable object-based payload containing property : value pairs (use . as delimiter)\n    https://stackoverflow.com/questions/1661197/what-characters-are-valid-for-javascript-variable-names\n    msg.payload ie {basement.temperature : 72.1, diningroom.temperature: 73.2}\n    msg.topic ie wisconsin/summerhome becomes the prefix for each item, creating final items such as wisconsin/summerhome/basement/temperature\n*/\nvar wwQueue = flow.get('wwQueue') ||{\"data\":[]};\n//var dt = new Date(); // defaults to now //var dtstring = dt.toISOString();\n//use timestamp if it exists otherwise default to now\n// this works and is efficient but I'm leaning toward \"non-function\", flow-based solutions\nif ((typeof msg.timestamp !== 'undefined')){dtstring = new Date(msg.timestamp).toISOString();} \nelse {dtstring = new Date().toISOString();}\n\ni = 0;\nwhile (\n    (typeof wwQueue.data !== 'undefined') &&\n    (typeof wwQueue.data[i] !== 'undefined') &&\n    (typeof wwQueue.data[i].dateTime !== 'undefined') &&\n    (new Date(wwQueue.data[i].dateTime).getTime() > new Date(dtstring).getTime()) //while we find newer dates keep looking \n) {i++;}\n\nvar obj = {};\nif (\n    (typeof wwQueue.data !== 'undefined')&&\n    (typeof wwQueue.data[i] !== 'undefined')&&\n    (typeof wwQueue.data[i].dateTime !== 'undefined')&&\n    (new Date(wwQueue.data[i].dateTime).getTime() == new Date(dtstring).getTime()) //if exact date found then we need to handle existing\n) {\n    obj = wwQueue.data.splice(i,1)[0];\n} else {\n    obj.dateTime = dtstring;\n}\n\nif (typeof msg.payload !== \"object\"){\n    var tag = msg.topic.replace(/\\//g,\".\"); //globally replace / with .\n    obj[tag]=msg.payload;//add new tag and value to this dateTime record\n} else {\n    var prefix = msg.topic.replace(/\\//g,\".\") + \".\";\n    var tag = \"\";\n    for(var propertyName in msg.payload) {\n        tag = prefix  + propertyName;//propertyName.replace(/\\$/g,\".\") was going to use $ delimiter but dot \".\" works \n        obj[tag] = msg.payload[propertyName];\n//        node.error(JSON.stringify(obj,null, 4));\n    }\n}\nwwQueue.data.splice(i,0,obj); //add new, full dateTime record back to all record data in the right spot\n\nflow.set('wwQueue',wwQueue);\nmsg.topic = \"tapia/home\";\nmsg.payload = wwQueue;\n\nreturn msg;\n\n/*\nexample from online.wonderware.com\n{\n  \"data\": [\n    {\n      \"dateTime\": \"2017-03-20T12:21:12.199Z\",\n      \"Reactor3.Level\": 1.51860072870498,\n      \"Reactor3.Temp\": 27.1360543141452,\n      \"Reactor3.InletValve\": 0,\n      \"Reactor3.Step\": 7,\n      \"Line3.Units\": 1518,\n      \"Line3.Product\": \"BRN\"\n    }\n  ]\n}\n*/\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 320,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "82437fb4.1b797",
+        "type": "function",
+        "z": "cd1c037.be287",
+        "name": "wwQueue process",
+        "func": "var wwQueue = flow.get('wwQueue') || null;\nflow.set('wwQueue',null); //delete processed json from global context\nmsg.timestamp = msg.payload;\nmsg.payload = wwQueue;\nif (!msg.payload) {\n    msg = null;\n}\n//msg.payload = JSON.stringify(wwQueue,null,\"\\t\");\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 310,
+        "y": 120,
+        "wires": [
+            [
+                "1c4b4b4e.c18425"
+            ]
+        ]
+    },
+    {
+        "id": "b17c1c41.8cd33",
+        "type": "inject",
+        "z": "cd1c037.be287",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "num",
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "",
+        "x": 110,
+        "y": 440,
+        "wires": [
+            [
+                "1417504f.3c3cc"
+            ]
+        ]
+    },
+    {
+        "id": "1417504f.3c3cc",
+        "type": "exec",
+        "z": "cd1c037.be287",
+        "command": "vcgencmd",
+        "addpay": false,
+        "append": "measure_temp",
+        "useSpawn": "",
+        "timer": "",
+        "oldrc": false,
+        "name": "getCPUtemp",
+        "x": 330,
+        "y": 440,
+        "wires": [
+            [
+                "d37716ec.649988"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "d37716ec.649988",
+        "type": "function",
+        "z": "cd1c037.be287",
+        "name": "CPU Temp Function",
+        "func": "//msg.payload = {'d':{'temp': parseFloat(msg.payload.replace(\"temp=\",\"\").replace(\"'C\\n\",\"\"))}};\n//temp in F where max op of 85C = 185F\nmsg.payload = Math.round(\n    (parseFloat(msg.payload.replace(\"temp=\",\"\").replace(\"'C\\n\",\"\")) * 9/5 + 32)*10)/10;\nmsg.topic = \"rpi/cpu/temperature\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 560,
+        "y": 440,
+        "wires": [
+            [
+                "a6d8f701.5b6538"
+            ]
+        ]
+    },
+    {
+        "id": "c074ec0e.691d6",
+        "type": "comment",
+        "z": "cd1c037.be287",
+        "name": "Check CPU's Temperature",
+        "info": "",
+        "x": 150,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "b910fb54.6cff08",
+        "type": "inject",
+        "z": "cd1c037.be287",
+        "name": "show queue",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "736c4414.9d735c"
+            ]
+        ]
+    },
+    {
+        "id": "736c4414.9d735c",
+        "type": "function",
+        "z": "cd1c037.be287",
+        "name": "show wwQueue",
+        "func": "var wwQueue = flow.get('wwQueue') || null;\nmsg.payload = wwQueue;\nif (!msg.payload) {\n    msg = null;\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 300,
+        "y": 160,
+        "wires": [
+            [
+                "aead96.a4413268"
+            ]
+        ]
+    },
+    {
+        "id": "aead96.a4413268",
+        "type": "debug",
+        "z": "cd1c037.be287",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 950,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "96a345cb.2c8808",
+        "type": "comment",
+        "z": "cd1c037.be287",
+        "name": "Main inputs",
+        "info": "",
+        "x": 110,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "d9f3f6a0.22b7c8",
+        "type": "debug",
+        "z": "cd1c037.be287",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 950,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "6e39894.5f35178",
+        "type": "credentials",
+        "z": "cd1c037.be287",
+        "name": "ENTER YOUR Wonderware Data Source (Data Upload) Bearer Token HERE",
+        "props": [
+            {
+                "value": "Authorization",
+                "type": "msg"
+            }
+        ],
+        "x": 710,
+        "y": 20,
+        "wires": [
+            [
+                "ac677f9c.f3ab4"
+            ]
+        ]
+    },
+    {
+        "id": "ed234a64.797478",
+        "type": "function",
+        "z": "cd1c037.be287",
+        "name": "decomplexificate dimmer state",
+        "func": "/*\ninsteon-mqtt dimmer state contains complex json\n    insteon/mydimmer/state='{\"state\":\"ON\",\"Brightness\":255}''\nwe are breaking this down to be like switches where:\n    insteon/myswitch/state = \"ON\"\n*/\n\nvar suffix = \"/state\";\n\nif (msg.topic && msg.topic.endsWith(suffix) && (msg.payload !== null) && (msg.payload !== \"\") && (typeof msg.payload == \"object\")) {\n    //(msg.payload.state) && (msg.payload.brightness)) {\n    var newmsg = [];\n    var prefix = msg.topic.replace(suffix,\"\")+\"/\";\n    for(var propertyName in msg.payload) {\n        newmsg.push({\n            topic : prefix  + propertyName,\n            payload : msg.payload[propertyName]\n        });\n    }\n    msg = newmsg;\n    return [msg];\n} else {\n    \n}\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 610,
+        "y": 300,
+        "wires": [
+            [
+                "a6d8f701.5b6538",
+                "716c5397.468f9c"
+            ]
+        ]
+    },
+    {
+        "id": "8467c2df.ca642",
+        "type": "json",
+        "z": "cd1c037.be287",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 410,
+        "y": 300,
+        "wires": [
+            [
+                "ed234a64.797478"
+            ]
+        ]
+    },
+    {
+        "id": "5c79246b.1eb77c",
+        "type": "switch",
+        "z": "cd1c037.be287",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "{",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 250,
+        "y": 300,
+        "wires": [
+            [
+                "8467c2df.ca642"
+            ],
+            [
+                "ed234a64.797478"
+            ]
+        ]
+    },
+    {
+        "id": "b57238db.23f2a8",
+        "type": "function",
+        "z": "cd1c037.be287",
+        "name": "prefix tapia/",
+        "func": "var prefix = \"tapia/\";\nif (msg.topic.startsWith(prefix)){\n    \n}else{\n    msg.topic = prefix + msg.topic;\n}\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 550,
+        "y": 240,
+        "wires": [
+            [
+                "d5636a26.5e8268"
+            ]
+        ]
+    },
+    {
+        "id": "7308c334.944d8c",
+        "type": "debug",
+        "z": "cd1c037.be287",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 960,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "d5636a26.5e8268",
+        "type": "subflow:50b2a29d.f794ec",
+        "z": "cd1c037.be287",
+        "name": "",
+        "x": 690,
+        "y": 240,
+        "wires": [
+            [
+                "7308c334.944d8c",
+                "13a00c90.7a3ab3"
+            ]
+        ]
+    },
+    {
+        "id": "bdfb4a37.6364f8",
+        "type": "switch",
+        "z": "cd1c037.be287",
+        "name": "filter /set b/c want /state",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "/set",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 270,
+        "y": 340,
+        "wires": [
+            [],
+            [
+                "d87d2361.f1f1"
+            ]
+        ]
+    },
+    {
+        "id": "d87d2361.f1f1",
+        "type": "switch",
+        "z": "cd1c037.be287",
+        "name": "filter _dummy",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "_dummy",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 480,
+        "y": 340,
+        "wires": [
+            [],
+            [
+                "5c79246b.1eb77c"
+            ]
+        ]
+    },
+    {
+        "id": "624ad010.36cc8",
+        "type": "debug",
+        "z": "cd1c037.be287",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 1090,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "716c5397.468f9c",
+        "type": "debug",
+        "z": "cd1c037.be287",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 950,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "ccbb33bf.6eb82",
+        "type": "function",
+        "z": "cd1c037.be287",
+        "name": "Merge Good Count",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 270,
+        "y": 540,
+        "wires": [
+            [
+                "f063a4d5.99d518"
+            ]
+        ]
+    },
+    {
+        "id": "f048e09b.4f73f",
+        "type": "function",
+        "z": "cd1c037.be287",
+        "name": "Merge Bad Count",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 270,
+        "y": 620,
+        "wires": [
+            [
+                "773d2036.f9539"
+            ]
+        ]
+    },
+    {
+        "id": "5a346ece.3512e",
+        "type": "function",
+        "z": "cd1c037.be287",
+        "name": "Merge Running",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 260,
+        "y": 700,
+        "wires": [
+            [
+                "e9054720.708208"
+            ]
+        ]
+    },
+    {
+        "id": "d0b934f5.bb25d8",
+        "type": "inject",
+        "z": "cd1c037.be287",
+        "name": "",
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "x": 110,
+        "y": 520,
+        "wires": [
+            [
+                "ccbb33bf.6eb82"
+            ]
+        ]
+    },
+    {
+        "id": "27fb675b.c4f4b8",
+        "type": "inject",
+        "z": "cd1c037.be287",
+        "name": "",
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "x": 110,
+        "y": 560,
+        "wires": [
+            [
+                "ccbb33bf.6eb82"
+            ]
+        ]
+    },
+    {
+        "id": "bd5d9294.82179",
+        "type": "debug",
+        "z": "cd1c037.be287",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "x": 910,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "f063a4d5.99d518",
+        "type": "rbe",
+        "z": "cd1c037.be287",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 430,
+        "y": 540,
+        "wires": [
+            [
+                "2e4c2472.e6af1c"
+            ]
+        ]
+    },
+    {
+        "id": "5ffefa26.21d684",
+        "type": "inject",
+        "z": "cd1c037.be287",
+        "name": "",
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "x": 110,
+        "y": 600,
+        "wires": [
+            [
+                "f048e09b.4f73f"
+            ]
+        ]
+    },
+    {
+        "id": "e75eea91.a06888",
+        "type": "inject",
+        "z": "cd1c037.be287",
+        "name": "",
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "x": 110,
+        "y": 640,
+        "wires": [
+            [
+                "f048e09b.4f73f"
+            ]
+        ]
+    },
+    {
+        "id": "7e52af8e.6773f",
+        "type": "inject",
+        "z": "cd1c037.be287",
+        "name": "",
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "x": 110,
+        "y": 680,
+        "wires": [
+            [
+                "5a346ece.3512e"
+            ]
+        ]
+    },
+    {
+        "id": "6914fde0.c8d3c4",
+        "type": "inject",
+        "z": "cd1c037.be287",
+        "name": "",
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "x": 110,
+        "y": 720,
+        "wires": [
+            [
+                "5a346ece.3512e"
+            ]
+        ]
+    },
+    {
+        "id": "2e4c2472.e6af1c",
+        "type": "switch",
+        "z": "cd1c037.be287",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 560,
+        "y": 540,
+        "wires": [
+            [
+                "ea99028e.72a9a"
+            ]
+        ]
+    },
+    {
+        "id": "42497a0a.e0b6f4",
+        "type": "debug",
+        "z": "cd1c037.be287",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "x": 910,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "773d2036.f9539",
+        "type": "rbe",
+        "z": "cd1c037.be287",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 430,
+        "y": 620,
+        "wires": [
+            [
+                "3d9b0a12.a0fa06"
+            ]
+        ]
+    },
+    {
+        "id": "3d9b0a12.a0fa06",
+        "type": "switch",
+        "z": "cd1c037.be287",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 560,
+        "y": 620,
+        "wires": [
+            [
+                "44b2b21c.e4c80c"
+            ]
+        ]
+    },
+    {
+        "id": "44b2b21c.e4c80c",
+        "type": "function",
+        "z": "cd1c037.be287",
+        "name": "counter bad",
+        "func": "var countername = 'badcount';\nvar rollover = 9999;\nvar count = flow.get(countername) || 0;\ncount++;\nif (count>rollover) count=count-1-rollover;\nflow.set(countername,count);\nmsg.payload=count;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 710,
+        "y": 620,
+        "wires": [
+            [
+                "42497a0a.e0b6f4"
+            ]
+        ]
+    },
+    {
+        "id": "e9054720.708208",
+        "type": "debug",
+        "z": "cd1c037.be287",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "x": 910,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "ea99028e.72a9a",
+        "type": "function",
+        "z": "cd1c037.be287",
+        "name": "counter good",
+        "func": "var countername = 'goodcount';\nvar rollover = 9999;\nvar count = flow.get(countername) || 0;\ncount++;\nif (count>rollover) count=count-1-rollover;\nflow.set(countername,count);\nmsg.payload=count;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 710,
+        "y": 540,
+        "wires": [
+            [
+                "bd5d9294.82179"
+            ]
+        ]
+    },
+    {
+        "id": "1c1d968d.f8d229",
+        "type": "debug",
+        "z": "c201e10a.3d66f",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 650,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "dbb0535a.76d3f",
+        "type": "ui_chart",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "group": "ddc0a4d2.dda318",
+        "order": 1,
+        "width": "6",
+        "height": "6",
+        "label": "Storage",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "x": 780,
+        "y": 920,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "49a53cb6.0a0af4",
+        "type": "ui_gauge",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "group": "ddc0a4d2.dda318",
+        "order": 2,
+        "width": "6",
+        "height": "4",
+        "gtype": "wave",
+        "title": "Used",
+        "label": "%",
+        "format": "{{msg.payload}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "80",
+        "x": 770,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "c004a6a4.62fbf8",
+        "type": "function",
+        "z": "e8223701.eebbe8",
+        "name": "convert",
+        "func": "var msg1,msg2,msg3;\n\nl = msg.payload.split(/(\\s+)/).filter( function(e) { return e.trim().length > 0; } );\nmsg1 = {topic: 'Total', payload: Math.round(l[1] / 1000)};\nmsg2 = {topic: 'Free', payload: Math.round(l[3] / 1000)};\nmsg3 = {topic: 'Used%', payload: l[4].slice(0, -1)};\nmsg4 = {topic: 'rpishare/sdcard/percentused', payload: l[4].slice(0, -1)};\n\nreturn [msg1, msg2, msg3, msg4];",
+        "outputs": 4,
+        "noerr": 0,
+        "x": 560,
+        "y": 900,
+        "wires": [
+            [
+                "dbb0535a.76d3f"
+            ],
+            [
+                "dbb0535a.76d3f"
+            ],
+            [
+                "dbb0535a.76d3f",
+                "49a53cb6.0a0af4"
+            ],
+            [
+                "7de4fca4.680f64"
+            ]
+        ]
+    },
+    {
+        "id": "8e182e0f.e5c9c",
+        "type": "exec",
+        "z": "e8223701.eebbe8",
+        "command": "df -m | grep root",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "read_sd_usage",
+        "x": 360,
+        "y": 900,
+        "wires": [
+            [
+                "c004a6a4.62fbf8"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "eb14bb4a.2514d8",
+        "type": "inject",
+        "z": "e8223701.eebbe8",
+        "name": "5 min tick",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "300",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "x": 130,
+        "y": 900,
+        "wires": [
+            [
+                "8e182e0f.e5c9c"
+            ]
+        ]
     }
 ]
