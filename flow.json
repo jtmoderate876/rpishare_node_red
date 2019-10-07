@@ -55,6 +55,13 @@
         "info": ""
     },
     {
+        "id": "c6be1934.85f088",
+        "type": "tab",
+        "label": "Misc Data Sources",
+        "disabled": false,
+        "info": " maintains the dynamic IP address\nfor tapiafamily.org\nby sending to domains.google.com"
+    },
+    {
         "id": "55542e37.3222d",
         "type": "tab",
         "label": "my web pages",
@@ -74,13 +81,6 @@
         "label": "DecodeOleumTech",
         "disabled": false,
         "info": ""
-    },
-    {
-        "id": "c6be1934.85f088",
-        "type": "tab",
-        "label": "DynIP to Google",
-        "disabled": false,
-        "info": " maintains the dynamic IP address\nfor tapiafamily.org\nby sending to domains.google.com"
     },
     {
         "id": "1fec4b90.1b56f4",
@@ -569,6 +569,27 @@
         "order": 2
     },
     {
+        "id": "4430a7b6.71c8e8",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "IOT",
+        "broker": "iot.my.org",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
         "id": "71a47ab9.6044a4",
         "type": "mosca in",
         "z": "c201e10a.3d66f",
@@ -647,7 +668,8 @@
         "wires": [
             [
                 "6c8ca6f9.edf128",
-                "2e5e419d.b21b5e"
+                "2e5e419d.b21b5e",
+                "eb902a7c.cbc798"
             ]
         ]
     },
@@ -782,10 +804,11 @@
         "topic": "",
         "payload": "",
         "payloadType": "str",
-        "repeat": "",
+        "repeat": "3600",
         "crontab": "",
         "once": false,
-        "x": 130,
+        "onceDelay": "",
+        "x": 140,
         "y": 360,
         "wires": [
             [
@@ -978,10 +1001,10 @@
         "type": "debug",
         "z": "88396424.c54498",
         "name": "",
-        "active": true,
+        "active": false,
         "console": "false",
         "complete": "false",
-        "x": 850,
+        "x": 870,
         "y": 100,
         "wires": []
     },
@@ -1154,7 +1177,7 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": true,
-        "x": 110,
+        "x": 120,
         "y": 220,
         "wires": [
             [
@@ -2287,12 +2310,16 @@
         "type": "function",
         "z": "1fec4b90.1b56f4",
         "name": "getJoke()",
-        "func": "const joke = global.get('getJoke')();\n\njoke.then(joke => {\n    node.warn(joke);\n}).catch(error => {\n    node.error(error);\n});",
-        "outputs": "0",
+        "func": "const joke = global.get('getJoke')();\n\njoke.then(joke => {\n    node.warn(joke);\n}).catch(error => {\n    node.error(error);\n});\nmsg.topic = \"joke\";\nmsg.payload = joke;",
+        "outputs": 1,
         "noerr": 0,
         "x": 226,
         "y": 201,
-        "wires": []
+        "wires": [
+            [
+                "6e6bedec.37b2c4"
+            ]
+        ]
     },
     {
         "id": "c349c77a.e98fb8",
@@ -2476,7 +2503,8 @@
         "y": 360,
         "wires": [
             [
-                "1ec5ae1c.2c9112"
+                "1ec5ae1c.2c9112",
+                "6e6bedec.37b2c4"
             ]
         ]
     },
@@ -2504,7 +2532,7 @@
         "crontab": "",
         "once": true,
         "x": 130,
-        "y": 40,
+        "y": 60,
         "wires": [
             [
                 "fd788715.f25b28"
@@ -2519,8 +2547,8 @@
         "method": "GET",
         "url": "https://jbdowsr8JzGj0wnm:2BY3RRZnfwDPoNvQ@domains.google.com/nic/update?hostname=tapiafamily.org&myip={{payload}}",
         "tls": "ccbad4df.c6e028",
-        "x": 380,
-        "y": 180,
+        "x": 340,
+        "y": 100,
         "wires": [
             [
                 "8808be74.62ca9",
@@ -2547,13 +2575,12 @@
         "checkall": "true",
         "outputs": 2,
         "x": 170,
-        "y": 260,
+        "y": 160,
         "wires": [
             [
                 "f79ddde4.a53c"
             ],
             [
-                "a9ee9555.ae0c08",
                 "6067afdd.9f727"
             ]
         ]
@@ -2573,7 +2600,7 @@
         "randomUnits": "seconds",
         "drop": true,
         "x": 460,
-        "y": 340,
+        "y": 220,
         "wires": [
             [
                 "12307aa6.f5aff5"
@@ -2586,8 +2613,8 @@
         "z": "c6be1934.85f088",
         "name": "No",
         "info": "",
-        "x": 190,
-        "y": 300,
+        "x": 350,
+        "y": 180,
         "wires": []
     },
     {
@@ -2596,20 +2623,8 @@
         "z": "c6be1934.85f088",
         "name": "Yes?",
         "info": "",
-        "x": 410,
-        "y": 260,
-        "wires": []
-    },
-    {
-        "id": "a9ee9555.ae0c08",
-        "type": "debug",
-        "z": "c6be1934.85f088",
-        "name": "",
-        "active": false,
-        "console": false,
-        "complete": false,
-        "x": 390,
-        "y": 300,
+        "x": 350,
+        "y": 140,
         "wires": []
     },
     {
@@ -2620,8 +2635,8 @@
         "func": "\ncontext.duckdnsfails=0;\nreturn msg;",
         "outputs": "0",
         "noerr": 0,
-        "x": 590,
-        "y": 260,
+        "x": 550,
+        "y": 140,
         "wires": []
     },
     {
@@ -2632,7 +2647,7 @@
         "func": "duckdnsfails = context.duckdnsfails || 0;\nduckdnsfails++;\ncontext.duckdnsfails = duckdnsfails;\n\n//Fsiled to update 5+ times?\nif(duckdnsfails <=6) {\n\treturn [msg,null];\n}\nelse {\n    //shout out last known IP\n    msg.payload=context.lastip;\n\treturn [null,msg];\n}",
         "outputs": "2",
         "x": 200,
-        "y": 340,
+        "y": 220,
         "wires": [
             [],
             [
@@ -2648,8 +2663,8 @@
         "func": "msg.topic = \"ipaddress\";\nreturn msg;\n\n",
         "outputs": "1",
         "noerr": 0,
-        "x": 390,
-        "y": 140,
+        "x": 850,
+        "y": 60,
         "wires": [
             [
                 "328c2bfb.25fd24",
@@ -2669,8 +2684,8 @@
         "timer": "",
         "oldrc": false,
         "name": "Call IP - ipv4bot whatismyipaddress.com",
-        "x": 220,
-        "y": 80,
+        "x": 400,
+        "y": 60,
         "wires": [
             [
                 "dcd48c82.d9513",
@@ -2700,8 +2715,8 @@
         ],
         "checkall": "true",
         "outputs": 2,
-        "x": 200,
-        "y": 120,
+        "x": 660,
+        "y": 60,
         "wires": [
             [
                 "e6ab8b0c.73b928",
@@ -2718,8 +2733,8 @@
         "active": true,
         "console": "false",
         "complete": "true",
-        "x": 610,
-        "y": 300,
+        "x": 630,
+        "y": 220,
         "wires": []
     },
     {
@@ -2730,8 +2745,8 @@
         "active": true,
         "console": "false",
         "complete": "true",
-        "x": 610,
-        "y": 120,
+        "x": 730,
+        "y": 100,
         "wires": []
     },
     {
@@ -2742,8 +2757,8 @@
         "active": false,
         "console": "false",
         "complete": "true",
-        "x": 610,
-        "y": 160,
+        "x": 850,
+        "y": 140,
         "wires": []
     },
     {
@@ -2754,8 +2769,8 @@
         "active": false,
         "console": "false",
         "complete": "false",
-        "x": 590,
-        "y": 80,
+        "x": 690,
+        "y": 20,
         "wires": []
     },
     {
@@ -2944,8 +2959,8 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 240,
-        "y": 120,
+        "x": 220,
+        "y": 100,
         "wires": [
             [
                 "4d54577b.bd94d8",
@@ -2961,8 +2976,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 550,
-        "y": 120,
+        "x": 530,
+        "y": 100,
         "wires": []
     },
     {
@@ -2976,8 +2991,8 @@
         "syntax": "mustache",
         "template": "This is the payload: {{payload}} !",
         "output": "str",
-        "x": 250,
-        "y": 160,
+        "x": 230,
+        "y": 140,
         "wires": [
             [
                 "a337dfa0.69642"
@@ -2992,8 +3007,8 @@
         "active": true,
         "console": "false",
         "complete": "true",
-        "x": 470,
-        "y": 200,
+        "x": 490,
+        "y": 140,
         "wires": []
     },
     {
@@ -3004,8 +3019,8 @@
         "links": [
             "4678823d.d3debc"
         ],
-        "x": 315,
-        "y": 240,
+        "x": 375,
+        "y": 160,
         "wires": []
     },
     {
@@ -3036,8 +3051,8 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 121,
-        "y": 339,
+        "x": 110,
+        "y": 200,
         "wires": [
             [
                 "e9c0f5ca.850598",
@@ -3053,8 +3068,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 535,
-        "y": 339,
+        "x": 524,
+        "y": 200,
         "wires": []
     },
     {
@@ -3068,8 +3083,8 @@
         "syntax": "mustache",
         "template": "This is the payload: {{payload}} !",
         "output": "str",
-        "x": 338,
-        "y": 339,
+        "x": 327,
+        "y": 200,
         "wires": [
             [
                 "79dabc0f.613094"
@@ -3084,8 +3099,8 @@
         "active": true,
         "console": "false",
         "complete": "true",
-        "x": 442,
-        "y": 410,
+        "x": 430,
+        "y": 240,
         "wires": []
     },
     {
@@ -3096,8 +3111,8 @@
         "links": [
             "4678823d.d3debc"
         ],
-        "x": 273,
-        "y": 475,
+        "x": 215,
+        "y": 240,
         "wires": []
     },
     {
@@ -3109,8 +3124,8 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 165,
-        "y": 563,
+        "x": 150,
+        "y": 280,
         "wires": [
             [
                 "796657f3.305708",
@@ -3126,8 +3141,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 539,
-        "y": 563,
+        "x": 524,
+        "y": 280,
         "wires": []
     },
     {
@@ -3141,8 +3156,8 @@
         "syntax": "mustache",
         "template": "This is the payload: {{payload}} !",
         "output": "str",
-        "x": 387,
-        "y": 563,
+        "x": 372,
+        "y": 280,
         "wires": [
             [
                 "32c413a5.043f8c"
@@ -3157,8 +3172,8 @@
         "active": true,
         "console": "false",
         "complete": "true",
-        "x": 446,
-        "y": 634,
+        "x": 410,
+        "y": 320,
         "wires": []
     },
     {
@@ -3169,8 +3184,8 @@
         "links": [
             "b1277c56.62047"
         ],
-        "x": 277,
-        "y": 699,
+        "x": 255,
+        "y": 320,
         "wires": []
     },
     {
@@ -3480,73 +3495,6 @@
         ]
     },
     {
-        "id": "a7854503.a6f5e8",
-        "type": "inject",
-        "z": "e8223701.eebbe8",
-        "name": "",
-        "topic": "",
-        "payload": "",
-        "payloadType": "num",
-        "repeat": "60",
-        "crontab": "",
-        "once": true,
-        "x": 110,
-        "y": 540,
-        "wires": [
-            [
-                "727637d9.5f7708"
-            ]
-        ]
-    },
-    {
-        "id": "727637d9.5f7708",
-        "type": "exec",
-        "z": "e8223701.eebbe8",
-        "command": "vcgencmd",
-        "addpay": false,
-        "append": "measure_temp",
-        "useSpawn": "",
-        "timer": "",
-        "oldrc": false,
-        "name": "getCPUtemp",
-        "x": 330,
-        "y": 540,
-        "wires": [
-            [
-                "508af0fb.c62c4"
-            ],
-            [],
-            []
-        ]
-    },
-    {
-        "id": "508af0fb.c62c4",
-        "type": "function",
-        "z": "e8223701.eebbe8",
-        "name": "CPU Temp Function",
-        "func": "//msg.payload = {'d':{'temp': parseFloat(msg.payload.replace(\"temp=\",\"\").replace(\"'C\\n\",\"\"))}};\n//temp in F where max op of 85C = 185F\nmsg.payload = Math.round(\n    (parseFloat(msg.payload.replace(\"temp=\",\"\").replace(\"'C\\n\",\"\")) * 9/5 + 32)*10)/10;\nmsg.topic = \"rpishare/cpu/temperature\";\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 560,
-        "y": 540,
-        "wires": [
-            [
-                "7de4fca4.680f64",
-                "f97b8b60.a66578"
-            ]
-        ]
-    },
-    {
-        "id": "d5dd5053.fa2d4",
-        "type": "comment",
-        "z": "e8223701.eebbe8",
-        "name": "Check CPU's Temperature",
-        "info": "",
-        "x": 150,
-        "y": 500,
-        "wires": []
-    },
-    {
         "id": "58379b8e.bd5164",
         "type": "inject",
         "z": "e8223701.eebbe8",
@@ -3621,8 +3569,8 @@
         "links": [
             "cd635b32.ae5f48"
         ],
-        "x": 575,
-        "y": 220,
+        "x": 935,
+        "y": 280,
         "wires": []
     },
     {
@@ -3634,8 +3582,9 @@
         "gap": "",
         "start": "",
         "inout": "out",
-        "x": 490,
-        "y": 220,
+        "property": "payload",
+        "x": 850,
+        "y": 260,
         "wires": [
             [
                 "e520b0c4.168a8"
@@ -3650,8 +3599,8 @@
         "func": "context.lastip = context.lastip || 'initial';\nvar currentip = msg.payload;\n\n//if (context.lastip == 'initial') {\n//context.lastip = currentip;\n//}\n//else if (context.lastip != currentip) {\n\nif (context.lastip != currentip) {\n    msg.topic = \"ipaddress\";\n    msg.payload = currentip;\n    context.lastip = currentip;\n    return msg;\n}\n\n",
         "outputs": "1",
         "noerr": 0,
-        "x": 170,
-        "y": 180,
+        "x": 130,
+        "y": 100,
         "wires": [
             [
                 "7a45445a.19a57c"
@@ -3663,7 +3612,7 @@
         "type": "debug",
         "z": "e8223701.eebbe8",
         "name": "",
-        "active": true,
+        "active": false,
         "console": "false",
         "complete": "true",
         "x": 950,
@@ -3679,8 +3628,8 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 150,
-        "y": 780,
+        "x": 130,
+        "y": 360,
         "wires": [
             [
                 "edf87573.dc7ed8",
@@ -3695,8 +3644,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 544,
-        "y": 780,
+        "x": 524,
+        "y": 360,
         "wires": []
     },
     {
@@ -3710,8 +3659,8 @@
         "syntax": "mustache",
         "template": "This is the payload: {{payload}} !",
         "output": "str",
-        "x": 392,
-        "y": 780,
+        "x": 372,
+        "y": 360,
         "wires": [
             [
                 "4ec0782d.b528b8"
@@ -3726,8 +3675,8 @@
         "active": true,
         "console": "false",
         "complete": "true",
-        "x": 451,
-        "y": 851,
+        "x": 430,
+        "y": 400,
         "wires": []
     },
     {
@@ -5661,8 +5610,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 110,
-        "y": 280,
+        "x": 350,
+        "y": 480,
         "wires": []
     },
     {
@@ -7942,6 +7891,7 @@
         "name": "Data source",
         "method": "GET",
         "url": "http://www.aviationweather.gov{{{payload}}}",
+        "tls": "",
         "x": 290,
         "y": 60,
         "wires": [
@@ -7955,10 +7905,10 @@
         "type": "inject",
         "z": "34a0f2ec.a39f9e",
         "name": "Weather report",
-        "topic": "",
+        "topic": "test",
         "payload": "/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&hoursBeforeNow=3&mostRecent=true&stationString=KORD",
         "payloadType": "str",
-        "repeat": "600",
+        "repeat": "900",
         "crontab": "",
         "once": false,
         "onceDelay": "",
@@ -7975,13 +7925,17 @@
         "type": "xml",
         "z": "34a0f2ec.a39f9e",
         "name": "",
+        "property": "payload",
+        "attr": "",
+        "chr": "",
         "x": 430,
         "y": 60,
         "wires": [
             [
                 "ed704f2c.f22ba",
                 "7c5cb4b1.9788dc",
-                "2c7ebc95.074a04"
+                "2c7ebc95.074a04",
+                "e1908881.88ae48"
             ]
         ]
     },
@@ -8039,7 +7993,7 @@
         "id": "2c7ebc95.074a04",
         "type": "change",
         "z": "34a0f2ec.a39f9e",
-        "name": "",
+        "name": "move to payload",
         "rules": [
             {
                 "t": "move",
@@ -8054,7 +8008,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 240,
+        "x": 140,
         "y": 100,
         "wires": [
             [
@@ -8075,7 +8029,8 @@
         "wires": [
             [
                 "8caa3aef.9eea88",
-                "63702d45.e76ef4"
+                "63702d45.e76ef4",
+                "1e11987a.99d258"
             ]
         ]
     },
@@ -8089,7 +8044,7 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 660,
+        "x": 650,
         "y": 100,
         "wires": []
     },
@@ -8101,8 +8056,8 @@
         "links": [
             "6ca1b15d.e06ae"
         ],
-        "x": 640,
-        "y": 160,
+        "x": 755,
+        "y": 20,
         "wires": []
     },
     {
@@ -8127,7 +8082,7 @@
         "type": "debug",
         "z": "e8223701.eebbe8",
         "name": "",
-        "active": true,
+        "active": false,
         "console": "false",
         "complete": "true",
         "x": 1090,
@@ -8446,7 +8401,7 @@
         "type": "debug",
         "z": "e8223701.eebbe8",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -9622,23 +9577,11 @@
         ]
     },
     {
-        "id": "f97b8b60.a66578",
-        "type": "link out",
-        "z": "e8223701.eebbe8",
-        "name": "from_ww_to_blynk",
-        "links": [
-            "e719ef1d.ba99b"
-        ],
-        "x": 1000,
-        "y": 520,
-        "wires": []
-    },
-    {
         "id": "e8817b1a.b4f8f8",
         "type": "debug",
         "z": "e26dee23.f05b3",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -9665,7 +9608,8 @@
         "z": "e26dee23.f05b3",
         "name": "blynk V0",
         "links": [
-            "f97b8b60.a66578"
+            "f97b8b60.a66578",
+            "ecde4299.fb243"
         ],
         "x": 200,
         "y": 520,
@@ -10610,7 +10554,7 @@
         "type": "debug",
         "z": "c201e10a.3d66f",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -10620,9 +10564,108 @@
         "wires": []
     },
     {
-        "id": "dbb0535a.76d3f",
+        "id": "6e6bedec.37b2c4",
+        "type": "play audio",
+        "z": "1fec4b90.1b56f4",
+        "name": "",
+        "voice": "0",
+        "x": 630,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "4d7125f4.9202dc",
+        "type": "comment",
+        "z": "c6be1934.85f088",
+        "name": "dynamic IP to Google",
+        "info": "",
+        "x": 120,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "348fd351.63c95c",
+        "type": "inject",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "num",
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "x": 90,
+        "y": 300,
+        "wires": [
+            [
+                "7b39cb81.60e974"
+            ]
+        ]
+    },
+    {
+        "id": "7b39cb81.60e974",
+        "type": "exec",
+        "z": "c6be1934.85f088",
+        "command": "vcgencmd",
+        "addpay": false,
+        "append": "measure_temp",
+        "useSpawn": "",
+        "timer": "",
+        "oldrc": false,
+        "name": "getCPUtemp",
+        "x": 310,
+        "y": 300,
+        "wires": [
+            [
+                "53b93e38.ca491"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "53b93e38.ca491",
+        "type": "function",
+        "z": "c6be1934.85f088",
+        "name": "CPU Temp Function",
+        "func": "//msg.payload = {'d':{'temp': parseFloat(msg.payload.replace(\"temp=\",\"\").replace(\"'C\\n\",\"\"))}};\n//temp in F where max op of 85C = 185F\nmsg.payload = Math.round(\n    (parseFloat(msg.payload.replace(\"temp=\",\"\").replace(\"'C\\n\",\"\")) * 9/5 + 32)*10)/10;\nmsg.topic = \"rpishare/cpu/temperature\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 540,
+        "y": 300,
+        "wires": [
+            [
+                "ecde4299.fb243",
+                "229c9b41.faae04"
+            ]
+        ]
+    },
+    {
+        "id": "f3932db6.34058",
+        "type": "comment",
+        "z": "c6be1934.85f088",
+        "name": "RPI CPU's Temperature",
+        "info": "",
+        "x": 120,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "ecde4299.fb243",
+        "type": "link out",
+        "z": "c6be1934.85f088",
+        "name": "from_ww_to_blynk",
+        "links": [
+            "e719ef1d.ba99b"
+        ],
+        "x": 935,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "febd7dfe.93b15",
         "type": "ui_chart",
-        "z": "e8223701.eebbe8",
+        "z": "c6be1934.85f088",
         "name": "",
         "group": "ddc0a4d2.dda318",
         "order": 1,
@@ -10654,17 +10697,17 @@
             "#c5b0d5"
         ],
         "useOldStyle": false,
-        "x": 780,
-        "y": 920,
+        "x": 760,
+        "y": 400,
         "wires": [
             [],
             []
         ]
     },
     {
-        "id": "49a53cb6.0a0af4",
+        "id": "4b71ec17.a598f4",
         "type": "ui_gauge",
-        "z": "e8223701.eebbe8",
+        "z": "c6be1934.85f088",
         "name": "",
         "group": "ddc0a4d2.dda318",
         "order": 2,
@@ -10683,40 +10726,39 @@
         ],
         "seg1": "60",
         "seg2": "80",
-        "x": 770,
-        "y": 880,
+        "x": 750,
+        "y": 360,
         "wires": []
     },
     {
-        "id": "c004a6a4.62fbf8",
+        "id": "6f8dc3b5.12838c",
         "type": "function",
-        "z": "e8223701.eebbe8",
+        "z": "c6be1934.85f088",
         "name": "convert",
         "func": "var msg1,msg2,msg3;\n\nl = msg.payload.split(/(\\s+)/).filter( function(e) { return e.trim().length > 0; } );\nmsg1 = {topic: 'Total', payload: Math.round(l[1] / 1000)};\nmsg2 = {topic: 'Free', payload: Math.round(l[3] / 1000)};\nmsg3 = {topic: 'Used%', payload: l[4].slice(0, -1)};\nmsg4 = {topic: 'rpishare/sdcard/percentused', payload: l[4].slice(0, -1)};\n\nreturn [msg1, msg2, msg3, msg4];",
         "outputs": 4,
         "noerr": 0,
-        "x": 560,
-        "y": 900,
+        "x": 540,
+        "y": 380,
         "wires": [
             [
-                "dbb0535a.76d3f"
+                "febd7dfe.93b15"
             ],
             [
-                "dbb0535a.76d3f"
+                "febd7dfe.93b15"
             ],
             [
-                "dbb0535a.76d3f",
-                "49a53cb6.0a0af4"
+                "febd7dfe.93b15",
+                "4b71ec17.a598f4",
+                "229c9b41.faae04"
             ],
-            [
-                "7de4fca4.680f64"
-            ]
+            []
         ]
     },
     {
-        "id": "8e182e0f.e5c9c",
+        "id": "e3ebf98e.4b9c98",
         "type": "exec",
-        "z": "e8223701.eebbe8",
+        "z": "c6be1934.85f088",
         "command": "df -m | grep root",
         "addpay": false,
         "append": "",
@@ -10724,20 +10766,20 @@
         "timer": "",
         "oldrc": false,
         "name": "read_sd_usage",
-        "x": 360,
-        "y": 900,
+        "x": 340,
+        "y": 380,
         "wires": [
             [
-                "c004a6a4.62fbf8"
+                "6f8dc3b5.12838c"
             ],
             [],
             []
         ]
     },
     {
-        "id": "eb14bb4a.2514d8",
+        "id": "51e303bb.b91c0c",
         "type": "inject",
-        "z": "e8223701.eebbe8",
+        "z": "c6be1934.85f088",
         "name": "5 min tick",
         "topic": "",
         "payload": "",
@@ -10746,11 +10788,700 @@
         "crontab": "",
         "once": true,
         "onceDelay": "1",
-        "x": 130,
-        "y": 900,
+        "x": 110,
+        "y": 380,
         "wires": [
             [
-                "8e182e0f.e5c9c"
+                "e3ebf98e.4b9c98"
+            ]
+        ]
+    },
+    {
+        "id": "58d06ca5.786694",
+        "type": "comment",
+        "z": "c6be1934.85f088",
+        "name": "RPI SD CARD % Used",
+        "info": "",
+        "x": 120,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "30844a59.ebd026",
+        "type": "inject",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "x": 90,
+        "y": 460,
+        "wires": [
+            [
+                "8fe49090.e3366"
+            ]
+        ]
+    },
+    {
+        "id": "17c036d2.2d9469",
+        "type": "comment",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "info": "",
+        "x": 80,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "5f732f24.6841a",
+        "type": "html",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "property": "payload",
+        "outproperty": "payload",
+        "tag": "dt < dl",
+        "ret": "html",
+        "as": "single",
+        "x": 370,
+        "y": 460,
+        "wires": [
+            [
+                "436d11fe.29aed"
+            ]
+        ]
+    },
+    {
+        "id": "436d11fe.29aed",
+        "type": "debug",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 850,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "8fe49090.e3366",
+        "type": "http request",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "url": "http://192.168.1.201",
+        "tls": "",
+        "x": 230,
+        "y": 460,
+        "wires": [
+            [
+                "5f732f24.6841a",
+                "362befdb.8bdba"
+            ]
+        ]
+    },
+    {
+        "id": "362befdb.8bdba",
+        "type": "debug",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 710,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "ef0aa54f.80aee8",
+        "type": "function",
+        "z": "34a0f2ec.a39f9e",
+        "name": "KICT",
+        "func": "msg.payload = \"/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&hoursBeforeNow=3&mostRecent=true&stationString=\"\nmsg.payload = msg.payload + node.name;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 270,
+        "y": 180,
+        "wires": [
+            [
+                "69d82567.79153c"
+            ]
+        ]
+    },
+    {
+        "id": "69d82567.79153c",
+        "type": "http request",
+        "z": "34a0f2ec.a39f9e",
+        "name": "Data source",
+        "method": "GET",
+        "url": "http://www.aviationweather.gov{{{payload}}}",
+        "tls": "",
+        "x": 410,
+        "y": 180,
+        "wires": [
+            [
+                "7a5659e5.7f6ca8"
+            ]
+        ]
+    },
+    {
+        "id": "7a5659e5.7f6ca8",
+        "type": "xml",
+        "z": "34a0f2ec.a39f9e",
+        "name": "",
+        "property": "payload",
+        "attr": "",
+        "chr": "",
+        "x": 550,
+        "y": 180,
+        "wires": [
+            [
+                "de38ae68.89888"
+            ]
+        ]
+    },
+    {
+        "id": "de38ae68.89888",
+        "type": "change",
+        "z": "34a0f2ec.a39f9e",
+        "name": "move to payload",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.response.data.0.METAR.0",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700,
+        "y": 180,
+        "wires": [
+            [
+                "b0fef966.7ea4e8"
+            ]
+        ]
+    },
+    {
+        "id": "b0fef966.7ea4e8",
+        "type": "function",
+        "z": "34a0f2ec.a39f9e",
+        "name": "",
+        "func": "var station = msg.payload.station_id;\n\nvar msgarr = [];\nvar temp_f = msg.payload.temp_c*9/5 + 32;\n\nif ((typeof msg.observation_time !== 'undefined')){\n    dtstring = new Date.parse(msg.observation_time)\n} else {dtstring = new Date().toISOString();}\n\nmsgarr.push({\n    payload:(temp_f),\n    topic: \"airport/\" + station + \"/temperature\",\n    timestamp : dtstring\n});\n\nvar pressure = parseFloat(msg.payload.altim_in_hg[0]); //inches hg\nvar dew = parseFloat(msg.payload.dewpoint_c[0]);\nvar temp = parseFloat(msg.payload.temp_c[0]);\n\n//August-Roche-Magnus approximation to calculate humidity\nvar constA = 17.625;\nvar constB = 243.04;\n//var rh_numer = 100.0*Math.exp((constA*eval(dew))/(eval(dew)+constB));\n//var rh_denom = Math.exp((constA*eval(temp))/(eval(temp)+constB));\nvar rh_numer = 100.0*Math.exp((constA*(dew))/((dew)+constB));\nvar rh_denom = Math.exp((constA*(temp))/((temp)+constB));\nvar rh_hum   = (rh_numer/rh_denom);\nvar humidity = Math.round(rh_hum);\n\nmsgarr.push({\n    payload:(humidity),\n    topic: \"airport/\" + station + \"/humidity\",\n    timestamp : dtstring\n});    \n\nmsgarr.push({\n    payload:(pressure),\n    topic: \"airport/\" + station + \"/pressure\",\n    timestamp : dtstring\n});    \n\n\nreturn [msgarr];\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 850,
+        "y": 180,
+        "wires": [
+            [
+                "63702d45.e76ef4",
+                "8caa3aef.9eea88",
+                "9688481f.58d408"
+            ]
+        ]
+    },
+    {
+        "id": "e1908881.88ae48",
+        "type": "debug",
+        "z": "34a0f2ec.a39f9e",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "x": 880,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "ccdb0c56.cb205",
+        "type": "function",
+        "z": "34a0f2ec.a39f9e",
+        "name": "KOMA",
+        "func": "msg.payload = \"/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&hoursBeforeNow=3&mostRecent=true&stationString=\"\nmsg.payload = msg.payload + node.name;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 270,
+        "y": 220,
+        "wires": [
+            [
+                "c48f5bc4.e77fc8"
+            ]
+        ]
+    },
+    {
+        "id": "c48f5bc4.e77fc8",
+        "type": "http request",
+        "z": "34a0f2ec.a39f9e",
+        "name": "Data source",
+        "method": "GET",
+        "url": "http://www.aviationweather.gov{{{payload}}}",
+        "tls": "",
+        "x": 410,
+        "y": 220,
+        "wires": [
+            [
+                "4748209e.f19e"
+            ]
+        ]
+    },
+    {
+        "id": "4748209e.f19e",
+        "type": "xml",
+        "z": "34a0f2ec.a39f9e",
+        "name": "",
+        "property": "payload",
+        "attr": "",
+        "chr": "",
+        "x": 550,
+        "y": 220,
+        "wires": [
+            [
+                "8727a00a.3a0da"
+            ]
+        ]
+    },
+    {
+        "id": "8727a00a.3a0da",
+        "type": "change",
+        "z": "34a0f2ec.a39f9e",
+        "name": "move to payload",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.response.data.0.METAR.0",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700,
+        "y": 220,
+        "wires": [
+            [
+                "63155d47.926624"
+            ]
+        ]
+    },
+    {
+        "id": "63155d47.926624",
+        "type": "function",
+        "z": "34a0f2ec.a39f9e",
+        "name": "",
+        "func": "var station = msg.payload.station_id;\n\nvar msgarr = [];\nvar temp_f = msg.payload.temp_c*9/5 + 32;\n\nif ((typeof msg.observation_time !== 'undefined')){\n    dtstring = new Date.parse(msg.observation_time)\n} else {dtstring = new Date().toISOString();}\n\nmsgarr.push({\n    payload:(temp_f),\n    topic: \"airport/\" + station + \"/temperature\",\n    timestamp : dtstring\n});\n\nvar pressure = parseFloat(msg.payload.altim_in_hg[0]); //inches hg\nvar dew = parseFloat(msg.payload.dewpoint_c[0]);\nvar temp = parseFloat(msg.payload.temp_c[0]);\n\n//August-Roche-Magnus approximation to calculate humidity\nvar constA = 17.625;\nvar constB = 243.04;\n//var rh_numer = 100.0*Math.exp((constA*eval(dew))/(eval(dew)+constB));\n//var rh_denom = Math.exp((constA*eval(temp))/(eval(temp)+constB));\nvar rh_numer = 100.0*Math.exp((constA*(dew))/((dew)+constB));\nvar rh_denom = Math.exp((constA*(temp))/((temp)+constB));\nvar rh_hum   = (rh_numer/rh_denom);\nvar humidity = Math.round(rh_hum);\n\nmsgarr.push({\n    payload:(humidity),\n    topic: \"airport/\" + station + \"/humidity\",\n    timestamp : dtstring\n});    \n\nmsgarr.push({\n    payload:(pressure),\n    topic: \"airport/\" + station + \"/pressure\",\n    timestamp : dtstring\n});    \n\n\nreturn [msgarr];\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 850,
+        "y": 220,
+        "wires": [
+            [
+                "63702d45.e76ef4",
+                "845e16c9.1b4898"
+            ]
+        ]
+    },
+    {
+        "id": "f2c6902d.f5783",
+        "type": "function",
+        "z": "34a0f2ec.a39f9e",
+        "name": "KMCI",
+        "func": "msg.payload = \"/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&hoursBeforeNow=3&mostRecent=true&stationString=\"\nmsg.payload = msg.payload + node.name;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 270,
+        "y": 260,
+        "wires": [
+            [
+                "d3c81a84.637658"
+            ]
+        ]
+    },
+    {
+        "id": "d3c81a84.637658",
+        "type": "http request",
+        "z": "34a0f2ec.a39f9e",
+        "name": "Data source",
+        "method": "GET",
+        "url": "http://www.aviationweather.gov{{{payload}}}",
+        "tls": "",
+        "x": 410,
+        "y": 260,
+        "wires": [
+            [
+                "e4ff5f8b.fe8bc"
+            ]
+        ]
+    },
+    {
+        "id": "e4ff5f8b.fe8bc",
+        "type": "xml",
+        "z": "34a0f2ec.a39f9e",
+        "name": "",
+        "property": "payload",
+        "attr": "",
+        "chr": "",
+        "x": 550,
+        "y": 260,
+        "wires": [
+            [
+                "644084a7.8b738c"
+            ]
+        ]
+    },
+    {
+        "id": "644084a7.8b738c",
+        "type": "change",
+        "z": "34a0f2ec.a39f9e",
+        "name": "move to payload",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.response.data.0.METAR.0",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700,
+        "y": 260,
+        "wires": [
+            [
+                "c818ce91.86932"
+            ]
+        ]
+    },
+    {
+        "id": "c818ce91.86932",
+        "type": "function",
+        "z": "34a0f2ec.a39f9e",
+        "name": "",
+        "func": "var station = msg.payload.station_id;\n\nvar msgarr = [];\nvar temp_f = msg.payload.temp_c*9/5 + 32;\n\nif ((typeof msg.observation_time !== 'undefined')){\n    dtstring = new Date.parse(msg.observation_time)\n} else {dtstring = new Date().toISOString();}\n\nmsgarr.push({\n    payload:(temp_f),\n    topic: \"airport/\" + station + \"/temperature\",\n    timestamp : dtstring\n});\n\nvar pressure = parseFloat(msg.payload.altim_in_hg[0]); //inches hg\nvar dew = parseFloat(msg.payload.dewpoint_c[0]);\nvar temp = parseFloat(msg.payload.temp_c[0]);\n\n//August-Roche-Magnus approximation to calculate humidity\nvar constA = 17.625;\nvar constB = 243.04;\n//var rh_numer = 100.0*Math.exp((constA*eval(dew))/(eval(dew)+constB));\n//var rh_denom = Math.exp((constA*eval(temp))/(eval(temp)+constB));\nvar rh_numer = 100.0*Math.exp((constA*(dew))/((dew)+constB));\nvar rh_denom = Math.exp((constA*(temp))/((temp)+constB));\nvar rh_hum   = (rh_numer/rh_denom);\nvar humidity = Math.round(rh_hum);\n\nmsgarr.push({\n    payload:(humidity),\n    topic: \"airport/\" + station + \"/humidity\",\n    timestamp : dtstring\n});    \n\nmsgarr.push({\n    payload:(pressure),\n    topic: \"airport/\" + station + \"/pressure\",\n    timestamp : dtstring\n});    \n\n\nreturn [msgarr];\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 850,
+        "y": 260,
+        "wires": [
+            [
+                "63702d45.e76ef4",
+                "83394f24.5af82"
+            ]
+        ]
+    },
+    {
+        "id": "9c250061.5e139",
+        "type": "function",
+        "z": "34a0f2ec.a39f9e",
+        "name": "KSTL",
+        "func": "msg.payload = \"/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&hoursBeforeNow=3&mostRecent=true&stationString=\"\nmsg.payload = msg.payload + node.name;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 270,
+        "y": 300,
+        "wires": [
+            [
+                "e6057f64.8b31d"
+            ]
+        ]
+    },
+    {
+        "id": "e6057f64.8b31d",
+        "type": "http request",
+        "z": "34a0f2ec.a39f9e",
+        "name": "Data source",
+        "method": "GET",
+        "url": "http://www.aviationweather.gov{{{payload}}}",
+        "tls": "",
+        "x": 410,
+        "y": 300,
+        "wires": [
+            [
+                "cd2ce16e.4c19a"
+            ]
+        ]
+    },
+    {
+        "id": "cd2ce16e.4c19a",
+        "type": "xml",
+        "z": "34a0f2ec.a39f9e",
+        "name": "",
+        "property": "payload",
+        "attr": "",
+        "chr": "",
+        "x": 550,
+        "y": 300,
+        "wires": [
+            [
+                "206ec417.6e30ac"
+            ]
+        ]
+    },
+    {
+        "id": "206ec417.6e30ac",
+        "type": "change",
+        "z": "34a0f2ec.a39f9e",
+        "name": "move to payload",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.response.data.0.METAR.0",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700,
+        "y": 300,
+        "wires": [
+            [
+                "c6553c3.419acc"
+            ]
+        ]
+    },
+    {
+        "id": "c6553c3.419acc",
+        "type": "function",
+        "z": "34a0f2ec.a39f9e",
+        "name": "",
+        "func": "var station = msg.payload.station_id;\n\nvar msgarr = [];\nvar temp_f = msg.payload.temp_c*9/5 + 32;\n\nif ((typeof msg.observation_time !== 'undefined')){\n    dtstring = new Date.parse(msg.observation_time)\n} else {dtstring = new Date().toISOString();}\n\nmsgarr.push({\n    payload:(temp_f),\n    topic: \"airport/\" + station + \"/temperature\",\n    timestamp : dtstring\n});\n\nvar pressure = parseFloat(msg.payload.altim_in_hg[0]); //inches hg\nvar dew = parseFloat(msg.payload.dewpoint_c[0]);\nvar temp = parseFloat(msg.payload.temp_c[0]);\n\n//August-Roche-Magnus approximation to calculate humidity\nvar constA = 17.625;\nvar constB = 243.04;\n//var rh_numer = 100.0*Math.exp((constA*eval(dew))/(eval(dew)+constB));\n//var rh_denom = Math.exp((constA*eval(temp))/(eval(temp)+constB));\nvar rh_numer = 100.0*Math.exp((constA*(dew))/((dew)+constB));\nvar rh_denom = Math.exp((constA*(temp))/((temp)+constB));\nvar rh_hum   = (rh_numer/rh_denom);\nvar humidity = Math.round(rh_hum);\n\nmsgarr.push({\n    payload:(humidity),\n    topic: \"airport/\" + station + \"/humidity\",\n    timestamp : dtstring\n});    \n\nmsgarr.push({\n    payload:(pressure),\n    topic: \"airport/\" + station + \"/pressure\",\n    timestamp : dtstring\n});    \n\n\nreturn [msgarr];\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 850,
+        "y": 300,
+        "wires": [
+            [
+                "63702d45.e76ef4",
+                "3ede2674.3419ea"
+            ]
+        ]
+    },
+    {
+        "id": "dbf62df6.c33d5",
+        "type": "function",
+        "z": "34a0f2ec.a39f9e",
+        "name": "KSGF",
+        "func": "msg.payload = \"/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&hoursBeforeNow=3&mostRecent=true&stationString=\"\nmsg.payload = msg.payload + node.name;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 270,
+        "y": 340,
+        "wires": [
+            [
+                "3efad988.071616"
+            ]
+        ]
+    },
+    {
+        "id": "3efad988.071616",
+        "type": "http request",
+        "z": "34a0f2ec.a39f9e",
+        "name": "Data source",
+        "method": "GET",
+        "url": "http://www.aviationweather.gov{{{payload}}}",
+        "tls": "",
+        "x": 410,
+        "y": 340,
+        "wires": [
+            [
+                "db7fb27d.0ae95"
+            ]
+        ]
+    },
+    {
+        "id": "db7fb27d.0ae95",
+        "type": "xml",
+        "z": "34a0f2ec.a39f9e",
+        "name": "",
+        "property": "payload",
+        "attr": "",
+        "chr": "",
+        "x": 550,
+        "y": 340,
+        "wires": [
+            [
+                "c4d81042.f53a8"
+            ]
+        ]
+    },
+    {
+        "id": "c4d81042.f53a8",
+        "type": "change",
+        "z": "34a0f2ec.a39f9e",
+        "name": "move to payload",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.response.data.0.METAR.0",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700,
+        "y": 340,
+        "wires": [
+            [
+                "8685a532.bd8c28"
+            ]
+        ]
+    },
+    {
+        "id": "8685a532.bd8c28",
+        "type": "function",
+        "z": "34a0f2ec.a39f9e",
+        "name": "",
+        "func": "var station = msg.payload.station_id;\n\nvar msgarr = [];\nvar temp_f = msg.payload.temp_c*9/5 + 32;\n\nif ((typeof msg.observation_time !== 'undefined')){\n    dtstring = new Date.parse(msg.observation_time)\n} else {dtstring = new Date().toISOString();}\n\nmsgarr.push({\n    payload:(temp_f),\n    topic: \"airport/\" + station + \"/temperature\",\n    timestamp : dtstring\n});\n\nvar pressure = parseFloat(msg.payload.altim_in_hg[0]); //inches hg\nvar dew = parseFloat(msg.payload.dewpoint_c[0]);\nvar temp = parseFloat(msg.payload.temp_c[0]);\n\n//August-Roche-Magnus approximation to calculate humidity\nvar constA = 17.625;\nvar constB = 243.04;\n//var rh_numer = 100.0*Math.exp((constA*eval(dew))/(eval(dew)+constB));\n//var rh_denom = Math.exp((constA*eval(temp))/(eval(temp)+constB));\nvar rh_numer = 100.0*Math.exp((constA*(dew))/((dew)+constB));\nvar rh_denom = Math.exp((constA*(temp))/((temp)+constB));\nvar rh_hum   = (rh_numer/rh_denom);\nvar humidity = Math.round(rh_hum);\n\nmsgarr.push({\n    payload:(humidity),\n    topic: \"airport/\" + station + \"/humidity\",\n    timestamp : dtstring\n});    \n\nmsgarr.push({\n    payload:(pressure),\n    topic: \"airport/\" + station + \"/pressure\",\n    timestamp : dtstring\n});    \n\n\nreturn [msgarr];\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 850,
+        "y": 340,
+        "wires": [
+            [
+                "63702d45.e76ef4"
+            ]
+        ]
+    },
+    {
+        "id": "1e11987a.99d258",
+        "type": "delay",
+        "z": "34a0f2ec.a39f9e",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 140,
+        "y": 180,
+        "wires": [
+            [
+                "ef0aa54f.80aee8"
+            ]
+        ]
+    },
+    {
+        "id": "9688481f.58d408",
+        "type": "delay",
+        "z": "34a0f2ec.a39f9e",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 140,
+        "y": 220,
+        "wires": [
+            [
+                "ccdb0c56.cb205"
+            ]
+        ]
+    },
+    {
+        "id": "845e16c9.1b4898",
+        "type": "delay",
+        "z": "34a0f2ec.a39f9e",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 140,
+        "y": 260,
+        "wires": [
+            [
+                "f2c6902d.f5783"
+            ]
+        ]
+    },
+    {
+        "id": "83394f24.5af82",
+        "type": "delay",
+        "z": "34a0f2ec.a39f9e",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 140,
+        "y": 300,
+        "wires": [
+            [
+                "9c250061.5e139"
+            ]
+        ]
+    },
+    {
+        "id": "3ede2674.3419ea",
+        "type": "delay",
+        "z": "34a0f2ec.a39f9e",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 140,
+        "y": 340,
+        "wires": [
+            [
+                "dbf62df6.c33d5"
             ]
         ]
     }
