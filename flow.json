@@ -374,6 +374,12 @@
                 "base-font": {
                     "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
                 }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey"
             }
         },
         "site": {
@@ -2538,8 +2544,8 @@
         "repeat": "1800",
         "crontab": "",
         "once": true,
-        "x": 130,
-        "y": 60,
+        "x": 310,
+        "y": 20,
         "wires": [
             [
                 "fd788715.f25b28"
@@ -2554,8 +2560,8 @@
         "method": "GET",
         "url": "https://jbdowsr8JzGj0wnm:2BY3RRZnfwDPoNvQ@domains.google.com/nic/update?hostname=tapiafamily.org&myip={{payload}}",
         "tls": "ccbad4df.c6e028",
-        "x": 340,
-        "y": 100,
+        "x": 480,
+        "y": 60,
         "wires": [
             [
                 "8808be74.62ca9",
@@ -2581,8 +2587,8 @@
         ],
         "checkall": "true",
         "outputs": 2,
-        "x": 170,
-        "y": 160,
+        "x": 710,
+        "y": 60,
         "wires": [
             [
                 "f79ddde4.a53c"
@@ -2607,32 +2613,12 @@
         "randomUnits": "seconds",
         "drop": true,
         "x": 460,
-        "y": 220,
+        "y": 100,
         "wires": [
             [
                 "12307aa6.f5aff5"
             ]
         ]
-    },
-    {
-        "id": "92da787d.76b068",
-        "type": "comment",
-        "z": "c6be1934.85f088",
-        "name": "No",
-        "info": "",
-        "x": 350,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "a17eb6ec.29b4c8",
-        "type": "comment",
-        "z": "c6be1934.85f088",
-        "name": "Yes?",
-        "info": "",
-        "x": 350,
-        "y": 140,
-        "wires": []
     },
     {
         "id": "f79ddde4.a53c",
@@ -2642,8 +2628,8 @@
         "func": "\ncontext.duckdnsfails=0;\nreturn msg;",
         "outputs": "0",
         "noerr": 0,
-        "x": 550,
-        "y": 140,
+        "x": 1010,
+        "y": 100,
         "wires": []
     },
     {
@@ -2654,7 +2640,7 @@
         "func": "duckdnsfails = context.duckdnsfails || 0;\nduckdnsfails++;\ncontext.duckdnsfails = duckdnsfails;\n\n//Fsiled to update 5+ times?\nif(duckdnsfails <=6) {\n\treturn [msg,null];\n}\nelse {\n    //shout out last known IP\n    msg.payload=context.lastip;\n\treturn [null,msg];\n}",
         "outputs": "2",
         "x": 200,
-        "y": 220,
+        "y": 100,
         "wires": [
             [],
             [
@@ -2670,11 +2656,10 @@
         "func": "msg.topic = \"ipaddress\";\nreturn msg;\n\n",
         "outputs": "1",
         "noerr": 0,
-        "x": 850,
+        "x": 130,
         "y": 60,
         "wires": [
             [
-                "328c2bfb.25fd24",
                 "51440dc4.c26ca4",
                 "229c9b41.faae04"
             ]
@@ -2691,12 +2676,11 @@
         "timer": "",
         "oldrc": false,
         "name": "Call IP - ipv4bot whatismyipaddress.com",
-        "x": 400,
-        "y": 60,
+        "x": 560,
+        "y": 20,
         "wires": [
             [
-                "dcd48c82.d9513",
-                "84cbe0c.f80882"
+                "dcd48c82.d9513"
             ],
             [],
             []
@@ -2722,8 +2706,8 @@
         ],
         "checkall": "true",
         "outputs": 2,
-        "x": 660,
-        "y": 60,
+        "x": 820,
+        "y": 20,
         "wires": [
             [
                 "e6ab8b0c.73b928",
@@ -2741,7 +2725,7 @@
         "console": "false",
         "complete": "true",
         "x": 630,
-        "y": 220,
+        "y": 100,
         "wires": []
     },
     {
@@ -2752,32 +2736,8 @@
         "active": true,
         "console": "false",
         "complete": "true",
-        "x": 730,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "328c2bfb.25fd24",
-        "type": "debug",
-        "z": "c6be1934.85f088",
-        "name": "",
-        "active": false,
-        "console": "false",
-        "complete": "true",
-        "x": 850,
-        "y": 140,
-        "wires": []
-    },
-    {
-        "id": "84cbe0c.f80882",
-        "type": "debug",
-        "z": "c6be1934.85f088",
-        "name": "",
-        "active": false,
-        "console": "false",
-        "complete": "false",
-        "x": 690,
-        "y": 20,
+        "x": 1030,
+        "y": 60,
         "wires": []
     },
     {
@@ -3384,7 +3344,8 @@
         "links": [
             "feef4a4e.553278",
             "d9c54d69.cb013",
-            "d533a1de.06894"
+            "d533a1de.06894",
+            "d47d4df0.74b34"
         ],
         "x": 215,
         "y": 200,
@@ -3578,8 +3539,8 @@
         "links": [
             "cd635b32.ae5f48"
         ],
-        "x": 935,
-        "y": 280,
+        "x": 1055,
+        "y": 140,
         "wires": []
     },
     {
@@ -3592,8 +3553,8 @@
         "start": "",
         "inout": "out",
         "property": "payload",
-        "x": 850,
-        "y": 260,
+        "x": 990,
+        "y": 140,
         "wires": [
             [
                 "e520b0c4.168a8"
@@ -3608,8 +3569,8 @@
         "func": "context.lastip = context.lastip || 'initial';\nvar currentip = msg.payload;\n\n//if (context.lastip == 'initial') {\n//context.lastip = currentip;\n//}\n//else if (context.lastip != currentip) {\n\nif (context.lastip != currentip) {\n    msg.topic = \"ipaddress\";\n    msg.payload = currentip;\n    context.lastip = currentip;\n    return msg;\n}\n\n",
         "outputs": "1",
         "noerr": 0,
-        "x": 130,
-        "y": 100,
+        "x": 290,
+        "y": 60,
         "wires": [
             [
                 "7a45445a.19a57c"
@@ -4932,7 +4893,8 @@
         "y": 740,
         "wires": [
             [
-                "bb0b2c50.7562e"
+                "bb0b2c50.7562e",
+                "ac6b2d4c.ea248"
             ]
         ]
     },
@@ -6572,6 +6534,7 @@
         "type": "subflow:50b2a29d.f794ec",
         "z": "e8223701.eebbe8",
         "name": "",
+        "env": [],
         "x": 650,
         "y": 300,
         "wires": [
@@ -10603,8 +10566,8 @@
         "repeat": "60",
         "crontab": "",
         "once": true,
-        "x": 90,
-        "y": 300,
+        "x": 290,
+        "y": 140,
         "wires": [
             [
                 "7b39cb81.60e974"
@@ -10622,8 +10585,8 @@
         "timer": "",
         "oldrc": false,
         "name": "getCPUtemp",
-        "x": 310,
-        "y": 300,
+        "x": 430,
+        "y": 140,
         "wires": [
             [
                 "53b93e38.ca491"
@@ -10640,8 +10603,8 @@
         "func": "//msg.payload = {'d':{'temp': parseFloat(msg.payload.replace(\"temp=\",\"\").replace(\"'C\\n\",\"\"))}};\n//temp in F where max op of 85C = 185F\nmsg.payload = Math.round(\n    (parseFloat(msg.payload.replace(\"temp=\",\"\").replace(\"'C\\n\",\"\")) * 9/5 + 32)*10)/10;\nmsg.topic = \"rpishare/cpu/temperature\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 540,
-        "y": 300,
+        "x": 820,
+        "y": 100,
         "wires": [
             [
                 "ecde4299.fb243",
@@ -10656,7 +10619,7 @@
         "name": "RPI CPU's Temperature",
         "info": "",
         "x": 120,
-        "y": 260,
+        "y": 140,
         "wires": []
     },
     {
@@ -10668,7 +10631,7 @@
             "e719ef1d.ba99b"
         ],
         "x": 935,
-        "y": 320,
+        "y": 160,
         "wires": []
     },
     {
@@ -10706,8 +10669,9 @@
             "#c5b0d5"
         ],
         "useOldStyle": false,
-        "x": 760,
-        "y": 400,
+        "outputs": 2,
+        "x": 1020,
+        "y": 180,
         "wires": [
             [],
             []
@@ -10735,8 +10699,8 @@
         ],
         "seg1": "60",
         "seg2": "80",
-        "x": 750,
-        "y": 360,
+        "x": 1030,
+        "y": 160,
         "wires": []
     },
     {
@@ -10747,8 +10711,8 @@
         "func": "var msg1,msg2,msg3;\n\nl = msg.payload.split(/(\\s+)/).filter( function(e) { return e.trim().length > 0; } );\nmsg1 = {topic: 'Total', payload: Math.round(l[1] / 1000)};\nmsg2 = {topic: 'Free', payload: Math.round(l[3] / 1000)};\nmsg3 = {topic: 'Used%', payload: l[4].slice(0, -1)};\nmsg4 = {topic: 'rpishare/sdcard/percentused', payload: l[4].slice(0, -1)};\n\nreturn [msg1, msg2, msg3, msg4];",
         "outputs": 4,
         "noerr": 0,
-        "x": 540,
-        "y": 380,
+        "x": 760,
+        "y": 160,
         "wires": [
             [
                 "febd7dfe.93b15"
@@ -10775,8 +10739,8 @@
         "timer": "",
         "oldrc": false,
         "name": "read_sd_usage",
-        "x": 340,
-        "y": 380,
+        "x": 600,
+        "y": 160,
         "wires": [
             [
                 "6f8dc3b5.12838c"
@@ -10797,8 +10761,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": "1",
-        "x": 110,
-        "y": 380,
+        "x": 310,
+        "y": 180,
         "wires": [
             [
                 "e3ebf98e.4b9c98"
@@ -10812,7 +10776,7 @@
         "name": "RPI SD CARD % Used",
         "info": "",
         "x": 120,
-        "y": 340,
+        "y": 180,
         "wires": []
     },
     {
@@ -10827,8 +10791,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": "",
-        "x": 90,
-        "y": 460,
+        "x": 210,
+        "y": 240,
         "wires": [
             [
                 "8fe49090.e3366"
@@ -10842,7 +10806,7 @@
         "name": "",
         "info": "",
         "x": 80,
-        "y": 420,
+        "y": 240,
         "wires": []
     },
     {
@@ -10855,8 +10819,8 @@
         "tag": "dt < dl",
         "ret": "html",
         "as": "single",
-        "x": 370,
-        "y": 460,
+        "x": 450,
+        "y": 240,
         "wires": [
             [
                 "436d11fe.29aed"
@@ -10872,7 +10836,7 @@
         "console": "false",
         "complete": "true",
         "x": 850,
-        "y": 460,
+        "y": 240,
         "wires": []
     },
     {
@@ -10884,8 +10848,8 @@
         "ret": "txt",
         "url": "http://192.168.1.201",
         "tls": "",
-        "x": 230,
-        "y": 460,
+        "x": 330,
+        "y": 240,
         "wires": [
             [
                 "5f732f24.6841a",
@@ -10902,7 +10866,7 @@
         "console": "false",
         "complete": "true",
         "x": 850,
-        "y": 420,
+        "y": 260,
         "wires": []
     },
     {
@@ -11669,20 +11633,6 @@
         ]
     },
     {
-        "id": "260b95be.9cc77a",
-        "type": "json",
-        "z": "d0d30a38.451ae8",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": false,
-        "x": 650,
-        "y": 440,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "1b565ae9.31ffa5",
         "type": "inject",
         "z": "d0d30a38.451ae8",
@@ -11695,7 +11645,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 90,
-        "y": 400,
+        "y": 300,
         "wires": [
             [
                 "4251960e.d56bf8",
@@ -11712,7 +11662,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 220,
-        "y": 460,
+        "y": 320,
         "wires": [
             [
                 "88a12926.81a6a8"
@@ -11728,7 +11678,7 @@
         "console": "false",
         "complete": "false",
         "x": 490,
-        "y": 440,
+        "y": 300,
         "wires": []
     },
     {
@@ -11743,8 +11693,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 90,
-        "y": 500,
+        "x": 100,
+        "y": 380,
         "wires": [
             [
                 "f581925c.a9e56",
@@ -11760,8 +11710,8 @@
         "func": "msg.payload =\n{\n  \"metadata\": [\n    {\n      \"TagName\": \"river.illinois.flow\",\n      \"Description\": \"Illinois River at Peoria Lock and Dam\",\n      \"DataType\": \"float\",\n      \"EngUnit\": \"CFS\",\n      \"Min\": 0,\n      \"Max\": 75000,\n      \"MessageOff\": \"\",\n      \"MessageOn\": \"\",\n      \"RolloverValue\": 0,\n      \"InterpolationType\": \"linear\",\n      \"Alias\": \"Illinois River Flow\"\n    }\n  ]\n}\n\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 210,
-        "y": 560,
+        "x": 250,
+        "y": 400,
         "wires": [
             [
                 "12be2aab.b01265"
@@ -11777,7 +11727,7 @@
         "console": "false",
         "complete": "false",
         "x": 480,
-        "y": 540,
+        "y": 400,
         "wires": []
     },
     {
@@ -11794,7 +11744,7 @@
         "proxy": "",
         "authType": "",
         "x": 290,
-        "y": 500,
+        "y": 360,
         "wires": [
             [
                 "830fbe1d.c5b61"
@@ -11812,7 +11762,7 @@
         "ret": "text",
         "as": "single",
         "x": 570,
-        "y": 500,
+        "y": 360,
         "wires": [
             []
         ]
@@ -11825,12 +11775,12 @@
         "topic": "river/illinois/flow",
         "payload": "",
         "payloadType": "date",
-        "repeat": "1200",
+        "repeat": "",
         "crontab": "",
         "once": false,
         "onceDelay": "",
-        "x": 110,
-        "y": 540,
+        "x": 100,
+        "y": 320,
         "wires": [
             [
                 "7b1d7c38.06f994"
@@ -11850,8 +11800,8 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 250,
-        "y": 500,
+        "x": 230,
+        "y": 280,
         "wires": [
             [
                 "ac77a9c8.b03fc8"
@@ -11870,7 +11820,7 @@
         "complete": "true",
         "targetType": "full",
         "x": 710,
-        "y": 540,
+        "y": 320,
         "wires": []
     },
     {
@@ -11883,8 +11833,8 @@
         "tag": "form[name=\"frm_plot\"] font:contains(\" CFS\")",
         "ret": "text",
         "as": "single",
-        "x": 490,
-        "y": 500,
+        "x": 470,
+        "y": 280,
         "wires": [
             [
                 "a7ffcf98.be5e9"
@@ -11896,9 +11846,9 @@
         "type": "comment",
         "z": "c6be1934.85f088",
         "name": "",
-        "info": "http://rivergages.mvr.usace.army.mil/WaterControl/stationinfo2.cfm?dt=S&sid=IL07&fid\n\nhttps://waterdata.usgs.gov/usa/nwis/uv?site_no=05568500\n\n\n{\n  \"metadata\": [\n    {\n      \"TagName\": \"Line3.Product\",\n      \"Description\": \"Product code for packaging line 3\",\n      \"DataType\": \"string\",\n      \"EngUnit\": \"\",\n      \"Min\": 0,\n      \"Max\": 0,\n      \"MessageOff\": \"\",\n      \"MessageOn\": \"\",\n      \"RolloverValue\": 0,\n      \"InterpolationType\": \"none\",\n      \"Alias\": \"Product Code\"\n    }\n  ]\n}\n\n{\n  \"metadata\": [\n    {\n      \"TagName\": \"Line3.Product\",\n      \"Description\": \"Product code for packaging line 3\",\n      \"DataType\": \"string\",\n      \"EngUnit\": \"\",\n      \"Min\": 0,\n      \"Max\": 0,\n      \"MessageOff\": \"\",\n      \"MessageOn\": \"\",\n      \"RolloverValue\": 0,\n      \"InterpolationType\": \"none\",\n      \"Alias\": \"Product Code\"\n    }\n  ]\n}",
-        "x": 100,
-        "y": 500,
+        "info": "http://rivergages.mvr.usace.army.mil/WaterControl/stationinfo2.cfm?dt=S&sid=IL07&fid\n\nhttps://waterdata.usgs.gov/usa/nwis/uv?site_no=05568500\n\nhttps://waterdata.usgs.gov/nwis/current?nw_longitude_va=-126&nw_latitude_va=49&se_longitude_va=-78&se_latitude_va=24&coordinate_format=dms&index_pmcode_STATION_NM=1&index_pmcode_DATETIME=2&index_pmcode_00060=3&group_key=NONE&sitefile_output_format=html_table&column_name=agency_cd&column_name=site_no&column_name=station_nm&format=html_table&sort_key_2=site_no&html_table_group_key=NONE&rdb_compression=file&list_of_search_criteria=lat_long_bounding_box%2Crealtime_parameter_selection\n\n{\n  \"metadata\": [\n    {\n      \"TagName\": \"Line3.Product\",\n      \"Description\": \"Product code for packaging line 3\",\n      \"DataType\": \"string\",\n      \"EngUnit\": \"\",\n      \"Min\": 0,\n      \"Max\": 0,\n      \"MessageOff\": \"\",\n      \"MessageOn\": \"\",\n      \"RolloverValue\": 0,\n      \"InterpolationType\": \"none\",\n      \"Alias\": \"Product Code\"\n    }\n  ]\n}\n\n{\n  \"metadata\": [\n    {\n      \"TagName\": \"Line3.Product\",\n      \"Description\": \"Product code for packaging line 3\",\n      \"DataType\": \"string\",\n      \"EngUnit\": \"\",\n      \"Min\": 0,\n      \"Max\": 0,\n      \"MessageOff\": \"\",\n      \"MessageOn\": \"\",\n      \"RolloverValue\": 0,\n      \"InterpolationType\": \"none\",\n      \"Alias\": \"Product Code\"\n    }\n  ]\n}",
+        "x": 80,
+        "y": 280,
         "wires": []
     },
     {
@@ -11921,7 +11871,7 @@
         "to": "",
         "reg": false,
         "x": 320,
-        "y": 540,
+        "y": 320,
         "wires": [
             [
                 "9c21adf9.2e3c"
@@ -11932,7 +11882,7 @@
         "id": "9c21adf9.2e3c",
         "type": "change",
         "z": "c6be1934.85f088",
-        "name": "",
+        "name": "remove CFS & comma",
         "rules": [
             {
                 "t": "change",
@@ -11958,8 +11908,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 500,
-        "y": 540,
+        "x": 520,
+        "y": 320,
         "wires": [
             [
                 "3344aa67.276d56",
@@ -11975,8 +11925,1106 @@
         "links": [
             "84d2eb34.ae0af8"
         ],
-        "x": 775,
+        "x": 995,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "7c5f3de8.b94a34",
+        "type": "inject",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "topic": "",
+        "payload": "07010000",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "x": 100,
+        "y": 360,
+        "wires": [
+            [
+                "267944d9.ef996c"
+            ]
+        ]
+    },
+    {
+        "id": "920c5f14.6df9d",
+        "type": "http request",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 290,
+        "y": 400,
+        "wires": [
+            [
+                "11c0b600.157f5a"
+            ]
+        ]
+    },
+    {
+        "id": "11c0b600.157f5a",
+        "type": "debug",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 810,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "f150dce5.479ef",
+        "type": "html",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "property": "payload",
+        "outproperty": "payload",
+        "tag": "form[name=\"frm_plot\"] font:contains(\" CFS\")",
+        "ret": "text",
+        "as": "single",
+        "x": 690,
+        "y": 440,
+        "wires": [
+            [
+                "11c0b600.157f5a"
+            ]
+        ]
+    },
+    {
+        "id": "12d74888.130d87",
+        "type": "change",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload[0]",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 980,
+        "y": 460,
+        "wires": [
+            [
+                "3e8e8b19.5b1a64"
+            ]
+        ]
+    },
+    {
+        "id": "3e8e8b19.5b1a64",
+        "type": "change",
+        "z": "c6be1934.85f088",
+        "name": "remove CFS & comma",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": " CFS",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": ",",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 980,
         "y": 500,
+        "wires": [
+            [
+                "11c0b600.157f5a"
+            ]
+        ]
+    },
+    {
+        "id": "fce3c19d.33701",
+        "type": "change",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "https://waterdata.usgs.gov/monitoring-location",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 360,
+        "wires": [
+            [
+                "bc6dbd74.adf57"
+            ]
+        ]
+    },
+    {
+        "id": "951d020d.1292b",
+        "type": "template",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "This is the payload: {{payload}} !",
+        "output": "str",
+        "x": 380,
+        "y": 440,
+        "wires": [
+            [
+                "11c0b600.157f5a"
+            ]
+        ]
+    },
+    {
+        "id": "7a3258ec.5b0438",
+        "type": "inject",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 100,
+        "y": 440,
+        "wires": [
+            [
+                "951d020d.1292b"
+            ]
+        ]
+    },
+    {
+        "id": "267944d9.ef996c",
+        "type": "change",
+        "z": "c6be1934.85f088",
+        "name": "siteid",
+        "rules": [
+            {
+                "t": "set",
+                "p": "siteid",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 210,
+        "y": 360,
+        "wires": [
+            [
+                "fce3c19d.33701"
+            ]
+        ]
+    },
+    {
+        "id": "2ee30e53.d38072",
+        "type": "change",
+        "z": "c6be1934.85f088",
+        "name": "add siteid to url",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "$.url & $.siteid & \"/\"",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 120,
+        "y": 400,
+        "wires": [
+            [
+                "920c5f14.6df9d"
+            ]
+        ]
+    },
+    {
+        "id": "bc6dbd74.adf57",
+        "type": "switch",
+        "z": "c6be1934.85f088",
+        "name": "end with /",
+        "property": "url",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "jsonata_exp",
+                "v": "msg.url.$substring(-1)=\"/\"",
+                "vt": "jsonata"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 460,
+        "y": 360,
+        "wires": [
+            [
+                "2ee30e53.d38072"
+            ],
+            [
+                "35838d3e.818c42"
+            ]
+        ]
+    },
+    {
+        "id": "35838d3e.818c42",
+        "type": "change",
+        "z": "c6be1934.85f088",
+        "name": "/",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "$.url & \"/\"",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 360,
+        "wires": [
+            [
+                "2ee30e53.d38072"
+            ]
+        ]
+    },
+    {
+        "id": "a0081ad3.d51948",
+        "type": "inject",
+        "z": "c6be1934.85f088",
+        "name": "multiple USGS codes",
+        "topic": "",
+        "payload": "07010000,05568500,06818000,06888990,06486000,05420500,06610000,05467000,05420500,06906500,07050690,06891080,06910450,06909000,05487520,06895500,05465500",
+        "payloadType": "str",
+        "repeat": "900",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "",
+        "x": 140,
+        "y": 560,
+        "wires": [
+            [
+                "40a845ba.a4f3cc"
+            ]
+        ]
+    },
+    {
+        "id": "177b19c4.d23da6",
+        "type": "http request",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 210,
+        "y": 600,
+        "wires": [
+            [
+                "8b21dc79.19e7c",
+                "471e08fd.eddc78"
+            ]
+        ]
+    },
+    {
+        "id": "8b21dc79.19e7c",
+        "type": "debug",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 750,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "40a845ba.a4f3cc",
+        "type": "change",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "https://waterservices.usgs.gov/nwis/iv/?format=json&sites=",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 210,
+        "y": 560,
+        "wires": [
+            [
+                "723126eb.89ba68"
+            ]
+        ]
+    },
+    {
+        "id": "85432d02.9be",
+        "type": "change",
+        "z": "c6be1934.85f088",
+        "name": "add siteid to url",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "$.url & $.siteid & \"/\"",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1020,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "13f77da5.8b9f02",
+        "type": "switch",
+        "z": "c6be1934.85f088",
+        "name": "end with /",
+        "property": "url",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "jsonata_exp",
+                "v": "msg.url.$substring(-1)=\"/\"",
+                "vt": "jsonata"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 940,
+        "y": 560,
+        "wires": [
+            [
+                "85432d02.9be"
+            ],
+            [
+                "d540d088.14562"
+            ]
+        ]
+    },
+    {
+        "id": "d540d088.14562",
+        "type": "change",
+        "z": "c6be1934.85f088",
+        "name": "/",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "$.url & \"/\"",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1010,
+        "y": 600,
+        "wires": [
+            [
+                "85432d02.9be"
+            ]
+        ]
+    },
+    {
+        "id": "db6c6583.d39348",
+        "type": "change",
+        "z": "c6be1934.85f088",
+        "name": "JSONata to wonderware data format",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.value.timeSeries\t{\t    \"data\": [\t        $.{\t            \"dateTime\" : values[0].value.dateTime,\t            \"usgs.river.\" & sourceInfo.siteCode.value & \".flow\":  values[0].value.value\t        }\t    ]\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 310,
+        "y": 660,
+        "wires": [
+            [
+                "41a15677.d1a468",
+                "78ed50d5.31fff",
+                "8eb03d67.edb88"
+            ]
+        ]
+    },
+    {
+        "id": "41a15677.d1a468",
+        "type": "debug",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 750,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "401f291d.91ff78",
+        "type": "comment",
+        "z": "c6be1934.85f088",
+        "name": "No",
+        "info": "",
+        "x": 770,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "135c5498.48135b",
+        "type": "comment",
+        "z": "c6be1934.85f088",
+        "name": "Yes?",
+        "info": "",
+        "x": 770,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "5416d457.0f423c",
+        "type": "comment",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "info": "https://waterservices.usgs.gov/nwis/iv/?format=json&bBox=-90.000000,40.000000,-85.000000,45.000000&parameterCd=00060&siteStatus=all&drainAreaMin=10000\n\nhttps://waterservices.usgs.gov/nwis/iv/?format=json&stateCd=mo&parameterCd=00060&siteStatus=all&drainAreaMin=100000\n\nhttps://waterservices.usgs.gov/rest/IV-Test-Tool.html\n\nhttps://waterservices.usgs.gov/nwis/iv/?format=json&sites=02198980,02246500,02310747,02323500,02428400,03025500,03086000,03114306,03216070,03216600,03277200,03292494,03303280,03381700,03566000,04067500,04082400,04084445,04127885,04159130,04165710,05082500,05092000,05129515,05133500,05137500,05331000,05331580,05340500,05344490,05355250,05378500,05400760,05404000,05407000,05420500,05430500,05437500,05442300,05446500,05464500,05465000,05465500,05465700,05485500,05489500,05490500,05490600,05558300,05568500,05586100,05587450,06327500,06329500,06343000,06486000,06610000,06807000,06813500,06818000,06821250,06887500,06888990,06910450,06910450,06934500,06935450,06935550,06935965,07024175,07032200,07077000,07190500,07190500,07191500,07194500,07198000,07249455,07250550,07289000,07374000,07374525,07381490,07381590,07381600,08041780,011313440,011337190,011455095,011455420,012040500,012194000,012200500,012391950,012395500,012396500,012472800,013269000,013334300,014105700&parameterCd=00060&siteStatus=all&drainAreaMin=10000\n\n07010000,05568500,05355250,06818000,06888990\n\nmap:\nhttps://waterwatch.usgs.gov/?id=ww_current\n\npayload.value.timeSeries {\n   name  : {\n       \"siteName\":sourceInfo.siteName,\n       \"siteCode\": sourceInfo.siteCode.value,\n       \"value\" : values[0].value.value,\n       \"units\" : variable.unit.unitCode,\n       \"latitude\": sourceInfo.geoLocation.geogLocation.latitude,\n       \"longitude\": sourceInfo.geoLocation.geogLocation.longitude\n    }\n}\n\n",
+        "x": 80,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "723126eb.89ba68",
+        "type": "change",
+        "z": "c6be1934.85f088",
+        "name": "add siteids to url",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "$.url & $.payload",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 360,
+        "y": 560,
+        "wires": [
+            [
+                "737bccf6.f78484"
+            ]
+        ]
+    },
+    {
+        "id": "737bccf6.f78484",
+        "type": "change",
+        "z": "c6be1934.85f088",
+        "name": "finish url",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "$.url & \"&parameterCd=00060&siteStatus=all&drainAreaMin=10000\"",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 560,
+        "wires": [
+            [
+                "c65c009e.95d8b",
+                "177b19c4.d23da6"
+            ]
+        ]
+    },
+    {
+        "id": "78ed50d5.31fff",
+        "type": "split",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 570,
+        "y": 660,
+        "wires": [
+            [
+                "2f163124.7184be"
+            ]
+        ]
+    },
+    {
+        "id": "ae8afc5e.4f9f5",
+        "type": "change",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "url",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "responseUrl",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "parts",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "statusCode",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "headers",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "redirectList",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 920,
+        "y": 780,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "471e08fd.eddc78",
+        "type": "function",
+        "z": "c6be1934.85f088",
+        "name": "payload only",
+        "func": "var newmsg={};\nnewmsg.payload = msg.payload;\nreturn newmsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 350,
+        "y": 600,
+        "wires": [
+            [
+                "db6c6583.d39348",
+                "655f825b.88904c",
+                "8db646b4.b99e58",
+                "15cb197f.5c8dd7"
+            ]
+        ]
+    },
+    {
+        "id": "2f163124.7184be",
+        "type": "change",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "$.payload.siteCode",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$.payload.value",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700,
+        "y": 660,
+        "wires": [
+            [
+                "962579f5.a592d8"
+            ]
+        ]
+    },
+    {
+        "id": "962579f5.a592d8",
+        "type": "change",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "\"usgs/river/\" & $.topic & \"/flow\"",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c65c009e.95d8b",
+        "type": "debug",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 690,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "15ff68da.a817b7",
+        "type": "comment",
+        "z": "c6be1934.85f088",
+        "name": "data",
+        "info": "",
+        "x": 90,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "fbc3a11.41a276",
+        "type": "comment",
+        "z": "c6be1934.85f088",
+        "name": "metadata",
+        "info": "",
+        "x": 100,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "655f825b.88904c",
+        "type": "change",
+        "z": "c6be1934.85f088",
+        "name": "JSONata to wonderware metadata format",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.value.timeSeries\t{\t\t\"metadata\": [\t\t\t$.{\t\t\t\t\"TagName\":\"usgs.river.\" & sourceInfo.siteCode.value & \".flow\",\t\t\t\t\"Description\":sourceInfo.siteName,\t\t\t\t\"DataType\": \"int4\",\t\t\t\t\"EngUnit\" : variable.unit.unitCode,\t\t\t\t\"Min\": -1000000,\t\t\t\t\"Max\": 1000000,\t\t\t\t\"MessageOff\": \"\",\t\t\t\t\"MessageOn\": \"\",\t\t\t\t\"RolloverValue\": 0,\t\t\t\t\"InterpolationType\": \"linear\",\t            /* the following line is commented out because as of 201910.20 online doesn't support GeoLocation via api\t\t\t\t\"GeoLocation\": sourceInfo.geoLocation.geogLocation.latitude & \",\" & sourceInfo.geoLocation.geogLocation.longitude,\t            */\t\t\t\t\"Alias\": sourceInfo.siteName\t\t\t}\t\t]\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 320,
+        "y": 700,
+        "wires": [
+            [
+                "abb4a75.d408058"
+            ]
+        ]
+    },
+    {
+        "id": "8db646b4.b99e58",
+        "type": "debug",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 630,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "4b4edc.c56b0124",
+        "type": "inject",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "topic": "",
+        "payload": "2019-10-20T06:45:00.000-05:00",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 820,
+        "wires": [
+            [
+                "c3498328.8d427"
+            ]
+        ]
+    },
+    {
+        "id": "c3498328.8d427",
+        "type": "function",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "func": "var mydatetime = new Date(msg.payload);\nmsg.payload=mydatetime;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 300,
+        "y": 820,
+        "wires": [
+            [
+                "8db646b4.b99e58"
+            ]
+        ]
+    },
+    {
+        "id": "c05c1900.4047f8",
+        "type": "function",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "func": "var newmsg = {};\nmsg.payload.data.forEach(function(entry) {\n//    node.warn(entry)\n    newmsg = {};\n    for (var key in entry) {\n        // check if the property/key is defined in the object itself, not in parent\n//        node.warn(\"before if the key = \" + key);\n        if (key == \"dateTime\") {\n//            node.warn(\"key = dateTime!!!\");\n            newmsg.timestamp = new Date(entry[key]);\n        }else{\n            newmsg.topic = key;\n            newmsg.payload = entry[key];\n        }\n        if (entry.hasOwnProperty(key)) {\n//            node.warn(key, entry[key]);\n        } \n    }\n//    node.warn(newmsg)\n`    return newmsg;\n`});\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 380,
+        "y": 760,
+        "wires": [
+            [
+                "18881877.9cdff8"
+            ]
+        ]
+    },
+    {
+        "id": "abb4a75.d408058",
+        "type": "debug",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 690,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "4b9102e4.4df98c",
+        "type": "inject",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 100,
+        "y": 880,
+        "wires": [
+            [
+                "c42d2bd2.f74308",
+                "18881877.9cdff8"
+            ]
+        ]
+    },
+    {
+        "id": "c42d2bd2.f74308",
+        "type": "function",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "func": "node.log(\"Why doens't this log?\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 350,
+        "y": 860,
+        "wires": [
+            [
+                "8db646b4.b99e58"
+            ]
+        ]
+    },
+    {
+        "id": "18881877.9cdff8",
+        "type": "debug",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 570,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "78555110.fdb53",
+        "type": "join",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "mode": "auto",
+        "build": "string",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": "false",
+        "timeout": "",
+        "count": "",
+        "reduceRight": false,
+        "x": 1060,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "47729be6.c92fe4",
+        "type": "inject",
+        "z": "d0d30a38.451ae8",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 100,
+        "y": 440,
+        "wires": [
+            [
+                "6c9aba6a.d96094"
+            ]
+        ]
+    },
+    {
+        "id": "6c9aba6a.d96094",
+        "type": "debug",
+        "z": "d0d30a38.451ae8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 230,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "c6d07106.3ab6c",
+        "type": "function",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "func": "/*20171208 \ninput message should contain:\nmsg.timestamp ie 1514764800000 is an epoch milliseconds timestamp representing 2018.01.01. at 00:00:00.000\n (if msg.timestamp does not exist then \"now\" will be used)\neither single value-based payload:\n    msg.payload ie 72.1 or any string or number representing the value for the topic\n    msg.topic ie diningroom/temperature\nor multi-variable object-based payload containing property : value pairs (use . as delimiter)\n    https://stackoverflow.com/questions/1661197/what-characters-are-valid-for-javascript-variable-names\n    msg.payload ie {basement.temperature : 72.1, diningroom.temperature: 73.2}\n    msg.topic ie wisconsin/summerhome becomes the prefix for each item, creating final items such as wisconsin/summerhome/basement/temperature\n*/\nvar wwQueue = flow.get('wwQueue') ||{\"data\":[]};\n//var dt = new Date(); // defaults to now //var dtstring = dt.toISOString();\n//use timestamp if it exists otherwise default to now\n// this works and is efficient but I'm leaning toward \"non-function\", flow-based solutions\nif ((typeof msg.timestamp !== 'undefined')){dtstring = new Date(msg.timestamp).toISOString();} \nelse {dtstring = new Date().toISOString();}\n\ni = 0;\nwhile (\n    (typeof wwQueue.data !== 'undefined') &&\n    (typeof wwQueue.data[i] !== 'undefined') &&\n    (typeof wwQueue.data[i].dateTime !== 'undefined') &&\n    (new Date(wwQueue.data[i].dateTime).getTime() > new Date(dtstring).getTime()) //while we find newer dates keep looking \n) {i++;}\n\nvar obj = {};\nif (\n    (typeof wwQueue.data !== 'undefined')&&\n    (typeof wwQueue.data[i] !== 'undefined')&&\n    (typeof wwQueue.data[i].dateTime !== 'undefined')&&\n    (new Date(wwQueue.data[i].dateTime).getTime() == new Date(dtstring).getTime()) //if exact date found then we need to handle existing\n) {\n    obj = wwQueue.data.splice(i,1)[0];\n} else {\n    obj.dateTime = dtstring;\n}\n\nvar tag = \"\";\nif (typeof msg.payload !== \"object\"){\n    tag = msg.topic.replace(/\\//g,\".\"); //globally replace / with .\n    obj[tag]=msg.payload;//add new tag and value to this dateTime record\n} else {\n    var prefix = msg.topic.replace(/\\//g,\".\") + \".\";\n    for(var propertyName in msg.payload) {\n        tag = prefix  + propertyName;//propertyName.replace(/\\$/g,\".\") was going to use $ delimiter but dot \".\" works \n        obj[tag] = msg.payload[propertyName];\n//        node.error(JSON.stringify(obj,null, 4));\n    }\n}\nwwQueue.data.splice(i,0,obj); //add new, full dateTime record back to all record data in the right spot\n\nflow.set('wwQueue',wwQueue);\nmsg.topic = \"tapia/home\";\nmsg.payload = wwQueue;\n\nreturn msg;\n\n/*\nexample from online.wonderware.com\n{\n  \"data\": [\n    {\n      \"dateTime\": \"2017-03-20T12:21:12.199Z\",\n      \"Reactor3.Level\": 1.51860072870498,\n      \"Reactor3.Temp\": 27.1360543141452,\n      \"Reactor3.InletValve\": 0,\n      \"Reactor3.Step\": 7,\n      \"Line3.Units\": 1518,\n      \"Line3.Product\": \"BRN\"\n    }\n  ]\n}\n*/\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 210,
+        "y": 780,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "48dd35e6.f3b0dc",
+        "type": "function",
+        "z": "c6be1934.85f088",
+        "name": "ww json to individual msg.topic fmt",
+        "func": "/*\nconvert from Wonderware format of:\n    {\n      \"data\": [\n        {\n          \"dateTime\": \"2019-10-27T07:45:00.000-05:00\",\n          \"usgs.river.05355250.flow\": \"67700\"\n        },\n          \"dateTime\": \"2019-10-27T08:00:00.000-05:00\",\n          \"usgs.river.07010000.flow\": \"436000\"\n        }\n      ]\n    }\n\nto individual msg with\n    msg.timestamp and msg.payload\n*/\n\nvar msgarr = [];\nfor (var obj of msg.payload.data) {//array so use \"of\" not \"in\"\n    var msg1 = {};\n    msg1.timestamp = obj.dateTime;\n//    node.warn(\"Object.keys(obj)=\" + Object.keys(obj))\n    for (i=1; i < Object.keys(obj).length; i++) {\n        var msg2 = {};\n        msg2.timestamp = msg1.timestamp;\n        msg2.topic = Object.keys(obj)[i].replace(/\\./g,\"/\"); //globally replace . with /\n        msg2.payload = Object.values(obj)[i];\n        msgarr.push(msg2);\n    }\n}\n\nreturn [msgarr];\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 780,
+        "y": 860,
+        "wires": [
+            [
+                "96616a8a.b6fa38",
+                "d533a1de.06894"
+            ]
+        ]
+    },
+    {
+        "id": "8eb03d67.edb88",
+        "type": "function",
+        "z": "c6be1934.85f088",
+        "name": "pass WW format",
+        "func": "/* wonderware format example\n{\n  \"data\": [\n    {\n      \"dateTime\": \"2017-03-20T12:21:12.199Z\",\n      \"Reactor3.Level\": 1.51860072870498,\n      \"Reactor3.Temp\": 27.1360543141452,\n      \"Reactor3.InletValve\": 0,\n      \"Reactor3.Step\": 7,\n      \"Line3.Units\": 1518,\n      \"Line3.Product\": \"BRN\"\n    }\n  ]\n}\n*/\n\nif (\n    (typeof msg.payload == 'undefined')|| // ||=or, &&=and\n    (typeof msg.payload.data == 'undefined')||\n    (Array.isArray(msg.payload.data) === false)||\n    (msg.payload.data.length<1)||\n    (msg.payload.data[0].dateTime == 'undefined' )||\n    (isNaN(Date.parse(msg.payload.data[0].dateTime)))||\n    (Object.keys(msg.payload.data[0]).length < 2)\n) {\n    //msg=null;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 540,
+        "y": 860,
+        "wires": [
+            [
+                "48dd35e6.f3b0dc"
+            ]
+        ]
+    },
+    {
+        "id": "15cb197f.5c8dd7",
+        "type": "change",
+        "z": "c6be1934.85f088",
+        "name": "JSONata to wonderware metadata format",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.value.timeSeries\t{\t   \"geolocation\": [\t       $.{\t           \"TagName\":\"usgs.river.\" & sourceInfo.siteCode.value & \".flow\",\t           \"Description\":sourceInfo.siteName,\t           \"GeoLocation\": sourceInfo.geoLocation.geogLocation.latitude & \",\" & sourceInfo.geoLocation.geogLocation.longitude\t       }\t   ]\t\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 320,
+        "y": 740,
+        "wires": [
+            [
+                "abb4a75.d408058"
+            ]
+        ]
+    },
+    {
+        "id": "96616a8a.b6fa38",
+        "type": "debug",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 950,
+        "y": 720,
         "wires": []
     }
 ]
