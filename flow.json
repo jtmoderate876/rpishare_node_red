@@ -2162,10 +2162,10 @@
         "url": "",
         "tls": "",
         "x": 950,
-        "y": 120,
+        "y": 100,
         "wires": [
             [
-                "387eba59.e6bb06"
+                "36c9f573.661a0a"
             ]
         ]
     },
@@ -2179,7 +2179,7 @@
             "e520b0c4.168a8"
         ],
         "x": 215,
-        "y": 320,
+        "y": 300,
         "wires": [
             [
                 "7de4fca4.680f64"
@@ -3348,7 +3348,7 @@
             "d47d4df0.74b34"
         ],
         "x": 215,
-        "y": 200,
+        "y": 180,
         "wires": [
             [
                 "c8c26955.8e6978"
@@ -3364,7 +3364,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 370,
-        "y": 300,
+        "y": 280,
         "wires": [
             [
                 "2a07f92e.5f7b06"
@@ -3380,7 +3380,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 750,
-        "y": 120,
+        "y": 100,
         "wires": [
             [
                 "6fa21a86.e6d6d4",
@@ -3396,12 +3396,12 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "repeat": "20",
+        "repeat": "120",
         "crontab": "",
         "once": false,
         "onceDelay": "",
         "x": 110,
-        "y": 120,
+        "y": 100,
         "wires": [
             [
                 "40e3d262.b63afc"
@@ -3417,7 +3417,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 520,
-        "y": 120,
+        "y": 100,
         "wires": [
             [
                 "78534302.56589c"
@@ -3431,7 +3431,7 @@
         "name": "wwQueue processing",
         "info": "",
         "x": 120,
-        "y": 80,
+        "y": 60,
         "wires": []
     },
     {
@@ -3439,11 +3439,11 @@
         "type": "function",
         "z": "e8223701.eebbe8",
         "name": "wwQueue insert",
-        "func": "/*20171208 \ninput message should contain:\nmsg.timestamp ie 1514764800000 is an epoch milliseconds timestamp representing 2018.01.01. at 00:00:00.000\n (if msg.timestamp does not exist then \"now\" will be used)\neither single value-based payload:\n    msg.payload ie 72.1 or any string or number representing the value for the topic\n    msg.topic ie diningroom/temperature\nor multi-variable object-based payload containing property : value pairs (use . as delimiter)\n    https://stackoverflow.com/questions/1661197/what-characters-are-valid-for-javascript-variable-names\n    msg.payload ie {basement.temperature : 72.1, diningroom.temperature: 73.2}\n    msg.topic ie wisconsin/summerhome becomes the prefix for each item, creating final items such as wisconsin/summerhome/basement/temperature\n*/\nvar wwQueue = flow.get('wwQueue') ||{\"data\":[]};\n//var dt = new Date(); // defaults to now //var dtstring = dt.toISOString();\n//use timestamp if it exists otherwise default to now\n// this works and is efficient but I'm leaning toward \"non-function\", flow-based solutions\nif ((typeof msg.timestamp !== 'undefined')){dtstring = new Date(msg.timestamp).toISOString();} \nelse {dtstring = new Date().toISOString();}\n\ni = 0;\nwhile (\n    (typeof wwQueue.data !== 'undefined') &&\n    (typeof wwQueue.data[i] !== 'undefined') &&\n    (typeof wwQueue.data[i].dateTime !== 'undefined') &&\n    (new Date(wwQueue.data[i].dateTime).getTime() > new Date(dtstring).getTime()) //while we find newer dates keep looking \n) {i++;}\n\nvar obj = {};\nif (\n    (typeof wwQueue.data !== 'undefined')&&\n    (typeof wwQueue.data[i] !== 'undefined')&&\n    (typeof wwQueue.data[i].dateTime !== 'undefined')&&\n    (new Date(wwQueue.data[i].dateTime).getTime() == new Date(dtstring).getTime()) //if exact date found then we need to handle existing\n) {\n    obj = wwQueue.data.splice(i,1)[0];\n} else {\n    obj.dateTime = dtstring;\n}\n\nif (typeof msg.payload !== \"object\"){\n    var tag = msg.topic.replace(/\\//g,\".\"); //globally replace / with .\n    obj[tag]=msg.payload;//add new tag and value to this dateTime record\n} else {\n    var prefix = msg.topic.replace(/\\//g,\".\") + \".\";\n    var tag = \"\";\n    for(var propertyName in msg.payload) {\n        tag = prefix  + propertyName;//propertyName.replace(/\\$/g,\".\") was going to use $ delimiter but dot \".\" works \n        obj[tag] = msg.payload[propertyName];\n//        node.error(JSON.stringify(obj,null, 4));\n    }\n}\nwwQueue.data.splice(i,0,obj); //add new, full dateTime record back to all record data in the right spot\n\nflow.set('wwQueue',wwQueue);\nmsg.topic = \"tapia/home\";\nmsg.payload = wwQueue;\n\nreturn msg;\n\n/*\nexample from online.wonderware.com\n{\n  \"data\": [\n    {\n      \"dateTime\": \"2017-03-20T12:21:12.199Z\",\n      \"Reactor3.Level\": 1.51860072870498,\n      \"Reactor3.Temp\": 27.1360543141452,\n      \"Reactor3.InletValve\": 0,\n      \"Reactor3.Step\": 7,\n      \"Line3.Units\": 1518,\n      \"Line3.Product\": \"BRN\"\n    }\n  ]\n}\n*/\n",
+        "func": "/*20171208 \ninput message should contain:\nmsg.timestamp ie 1514764800000 is an epoch milliseconds timestamp representing 2018.01.01. at 00:00:00.000\n (if msg.timestamp does not exist then \"now\" will be used)\neither single value-based payload:\n    msg.payload ie 72.1 or any string or number representing the value for the topic\n    msg.topic ie diningroom/temperature\nor multi-variable object-based payload containing property : value pairs (use . as delimiter)\n    https://stackoverflow.com/questions/1661197/what-characters-are-valid-for-javascript-variable-names\n    msg.payload ie {basement.temperature : 72.1, diningroom.temperature: 73.2}\n    msg.topic ie wisconsin/summerhome becomes the prefix for each item, creating final items such as wisconsin/summerhome/basement/temperature\n*/\nvar wwQueue = flow.get('wwQueue') ||{\"data\":[]};\n//var dt = new Date(); // defaults to now //var dtstring = dt.toISOString();\n//use timestamp if it exists otherwise default to now\n// this works and is efficient but I'm leaning toward \"non-function\", flow-based solutions\nif ((typeof msg.timestamp !== 'undefined')){dtstring = new Date(msg.timestamp).toISOString();} \nelse {dtstring = new Date().toISOString();}\n\ni = 0;\nwhile (\n    (typeof wwQueue.data !== 'undefined') &&\n    (typeof wwQueue.data[i] !== 'undefined') &&\n    (typeof wwQueue.data[i].dateTime !== 'undefined') &&\n    (new Date(wwQueue.data[i].dateTime).getTime() > new Date(dtstring).getTime()) //while we find newer dates keep looking \n) {i++;}\n\nvar obj = {};\nif (\n    (typeof wwQueue.data !== 'undefined')&&\n    (typeof wwQueue.data[i] !== 'undefined')&&\n    (typeof wwQueue.data[i].dateTime !== 'undefined')&&\n    (new Date(wwQueue.data[i].dateTime).getTime() == new Date(dtstring).getTime()) //if exact date found then we need to handle existing\n) {\n    obj = wwQueue.data.splice(i,1)[0];\n} else {\n    obj.dateTime = dtstring;\n}\nvar tag = \"\";\nif (typeof msg.payload !== \"object\"){\n    tag = msg.topic.replace(/\\//g,\".\"); //globally replace / with .\n    obj[tag]=msg.payload;//add new tag and value to this dateTime record\n} else {\n    var prefix = msg.topic.replace(/\\//g,\".\") + \".\";\n    for(var propertyName in msg.payload) {\n        tag = prefix  + propertyName;//propertyName.replace(/\\$/g,\".\") was going to use $ delimiter but dot \".\" works \n        obj[tag] = msg.payload[propertyName];\n//        node.error(JSON.stringify(obj,null, 4));\n    }\n}\nwwQueue.data.splice(i,0,obj); //add new, full dateTime record back to all record data in the right spot\n\nflow.set('wwQueue',wwQueue);\nmsg.topic = \"tapia/home\";\nmsg.payload = wwQueue;\n\nreturn msg;\n\n/*\nexample from online.wonderware.com\n{\n  \"data\": [\n    {\n      \"dateTime\": \"2017-03-20T12:21:12.199Z\",\n      \"Reactor3.Level\": 1.51860072870498,\n      \"Reactor3.Temp\": 27.1360543141452,\n      \"Reactor3.InletValve\": 0,\n      \"Reactor3.Step\": 7,\n      \"Line3.Units\": 1518,\n      \"Line3.Product\": \"BRN\"\n    }\n  ]\n}\n*/\n",
         "outputs": 1,
         "noerr": 0,
         "x": 320,
-        "y": 80,
+        "y": 60,
         "wires": [
             []
         ]
@@ -3453,14 +3453,15 @@
         "type": "function",
         "z": "e8223701.eebbe8",
         "name": "wwQueue process",
-        "func": "var wwQueue = flow.get('wwQueue') || null;\nflow.set('wwQueue',null); //delete processed json from global context\nmsg.timestamp = msg.payload;\nmsg.payload = wwQueue;\nif (!msg.payload) {\n    msg = null;\n}\n//msg.payload = JSON.stringify(wwQueue,null,\"\\t\");\n\nreturn msg;\n",
+        "func": "//var wwQueue = flow.get('wwQueue') || null;\nvar wwQueue = flow.get('wwQueue') || {\"data\":[]};\n// var wwHTTPResponse = flow.get('wwHTTPResponse') || null;\nif ((flow.get('wwHTTPResponse') !== undefined) && (flow.get('wwHTTPResponse') !== null)){\n    // if wonderware responded to  previous POST assume successful and clear\n    flow.set('wwHTTPResponse',undefined);\n} else if ((flow.get('wwQueueAwaitingConfirmation') !== undefined) && (flow.get('wwQueueAwaitingConfirmation') !==null)){\n    // otherwise reprocess the previous data by adding it back to wwQueue\n    var wwQueueAwaitingConfirmation = flow.get('wwQueueAwaitingConfirmation');\n    for (var obj1 of wwQueueAwaitingConfirmation.data) {//array so use \"of\" not \"in\"\n        i = 0;\n        while (//work through all earlier dateTimes\n            (typeof wwQueue.data !== 'undefined') &&\n            (typeof wwQueue.data[i] !== 'undefined') &&\n            (typeof wwQueue.data[i].dateTime !== 'undefined') &&\n            (new Date(wwQueue.data[i].dateTime).getTime() > new Date(obj1.dateTime).getTime()) //while we find newer dates keep looking\n        ) {i++;}\n        var obj2 = {};\n        if (//is current dateTime EQUAL to ours (or older)\n            (typeof wwQueue.data !== 'undefined')&&\n            (typeof wwQueue.data[i] !== 'undefined')&&\n            (typeof wwQueue.data[i].dateTime !== 'undefined')&&\n            (new Date(wwQueue.data[i].dateTime).getTime() == new Date(obj1.dateTime).getTime()) //if exact date found then we need to handle existing\n        ) {//if equal use  existing array element\n            obj2 = wwQueue.data.splice(i,1)[0];\n        } else {//if older (not equal) create a new array element\n            obj2.dateTime = obj1.dateTime;\n        }\n        for (i=1; i < Object.keys(obj1).length; i++) {\n            if (Object.keys(obj1)[i]!=\"dateTime\") {//don't duplicate the dateTime\n                obj2[Object.keys(obj1)[i]] = Object.values(obj1)[i];\n            }\n        }\n        wwQueue.data.splice(i,0,obj2); //add new, full dateTime record back to all record data in the right spot\n        flow.set('wwHTTPResponse',undefined);\n    }\n}\nflow.set('wwQueueAwaitingConfirmation',wwQueue)//\"move\" queue to awaiting confirmation\nflow.set('wwQueue',null); //delete processed json from global context\nmsg.timestamp = msg.payload;\nmsg.payload = wwQueue;\nif (!msg.payload) {\n    msg = null;\n}\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "x": 310,
-        "y": 120,
+        "y": 100,
         "wires": [
             [
-                "ec1ff4f0.8a3f18"
+                "ec1ff4f0.8a3f18",
+                "5825d936.db4968"
             ]
         ]
     },
@@ -3476,7 +3477,7 @@
         "crontab": "",
         "once": false,
         "x": 110,
-        "y": 160,
+        "y": 140,
         "wires": [
             [
                 "810817eb.dbcb88"
@@ -3492,7 +3493,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 300,
-        "y": 160,
+        "y": 140,
         "wires": [
             [
                 "bc9e74de.3876b8"
@@ -3508,7 +3509,7 @@
         "console": "false",
         "complete": "true",
         "x": 950,
-        "y": 160,
+        "y": 140,
         "wires": []
     },
     {
@@ -3517,8 +3518,8 @@
         "z": "e8223701.eebbe8",
         "name": "Main inputs",
         "info": "",
-        "x": 70,
-        "y": 260,
+        "x": 90,
+        "y": 240,
         "wires": []
     },
     {
@@ -3528,7 +3529,7 @@
         "name": "MQTT processing",
         "info": "",
         "x": 930,
-        "y": 220,
+        "y": 200,
         "wires": []
     },
     {
@@ -3586,7 +3587,7 @@
         "console": "false",
         "complete": "true",
         "x": 950,
-        "y": 80,
+        "y": 20,
         "wires": []
     },
     {
@@ -3661,7 +3662,7 @@
             }
         ],
         "x": 710,
-        "y": 20,
+        "y": 60,
         "wires": [
             [
                 "89b4a504.7f21e8"
@@ -3714,7 +3715,7 @@
             "3c87aa50.8e7256"
         ],
         "x": 915,
-        "y": 260,
+        "y": 240,
         "wires": []
     },
     {
@@ -5497,7 +5498,7 @@
         "qos": "2",
         "broker": "971eda83.260398",
         "x": 100,
-        "y": 360,
+        "y": 340,
         "wires": [
             [
                 "ef1bb868.c53928",
@@ -5547,7 +5548,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 570,
-        "y": 360,
+        "y": 340,
         "wires": [
             [
                 "7de4fca4.680f64",
@@ -5564,7 +5565,7 @@
         "action": "obj",
         "pretty": false,
         "x": 370,
-        "y": 360,
+        "y": 340,
         "wires": [
             [
                 "b802be46.082e7"
@@ -5576,13 +5577,13 @@
         "type": "debug",
         "z": "e8223701.eebbe8",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 350,
-        "y": 480,
+        "x": 370,
+        "y": 180,
         "wires": []
     },
     {
@@ -5649,7 +5650,7 @@
         "repair": false,
         "outputs": 2,
         "x": 250,
-        "y": 360,
+        "y": 340,
         "wires": [
             [
                 "60c14a65.0287d4"
@@ -5670,8 +5671,8 @@
                 "type": "msg"
             }
         ],
-        "x": 550,
-        "y": 600,
+        "x": 540,
+        "y": 440,
         "wires": [
             [
                 "307e7272.0da96e"
@@ -5684,8 +5685,8 @@
         "z": "e8223701.eebbe8",
         "name": "Read REST API",
         "info": "",
-        "x": 120,
-        "y": 600,
+        "x": 100,
+        "y": 440,
         "wires": []
     },
     {
@@ -5697,8 +5698,8 @@
         "ret": "txt",
         "url": "",
         "tls": "",
-        "x": 770,
-        "y": 680,
+        "x": 760,
+        "y": 520,
         "wires": [
             [
                 "5825d936.db4968"
@@ -5717,8 +5718,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 120,
-        "y": 640,
+        "x": 100,
+        "y": 480,
         "wires": [
             [
                 "4917e4e5.06bbbc"
@@ -5733,8 +5734,8 @@
         "func": "//msg.url = \"https://online.wonderware.com/apis/Historian/v2/\";\n//msg.method = \"GET\";\n//msg.headers = {};\nmsg.headers.Authorization = msg.Authorization;  //copy Authorization to be under headers\ndelete msg.Authorization;                       // and remove from old location\n//msg.headers.ContentType = \"application/json\";\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 370,
-        "y": 680,
+        "x": 360,
+        "y": 520,
         "wires": [
             [
                 "43ec985e.08bb38"
@@ -5751,8 +5752,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 970,
-        "y": 680,
+        "x": 960,
+        "y": 520,
         "wires": []
     },
     {
@@ -5774,8 +5775,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 460,
-        "y": 640,
+        "x": 450,
+        "y": 480,
         "wires": [
             [
                 "7e76212d.f8ed5"
@@ -5801,8 +5802,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 310,
-        "y": 640,
+        "x": 300,
+        "y": 480,
         "wires": [
             [
                 "dbb8355c.ae2f88"
@@ -5828,8 +5829,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 670,
-        "y": 640,
+        "x": 660,
+        "y": 480,
         "wires": [
             [
                 "9a406cda.bd797"
@@ -5961,7 +5962,7 @@
             "9cd45335.9c179"
         ],
         "x": 215,
-        "y": 280,
+        "y": 260,
         "wires": [
             [
                 "2a07f92e.5f7b06"
@@ -5977,7 +5978,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 510,
-        "y": 300,
+        "y": 280,
         "wires": [
             [
                 "c8c26955.8e6978"
@@ -6220,8 +6221,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 110,
-        "y": 780,
+        "x": 210,
+        "y": 580,
         "wires": [
             [
                 "dde297b1.22f478"
@@ -6234,8 +6235,8 @@
         "z": "e8223701.eebbe8",
         "name": "null testing",
         "info": "",
-        "x": 100,
-        "y": 740,
+        "x": 80,
+        "y": 580,
         "wires": []
     },
     {
@@ -6250,8 +6251,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 110,
-        "y": 820,
+        "x": 210,
+        "y": 620,
         "wires": [
             [
                 "dde297b1.22f478"
@@ -6270,8 +6271,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 230,
-        "y": 740,
+        "x": 350,
+        "y": 580,
         "wires": [
             [
                 "c222c71e.ab18e8"
@@ -6298,7 +6299,7 @@
         "to": "",
         "reg": false,
         "x": 590,
-        "y": 800,
+        "y": 620,
         "wires": [
             [
                 "7de4fca4.680f64",
@@ -6314,51 +6315,14 @@
         "func": "msg.payload = null;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 370,
-        "y": 760,
+        "x": 450,
+        "y": 580,
         "wires": [
             [
                 "d2fec07e.6bc5a",
                 "dde297b1.22f478"
             ]
         ]
-    },
-    {
-        "id": "a6bd1a1.45d74e8",
-        "type": "ui_slider",
-        "z": "e8223701.eebbe8",
-        "name": "",
-        "label": "slider",
-        "group": "e1d17b09.535418",
-        "order": 0,
-        "width": 0,
-        "height": 0,
-        "passthru": true,
-        "topic": "",
-        "min": 0,
-        "max": "100",
-        "step": "0.5",
-        "x": 880,
-        "y": 800,
-        "wires": [
-            [
-                "e7381b04.284178"
-            ]
-        ]
-    },
-    {
-        "id": "e7381b04.284178",
-        "type": "debug",
-        "z": "e8223701.eebbe8",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 970,
-        "y": 740,
-        "wires": []
     },
     {
         "id": "f990879b.ddac88",
@@ -6368,8 +6332,8 @@
         "func": "/*\ncreating a report-by-exception type node but one that, when the value does change\nsends to messages, one with the old value and last timestamp for that value\nand a second with the new value and timestamp. This way Wonderware Online will have\na better data for visualization / interpolation.\n*/\nvar prevValue = {};\nvar topic = msg.topic;//.replace(/\\//g,\".\"); //globally replace / with .\nprevValue = context.get(topic);\n//create object with .topic, .payload, .timestamp\nvar currValue = {\n    topic : msg.topic,\n    payload : msg.payload,\n    timestamp : msg.timestamp\n};\n/*\nif (typeof prevValue !== 'undefined') {\n    node.warn(\"prevValue=\" + JSON.stringify(prevValue) );\n}\nif (typeof currValue !== 'undefined') {\n    node.warn(\"currValue=\" + JSON.stringify(currValue) );\n}\n*/\n\nif ((typeof prevValue !== 'undefined') && (typeof prevValue.payload !== 'undefined')) {\n    if (currValue.payload==prevValue.payload) {\n        //node.warn(\"Values the same!\")\n        prevValue = currValue;\n        context.set(topic, prevValue)\n        return null;// values the same, no need to process\n    } else {\n        var msgarr = [\n            {\n                timestamp: prevValue.timestamp,\n                topic: prevValue.topic,\n                payload: prevValue.payload\n            },\n            {\n                timestamp: currValue.timestamp,\n                topic: currValue.topic,\n                payload: currValue.payload\n            },\n        ];\n        node.log(msgarr.toString());\n        context.set(topic, currValue)\n        return [msgarr];\n    }\n} else {\n    prevValue = currValue;\n    context.set(topic, prevValue);\n    return msg;\n}\n\n//return msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 630,
-        "y": 740,
+        "x": 640,
+        "y": 580,
         "wires": [
             [
                 "3acf5776.544708"
@@ -6386,8 +6350,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 770,
-        "y": 840,
+        "x": 810,
+        "y": 580,
         "wires": []
     },
     {
@@ -6410,7 +6374,7 @@
         "to": "",
         "reg": false,
         "x": 390,
-        "y": 820,
+        "y": 620,
         "wires": [
             [
                 "d2fec07e.6bc5a"
@@ -6428,7 +6392,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 920,
-        "y": 300,
+        "y": 280,
         "wires": []
     },
     {
@@ -6536,7 +6500,7 @@
         "name": "",
         "env": [],
         "x": 650,
-        "y": 300,
+        "y": 280,
         "wires": [
             [
                 "51c255f0.079a2c",
@@ -6566,7 +6530,7 @@
         "repair": false,
         "outputs": 2,
         "x": 730,
-        "y": 260,
+        "y": 240,
         "wires": [
             [],
             [
@@ -6619,8 +6583,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 230,
-        "y": 400,
+        "x": 490,
+        "y": 380,
         "wires": [
             [],
             [
@@ -6648,8 +6612,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 440,
-        "y": 400,
+        "x": 700,
+        "y": 380,
         "wires": [
             [],
             [
@@ -6666,7 +6630,7 @@
         "qos": "2",
         "broker": "971eda83.260398",
         "x": 110,
-        "y": 440,
+        "y": 380,
         "wires": [
             [
                 "7de4fca4.680f64"
@@ -6708,7 +6672,7 @@
         "repair": false,
         "outputs": 2,
         "x": 690,
-        "y": 220,
+        "y": 200,
         "wires": [
             [],
             [
@@ -8042,7 +8006,7 @@
             "2ef64807.1661f8"
         ],
         "x": 215,
-        "y": 240,
+        "y": 220,
         "wires": [
             [
                 "c8c26955.8e6978"
@@ -8054,11 +8018,11 @@
         "type": "debug",
         "z": "e8223701.eebbe8",
         "name": "",
-        "active": false,
+        "active": true,
         "console": "false",
         "complete": "true",
-        "x": 1090,
-        "y": 40,
+        "x": 810,
+        "y": 160,
         "wires": []
     },
     {
@@ -8379,7 +8343,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 910,
-        "y": 360,
+        "y": 340,
         "wires": []
     },
     {
@@ -11925,8 +11889,8 @@
         "links": [
             "84d2eb34.ae0af8"
         ],
-        "x": 995,
-        "y": 320,
+        "x": 835,
+        "y": 460,
         "wires": []
     },
     {
@@ -11984,89 +11948,6 @@
         "x": 810,
         "y": 360,
         "wires": []
-    },
-    {
-        "id": "f150dce5.479ef",
-        "type": "html",
-        "z": "c6be1934.85f088",
-        "name": "",
-        "property": "payload",
-        "outproperty": "payload",
-        "tag": "form[name=\"frm_plot\"] font:contains(\" CFS\")",
-        "ret": "text",
-        "as": "single",
-        "x": 690,
-        "y": 440,
-        "wires": [
-            [
-                "11c0b600.157f5a"
-            ]
-        ]
-    },
-    {
-        "id": "12d74888.130d87",
-        "type": "change",
-        "z": "c6be1934.85f088",
-        "name": "",
-        "rules": [
-            {
-                "t": "move",
-                "p": "payload[0]",
-                "pt": "msg",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 980,
-        "y": 460,
-        "wires": [
-            [
-                "3e8e8b19.5b1a64"
-            ]
-        ]
-    },
-    {
-        "id": "3e8e8b19.5b1a64",
-        "type": "change",
-        "z": "c6be1934.85f088",
-        "name": "remove CFS & comma",
-        "rules": [
-            {
-                "t": "change",
-                "p": "payload",
-                "pt": "msg",
-                "from": " CFS",
-                "fromt": "str",
-                "to": "",
-                "tot": "str"
-            },
-            {
-                "t": "change",
-                "p": "payload",
-                "pt": "msg",
-                "from": ",",
-                "fromt": "str",
-                "to": "",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 980,
-        "y": 500,
-        "wires": [
-            [
-                "11c0b600.157f5a"
-            ]
-        ]
     },
     {
         "id": "fce3c19d.33701",
@@ -12252,7 +12133,7 @@
         "z": "c6be1934.85f088",
         "name": "multiple USGS codes",
         "topic": "",
-        "payload": "07010000,05568500,06818000,06888990,06486000,05420500,06610000,05467000,05420500,06906500,07050690,06891080,06910450,06909000,05487520,06895500,05465500",
+        "payload": "07010000,05568500,06818000,06888990,06486000,05420500,06610000,05467000,05420500,06906500,07050690,06891080,06910450,06909000,05487520,06895500,05465500,07144550",
         "payloadType": "str",
         "repeat": "900",
         "crontab": "",
@@ -12299,8 +12180,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 750,
-        "y": 560,
+        "x": 690,
+        "y": 600,
         "wires": []
     },
     {
@@ -12331,89 +12212,6 @@
         ]
     },
     {
-        "id": "85432d02.9be",
-        "type": "change",
-        "z": "c6be1934.85f088",
-        "name": "add siteid to url",
-        "rules": [
-            {
-                "t": "set",
-                "p": "url",
-                "pt": "msg",
-                "to": "$.url & $.siteid & \"/\"",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1020,
-        "y": 640,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "13f77da5.8b9f02",
-        "type": "switch",
-        "z": "c6be1934.85f088",
-        "name": "end with /",
-        "property": "url",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "jsonata_exp",
-                "v": "msg.url.$substring(-1)=\"/\"",
-                "vt": "jsonata"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 940,
-        "y": 560,
-        "wires": [
-            [
-                "85432d02.9be"
-            ],
-            [
-                "d540d088.14562"
-            ]
-        ]
-    },
-    {
-        "id": "d540d088.14562",
-        "type": "change",
-        "z": "c6be1934.85f088",
-        "name": "/",
-        "rules": [
-            {
-                "t": "set",
-                "p": "url",
-                "pt": "msg",
-                "to": "$.url & \"/\"",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1010,
-        "y": 600,
-        "wires": [
-            [
-                "85432d02.9be"
-            ]
-        ]
-    },
-    {
         "id": "db6c6583.d39348",
         "type": "change",
         "z": "c6be1934.85f088",
@@ -12437,7 +12235,6 @@
         "wires": [
             [
                 "41a15677.d1a468",
-                "78ed50d5.31fff",
                 "8eb03d67.edb88"
             ]
         ]
@@ -12452,8 +12249,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 750,
-        "y": 600,
+        "x": 670,
+        "y": 660,
         "wires": []
     },
     {
@@ -12480,9 +12277,9 @@
         "id": "5416d457.0f423c",
         "type": "comment",
         "z": "c6be1934.85f088",
-        "name": "",
+        "name": "USGS river flow data notes",
         "info": "https://waterservices.usgs.gov/nwis/iv/?format=json&bBox=-90.000000,40.000000,-85.000000,45.000000&parameterCd=00060&siteStatus=all&drainAreaMin=10000\n\nhttps://waterservices.usgs.gov/nwis/iv/?format=json&stateCd=mo&parameterCd=00060&siteStatus=all&drainAreaMin=100000\n\nhttps://waterservices.usgs.gov/rest/IV-Test-Tool.html\n\nhttps://waterservices.usgs.gov/nwis/iv/?format=json&sites=02198980,02246500,02310747,02323500,02428400,03025500,03086000,03114306,03216070,03216600,03277200,03292494,03303280,03381700,03566000,04067500,04082400,04084445,04127885,04159130,04165710,05082500,05092000,05129515,05133500,05137500,05331000,05331580,05340500,05344490,05355250,05378500,05400760,05404000,05407000,05420500,05430500,05437500,05442300,05446500,05464500,05465000,05465500,05465700,05485500,05489500,05490500,05490600,05558300,05568500,05586100,05587450,06327500,06329500,06343000,06486000,06610000,06807000,06813500,06818000,06821250,06887500,06888990,06910450,06910450,06934500,06935450,06935550,06935965,07024175,07032200,07077000,07190500,07190500,07191500,07194500,07198000,07249455,07250550,07289000,07374000,07374525,07381490,07381590,07381600,08041780,011313440,011337190,011455095,011455420,012040500,012194000,012200500,012391950,012395500,012396500,012472800,013269000,013334300,014105700&parameterCd=00060&siteStatus=all&drainAreaMin=10000\n\n07010000,05568500,05355250,06818000,06888990\n\nmap:\nhttps://waterwatch.usgs.gov/?id=ww_current\n\npayload.value.timeSeries {\n   name  : {\n       \"siteName\":sourceInfo.siteName,\n       \"siteCode\": sourceInfo.siteCode.value,\n       \"value\" : values[0].value.value,\n       \"units\" : variable.unit.unitCode,\n       \"latitude\": sourceInfo.geoLocation.geogLocation.latitude,\n       \"longitude\": sourceInfo.geoLocation.geogLocation.longitude\n    }\n}\n\n",
-        "x": 80,
+        "x": 130,
         "y": 620,
         "wires": []
     },
@@ -12542,73 +12339,6 @@
         ]
     },
     {
-        "id": "78ed50d5.31fff",
-        "type": "split",
-        "z": "c6be1934.85f088",
-        "name": "",
-        "splt": "\\n",
-        "spltType": "str",
-        "arraySplt": 1,
-        "arraySpltType": "len",
-        "stream": false,
-        "addname": "",
-        "x": 570,
-        "y": 660,
-        "wires": [
-            [
-                "2f163124.7184be"
-            ]
-        ]
-    },
-    {
-        "id": "ae8afc5e.4f9f5",
-        "type": "change",
-        "z": "c6be1934.85f088",
-        "name": "",
-        "rules": [
-            {
-                "t": "delete",
-                "p": "url",
-                "pt": "msg"
-            },
-            {
-                "t": "delete",
-                "p": "responseUrl",
-                "pt": "msg"
-            },
-            {
-                "t": "delete",
-                "p": "parts",
-                "pt": "msg"
-            },
-            {
-                "t": "delete",
-                "p": "statusCode",
-                "pt": "msg"
-            },
-            {
-                "t": "delete",
-                "p": "headers",
-                "pt": "msg"
-            },
-            {
-                "t": "delete",
-                "p": "redirectList",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 920,
-        "y": 780,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "471e08fd.eddc78",
         "type": "function",
         "z": "c6be1934.85f088",
@@ -12623,67 +12353,9 @@
                 "db6c6583.d39348",
                 "655f825b.88904c",
                 "8db646b4.b99e58",
-                "15cb197f.5c8dd7"
+                "15cb197f.5c8dd7",
+                "41a15677.d1a468"
             ]
-        ]
-    },
-    {
-        "id": "2f163124.7184be",
-        "type": "change",
-        "z": "c6be1934.85f088",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "$.payload.siteCode",
-                "tot": "jsonata"
-            },
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "$.payload.value",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 700,
-        "y": 660,
-        "wires": [
-            [
-                "962579f5.a592d8"
-            ]
-        ]
-    },
-    {
-        "id": "962579f5.a592d8",
-        "type": "change",
-        "z": "c6be1934.85f088",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "\"usgs/river/\" & $.topic & \"/flow\"",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 850,
-        "y": 660,
-        "wires": [
-            []
         ]
     },
     {
@@ -12697,8 +12369,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 690,
-        "y": 500,
+        "x": 670,
+        "y": 560,
         "wires": []
     },
     {
@@ -12759,8 +12431,8 @@
         "tostatus": false,
         "complete": "payload",
         "targetType": "msg",
-        "x": 630,
-        "y": 760,
+        "x": 670,
+        "y": 740,
         "wires": []
     },
     {
@@ -12776,7 +12448,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 110,
-        "y": 820,
+        "y": 780,
         "wires": [
             [
                 "c3498328.8d427"
@@ -12792,26 +12464,10 @@
         "outputs": 1,
         "noerr": 0,
         "x": 300,
-        "y": 820,
+        "y": 780,
         "wires": [
             [
                 "8db646b4.b99e58"
-            ]
-        ]
-    },
-    {
-        "id": "c05c1900.4047f8",
-        "type": "function",
-        "z": "c6be1934.85f088",
-        "name": "",
-        "func": "var newmsg = {};\nmsg.payload.data.forEach(function(entry) {\n//    node.warn(entry)\n    newmsg = {};\n    for (var key in entry) {\n        // check if the property/key is defined in the object itself, not in parent\n//        node.warn(\"before if the key = \" + key);\n        if (key == \"dateTime\") {\n//            node.warn(\"key = dateTime!!!\");\n            newmsg.timestamp = new Date(entry[key]);\n        }else{\n            newmsg.topic = key;\n            newmsg.payload = entry[key];\n        }\n        if (entry.hasOwnProperty(key)) {\n//            node.warn(key, entry[key]);\n        } \n    }\n//    node.warn(newmsg)\n`    return newmsg;\n`});\n",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 380,
-        "y": 760,
-        "wires": [
-            [
-                "18881877.9cdff8"
             ]
         ]
     },
@@ -12842,8 +12498,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 100,
-        "y": 880,
+        "x": 120,
+        "y": 820,
         "wires": [
             [
                 "c42d2bd2.f74308",
@@ -12859,8 +12515,8 @@
         "func": "node.log(\"Why doens't this log?\");\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 350,
-        "y": 860,
+        "x": 290,
+        "y": 820,
         "wires": [
             [
                 "8db646b4.b99e58"
@@ -12878,31 +12534,9 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 570,
-        "y": 800,
+        "x": 610,
+        "y": 780,
         "wires": []
-    },
-    {
-        "id": "78555110.fdb53",
-        "type": "join",
-        "z": "c6be1934.85f088",
-        "name": "",
-        "mode": "auto",
-        "build": "string",
-        "property": "payload",
-        "propertyType": "msg",
-        "key": "topic",
-        "joiner": "\\n",
-        "joinerType": "str",
-        "accumulate": "false",
-        "timeout": "",
-        "count": "",
-        "reduceRight": false,
-        "x": 1060,
-        "y": 280,
-        "wires": [
-            []
-        ]
     },
     {
         "id": "47729be6.c92fe4",
@@ -12939,20 +12573,6 @@
         "wires": []
     },
     {
-        "id": "c6d07106.3ab6c",
-        "type": "function",
-        "z": "c6be1934.85f088",
-        "name": "",
-        "func": "/*20171208 \ninput message should contain:\nmsg.timestamp ie 1514764800000 is an epoch milliseconds timestamp representing 2018.01.01. at 00:00:00.000\n (if msg.timestamp does not exist then \"now\" will be used)\neither single value-based payload:\n    msg.payload ie 72.1 or any string or number representing the value for the topic\n    msg.topic ie diningroom/temperature\nor multi-variable object-based payload containing property : value pairs (use . as delimiter)\n    https://stackoverflow.com/questions/1661197/what-characters-are-valid-for-javascript-variable-names\n    msg.payload ie {basement.temperature : 72.1, diningroom.temperature: 73.2}\n    msg.topic ie wisconsin/summerhome becomes the prefix for each item, creating final items such as wisconsin/summerhome/basement/temperature\n*/\nvar wwQueue = flow.get('wwQueue') ||{\"data\":[]};\n//var dt = new Date(); // defaults to now //var dtstring = dt.toISOString();\n//use timestamp if it exists otherwise default to now\n// this works and is efficient but I'm leaning toward \"non-function\", flow-based solutions\nif ((typeof msg.timestamp !== 'undefined')){dtstring = new Date(msg.timestamp).toISOString();} \nelse {dtstring = new Date().toISOString();}\n\ni = 0;\nwhile (\n    (typeof wwQueue.data !== 'undefined') &&\n    (typeof wwQueue.data[i] !== 'undefined') &&\n    (typeof wwQueue.data[i].dateTime !== 'undefined') &&\n    (new Date(wwQueue.data[i].dateTime).getTime() > new Date(dtstring).getTime()) //while we find newer dates keep looking \n) {i++;}\n\nvar obj = {};\nif (\n    (typeof wwQueue.data !== 'undefined')&&\n    (typeof wwQueue.data[i] !== 'undefined')&&\n    (typeof wwQueue.data[i].dateTime !== 'undefined')&&\n    (new Date(wwQueue.data[i].dateTime).getTime() == new Date(dtstring).getTime()) //if exact date found then we need to handle existing\n) {\n    obj = wwQueue.data.splice(i,1)[0];\n} else {\n    obj.dateTime = dtstring;\n}\n\nvar tag = \"\";\nif (typeof msg.payload !== \"object\"){\n    tag = msg.topic.replace(/\\//g,\".\"); //globally replace / with .\n    obj[tag]=msg.payload;//add new tag and value to this dateTime record\n} else {\n    var prefix = msg.topic.replace(/\\//g,\".\") + \".\";\n    for(var propertyName in msg.payload) {\n        tag = prefix  + propertyName;//propertyName.replace(/\\$/g,\".\") was going to use $ delimiter but dot \".\" works \n        obj[tag] = msg.payload[propertyName];\n//        node.error(JSON.stringify(obj,null, 4));\n    }\n}\nwwQueue.data.splice(i,0,obj); //add new, full dateTime record back to all record data in the right spot\n\nflow.set('wwQueue',wwQueue);\nmsg.topic = \"tapia/home\";\nmsg.payload = wwQueue;\n\nreturn msg;\n\n/*\nexample from online.wonderware.com\n{\n  \"data\": [\n    {\n      \"dateTime\": \"2017-03-20T12:21:12.199Z\",\n      \"Reactor3.Level\": 1.51860072870498,\n      \"Reactor3.Temp\": 27.1360543141452,\n      \"Reactor3.InletValve\": 0,\n      \"Reactor3.Step\": 7,\n      \"Line3.Units\": 1518,\n      \"Line3.Product\": \"BRN\"\n    }\n  ]\n}\n*/\n",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 210,
-        "y": 780,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "48dd35e6.f3b0dc",
         "type": "function",
         "z": "c6be1934.85f088",
@@ -12960,8 +12580,8 @@
         "func": "/*\nconvert from Wonderware format of:\n    {\n      \"data\": [\n        {\n          \"dateTime\": \"2019-10-27T07:45:00.000-05:00\",\n          \"usgs.river.05355250.flow\": \"67700\"\n        },\n          \"dateTime\": \"2019-10-27T08:00:00.000-05:00\",\n          \"usgs.river.07010000.flow\": \"436000\"\n        }\n      ]\n    }\n\nto individual msg with\n    msg.timestamp and msg.payload\n*/\n\nvar msgarr = [];\nfor (var obj of msg.payload.data) {//array so use \"of\" not \"in\"\n    var msg1 = {};\n    msg1.timestamp = obj.dateTime;\n//    node.warn(\"Object.keys(obj)=\" + Object.keys(obj))\n    for (i=1; i < Object.keys(obj).length; i++) {\n        var msg2 = {};\n        msg2.timestamp = msg1.timestamp;\n        msg2.topic = Object.keys(obj)[i].replace(/\\./g,\"/\"); //globally replace . with /\n        msg2.payload = Object.values(obj)[i];\n        msgarr.push(msg2);\n    }\n}\n\nreturn [msgarr];\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 780,
-        "y": 860,
+        "x": 700,
+        "y": 820,
         "wires": [
             [
                 "96616a8a.b6fa38",
@@ -12977,8 +12597,8 @@
         "func": "/* wonderware format example\n{\n  \"data\": [\n    {\n      \"dateTime\": \"2017-03-20T12:21:12.199Z\",\n      \"Reactor3.Level\": 1.51860072870498,\n      \"Reactor3.Temp\": 27.1360543141452,\n      \"Reactor3.InletValve\": 0,\n      \"Reactor3.Step\": 7,\n      \"Line3.Units\": 1518,\n      \"Line3.Product\": \"BRN\"\n    }\n  ]\n}\n*/\n\nif (\n    (typeof msg.payload == 'undefined')|| // ||=or, &&=and\n    (typeof msg.payload.data == 'undefined')||\n    (Array.isArray(msg.payload.data) === false)||\n    (msg.payload.data.length<1)||\n    (msg.payload.data[0].dateTime == 'undefined' )||\n    (isNaN(Date.parse(msg.payload.data[0].dateTime)))||\n    (Object.keys(msg.payload.data[0]).length < 2)\n) {\n    //msg=null;\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 540,
-        "y": 860,
+        "x": 470,
+        "y": 820,
         "wires": [
             [
                 "48dd35e6.f3b0dc"
@@ -12989,7 +12609,7 @@
         "id": "15cb197f.5c8dd7",
         "type": "change",
         "z": "c6be1934.85f088",
-        "name": "JSONata to wonderware metadata format",
+        "name": "JSONata to geolocation",
         "rules": [
             {
                 "t": "set",
@@ -13004,7 +12624,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 320,
+        "x": 270,
         "y": 740,
         "wires": [
             [
@@ -13023,8 +12643,24 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 950,
-        "y": 720,
+        "x": 810,
+        "y": 780,
         "wires": []
+    },
+    {
+        "id": "36c9f573.661a0a",
+        "type": "function",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "func": "flow.set(\"wwHTTPResponse\",msg)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 650,
+        "y": 160,
+        "wires": [
+            [
+                "387eba59.e6bb06"
+            ]
+        ]
     }
 ]
