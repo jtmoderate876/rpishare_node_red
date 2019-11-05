@@ -85,7 +85,7 @@
     {
         "id": "1fec4b90.1b56f4",
         "type": "tab",
-        "label": "Jokes",
+        "label": "Examples",
         "disabled": false,
         "info": ""
     },
@@ -2274,8 +2274,8 @@
         "repeat": "",
         "crontab": "",
         "once": true,
-        "x": 90,
-        "y": 100,
+        "x": 110,
+        "y": 60,
         "wires": [
             [
                 "2525f2e3.ad6b6e",
@@ -2291,8 +2291,8 @@
         "func": "const getJoke = function (firstname=\"Chuck\", lastname=\"Norris\") {\n    \n    let promise = new Promise((resolve, reject) => {\n        msg.resolve = resolve;\n        msg.reject = reject;\n    });\n    \n    msg.url = `http://api.icndb.com/jokes/random?firstName=${firstname}&lastName=${lastname}`;\n    msg.method = 'GET';\n    \n    node.send(Object.assign({}, msg));\n    \n    return promise;\n};\n\nglobal.set('getJoke', getJoke);",
         "outputs": 1,
         "noerr": 0,
-        "x": 226,
-        "y": 101,
+        "x": 220,
+        "y": 60,
         "wires": [
             [
                 "32981db2.1ad1d2",
@@ -2309,8 +2309,8 @@
         "ret": "obj",
         "url": "",
         "tls": "",
-        "x": 372,
-        "y": 102,
+        "x": 350,
+        "y": 60,
         "wires": [
             [
                 "c4d63d77.0991a",
@@ -2323,14 +2323,14 @@
         "type": "function",
         "z": "1fec4b90.1b56f4",
         "name": "getJoke()",
-        "func": "const joke = global.get('getJoke')();\n\njoke.then(joke => {\n    node.warn(joke);\n}).catch(error => {\n    node.error(error);\n});\nmsg.topic = \"joke\";\nmsg.payload = joke;",
+        "func": "const joke = global.get('getJoke')();\nvar pl = null;\njoke.then(joke => {\n    //node.warn(joke);\n    msg.topic = \"joke\";\n    msg.payload = joke;\n    node.send(msg);\n}).catch(error => {\n    node.error(error);\n});\nreturn null;",
         "outputs": 1,
         "noerr": 0,
-        "x": 226,
-        "y": 201,
+        "x": 240,
+        "y": 180,
         "wires": [
             [
-                "6e6bedec.37b2c4"
+                "80539111.f993"
             ]
         ]
     },
@@ -2345,8 +2345,8 @@
         "repeat": "",
         "crontab": "",
         "once": false,
-        "x": 96,
-        "y": 201,
+        "x": 110,
+        "y": 180,
         "wires": [
             [
                 "35bd9768.216c88"
@@ -2361,18 +2361,18 @@
         "func": "msg.resolve(msg.payload.value.joke);\n\n// reject\n// setTimeout(function () {\n//     msg.reject({message: 'Could not request joke'});\n// }, 2000);",
         "outputs": "0",
         "noerr": 0,
-        "x": 642,
-        "y": 115,
+        "x": 480,
+        "y": 60,
         "wires": []
     },
     {
         "id": "660e8cd8.377134",
         "type": "comment",
         "z": "1fec4b90.1b56f4",
-        "name": "use above flow",
+        "name": "use above flow to initize promise then below to retrieve one after the other",
         "info": "",
-        "x": 106,
-        "y": 161,
+        "x": 300,
+        "y": 140,
         "wires": []
     },
     {
@@ -2383,8 +2383,8 @@
         "active": true,
         "console": "false",
         "complete": "true",
-        "x": 359,
-        "y": 25,
+        "x": 110,
+        "y": 100,
         "wires": []
     },
     {
@@ -2395,8 +2395,8 @@
         "active": true,
         "console": "false",
         "complete": "true",
-        "x": 524,
-        "y": 33,
+        "x": 250,
+        "y": 100,
         "wires": []
     },
     {
@@ -2407,8 +2407,8 @@
         "active": true,
         "console": "false",
         "complete": "true",
-        "x": 736,
-        "y": 34,
+        "x": 390,
+        "y": 100,
         "wires": []
     },
     {
@@ -2419,8 +2419,8 @@
         "func": "msg.callback(msg.payload.value.joke.replace(/&quot;/g, '\"'));",
         "outputs": "0",
         "noerr": 0,
-        "x": 590,
-        "y": 320,
+        "x": 610,
+        "y": 260,
         "wires": []
     },
     {
@@ -2434,8 +2434,8 @@
         "repeat": "",
         "crontab": "",
         "once": true,
-        "x": 110,
-        "y": 320,
+        "x": 130,
+        "y": 260,
         "wires": [
             [
                 "c059123.379e7f"
@@ -2450,8 +2450,8 @@
         "func": "var getJoke = function(firstname, lastname, callback) {\n    firstname = firstname || 'Chuck';\n    lastname = lastname || 'Norris';\n    \n    // http request\n    msg.url = `http://api.icndb.com/jokes/random?firstName=${firstname}&lastName=${lastname}`;\n    msg.method = 'GET';\n    \n    // assign callback to msg\n    msg.callback = callback;\n    \n    // return copy of msg\n    node.send(Object.assign({}, msg));\n};\n\n\n// make global\nglobal.set('getJoke', getJoke);",
         "outputs": 1,
         "noerr": 0,
-        "x": 270,
-        "y": 320,
+        "x": 290,
+        "y": 260,
         "wires": [
             [
                 "e9d00c74.bbb9c"
@@ -2464,8 +2464,8 @@
         "z": "1fec4b90.1b56f4",
         "name": "Flow callback example",
         "info": "",
-        "x": 120,
-        "y": 280,
+        "x": 100,
+        "y": 220,
         "wires": []
     },
     {
@@ -2477,8 +2477,8 @@
         "ret": "obj",
         "url": "",
         "tls": "",
-        "x": 430,
-        "y": 320,
+        "x": 450,
+        "y": 260,
         "wires": [
             [
                 "308390c7.2af29"
@@ -2497,7 +2497,7 @@
         "crontab": "",
         "once": false,
         "x": 120,
-        "y": 360,
+        "y": 300,
         "wires": [
             [
                 "e0837b3c.25c928"
@@ -2512,12 +2512,12 @@
         "func": "global.get('getJoke')('Wesley', 'Stam', function (joke) {\n    msg.payload = joke;\n    node.send(msg);\n});",
         "outputs": 1,
         "noerr": 0,
-        "x": 360,
-        "y": 360,
+        "x": 380,
+        "y": 300,
         "wires": [
             [
                 "1ec5ae1c.2c9112",
-                "6e6bedec.37b2c4"
+                "80539111.f993"
             ]
         ]
     },
@@ -2529,8 +2529,8 @@
         "active": true,
         "console": "false",
         "complete": "false",
-        "x": 610,
-        "y": 360,
+        "x": 630,
+        "y": 300,
         "wires": []
     },
     {
@@ -4782,7 +4782,7 @@
         "id": "f084466e.5d61b8",
         "type": "inject",
         "z": "984823b1.a0823",
-        "name": "PowerRoomFastOnOff",
+        "name": "PowderRoomFastOnOff",
         "topic": "insteon/flr1_powderroom_fan/state",
         "payload": "ON",
         "payloadType": "str",
@@ -5675,7 +5675,8 @@
         "y": 440,
         "wires": [
             [
-                "307e7272.0da96e"
+                "307e7272.0da96e",
+                "2a646435.73848c"
             ]
         ]
     },
@@ -5747,7 +5748,7 @@
         "type": "debug",
         "z": "e8223701.eebbe8",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -8018,7 +8019,7 @@
         "type": "debug",
         "z": "e8223701.eebbe8",
         "name": "",
-        "active": true,
+        "active": false,
         "console": "false",
         "complete": "true",
         "x": 810,
@@ -8264,36 +8265,6 @@
         "x": 670,
         "y": 60,
         "wires": []
-    },
-    {
-        "id": "91b4b42c.9b76c8",
-        "type": "play audio",
-        "z": "984823b1.a0823",
-        "name": "",
-        "voice": "0",
-        "x": 930,
-        "y": 600,
-        "wires": []
-    },
-    {
-        "id": "a59b055a.7af618",
-        "type": "inject",
-        "z": "984823b1.a0823",
-        "name": "",
-        "topic": "",
-        "payload": "This is just a test.",
-        "payloadType": "str",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "x": 120,
-        "y": 600,
-        "wires": [
-            [
-                "91b4b42c.9b76c8"
-            ]
-        ]
     },
     {
         "id": "aaa0fb1c.faae18",
@@ -10500,16 +10471,6 @@
         "wires": []
     },
     {
-        "id": "6e6bedec.37b2c4",
-        "type": "play audio",
-        "z": "1fec4b90.1b56f4",
-        "name": "",
-        "voice": "0",
-        "x": 630,
-        "y": 240,
-        "wires": []
-    },
-    {
         "id": "4d7125f4.9202dc",
         "type": "comment",
         "z": "c6be1934.85f088",
@@ -10755,23 +10716,13 @@
         "crontab": "",
         "once": false,
         "onceDelay": "",
-        "x": 210,
-        "y": 240,
+        "x": 110,
+        "y": 700,
         "wires": [
             [
                 "8fe49090.e3366"
             ]
         ]
-    },
-    {
-        "id": "17c036d2.2d9469",
-        "type": "comment",
-        "z": "c6be1934.85f088",
-        "name": "",
-        "info": "",
-        "x": 80,
-        "y": 240,
-        "wires": []
     },
     {
         "id": "5f732f24.6841a",
@@ -10783,8 +10734,8 @@
         "tag": "dt < dl",
         "ret": "html",
         "as": "single",
-        "x": 450,
-        "y": 240,
+        "x": 370,
+        "y": 700,
         "wires": [
             [
                 "436d11fe.29aed"
@@ -10799,8 +10750,8 @@
         "active": true,
         "console": "false",
         "complete": "true",
-        "x": 850,
-        "y": 240,
+        "x": 750,
+        "y": 700,
         "wires": []
     },
     {
@@ -10812,8 +10763,8 @@
         "ret": "txt",
         "url": "http://192.168.1.201",
         "tls": "",
-        "x": 330,
-        "y": 240,
+        "x": 230,
+        "y": 700,
         "wires": [
             [
                 "5f732f24.6841a",
@@ -10829,8 +10780,8 @@
         "active": false,
         "console": "false",
         "complete": "true",
-        "x": 850,
-        "y": 260,
+        "x": 590,
+        "y": 700,
         "wires": []
     },
     {
@@ -11743,8 +11694,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": "",
-        "x": 100,
-        "y": 320,
+        "x": 120,
+        "y": 500,
         "wires": [
             [
                 "7b1d7c38.06f994"
@@ -11764,8 +11715,8 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 230,
-        "y": 280,
+        "x": 470,
+        "y": 460,
         "wires": [
             [
                 "ac77a9c8.b03fc8"
@@ -11783,8 +11734,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 710,
-        "y": 320,
+        "x": 810,
+        "y": 500,
         "wires": []
     },
     {
@@ -11797,8 +11748,8 @@
         "tag": "form[name=\"frm_plot\"] font:contains(\" CFS\")",
         "ret": "text",
         "as": "single",
-        "x": 470,
-        "y": 280,
+        "x": 710,
+        "y": 460,
         "wires": [
             [
                 "a7ffcf98.be5e9"
@@ -11809,10 +11760,10 @@
         "id": "c7bb7cb1.48a5d",
         "type": "comment",
         "z": "c6be1934.85f088",
-        "name": "",
-        "info": "http://rivergages.mvr.usace.army.mil/WaterControl/stationinfo2.cfm?dt=S&sid=IL07&fid\n\nhttps://waterdata.usgs.gov/usa/nwis/uv?site_no=05568500\n\nhttps://waterdata.usgs.gov/nwis/current?nw_longitude_va=-126&nw_latitude_va=49&se_longitude_va=-78&se_latitude_va=24&coordinate_format=dms&index_pmcode_STATION_NM=1&index_pmcode_DATETIME=2&index_pmcode_00060=3&group_key=NONE&sitefile_output_format=html_table&column_name=agency_cd&column_name=site_no&column_name=station_nm&format=html_table&sort_key_2=site_no&html_table_group_key=NONE&rdb_compression=file&list_of_search_criteria=lat_long_bounding_box%2Crealtime_parameter_selection\n\n{\n  \"metadata\": [\n    {\n      \"TagName\": \"Line3.Product\",\n      \"Description\": \"Product code for packaging line 3\",\n      \"DataType\": \"string\",\n      \"EngUnit\": \"\",\n      \"Min\": 0,\n      \"Max\": 0,\n      \"MessageOff\": \"\",\n      \"MessageOn\": \"\",\n      \"RolloverValue\": 0,\n      \"InterpolationType\": \"none\",\n      \"Alias\": \"Product Code\"\n    }\n  ]\n}\n\n{\n  \"metadata\": [\n    {\n      \"TagName\": \"Line3.Product\",\n      \"Description\": \"Product code for packaging line 3\",\n      \"DataType\": \"string\",\n      \"EngUnit\": \"\",\n      \"Min\": 0,\n      \"Max\": 0,\n      \"MessageOff\": \"\",\n      \"MessageOn\": \"\",\n      \"RolloverValue\": 0,\n      \"InterpolationType\": \"none\",\n      \"Alias\": \"Product Code\"\n    }\n  ]\n}",
-        "x": 80,
-        "y": 280,
+        "name": "river flow via [depricated] scrape of rivergages ",
+        "info": "see USGS Web Services for better example (less prone to future problems)\n\nhttp://rivergages.mvr.usace.army.mil/WaterControl/stationinfo2.cfm?dt=S&sid=IL07&fid\n\nhttps://waterdata.usgs.gov/usa/nwis/uv?site_no=05568500\n\nhttps://waterdata.usgs.gov/nwis/current?nw_longitude_va=-126&nw_latitude_va=49&se_longitude_va=-78&se_latitude_va=24&coordinate_format=dms&index_pmcode_STATION_NM=1&index_pmcode_DATETIME=2&index_pmcode_00060=3&group_key=NONE&sitefile_output_format=html_table&column_name=agency_cd&column_name=site_no&column_name=station_nm&format=html_table&sort_key_2=site_no&html_table_group_key=NONE&rdb_compression=file&list_of_search_criteria=lat_long_bounding_box%2Crealtime_parameter_selection\n",
+        "x": 190,
+        "y": 460,
         "wires": []
     },
     {
@@ -11834,8 +11785,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 320,
-        "y": 320,
+        "x": 420,
+        "y": 500,
         "wires": [
             [
                 "9c21adf9.2e3c"
@@ -11872,12 +11823,12 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 520,
-        "y": 320,
+        "x": 620,
+        "y": 500,
         "wires": [
             [
                 "3344aa67.276d56",
-                "d533a1de.06894"
+                "d5055b34.d2ede8"
             ]
         ]
     },
@@ -11890,7 +11841,7 @@
             "84d2eb34.ae0af8"
         ],
         "x": 835,
-        "y": 460,
+        "y": 260,
         "wires": []
     },
     {
@@ -11905,8 +11856,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": "",
-        "x": 100,
-        "y": 360,
+        "x": 120,
+        "y": 540,
         "wires": [
             [
                 "267944d9.ef996c"
@@ -11926,8 +11877,8 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 290,
-        "y": 400,
+        "x": 310,
+        "y": 580,
         "wires": [
             [
                 "11c0b600.157f5a"
@@ -11946,7 +11897,7 @@
         "complete": "true",
         "targetType": "full",
         "x": 810,
-        "y": 360,
+        "y": 540,
         "wires": []
     },
     {
@@ -11968,8 +11919,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 330,
-        "y": 360,
+        "x": 350,
+        "y": 540,
         "wires": [
             [
                 "bc6dbd74.adf57"
@@ -11987,8 +11938,8 @@
         "syntax": "mustache",
         "template": "This is the payload: {{payload}} !",
         "output": "str",
-        "x": 380,
-        "y": 440,
+        "x": 400,
+        "y": 620,
         "wires": [
             [
                 "11c0b600.157f5a"
@@ -12007,8 +11958,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 100,
-        "y": 440,
+        "x": 120,
+        "y": 620,
         "wires": [
             [
                 "951d020d.1292b"
@@ -12034,8 +11985,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 210,
-        "y": 360,
+        "x": 230,
+        "y": 540,
         "wires": [
             [
                 "fce3c19d.33701"
@@ -12061,8 +12012,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 120,
-        "y": 400,
+        "x": 140,
+        "y": 580,
         "wires": [
             [
                 "920c5f14.6df9d"
@@ -12089,8 +12040,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 460,
-        "y": 360,
+        "x": 480,
+        "y": 540,
         "wires": [
             [
                 "2ee30e53.d38072"
@@ -12119,8 +12070,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 610,
-        "y": 360,
+        "x": 630,
+        "y": 540,
         "wires": [
             [
                 "2ee30e53.d38072"
@@ -12139,8 +12090,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": "",
-        "x": 140,
-        "y": 560,
+        "x": 160,
+        "y": 280,
         "wires": [
             [
                 "40a845ba.a4f3cc"
@@ -12160,8 +12111,8 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 210,
-        "y": 600,
+        "x": 370,
+        "y": 280,
         "wires": [
             [
                 "8b21dc79.19e7c",
@@ -12180,8 +12131,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 690,
-        "y": 600,
+        "x": 710,
+        "y": 280,
         "wires": []
     },
     {
@@ -12203,8 +12154,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 210,
-        "y": 560,
+        "x": 370,
+        "y": 240,
         "wires": [
             [
                 "723126eb.89ba68"
@@ -12230,8 +12181,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 310,
-        "y": 660,
+        "x": 270,
+        "y": 400,
         "wires": [
             [
                 "41a15677.d1a468",
@@ -12249,8 +12200,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 670,
-        "y": 660,
+        "x": 690,
+        "y": 320,
         "wires": []
     },
     {
@@ -12277,10 +12228,10 @@
         "id": "5416d457.0f423c",
         "type": "comment",
         "z": "c6be1934.85f088",
-        "name": "USGS river flow data notes",
+        "name": "river flow via USGS web service",
         "info": "https://waterservices.usgs.gov/nwis/iv/?format=json&bBox=-90.000000,40.000000,-85.000000,45.000000&parameterCd=00060&siteStatus=all&drainAreaMin=10000\n\nhttps://waterservices.usgs.gov/nwis/iv/?format=json&stateCd=mo&parameterCd=00060&siteStatus=all&drainAreaMin=100000\n\nhttps://waterservices.usgs.gov/rest/IV-Test-Tool.html\n\nhttps://waterservices.usgs.gov/nwis/iv/?format=json&sites=02198980,02246500,02310747,02323500,02428400,03025500,03086000,03114306,03216070,03216600,03277200,03292494,03303280,03381700,03566000,04067500,04082400,04084445,04127885,04159130,04165710,05082500,05092000,05129515,05133500,05137500,05331000,05331580,05340500,05344490,05355250,05378500,05400760,05404000,05407000,05420500,05430500,05437500,05442300,05446500,05464500,05465000,05465500,05465700,05485500,05489500,05490500,05490600,05558300,05568500,05586100,05587450,06327500,06329500,06343000,06486000,06610000,06807000,06813500,06818000,06821250,06887500,06888990,06910450,06910450,06934500,06935450,06935550,06935965,07024175,07032200,07077000,07190500,07190500,07191500,07194500,07198000,07249455,07250550,07289000,07374000,07374525,07381490,07381590,07381600,08041780,011313440,011337190,011455095,011455420,012040500,012194000,012200500,012391950,012395500,012396500,012472800,013269000,013334300,014105700&parameterCd=00060&siteStatus=all&drainAreaMin=10000\n\n07010000,05568500,05355250,06818000,06888990\n\nmap:\nhttps://waterwatch.usgs.gov/?id=ww_current\n\npayload.value.timeSeries {\n   name  : {\n       \"siteName\":sourceInfo.siteName,\n       \"siteCode\": sourceInfo.siteCode.value,\n       \"value\" : values[0].value.value,\n       \"units\" : variable.unit.unitCode,\n       \"latitude\": sourceInfo.geoLocation.geogLocation.latitude,\n       \"longitude\": sourceInfo.geoLocation.geogLocation.longitude\n    }\n}\n\n",
-        "x": 130,
-        "y": 620,
+        "x": 150,
+        "y": 240,
         "wires": []
     },
     {
@@ -12302,8 +12253,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 360,
-        "y": 560,
+        "x": 520,
+        "y": 240,
         "wires": [
             [
                 "737bccf6.f78484"
@@ -12329,11 +12280,10 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 500,
-        "y": 560,
+        "x": 660,
+        "y": 240,
         "wires": [
             [
-                "c65c009e.95d8b",
                 "177b19c4.d23da6"
             ]
         ]
@@ -12346,32 +12296,16 @@
         "func": "var newmsg={};\nnewmsg.payload = msg.payload;\nreturn newmsg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 350,
-        "y": 600,
+        "x": 510,
+        "y": 280,
         "wires": [
             [
                 "db6c6583.d39348",
                 "655f825b.88904c",
-                "8db646b4.b99e58",
                 "15cb197f.5c8dd7",
                 "41a15677.d1a468"
             ]
         ]
-    },
-    {
-        "id": "c65c009e.95d8b",
-        "type": "debug",
-        "z": "c6be1934.85f088",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 670,
-        "y": 560,
-        "wires": []
     },
     {
         "id": "15ff68da.a817b7",
@@ -12379,8 +12313,8 @@
         "z": "c6be1934.85f088",
         "name": "data",
         "info": "",
-        "x": 90,
-        "y": 660,
+        "x": 70,
+        "y": 400,
         "wires": []
     },
     {
@@ -12389,8 +12323,8 @@
         "z": "c6be1934.85f088",
         "name": "metadata",
         "info": "",
-        "x": 100,
-        "y": 700,
+        "x": 80,
+        "y": 320,
         "wires": []
     },
     {
@@ -12412,8 +12346,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 320,
-        "y": 700,
+        "x": 300,
+        "y": 320,
         "wires": [
             [
                 "abb4a75.d408058"
@@ -12421,7 +12355,7 @@
         ]
     },
     {
-        "id": "8db646b4.b99e58",
+        "id": "abb4a75.d408058",
         "type": "debug",
         "z": "c6be1934.85f088",
         "name": "",
@@ -12431,111 +12365,8 @@
         "tostatus": false,
         "complete": "payload",
         "targetType": "msg",
-        "x": 670,
-        "y": 740,
-        "wires": []
-    },
-    {
-        "id": "4b4edc.c56b0124",
-        "type": "inject",
-        "z": "c6be1934.85f088",
-        "name": "",
-        "topic": "",
-        "payload": "2019-10-20T06:45:00.000-05:00",
-        "payloadType": "str",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "x": 110,
-        "y": 780,
-        "wires": [
-            [
-                "c3498328.8d427"
-            ]
-        ]
-    },
-    {
-        "id": "c3498328.8d427",
-        "type": "function",
-        "z": "c6be1934.85f088",
-        "name": "",
-        "func": "var mydatetime = new Date(msg.payload);\nmsg.payload=mydatetime;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 300,
-        "y": 780,
-        "wires": [
-            [
-                "8db646b4.b99e58"
-            ]
-        ]
-    },
-    {
-        "id": "abb4a75.d408058",
-        "type": "debug",
-        "z": "c6be1934.85f088",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
         "x": 690,
-        "y": 700,
-        "wires": []
-    },
-    {
-        "id": "4b9102e4.4df98c",
-        "type": "inject",
-        "z": "c6be1934.85f088",
-        "name": "",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "x": 120,
-        "y": 820,
-        "wires": [
-            [
-                "c42d2bd2.f74308",
-                "18881877.9cdff8"
-            ]
-        ]
-    },
-    {
-        "id": "c42d2bd2.f74308",
-        "type": "function",
-        "z": "c6be1934.85f088",
-        "name": "",
-        "func": "node.log(\"Why doens't this log?\");\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 290,
-        "y": 820,
-        "wires": [
-            [
-                "8db646b4.b99e58"
-            ]
-        ]
-    },
-    {
-        "id": "18881877.9cdff8",
-        "type": "debug",
-        "z": "c6be1934.85f088",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 610,
-        "y": 780,
+        "y": 360,
         "wires": []
     },
     {
@@ -12580,8 +12411,8 @@
         "func": "/*\nconvert from Wonderware format of:\n    {\n      \"data\": [\n        {\n          \"dateTime\": \"2019-10-27T07:45:00.000-05:00\",\n          \"usgs.river.05355250.flow\": \"67700\"\n        },\n          \"dateTime\": \"2019-10-27T08:00:00.000-05:00\",\n          \"usgs.river.07010000.flow\": \"436000\"\n        }\n      ]\n    }\n\nto individual msg with\n    msg.timestamp and msg.payload\n*/\n\nvar msgarr = [];\nfor (var obj of msg.payload.data) {//array so use \"of\" not \"in\"\n    var msg1 = {};\n    msg1.timestamp = obj.dateTime;\n//    node.warn(\"Object.keys(obj)=\" + Object.keys(obj))\n    for (i=1; i < Object.keys(obj).length; i++) {\n        var msg2 = {};\n        msg2.timestamp = msg1.timestamp;\n        msg2.topic = Object.keys(obj)[i].replace(/\\./g,\"/\"); //globally replace . with /\n        msg2.payload = Object.values(obj)[i];\n        msgarr.push(msg2);\n    }\n}\n\nreturn [msgarr];\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 700,
-        "y": 820,
+        "x": 740,
+        "y": 400,
         "wires": [
             [
                 "96616a8a.b6fa38",
@@ -12597,8 +12428,8 @@
         "func": "/* wonderware format example\n{\n  \"data\": [\n    {\n      \"dateTime\": \"2017-03-20T12:21:12.199Z\",\n      \"Reactor3.Level\": 1.51860072870498,\n      \"Reactor3.Temp\": 27.1360543141452,\n      \"Reactor3.InletValve\": 0,\n      \"Reactor3.Step\": 7,\n      \"Line3.Units\": 1518,\n      \"Line3.Product\": \"BRN\"\n    }\n  ]\n}\n*/\n\nif (\n    (typeof msg.payload == 'undefined')|| // ||=or, &&=and\n    (typeof msg.payload.data == 'undefined')||\n    (Array.isArray(msg.payload.data) === false)||\n    (msg.payload.data.length<1)||\n    (msg.payload.data[0].dateTime == 'undefined' )||\n    (isNaN(Date.parse(msg.payload.data[0].dateTime)))||\n    (Object.keys(msg.payload.data[0]).length < 2)\n) {\n    //msg=null;\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 470,
-        "y": 820,
+        "x": 520,
+        "y": 400,
         "wires": [
             [
                 "48dd35e6.f3b0dc"
@@ -12624,8 +12455,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 270,
-        "y": 740,
+        "x": 250,
+        "y": 360,
         "wires": [
             [
                 "abb4a75.d408058"
@@ -12643,8 +12474,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 810,
-        "y": 780,
+        "x": 830,
+        "y": 360,
         "wires": []
     },
     {
@@ -12662,5 +12493,156 @@
                 "387eba59.e6bb06"
             ]
         ]
+    },
+    {
+        "id": "2a646435.73848c",
+        "type": "debug",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 930,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "cb375a5e.2a76d8",
+        "type": "inject",
+        "z": "1fec4b90.1b56f4",
+        "name": "",
+        "topic": "",
+        "payload": "This is just a test.",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 360,
+        "y": 220,
+        "wires": [
+            [
+                "80539111.f993"
+            ]
+        ]
+    },
+    {
+        "id": "80539111.f993",
+        "type": "play audio",
+        "z": "1fec4b90.1b56f4",
+        "name": "",
+        "voice": "0",
+        "x": 500,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "8df067e2.45df28",
+        "type": "comment",
+        "z": "c6be1934.85f088",
+        "name": "attempt at printer 192.168.1.201",
+        "info": "",
+        "x": 150,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "d5055b34.d2ede8",
+        "type": "function",
+        "z": "c6be1934.85f088",
+        "name": "merge",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 690,
+        "y": 600,
+        "wires": [
+            [
+                "26075fee.d356d"
+            ]
+        ]
+    },
+    {
+        "id": "26075fee.d356d",
+        "type": "debug",
+        "z": "c6be1934.85f088",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 810,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "b1b10203.5db37",
+        "type": "inject",
+        "z": "1fec4b90.1b56f4",
+        "name": "2019-10-20T06:45:00.000-05:00",
+        "topic": "",
+        "payload": "2019-10-20T06:45:00.000-05:00",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 350,
+        "y": 360,
+        "wires": [
+            [
+                "26c47192.58b60e"
+            ]
+        ]
+    },
+    {
+        "id": "26c47192.58b60e",
+        "type": "function",
+        "z": "1fec4b90.1b56f4",
+        "name": "",
+        "func": "var mydatetime = new Date(msg.payload);\nmsg.payload=mydatetime;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 550,
+        "y": 360,
+        "wires": [
+            [
+                "1ec5ae1c.2c9112"
+            ]
+        ]
+    },
+    {
+        "id": "c5a73e70.8d34c",
+        "type": "comment",
+        "z": "1fec4b90.1b56f4",
+        "name": "string to timestamp",
+        "info": "",
+        "x": 90,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "aa82489f.814748",
+        "type": "comment",
+        "z": "1fec4b90.1b56f4",
+        "name": "chuck norris joke example of promise in javascript",
+        "info": "",
+        "x": 180,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "417d2fb7.c0815",
+        "type": "comment",
+        "z": "c6be1934.85f088",
+        "name": "geo",
+        "info": "",
+        "x": 70,
+        "y": 360,
+        "wires": []
     }
 ]
