@@ -62,6 +62,13 @@
         "info": " maintains the dynamic IP address\nfor tapiafamily.org\nby sending to domains.google.com"
     },
     {
+        "id": "1fec4b90.1b56f4",
+        "type": "tab",
+        "label": "Examples",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "55542e37.3222d",
         "type": "tab",
         "label": "my web pages",
@@ -79,13 +86,6 @@
         "id": "16be06b7.63eec9",
         "type": "tab",
         "label": "DecodeOleumTech",
-        "disabled": false,
-        "info": ""
-    },
-    {
-        "id": "1fec4b90.1b56f4",
-        "type": "tab",
-        "label": "Examples",
         "disabled": false,
         "info": ""
     },
@@ -229,6 +229,61 @@
                 ]
             }
         ]
+    },
+    {
+        "id": "65be8225.2f6e3c",
+        "type": "subflow",
+        "name": "wwQ Insert Basic",
+        "info": "input\nmsg = {\n    \"timestamp\": 123456,\n    \"topic\": \"my/mqtt/topic\"\n}",
+        "category": "",
+        "in": [
+            {
+                "x": 40,
+                "y": 40,
+                "wires": []
+            }
+        ],
+        "out": [
+            {
+                "x": 340,
+                "y": 40,
+                "wires": []
+            }
+        ],
+        "env": [],
+        "color": "#DDAA99"
+    },
+    {
+        "id": "4a24e5e3.d1b1ec",
+        "type": "subflow",
+        "name": "wwHierName",
+        "info": "input format 1:\nmsg = {\n    \"topic\" : \"my/home/temperature\",\n    \"timestamp\": 1234567,\n    \"payload\" : 72.0\n}\n\noutput format 1:\nmsg = {\n    \"topic\" : \"my.home.temperature\",\n    \"timestamp\": 1234567,\n    \"payload\" : 72.0\n}\n",
+        "category": "",
+        "in": [
+            {
+                "x": 40,
+                "y": 40,
+                "wires": [
+                    {
+                        "id": "2f425822.791298"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 340,
+                "y": 40,
+                "wires": [
+                    {
+                        "id": "2f425822.791298",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "color": "#DDAA99"
     },
     {
         "id": "971eda83.260398",
@@ -2529,7 +2584,7 @@
         "active": true,
         "console": "false",
         "complete": "false",
-        "x": 630,
+        "x": 750,
         "y": 300,
         "wires": []
     },
@@ -12520,8 +12575,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 360,
-        "y": 220,
+        "x": 420,
+        "y": 200,
         "wires": [
             [
                 "80539111.f993"
@@ -12534,7 +12589,7 @@
         "z": "1fec4b90.1b56f4",
         "name": "",
         "voice": "0",
-        "x": 500,
+        "x": 630,
         "y": 180,
         "wires": []
     },
@@ -12591,27 +12646,11 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 350,
-        "y": 360,
+        "x": 190,
+        "y": 400,
         "wires": [
             [
-                "26c47192.58b60e"
-            ]
-        ]
-    },
-    {
-        "id": "26c47192.58b60e",
-        "type": "function",
-        "z": "1fec4b90.1b56f4",
-        "name": "",
-        "func": "var mydatetime = new Date(msg.payload);\nmsg.payload=mydatetime;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 550,
-        "y": 360,
-        "wires": [
-            [
-                "1ec5ae1c.2c9112"
+                "9ea4ba87.633cc8"
             ]
         ]
     },
@@ -12619,9 +12658,9 @@
         "id": "c5a73e70.8d34c",
         "type": "comment",
         "z": "1fec4b90.1b56f4",
-        "name": "string to timestamp",
+        "name": "time",
         "info": "",
-        "x": 90,
+        "x": 50,
         "y": 360,
         "wires": []
     },
@@ -12644,5 +12683,350 @@
         "x": 70,
         "y": 360,
         "wires": []
+    },
+    {
+        "id": "c1c9c612.bd4fc8",
+        "type": "change",
+        "z": "65be8225.2f6e3c",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 200,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2f425822.791298",
+        "type": "change",
+        "z": "4a24e5e3.d1b1ec",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "$replace(topic,/\\//,\".\")\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 170,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9aba2615.6107a8",
+        "type": "comment",
+        "z": "1fec4b90.1b56f4",
+        "name": "ww to ww individual JSONata",
+        "info": "Wonderware data format to an individual element version using JSONata\n\nhttp://try.jsonata.org/ryh3hqM5H\n\nmsg.payload version:\nhttp://try.jsonata.org/HJCjoHxoS\n\nThx to SteveR at:\nhttps://stackoverflow.com/questions/58570864/how-to-use-jsonata-to-return-multiple-objects-distributing-the-first-key-value\n\n",
+        "x": 120,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "df888f12.da74b",
+        "type": "inject",
+        "z": "1fec4b90.1b56f4",
+        "name": "ww data",
+        "topic": "",
+        "payload": "{\"data\":[{\"dateTime\":\"2019-10-19T12:53:54.043Z\",\"Reactor3.Level\":1.51860072870498,\"Reactor3.Temp\":27.1360543141452},{\"dateTime\":\"2019-10-19T12:55:54.043Z\",\"Reactor3.Press\":88.9,\"Reactor3.Temp\":24.1418981047159}]}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "x": 320,
+        "y": 480,
+        "wires": [
+            [
+                "a71b6ce8.baa44"
+            ]
+        ]
+    },
+    {
+        "id": "a71b6ce8.baa44",
+        "type": "change",
+        "z": "1fec4b90.1b56f4",
+        "name": "ww to individual JSONata",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.$ ~> | $ | { \"data\": data.(\t    $obj := $;\t    $key := \"dateTime\";\t    $keys($obj)[$ != $key].{\t        $key : $lookup($obj, $key),\t        $: $lookup($obj, $)\t    }\t) } |",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 480,
+        "wires": [
+            [
+                "1ec5ae1c.2c9112"
+            ]
+        ],
+        "info": "Not sure how useful anymore but this JSONata converts the data format from ww style\nmsg = \n{\n  \"payload\":{\n      \"data\": [\n        {\n          \"dateTime\": \"2019-10-19T12:53:54.043Z\",\n          \"Reactor3.Level\": 1.51860072870498,\n          \"Reactor3.Temp\": 27.1360543141452\n        },\n        {\n          \"dateTime\": \"2019-10-19T12:55:54.043Z\",\n          \"Reactor3.Press\": 88.9,\n          \"Reactor3.Temp\": 24.1418981047159\n        }\n      ]\n    }\n}\n\nto individual items:\n{\n  \"data\": [\n    {\n      \"dateTime\": \"2019-10-19T12:53:54.043Z\",\n      \"Reactor3.Level\": 1.518600728705\n    },\n    {\n      \"dateTime\": \"2019-10-19T12:53:54.043Z\",\n      \"Reactor3.Temp\": 27.13605431415\n    },\n    {\n      \"dateTime\": \"2019-10-19T12:55:54.043Z\",\n      \"Reactor3.Press\": 88.9\n    },\n    {\n      \"dateTime\": \"2019-10-19T12:55:54.043Z\",\n      \"Reactor3.Temp\": 24.14189810472\n    }\n  ]\n}\n\n\nReferences:\n\nmsg.payload version:\nhttp://try.jsonata.org/HJCjoHxoS\n\nThx to SteveR at:\nhttps://stackoverflow.com/questions/58570864/how-to-use-jsonata-to-return-multiple-objects-distributing-the-first-key-value\n\n"
+    },
+    {
+        "id": "5daea6e2.0f1848",
+        "type": "inject",
+        "z": "1fec4b90.1b56f4",
+        "name": "home/basement/temperature",
+        "topic": "",
+        "payload": "home/basement/temperature",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 180,
+        "y": 520,
+        "wires": [
+            [
+                "7b9df445.3fb52c"
+            ]
+        ]
+    },
+    {
+        "id": "57ccbf37.f675e",
+        "type": "debug",
+        "z": "1fec4b90.1b56f4",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 730,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "7b9df445.3fb52c",
+        "type": "change",
+        "z": "1fec4b90.1b56f4",
+        "name": "payload replace / with .",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$replace(payload,/\\//,\".\")\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 580,
+        "y": 520,
+        "wires": [
+            [
+                "d3bf1de9.90582"
+            ]
+        ]
+    },
+    {
+        "id": "fd5d6a39.2f5f38",
+        "type": "inject",
+        "z": "1fec4b90.1b56f4",
+        "name": "",
+        "topic": "",
+        "payload": "65.4",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 560,
+        "wires": [
+            [
+                "cc15de55.130fb"
+            ]
+        ]
+    },
+    {
+        "id": "1b27559f.a2db0a",
+        "type": "change",
+        "z": "1fec4b90.1b56f4",
+        "name": "topic replace / with .",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "$replace(topic,/\\//,\".\")\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 560,
+        "wires": [
+            [
+                "57ccbf37.f675e"
+            ]
+        ]
+    },
+    {
+        "id": "cc15de55.130fb",
+        "type": "change",
+        "z": "1fec4b90.1b56f4",
+        "name": "set msg.topic to home/basement/temperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "home/basement/temperature",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 560,
+        "wires": [
+            [
+                "1b27559f.a2db0a"
+            ]
+        ]
+    },
+    {
+        "id": "d3bf1de9.90582",
+        "type": "debug",
+        "z": "1fec4b90.1b56f4",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 750,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "de413663.9fd888",
+        "type": "inject",
+        "z": "1fec4b90.1b56f4",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 260,
+        "y": 360,
+        "wires": [
+            [
+                "9ea4ba87.633cc8"
+            ]
+        ]
+    },
+    {
+        "id": "d3681ace.65a128",
+        "type": "function",
+        "z": "1fec4b90.1b56f4",
+        "name": "ToISOString",
+        "func": "msg.payload=new Date(msg.payload).toISOString();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 410,
+        "y": 400,
+        "wires": [
+            [
+                "1ec5ae1c.2c9112",
+                "5d3035ad.542fac"
+            ]
+        ]
+    },
+    {
+        "id": "5d3035ad.542fac",
+        "type": "function",
+        "z": "1fec4b90.1b56f4",
+        "name": "java native",
+        "func": "msg.payload=new Date(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 570,
+        "y": 400,
+        "wires": [
+            [
+                "1ec5ae1c.2c9112",
+                "54e34b2d.167f94"
+            ]
+        ]
+    },
+    {
+        "id": "54e34b2d.167f94",
+        "type": "function",
+        "z": "1fec4b90.1b56f4",
+        "name": "getTime()",
+        "func": "msg.payload=new Date(msg.payload).getTime();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 720,
+        "y": 400,
+        "wires": [
+            [
+                "1ec5ae1c.2c9112"
+            ]
+        ]
+    },
+    {
+        "id": "9ea4ba87.633cc8",
+        "type": "function",
+        "z": "1fec4b90.1b56f4",
+        "name": "",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 390,
+        "y": 360,
+        "wires": [
+            [
+                "d3681ace.65a128",
+                "1ec5ae1c.2c9112"
+            ]
+        ]
     }
 ]
