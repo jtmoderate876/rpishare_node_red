@@ -1,5 +1,12 @@
 [
     {
+        "id": "1fec4b90.1b56f4",
+        "type": "tab",
+        "label": "Examples",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "984823b1.a0823",
         "type": "tab",
         "label": "Insteon-mqtt",
@@ -60,13 +67,6 @@
         "label": "Misc Data Sources",
         "disabled": false,
         "info": " maintains the dynamic IP address\nfor tapiafamily.org\nby sending to domains.google.com"
-    },
-    {
-        "id": "1fec4b90.1b56f4",
-        "type": "tab",
-        "label": "Examples",
-        "disabled": false,
-        "info": ""
     },
     {
         "id": "55542e37.3222d",
