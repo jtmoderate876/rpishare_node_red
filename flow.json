@@ -3977,7 +3977,7 @@
         "qos": "2",
         "broker": "971eda83.260398",
         "x": 190,
-        "y": 940,
+        "y": 620,
         "wires": [
             [
                 "c5f1953a.314208"
@@ -3995,7 +3995,7 @@
         "tostatus": false,
         "complete": "false",
         "x": 750,
-        "y": 940,
+        "y": 620,
         "wires": []
     },
     {
@@ -4011,7 +4011,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 120,
-        "y": 1380,
+        "y": 1060,
         "wires": [
             [
                 "e650743f.56d978"
@@ -4025,7 +4025,7 @@
         "name": "lamplinc tests 18.93.3c",
         "info": "",
         "x": 120,
-        "y": 1280,
+        "y": 960,
         "wires": []
     },
     {
@@ -4037,7 +4037,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 430,
-        "y": 1380,
+        "y": 1060,
         "wires": [
             [
                 "710d3950.694438"
@@ -4053,8 +4053,8 @@
         "qos": "",
         "retain": "",
         "broker": "971eda83.260398",
-        "x": 810,
-        "y": 780,
+        "x": 950,
+        "y": 1320,
         "wires": []
     },
     {
@@ -4070,7 +4070,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 250,
-        "y": 1420,
+        "y": 1100,
         "wires": [
             [
                 "710d3950.694438"
@@ -4081,23 +4081,10 @@
         "id": "2673fdf9.3d31a2",
         "type": "comment",
         "z": "984823b1.a0823",
-        "name": "plm tests 14.84.1c",
+        "name": "db 14.84.1c",
         "info": "",
         "x": 110,
-        "y": 1720,
-        "wires": []
-    },
-    {
-        "id": "357d8636.7d764a",
-        "type": "mqtt out",
-        "z": "984823b1.a0823",
-        "name": "",
-        "topic": "",
-        "qos": "",
-        "retain": "",
-        "broker": "971eda83.260398",
-        "x": 590,
-        "y": 1760,
+        "y": 1460,
         "wires": []
     },
     {
@@ -4112,11 +4099,11 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 150,
-        "y": 1760,
+        "x": 350,
+        "y": 1460,
         "wires": [
             [
-                "357d8636.7d764a"
+                "710d3950.694438"
             ]
         ]
     },
@@ -4133,7 +4120,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 290,
-        "y": 1340,
+        "y": 1020,
         "wires": [
             [
                 "710d3950.694438"
@@ -4153,7 +4140,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 270,
-        "y": 1460,
+        "y": 1140,
         "wires": [
             [
                 "710d3950.694438"
@@ -4787,7 +4774,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 140,
-        "y": 1240,
+        "y": 920,
         "wires": [
             [
                 "b4f329cb.60c288"
@@ -4803,7 +4790,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 320,
-        "y": 1240,
+        "y": 920,
         "wires": [
             []
         ]
@@ -4835,7 +4822,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 500,
-        "y": 940,
+        "y": 620,
         "wires": [
             [
                 "7502f25.a3ec60c"
@@ -4930,7 +4917,7 @@
         "name": "experimental testing:",
         "info": "",
         "x": 90,
-        "y": 1160,
+        "y": 840,
         "wires": []
     },
     {
@@ -4939,8 +4926,8 @@
         "z": "984823b1.a0823",
         "name": "troubleshooting tools:",
         "info": "",
-        "x": 120,
-        "y": 840,
+        "x": 140,
+        "y": 1380,
         "wires": []
     },
     {
@@ -4950,7 +4937,7 @@
         "name": "possibly use global/flow context for name/insteon id lookup table",
         "info": "",
         "x": 250,
-        "y": 1200,
+        "y": 880,
         "wires": []
     },
     {
@@ -4981,8 +4968,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 940,
-        "y": 1340,
+        "x": 800,
+        "y": 1020,
         "wires": [
             [
                 "710d3950.694438"
@@ -4998,7 +4985,7 @@
         "qos": "2",
         "broker": "971eda83.260398",
         "x": 140,
-        "y": 1000,
+        "y": 680,
         "wires": [
             [
                 "61553f8d.492ec"
@@ -5012,7 +4999,7 @@
         "name": "notes on insteon/command/{device} vs insteon/{device}/set",
         "info": "it appears you can set a dimmer device, for example\nusing either:\n msg.topic = 'insteon/command/{device}''\n msg.payload = '{ \"cmd\": \"on\", \"level\" : 175, \"instant\" : 1 }''\n\nor:\n msg.topic = 'insteon/{device}/set'\n msg.payload = { \"cmd\": \"on\" }\n\nor:\n msg.topic = 'insteon/{device}/level'\n msg.payload = '{ \"cmd\": \"on\"[,\"level\" : 175] }'\n ([]-optional)\n \n I'm unclear which of the 3 might be best.\n ",
         "x": 670,
-        "y": 1240,
+        "y": 920,
         "wires": []
     },
     {
@@ -5028,7 +5015,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 100,
-        "y": 1100,
+        "y": 780,
         "wires": [
             [
                 "fe37c1ff.2d225"
@@ -5044,7 +5031,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 460,
-        "y": 1100,
+        "y": 780,
         "wires": [
             [
                 "ac6b2d4c.ea248"
@@ -5062,7 +5049,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 710,
-        "y": 1100,
+        "y": 780,
         "wires": []
     },
     {
@@ -5077,8 +5064,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 950,
-        "y": 1380,
+        "x": 810,
+        "y": 1060,
         "wires": [
             [
                 "710d3950.694438"
@@ -5097,8 +5084,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 810,
-        "y": 1420,
+        "x": 670,
+        "y": 1100,
         "wires": [
             [
                 "710d3950.694438"
@@ -5118,7 +5105,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 160,
-        "y": 1620,
+        "y": 1300,
         "wires": [
             [
                 "710d3950.694438"
@@ -5138,7 +5125,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 190,
-        "y": 1660,
+        "y": 1340,
         "wires": [
             [
                 "710d3950.694438"
@@ -5158,7 +5145,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 240,
-        "y": 1580,
+        "y": 1260,
         "wires": [
             [
                 "710d3950.694438"
@@ -5178,7 +5165,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 250,
-        "y": 1540,
+        "y": 1220,
         "wires": [
             [
                 "710d3950.694438"
@@ -5198,7 +5185,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 270,
-        "y": 1500,
+        "y": 1180,
         "wires": [
             [
                 "710d3950.694438"
@@ -5212,7 +5199,7 @@
         "name": "THESE WORK",
         "info": "",
         "x": 300,
-        "y": 1300,
+        "y": 980,
         "wires": []
     },
     {
@@ -5221,8 +5208,8 @@
         "z": "984823b1.a0823",
         "name": "THESE DO NOT WORK",
         "info": "",
-        "x": 890,
-        "y": 1300,
+        "x": 750,
+        "y": 980,
         "wires": []
     },
     {
@@ -5231,7 +5218,7 @@
         "z": "984823b1.a0823",
         "name": "",
         "x": 810,
-        "y": 1000,
+        "y": 680,
         "wires": []
     },
     {
@@ -5273,7 +5260,7 @@
         "to": "",
         "reg": false,
         "x": 450,
-        "y": 1000,
+        "y": 680,
         "wires": [
             [
                 "fbac0c39.6c15"
@@ -5677,7 +5664,7 @@
             }
         ],
         "x": 540,
-        "y": 600,
+        "y": 720,
         "wires": [
             [
                 "307e7272.0da96e",
@@ -5692,7 +5679,7 @@
         "name": "Read REST API",
         "info": "",
         "x": 100,
-        "y": 600,
+        "y": 720,
         "wires": []
     },
     {
@@ -5705,7 +5692,7 @@
         "url": "",
         "tls": "",
         "x": 760,
-        "y": 680,
+        "y": 800,
         "wires": [
             [
                 "5825d936.db4968"
@@ -5725,7 +5712,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 100,
-        "y": 640,
+        "y": 760,
         "wires": [
             [
                 "4917e4e5.06bbbc"
@@ -5741,7 +5728,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 360,
-        "y": 680,
+        "y": 800,
         "wires": [
             [
                 "43ec985e.08bb38"
@@ -5759,7 +5746,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 950,
-        "y": 680,
+        "y": 800,
         "wires": []
     },
     {
@@ -5782,7 +5769,7 @@
         "to": "",
         "reg": false,
         "x": 450,
-        "y": 640,
+        "y": 760,
         "wires": [
             [
                 "7e76212d.f8ed5"
@@ -5809,7 +5796,7 @@
         "to": "",
         "reg": false,
         "x": 300,
-        "y": 640,
+        "y": 760,
         "wires": [
             [
                 "dbb8355c.ae2f88"
@@ -5836,7 +5823,7 @@
         "to": "",
         "reg": false,
         "x": 660,
-        "y": 640,
+        "y": 760,
         "wires": [
             [
                 "9a406cda.bd797"
@@ -6295,7 +6282,7 @@
                 "t": "set",
                 "p": "topic",
                 "pt": "msg",
-                "to": "test/analog",
+                "to": "test/analog1",
                 "tot": "str"
             }
         ],
@@ -6308,8 +6295,8 @@
         "y": 500,
         "wires": [
             [
-                "7de4fca4.680f64",
-                "f990879b.ddac88"
+                "f990879b.ddac88",
+                "9e09e3b7.03f3e"
             ]
         ]
     },
@@ -6338,7 +6325,7 @@
         "func": "/*\ncreating a report-by-exception type node but one that, when the value does change\nsends to messages, one with the old value and last timestamp for that value\nand a second with the new value and timestamp. This way Wonderware Online will have\na better data for visualization / interpolation.\n*/\nvar prevValue = {};\nvar topic = msg.topic;//.replace(/\\//g,\".\"); //globally replace / with .\nprevValue = context.get(topic);\n//create object with .topic, .payload, .timestamp\nvar currValue = {\n    topic : msg.topic,\n    payload : msg.payload,\n    timestamp : msg.timestamp\n};\n/*\nif (typeof prevValue !== 'undefined') {\n    node.warn(\"prevValue=\" + JSON.stringify(prevValue) );\n}\nif (typeof currValue !== 'undefined') {\n    node.warn(\"currValue=\" + JSON.stringify(currValue) );\n}\n*/\n\nif ((typeof prevValue !== 'undefined') && (typeof prevValue.payload !== 'undefined')) {\n    if (currValue.payload==prevValue.payload) {\n        //node.warn(\"Values the same!\")\n        prevValue = currValue;\n        context.set(topic, prevValue)\n        return null;// values the same, no need to process\n    } else {\n        var msgarr = [\n            {\n                timestamp: prevValue.timestamp,\n                topic: prevValue.topic,\n                payload: prevValue.payload\n            },\n            {\n                timestamp: currValue.timestamp,\n                topic: currValue.topic,\n                payload: currValue.payload\n            },\n        ];\n        node.log(msgarr.toString());\n        context.set(topic, currValue)\n        return [msgarr];\n    }\n} else {\n    prevValue = currValue;\n    context.set(topic, prevValue);\n    return msg;\n}\n\n//return msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 750,
+        "x": 790,
         "y": 500,
         "wires": [
             [
@@ -6699,8 +6686,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 330,
-        "y": 840,
+        "x": 350,
+        "y": 1380,
         "wires": [
             [
                 "710d3950.694438"
@@ -6719,8 +6706,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 337.50000762939453,
-        "y": 789.9999837875366,
+        "x": 350,
+        "y": 1420,
         "wires": [
             [
                 "710d3950.694438"
@@ -8818,7 +8805,7 @@
         "tostatus": false,
         "complete": "false",
         "x": 790,
-        "y": 1900,
+        "y": 1540,
         "wires": []
     },
     {
@@ -8833,8 +8820,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 90,
-        "y": 1880,
+        "x": 110,
+        "y": 1520,
         "wires": [
             [
                 "1af3f48f.5a244b"
@@ -8853,8 +8840,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 90,
-        "y": 1920,
+        "x": 110,
+        "y": 1560,
         "wires": [
             [
                 "1af3f48f.5a244b"
@@ -8869,8 +8856,8 @@
         "func": "\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 220,
-        "y": 1900,
+        "x": 240,
+        "y": 1540,
         "wires": [
             [
                 "aba1942b.6aba78"
@@ -8897,7 +8884,7 @@
         "z": "984823b1.a0823",
         "name": "",
         "x": 470,
-        "y": 1900,
+        "y": 1540,
         "wires": [
             [
                 "c692a8e4.1677d8"
@@ -8989,8 +8976,8 @@
         "qos": "1",
         "retain": "true",
         "broker": "971eda83.260398",
-        "x": 320,
-        "y": 2080,
+        "x": 800,
+        "y": 1640,
         "wires": []
     },
     {
@@ -9006,7 +8993,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 110,
-        "y": 1960,
+        "y": 1600,
         "wires": [
             [
                 "2b57ffc8.a89d1"
@@ -9024,7 +9011,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 370,
-        "y": 1960,
+        "y": 1600,
         "wires": []
     },
     {
@@ -9035,8 +9022,8 @@
         "func": "// converts format of a simple on/off payload to\n// the more complex payload needed by my\n// insteon-mqtt diver of:\n// {\"cmd\":\"on/off\",\"mode\":\"normal\"}\n\n/*\nif ((msg.payload==\"on\") || (msg.payload==\"off\")){\n    var payload = {\n        \"cmd\" : msg.payload,\n        \"mode\" : \"normal\"\n    }\n    msg.payload = JSON.stringify(payload);\n}\n*/\n\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 230,
-        "y": 2040,
+        "x": 350,
+        "y": 1640,
         "wires": [
             [
                 "fff57ea6.8e7c7",
@@ -9057,7 +9044,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 110,
-        "y": 2000,
+        "y": 1640,
         "wires": [
             [
                 "2b57ffc8.a89d1"
@@ -12421,7 +12408,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 950,
-        "y": 600,
+        "y": 720,
         "wires": []
     },
     {
@@ -13027,12 +13014,11 @@
         "func": "var newmsg = {\n    \"topic\": msg.topic,\n    \"payload\": msg.payload,\n    \"timestamp\": msg.timestamp\n}\nreturn newmsg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 530,
+        "x": 430,
         "y": 220,
         "wires": [
             [
-                "1913fb4e.05ae35",
-                "cd76d8cc.97fb08"
+                "67470be5.f80af4"
             ]
         ]
     },
@@ -13228,5 +13214,154 @@
         "x": 750,
         "y": 500,
         "wires": []
+    },
+    {
+        "id": "191692ee.6bc61d",
+        "type": "comment",
+        "z": "984823b1.a0823",
+        "name": "plm db",
+        "info": "",
+        "x": 90,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "12db7111.403d8f",
+        "type": "inject",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "topic": "",
+        "payload": "87.6",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 210,
+        "y": 580,
+        "wires": [
+            [
+                "822e971c.4bf7d8"
+            ]
+        ]
+    },
+    {
+        "id": "23fe7f9.4618e8",
+        "type": "inject",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "topic": "",
+        "payload": "23.4",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 210,
+        "y": 620,
+        "wires": [
+            [
+                "822e971c.4bf7d8"
+            ]
+        ]
+    },
+    {
+        "id": "df6643b.17fedc",
+        "type": "change",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "test/analog2",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 580,
+        "wires": [
+            [
+                "9e09e3b7.03f3e",
+                "f990879b.ddac88"
+            ]
+        ]
+    },
+    {
+        "id": "822e971c.4bf7d8",
+        "type": "change",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "timestamp",
+                "pt": "msg",
+                "to": "",
+                "tot": "date"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 580,
+        "wires": [
+            [
+                "df6643b.17fedc"
+            ]
+        ]
+    },
+    {
+        "id": "9e09e3b7.03f3e",
+        "type": "switch",
+        "z": "e8223701.eebbe8",
+        "name": "block= is null ; unblock = is not null",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "null"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 860,
+        "y": 580,
+        "wires": [
+            [
+                "7de4fca4.680f64"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "67470be5.f80af4",
+        "type": "function",
+        "z": "e8223701.eebbe8",
+        "name": "RBE+prev.",
+        "func": "/*\ncreating a report-by-exception type node but one that, when the value does change\nsends to messages, one with the old value and last timestamp for that value\nand a second with the new value and timestamp. This way Wonderware Online will have\na better data for visualization / interpolation.\n*/\nvar prevValue = {};\nvar topic = msg.topic;//.replace(/\\//g,\".\"); //globally replace / with .\nprevValue = context.get(topic);\n//create object with .topic, .payload, .timestamp\nvar currValue = {\n    topic : msg.topic,\n    payload : msg.payload,\n    timestamp : msg.timestamp\n};\n/*\nif (typeof prevValue !== 'undefined') {\n    node.warn(\"prevValue=\" + JSON.stringify(prevValue) );\n}\nif (typeof currValue !== 'undefined') {\n    node.warn(\"currValue=\" + JSON.stringify(currValue) );\n}\n*/\n\nif ((typeof prevValue !== 'undefined') && (typeof prevValue.payload !== 'undefined')) {\n    if (currValue.payload==prevValue.payload) {\n        //node.warn(\"Values the same!\")\n        prevValue = currValue;\n        context.set(topic, prevValue)\n        return null;// values the same, no need to process\n    } else {\n        var msgarr = [\n            {\n                timestamp: prevValue.timestamp,\n                topic: prevValue.topic,\n                payload: prevValue.payload\n            },\n            {\n                timestamp: currValue.timestamp,\n                topic: currValue.topic,\n                payload: currValue.payload\n            },\n        ];\n        node.log(msgarr.toString());\n        context.set(topic, currValue)\n        return [msgarr];\n    }\n} else {\n    prevValue = currValue;\n    context.set(topic, prevValue);\n    return msg;\n}\n\n//return msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 630,
+        "y": 220,
+        "wires": [
+            [
+                "cd76d8cc.97fb08",
+                "1913fb4e.05ae35"
+            ]
+        ]
     }
 ]
