@@ -189,7 +189,7 @@
         ],
         "out": [
             {
-                "x": 580,
+                "x": 720,
                 "y": 20,
                 "wires": [
                     {
@@ -704,7 +704,7 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 590,
+        "x": 730,
         "y": 60,
         "wires": []
     },
@@ -734,7 +734,7 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 590,
+        "x": 730,
         "y": 100,
         "wires": []
     },
@@ -1078,9 +1078,8 @@
             [
                 "6575f545.23b7fc",
                 "2d4ad8bc.1d9788",
-                "34b2b94.276a146",
                 "21f32043.3daa9",
-                "f14453c0.5fa2f"
+                "21658561.3d251a"
             ]
         ]
     },
@@ -1230,7 +1229,7 @@
         "wires": [
             [
                 "e1582874.335878",
-                "34b2b94.276a146"
+                "21658561.3d251a"
             ]
         ]
     },
@@ -2271,7 +2270,7 @@
             "c30c472a.3b5e98",
             "a1e76248.eab86"
         ],
-        "x": 875,
+        "x": 995,
         "y": 300,
         "wires": []
     },
@@ -2313,7 +2312,7 @@
         "gap": "",
         "start": "",
         "inout": "out",
-        "x": 630,
+        "x": 690,
         "y": 220,
         "wires": [
             [
@@ -3747,7 +3746,7 @@
         "name": "Configure YOUR Remote MQTT Broker connection here ",
         "info": "",
         "x": 200,
-        "y": 260,
+        "y": 200,
         "wires": []
     },
     {
@@ -3759,7 +3758,7 @@
         "qos": "0",
         "broker": "27dbe3bb.c30aec",
         "x": 280,
-        "y": 300,
+        "y": 240,
         "wires": [
             [
                 "1c1d968d.f8d229"
@@ -3788,7 +3787,7 @@
             "8b940ec1.056b4"
         ],
         "x": 175,
-        "y": 360,
+        "y": 280,
         "wires": [
             [
                 "c27b7891.9b51c8"
@@ -3804,8 +3803,8 @@
         "qos": "0",
         "retain": "false",
         "broker": "27dbe3bb.c30aec",
-        "x": 615,
-        "y": 360,
+        "x": 720,
+        "y": 280,
         "wires": []
     },
     {
@@ -3817,7 +3816,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 365,
-        "y": 360,
+        "y": 280,
         "wires": [
             [
                 "5fed1231.75455c",
@@ -3834,8 +3833,8 @@
         "active": false,
         "console": "false",
         "complete": "true",
-        "x": 585,
-        "y": 420,
+        "x": 750,
+        "y": 200,
         "wires": []
     },
     {
@@ -5478,8 +5477,8 @@
         "qos": "0",
         "retain": "false",
         "broker": "971eda83.260398",
-        "x": 590,
-        "y": 160,
+        "x": 730,
+        "y": 140,
         "wires": []
     },
     {
@@ -6468,7 +6467,7 @@
         "y": 20,
         "wires": [
             [
-                "84427a8a.39aea8"
+                "27c1592.a85f4a6"
             ]
         ]
     },
@@ -6480,7 +6479,7 @@
         "func": "\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 470,
+        "x": 610,
         "y": 40,
         "wires": [
             []
@@ -10415,8 +10414,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 650,
-        "y": 300,
+        "x": 730,
+        "y": 240,
         "wires": []
     },
     {
@@ -12377,8 +12376,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 830,
-        "y": 360,
+        "x": 870,
+        "y": 340,
         "wires": []
     },
     {
@@ -12986,35 +12985,19 @@
         "active": true,
         "console": "false",
         "complete": "true",
-        "x": 1070,
+        "x": 930,
         "y": 340,
         "wires": []
-    },
-    {
-        "id": "f14453c0.5fa2f",
-        "type": "function",
-        "z": "88396424.c54498",
-        "name": "just topic,payload,ts",
-        "func": "var newmsg = {\n    \"topic\": msg.topic,\n    \"payload\": msg.payload,\n    \"timestamp\": msg.timestamp\n}\nreturn newmsg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 990,
-        "y": 340,
-        "wires": [
-            [
-                "64697bfd.e1f814"
-            ]
-        ]
     },
     {
         "id": "22f88852.757288",
         "type": "function",
         "z": "e8223701.eebbe8",
-        "name": "topic,payload,timestamp",
+        "name": "reduce to topic, payload, timestamp",
         "func": "var newmsg = {\n    \"topic\": msg.topic,\n    \"payload\": msg.payload,\n    \"timestamp\": msg.timestamp\n}\nreturn newmsg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 430,
+        "x": 460,
         "y": 220,
         "wires": [
             [
@@ -13094,13 +13077,11 @@
         "topic": "#",
         "qos": "2",
         "broker": "971eda83.260398",
-        "x": 90,
-        "y": 460,
+        "x": 70,
+        "y": 340,
         "wires": [
             [
-                "357db468.59e71c",
-                "8bca47a7.602278",
-                "955a8e58.44eb4"
+                "6a095042.3ea6d"
             ]
         ]
     },
@@ -13109,13 +13090,14 @@
         "type": "debug",
         "z": "c201e10a.3d66f",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
-        "x": 950,
-        "y": 480,
+        "complete": "true",
+        "targetType": "full",
+        "x": 750,
+        "y": 420,
         "wires": []
     },
     {
@@ -13133,8 +13115,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": true,
-        "x": 530,
-        "y": 480,
+        "x": 610,
+        "y": 420,
         "wires": [
             [
                 "6b782cb9.de7684"
@@ -13151,8 +13133,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 770,
-        "y": 460,
+        "x": 730,
+        "y": 380,
         "wires": []
     },
     {
@@ -13165,8 +13147,8 @@
         "start": "",
         "inout": "out",
         "property": "payload",
-        "x": 370,
-        "y": 480,
+        "x": 470,
+        "y": 420,
         "wires": [
             [
                 "6dc229f1.4045a8"
@@ -13186,18 +13168,18 @@
         "joiner": "\\n",
         "joinerType": "str",
         "accumulate": false,
-        "timeout": "10",
+        "timeout": "60",
         "count": "",
         "reduceRight": false,
         "reduceExp": "",
         "reduceInit": "",
         "reduceInitType": "",
         "reduceFixup": "",
-        "x": 230,
-        "y": 500,
+        "x": 450,
+        "y": 460,
         "wires": [
             [
-                "730c64db.c6381c"
+                "5f4d2a9f.c04204"
             ]
         ]
     },
@@ -13212,7 +13194,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 750,
-        "y": 500,
+        "y": 460,
         "wires": []
     },
     {
@@ -13330,21 +13312,17 @@
         "rules": [
             {
                 "t": "null"
-            },
-            {
-                "t": "else"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 2,
+        "outputs": 1,
         "x": 860,
         "y": 580,
         "wires": [
             [
                 "7de4fca4.680f64"
-            ],
-            []
+            ]
         ]
     },
     {
@@ -13363,5 +13341,176 @@
                 "1913fb4e.05ae35"
             ]
         ]
+    },
+    {
+        "id": "75a78783.a4af98",
+        "type": "function",
+        "z": "c201e10a.3d66f",
+        "name": "only topic,payload,timestamp",
+        "func": "var newmsg = {\n    \"topic\": msg.topic,\n    \"payload\": msg.payload,\n    \"timestamp\": msg.timestamp\n}\nreturn newmsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 280,
+        "y": 460,
+        "wires": [
+            [
+                "955a8e58.44eb4"
+            ]
+        ]
+    },
+    {
+        "id": "5f4d2a9f.c04204",
+        "type": "function",
+        "z": "c201e10a.3d66f",
+        "name": "only payload",
+        "func": "var newmsg = {\n    \"payload\": msg.payload\n}\nreturn newmsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 590,
+        "y": 460,
+        "wires": [
+            [
+                "730c64db.c6381c",
+                "64beba43.cc2924"
+            ]
+        ]
+    },
+    {
+        "id": "ed164396.f0e44",
+        "type": "debug",
+        "z": "c201e10a.3d66f",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 750,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "21658561.3d251a",
+        "type": "function",
+        "z": "88396424.c54498",
+        "name": "just topic,payload,ts",
+        "func": "var newmsg = {\n    \"topic\": msg.topic,\n    \"payload\": msg.payload,\n    \"timestamp\": msg.timestamp\n}\nreturn newmsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 890,
+        "y": 300,
+        "wires": [
+            [
+                "34b2b94.276a146",
+                "64697bfd.e1f814"
+            ]
+        ]
+    },
+    {
+        "id": "937415a4.c4ade8",
+        "type": "subflow:50b2a29d.f794ec",
+        "z": "c201e10a.3d66f",
+        "name": "",
+        "x": 190,
+        "y": 380,
+        "wires": [
+            [
+                "75a78783.a4af98",
+                "8bca47a7.602278",
+                "357db468.59e71c"
+            ]
+        ]
+    },
+    {
+        "id": "27c1592.a85f4a6",
+        "type": "function",
+        "z": "50b2a29d.f794ec",
+        "name": "",
+        "func": "msg.timestamp = Math.round(msg.timestamp/1000)*1000\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 450,
+        "y": 20,
+        "wires": [
+            [
+                "84427a8a.39aea8"
+            ]
+        ]
+    },
+    {
+        "id": "6a095042.3ea6d",
+        "type": "switch",
+        "z": "c201e10a.3d66f",
+        "name": "block= is null ; unblock = is not null",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "null"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 280,
+        "y": 340,
+        "wires": [
+            [
+                "937415a4.c4ade8",
+                "ed164396.f0e44"
+            ]
+        ]
+    },
+    {
+        "id": "64beba43.cc2924",
+        "type": "change",
+        "z": "c201e10a.3d66f",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.$\t{\t  $fromMillis(timestamp):\t  [\t    {\t      topic:payload\t\t}\t  ]\t}\t\t/*\t$fromMillis(*.timestamp)\tpayload.*\t*.timestamp\t\t\t{\t\t$fromMillis(timestamp):\t    [\t    \t{\t\t\ttopic:payload        \t        }\t\t]\t}\t\tpayload.\t\t$fromMillis(timestamp):[{\t\ttopic:payload\t}]\t\t\t\tpayload.\t{\t  $fromMillis(timestamp):\t  [\t    {\t      topic:payload\t\t}\t  ]\t}\t\tpayload\t{\t  $fromMillis(timestamp):\t  [\t    {\t      topic:payload\t\t}\t  ]\t}\t\t*/\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 580,
+        "y": 500,
+        "wires": [
+            [
+                "23dce4bd.14f21c"
+            ]
+        ]
+    },
+    {
+        "id": "23dce4bd.14f21c",
+        "type": "debug",
+        "z": "c201e10a.3d66f",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 730,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "ca0de740.b5f058",
+        "type": "comment",
+        "z": "c201e10a.3d66f",
+        "name": "",
+        "info": "I'm chosing the following format as what I would call Node_RED standard time series datapoint:\nmsg = {\n    \"topic\": \"power/consumption/instantaneous\",\n    \"timestamp\": 1573475400000,\n    \"payload\": 5.7\n}\n\nI acknowledge that the following is arguably similar or better for some things:\nmsg = {\n    \"topic\": \"power/consumption/instantaneous\",\n    \"payload\": [{\n        \"timestamp\": 1573475400000,\n        \"value\":5.7\n    }]\n}\n\nwhere the timestamp is an attribute of the payload rather than an attribute of the msg itself, but went with the former for payload simplicity whereby the payload can be assumed to be the current value in MQTT, for math, comparison, range-checking, alarming, etc.\n",
+        "x": 80,
+        "y": 420,
+        "wires": []
     }
 ]
