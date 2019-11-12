@@ -13447,7 +13447,7 @@
         "propertyType": "msg",
         "rules": [
             {
-                "t": "null"
+                "t": "nnull"
             }
         ],
         "checkall": "true",
@@ -13472,7 +13472,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "payload.$\t{\t  $fromMillis(timestamp):\t  [\t    {\t      topic:payload\t\t}\t  ]\t}\t\t/*\t$fromMillis(*.timestamp)\tpayload.*\t*.timestamp\t\t\t{\t\t$fromMillis(timestamp):\t    [\t    \t{\t\t\ttopic:payload        \t        }\t\t]\t}\t\tpayload.\t\t$fromMillis(timestamp):[{\t\ttopic:payload\t}]\t\t\t\tpayload.\t{\t  $fromMillis(timestamp):\t  [\t    {\t      topic:payload\t\t}\t  ]\t}\t\tpayload\t{\t  $fromMillis(timestamp):\t  [\t    {\t      topic:payload\t\t}\t  ]\t}\t\t*/\t",
+                "to": "{ \"data\":\t  payload.$\t  {\t    $fromMillis(timestamp):\t    {\t      topic:payload\t    }\t  }\t}\t\t/*\t$fromMillis(*.timestamp)\tpayload.*\t*.timestamp\t\t\t{\t\t$fromMillis(timestamp):\t    [\t    \t{\t\t\ttopic:payload        \t        }\t\t]\t}\t\tpayload.\t\t$fromMillis(timestamp):[{\t\ttopic:payload\t}]\t\t\t\tpayload.\t{\t  $fromMillis(timestamp):\t  [\t    {\t      topic:payload\t\t}\t  ]\t}\t\tpayload\t{\t  $fromMillis(timestamp):\t  [\t    {\t      topic:payload\t\t}\t  ]\t}\t\t\tpayload.$\t{\t  $fromMillis(timestamp):\t  [\t    {\t      topic:payload\t    }\t  ]\t}\t\t\t{ \"data\":\t  payload.$\t  {\t    $fromMillis(timestamp):\t    [\t      {\t        topic:payload\t      }\t    ]\t  }\t}\t\t*/\t",
                 "tot": "jsonata"
             }
         ],
