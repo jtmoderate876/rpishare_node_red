@@ -677,6 +677,12 @@
         "hidden": false
     },
     {
+        "id": "5e06fbd1.409cc4",
+        "type": "PLMConfig",
+        "z": "",
+        "path": "/dev/insteon"
+    },
+    {
         "id": "71a47ab9.6044a4",
         "type": "mosca in",
         "z": "c201e10a.3d66f",
@@ -1069,7 +1075,7 @@
         "type": "function",
         "z": "88396424.c54498",
         "name": "Calculate Demand Value",
-        "func": "//ignore bad data\nif (!msg.payload.InstantaneousDemand) \n{\n    return;\n}\n\n//parse response\nstrDemand=msg.payload.InstantaneousDemand.Demand[0];\nintDemand=parseInt(strDemand,16);\n\nstrMultiplier=msg.payload.InstantaneousDemand.Multiplier[0];\nintMultiplier=parseInt(strMultiplier,16);\n\nstrDivisor=msg.payload.InstantaneousDemand.Divisor[0];\nintDivisor=parseInt(strDivisor,16);\n\nif (intDemand>2147483647) {\n    intDemand = 0;\n}\n\nif (intMultiplier===0) {\n    intMultiplier = 1;\n} \n\nif (intDivisor===0) {\n    intDivisor = 1;\n}\n\nstrTimeStamp = msg.payload.InstantaneousDemand.TimeStamp[0];\nintTimeStamp = parseInt(strTimeStamp,16);\ntimestamp=new Date(\"2000\");//rainforest timestamp is based upon seconds since 1/1/2000\n//the following would also work:\n//timestamp=new Date(\"2000-01-01T00:00:00Z\");//rainforest timestamp is based upon 1/1/2000\n//node.warn(timestamp.toUTCString());\ntimestamp.setUTCSeconds(timestamp.getUTCSeconds() + intTimeStamp);\n//node.warn(timestamp.toUTCString());\n\nmsg.payload = (intDemand * intMultiplier) / intDivisor;\nmsg.topic = \"power/consumption/instantaneous\";\nmsg.timestamp = timestamp;\n\nreturn msg;",
+        "func": "//ignore bad data\nif (!msg.payload.InstantaneousDemand) \n{\n    return;\n}\n\n//parse response\nstrDemand=msg.payload.InstantaneousDemand.Demand[0];\nintDemand=parseInt(strDemand,16);\n\nstrMultiplier=msg.payload.InstantaneousDemand.Multiplier[0];\nintMultiplier=parseInt(strMultiplier,16);\n\nstrDivisor=msg.payload.InstantaneousDemand.Divisor[0];\nintDivisor=parseInt(strDivisor,16);\n\nif (intDemand>2147483647) {\n    intDemand = 0;\n}\n\nif (intMultiplier===0) {\n    intMultiplier = 1;\n} \n\nif (intDivisor===0) {\n    intDivisor = 1;\n}\n\nstrTimeStamp = msg.payload.InstantaneousDemand.TimeStamp[0];\nintTimeStamp = parseInt(strTimeStamp,16);\ntimestamp=new Date(\"2000\");//rainforest timestamp is based upon seconds since 1/1/2000\n//the following would also work:\n//timestamp=new Date(\"2000-01-01T00:00:00Z\");//rainforest timestamp is based upon 1/1/2000\n//node.warn(timestamp.toUTCString());\ntimestamp.setUTCSeconds(timestamp.getUTCSeconds() + intTimeStamp);\ntimestamp = timestamp.valueOf();\n//node.warn(timestamp);\n\nmsg.payload = (intDemand * intMultiplier) / intDivisor;\nmsg.topic = \"power/consumption/instantaneous\";\nmsg.timestamp = timestamp;\n\nreturn msg;",
         "outputs": "1",
         "noerr": 0,
         "x": 450,
@@ -1221,7 +1227,7 @@
         "type": "function",
         "z": "88396424.c54498",
         "name": "Calculate Consumption Total Value",
-        "func": "//ignore bad data\nif (!msg.payload.CurrentSummation || msg.payload.CurrentSummation===null || msg.payloadCurrentSummation==='' )\n{\n    return;\n} else {\n\n    //parse response\n    strConsumptionTotal=msg.payload.CurrentSummation.SummationDelivered[0];\n    intConsumptionTotal=parseInt(strConsumptionTotal,16);\n    \n    strMultiplier=msg.payload.CurrentSummation.Multiplier[0];\n    intMultiplier=parseInt(strMultiplier,16);\n    \n    strDivisor=msg.payload.CurrentSummation.Divisor[0];\n    intDivisor=parseInt(strDivisor,16);\n    \n    if (intConsumptionTotal>2147483647) {\n        intConsumptionTotal = 0;\n    }\n    \n    if (intMultiplier===0) {\n        intMultiplier = 1;\n    } \n    \n    if (intDivisor===0) {\n        intDivisor = 1;\n    }\n    \n    strTimeStamp = msg.payload.CurrentSummation.TimeStamp[0];\n    intTimeStamp = parseInt(strTimeStamp,16);\n    timestamp=new Date(\"2000\");//rainforest timestamp is based upon seconds since 1/1/2000\n    //the following would also work:\n    //timestamp=new Date(\"2000-01-01T00:00:00Z\");//rainforest timestamp is based upon 1/1/2000\n    //node.warn(timestamp.toUTCString());\n    timestamp.setUTCSeconds(timestamp.getUTCSeconds() + intTimeStamp);\n    //node.warn(timestamp.toUTCString());\n    \n\n    \n    msg.payload = (intConsumptionTotal * intMultiplier) / intDivisor;\n    msg.topic = \"power/consumption/total\";\n    msg.timestamp = timestamp;\n    \n    if (msg.payload === 0)\n    {\n        return;\n    } else {\n        return msg;\n    }\n}",
+        "func": "//ignore bad data\nif (!msg.payload.CurrentSummation || msg.payload.CurrentSummation===null || msg.payloadCurrentSummation==='' )\n{\n    return;\n} else {\n\n    //parse response\n    strConsumptionTotal=msg.payload.CurrentSummation.SummationDelivered[0];\n    intConsumptionTotal=parseInt(strConsumptionTotal,16);\n    \n    strMultiplier=msg.payload.CurrentSummation.Multiplier[0];\n    intMultiplier=parseInt(strMultiplier,16);\n    \n    strDivisor=msg.payload.CurrentSummation.Divisor[0];\n    intDivisor=parseInt(strDivisor,16);\n    \n    if (intConsumptionTotal>2147483647) {\n        intConsumptionTotal = 0;\n    }\n    \n    if (intMultiplier===0) {\n        intMultiplier = 1;\n    } \n    \n    if (intDivisor===0) {\n        intDivisor = 1;\n    }\n    \n    strTimeStamp = msg.payload.CurrentSummation.TimeStamp[0];\n    intTimeStamp = parseInt(strTimeStamp,16);\n    timestamp=new Date(\"2000\");//rainforest timestamp is based upon seconds since 1/1/2000\n    //the following would also work:\n    //timestamp=new Date(\"2000-01-01T00:00:00Z\");//rainforest timestamp is based upon 1/1/2000\n    //node.warn(timestamp.toUTCString());\n    timestamp.setUTCSeconds(timestamp.getUTCSeconds() + intTimeStamp);\n    timestamp = timestamp.valueOf();\n    //node.warn(timestamp.toUTCString());\n    \n\n    \n    msg.payload = (intConsumptionTotal * intMultiplier) / intDivisor;\n    msg.topic = \"power/consumption/total\";\n    msg.timestamp = timestamp;\n    \n    if (msg.payload === 0)\n    {\n        return;\n    } else {\n        return msg;\n    }\n}",
         "outputs": "1",
         "noerr": 0,
         "x": 520,
@@ -3469,11 +3475,11 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "repeat": "120",
+        "repeat": "",
         "crontab": "",
         "once": false,
         "onceDelay": "",
-        "x": 310,
+        "x": 300,
         "y": 60,
         "wires": [
             [
@@ -3529,7 +3535,7 @@
         "func": "//var wwQueue = flow.get('wwQueue') || null;\nvar wwQueue = flow.get('wwQueue') || {\"data\":[]};\n// var wwHTTPResponse = flow.get('wwHTTPResponse') || null;\nif ((flow.get('wwHTTPResponse') !== undefined) && (flow.get('wwHTTPResponse') !== null)){\n    // if wonderware responded to  previous POST assume successful and clear\n    flow.set('wwHTTPResponse',undefined);\n} else if ((flow.get('wwQueueAwaitingConfirmation') !== undefined) && (flow.get('wwQueueAwaitingConfirmation') !==null)){\n    // otherwise reprocess the previous data by adding it back to wwQueue\n    var wwQueueAwaitingConfirmation = flow.get('wwQueueAwaitingConfirmation');\n    for (var obj1 of wwQueueAwaitingConfirmation.data) {//array so use \"of\" not \"in\"\n        i = 0;\n        while (//work through all earlier dateTimes\n            (typeof wwQueue.data !== 'undefined') &&\n            (typeof wwQueue.data[i] !== 'undefined') &&\n            (typeof wwQueue.data[i].dateTime !== 'undefined') &&\n            (new Date(wwQueue.data[i].dateTime).getTime() > new Date(obj1.dateTime).getTime()) //while we find newer dates keep looking\n        ) {i++;}\n        var obj2 = {};\n        if (//is current dateTime EQUAL to ours (or older)\n            (typeof wwQueue.data !== 'undefined')&&\n            (typeof wwQueue.data[i] !== 'undefined')&&\n            (typeof wwQueue.data[i].dateTime !== 'undefined')&&\n            (new Date(wwQueue.data[i].dateTime).getTime() == new Date(obj1.dateTime).getTime()) //if exact date found then we need to handle existing\n        ) {//if equal use  existing array element\n            obj2 = wwQueue.data.splice(i,1)[0];\n        } else {//if older (not equal) create a new array element\n            obj2.dateTime = obj1.dateTime;\n        }\n        for (i=1; i < Object.keys(obj1).length; i++) {\n            if (Object.keys(obj1)[i]!=\"dateTime\") {//don't duplicate the dateTime\n                obj2[Object.keys(obj1)[i]] = Object.values(obj1)[i];\n            }\n        }\n        wwQueue.data.splice(i,0,obj2); //add new, full dateTime record back to all record data in the right spot\n        flow.set('wwHTTPResponse',undefined);\n    }\n}\nflow.set('wwQueueAwaitingConfirmation',wwQueue)//\"move\" queue to awaiting confirmation\nflow.set('wwQueue',null); //delete processed json from global context\nmsg.timestamp = msg.payload;\nmsg.payload = wwQueue;\nif (!msg.payload) {\n    msg = null;\n}\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 470,
+        "x": 450,
         "y": 60,
         "wires": [
             [
@@ -5662,8 +5668,8 @@
                 "type": "msg"
             }
         ],
-        "x": 540,
-        "y": 720,
+        "x": 520,
+        "y": 920,
         "wires": [
             [
                 "307e7272.0da96e",
@@ -5677,8 +5683,8 @@
         "z": "e8223701.eebbe8",
         "name": "Read REST API",
         "info": "",
-        "x": 100,
-        "y": 720,
+        "x": 80,
+        "y": 920,
         "wires": []
     },
     {
@@ -5690,8 +5696,8 @@
         "ret": "txt",
         "url": "",
         "tls": "",
-        "x": 760,
-        "y": 800,
+        "x": 740,
+        "y": 1000,
         "wires": [
             [
                 "5825d936.db4968"
@@ -5710,8 +5716,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 100,
-        "y": 760,
+        "x": 80,
+        "y": 960,
         "wires": [
             [
                 "4917e4e5.06bbbc"
@@ -5726,8 +5732,8 @@
         "func": "//msg.url = \"https://online.wonderware.com/apis/Historian/v2/\";\n//msg.method = \"GET\";\n//msg.headers = {};\nmsg.headers.Authorization = msg.Authorization;  //copy Authorization to be under headers\ndelete msg.Authorization;                       // and remove from old location\n//msg.headers.ContentType = \"application/json\";\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 360,
-        "y": 800,
+        "x": 340,
+        "y": 1000,
         "wires": [
             [
                 "43ec985e.08bb38"
@@ -5744,8 +5750,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 950,
-        "y": 800,
+        "x": 930,
+        "y": 1000,
         "wires": []
     },
     {
@@ -5767,8 +5773,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 450,
-        "y": 760,
+        "x": 430,
+        "y": 960,
         "wires": [
             [
                 "7e76212d.f8ed5"
@@ -5794,8 +5800,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 300,
-        "y": 760,
+        "x": 280,
+        "y": 960,
         "wires": [
             [
                 "dbb8355c.ae2f88"
@@ -5821,8 +5827,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 660,
-        "y": 760,
+        "x": 640,
+        "y": 960,
         "wires": [
             [
                 "9a406cda.bd797"
@@ -5973,7 +5979,8 @@
         "y": 360,
         "wires": [
             [
-                "c8c26955.8e6978"
+                "c8c26955.8e6978",
+                "d06127ff.b948d8"
             ]
         ]
     },
@@ -6290,7 +6297,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 610,
+        "x": 590,
         "y": 500,
         "wires": [
             [
@@ -6342,7 +6349,7 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 940,
+        "x": 950,
         "y": 500,
         "wires": []
     },
@@ -6365,7 +6372,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 450,
+        "x": 430,
         "y": 500,
         "wires": [
             [
@@ -6440,7 +6447,7 @@
                 "90c7422b.75087"
             ],
             [
-                "84427a8a.39aea8"
+                "10cd2a2e.b52c76"
             ]
         ]
     },
@@ -6495,10 +6502,10 @@
         "y": 360,
         "wires": [
             [
-                "51c255f0.079a2c",
                 "7660dea.3da042",
                 "d4ca7121.40415",
-                "22f88852.757288"
+                "285de1d1.22bbae",
+                "51c255f0.079a2c"
             ]
         ]
     },
@@ -12384,8 +12391,8 @@
         "id": "36c9f573.661a0a",
         "type": "function",
         "z": "e8223701.eebbe8",
-        "name": "",
-        "func": "flow.set(\"wwHTTPResponse\",msg)\nreturn msg;",
+        "name": "clear queue",
+        "func": "flow.set(\"wwHTTPResponse\",msg)\nflow.set(\"wwQueue2\",undefined)\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 830,
@@ -12406,8 +12413,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 950,
-        "y": 720,
+        "x": 930,
+        "y": 920,
         "wires": []
     },
     {
@@ -12982,28 +12989,12 @@
         "type": "debug",
         "z": "88396424.c54498",
         "name": "",
-        "active": true,
+        "active": false,
         "console": "false",
         "complete": "true",
-        "x": 930,
-        "y": 340,
+        "x": 890,
+        "y": 480,
         "wires": []
-    },
-    {
-        "id": "22f88852.757288",
-        "type": "function",
-        "z": "e8223701.eebbe8",
-        "name": "reduce to topic, payload, timestamp",
-        "func": "var newmsg = {\n    \"topic\": msg.topic,\n    \"payload\": msg.payload,\n    \"timestamp\": msg.timestamp\n}\nreturn newmsg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 460,
-        "y": 220,
-        "wires": [
-            [
-                "67470be5.f80af4"
-            ]
-        ]
     },
     {
         "id": "4a1ca3f5.47c4cc",
@@ -13188,7 +13179,7 @@
         "type": "debug",
         "z": "c201e10a.3d66f",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -13266,7 +13257,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 610,
+        "x": 590,
         "y": 580,
         "wires": [
             [
@@ -13294,7 +13285,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 450,
+        "x": 430,
         "y": 580,
         "wires": [
             [
@@ -13338,7 +13329,8 @@
         "wires": [
             [
                 "cd76d8cc.97fb08",
-                "1913fb4e.05ae35"
+                "8b92aa56.de29a8",
+                "a19c0f0d.080b5"
             ]
         ]
     },
@@ -13447,7 +13439,7 @@
         "propertyType": "msg",
         "rules": [
             {
-                "t": "nnull"
+                "t": "null"
             }
         ],
         "checkall": "true",
@@ -13494,7 +13486,7 @@
         "type": "debug",
         "z": "c201e10a.3d66f",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -13511,6 +13503,390 @@
         "info": "I'm chosing the following format as what I would call Node_RED standard time series datapoint:\nmsg = {\n    \"topic\": \"power/consumption/instantaneous\",\n    \"timestamp\": 1573475400000,\n    \"payload\": 5.7\n}\n\nI acknowledge that the following is arguably similar or better for some things:\nmsg = {\n    \"topic\": \"power/consumption/instantaneous\",\n    \"payload\": [{\n        \"timestamp\": 1573475400000,\n        \"value\":5.7\n    }]\n}\n\nwhere the timestamp is an attribute of the payload rather than an attribute of the msg itself, but went with the former for payload simplicity whereby the payload can be assumed to be the current value in MQTT, for math, comparison, range-checking, alarming, etc.\n",
         "x": 80,
         "y": 420,
+        "wires": []
+    },
+    {
+        "id": "d6b679ed.7e34b8",
+        "type": "debug",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 950,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "a938e7c5.2ccaa8",
+        "type": "delay",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "pauseType": "queue",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "x": 610,
+        "y": 700,
+        "wires": [
+            [
+                "d6b679ed.7e34b8"
+            ]
+        ]
+    },
+    {
+        "id": "a55556ac.0d0d88",
+        "type": "rbe",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 470,
+        "y": 700,
+        "wires": [
+            [
+                "a938e7c5.2ccaa8"
+            ]
+        ]
+    },
+    {
+        "id": "7bcf3d0e.e20c24",
+        "type": "join",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "mode": "custom",
+        "build": "array",
+        "property": "",
+        "propertyType": "full",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "60",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 390,
+        "y": 740,
+        "wires": [
+            [
+                "8b3466d6.fe2718"
+            ]
+        ]
+    },
+    {
+        "id": "d7054213.67888",
+        "type": "debug",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 950,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "3775f938.482af6",
+        "type": "function",
+        "z": "e8223701.eebbe8",
+        "name": "only topic,timestamp,payload",
+        "func": "var newmsg = {\n    \"topic\": msg.topic,\n    \"timestamp\": msg.timestamp,\n    \"payload\": msg.payload\n}\nreturn newmsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 220,
+        "y": 740,
+        "wires": [
+            [
+                "7bcf3d0e.e20c24"
+            ]
+        ]
+    },
+    {
+        "id": "8b3466d6.fe2718",
+        "type": "function",
+        "z": "e8223701.eebbe8",
+        "name": "only payload",
+        "func": "var newmsg = {\n    \"payload\": msg.payload\n}\nreturn newmsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 510,
+        "y": 740,
+        "wires": [
+            [
+                "d7054213.67888",
+                "69cb68c5.62def8"
+            ]
+        ]
+    },
+    {
+        "id": "857a4872.f198d8",
+        "type": "debug",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 950,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "8b92aa56.de29a8",
+        "type": "switch",
+        "z": "e8223701.eebbe8",
+        "name": "block= is null ; unblock = is not null",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 280,
+        "y": 660,
+        "wires": [
+            [
+                "857a4872.f198d8",
+                "3775f938.482af6"
+            ]
+        ]
+    },
+    {
+        "id": "90403323.2f402",
+        "type": "comment",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "info": "I'm chosing the following format as what I would call Node_RED standard time series datapoint:\nmsg = {\n    \"topic\": \"power/consumption/instantaneous\",\n    \"timestamp\": 1573475400000,\n    \"payload\": 5.7\n}\n\nI acknowledge that the following is arguably similar or better for some things:\nmsg = {\n    \"topic\": \"power/consumption/instantaneous\",\n    \"payload\": [{\n        \"timestamp\": 1573475400000,\n        \"value\":5.7\n    }]\n}\n\nwhere the timestamp is an attribute of the payload rather than an attribute of the msg itself, but went with the former for payload simplicity whereby the payload can be assumed to be the current value in MQTT, for math, comparison, range-checking, alarming, etc.\n",
+        "x": 80,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "285de1d1.22bbae",
+        "type": "function",
+        "z": "e8223701.eebbe8",
+        "name": "only topic,payload,timestamp",
+        "func": "var newmsg = {\n    \"topic\": msg.topic,\n    \"payload\": msg.payload,\n    \"timestamp\": msg.timestamp\n}\nreturn newmsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 420,
+        "y": 220,
+        "wires": [
+            [
+                "67470be5.f80af4"
+            ]
+        ]
+    },
+    {
+        "id": "10cd2a2e.b52c76",
+        "type": "function",
+        "z": "50b2a29d.f794ec",
+        "name": "force numeric timestamp",
+        "func": "/*\nif (isNaN(msg.timestamp)) {\n    msg.timestamp=new Date(msg.timestamp).getTime();\n}\n*/\nif (typeof msg.timestamp !=\"number\") {\n    msg.timestamp=new Date(msg.timestamp).getTime();\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 330,
+        "y": 60,
+        "wires": [
+            [
+                "84427a8a.39aea8"
+            ]
+        ]
+    },
+    {
+        "id": "d06127ff.b948d8",
+        "type": "debug",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 950,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "b75d37ac.77fba8",
+        "type": "function",
+        "z": "e8223701.eebbe8",
+        "name": "dedupe",
+        "func": "/*\nvar arr = [];\nfor(let i = 0; i < msg.payload.length; i++) {\n  if(!arr.includes(msg.payload[i])) {\n      arr.push(msg.payload[i]);\n  }\n}\nmsg.payload = arr;\n*/\nmsg.payload = Array.from(new Set(msg.payload.map(JSON.stringify))).map(JSON.parse);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 440,
+        "y": 780,
+        "wires": [
+            [
+                "20f41dcc.ead692",
+                "136dc780.a11f89"
+            ]
+        ]
+    },
+    {
+        "id": "69cb68c5.62def8",
+        "type": "function",
+        "z": "e8223701.eebbe8",
+        "name": "strip _msgid",
+        "func": "var arr = [];\n//node.warn(msg.payload.length)\nfor(var i = 0; i < msg.payload.length; i++) {\n  arr.push(\n  {\n      \"topic\":msg.payload[i].topic,\n      \"timestamp\":msg.payload[i].timestamp,\n      \"payload\":msg.payload[i].payload\n  }\n  );\n}\n\nmsg.payload = arr;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 130,
+        "y": 780,
+        "wires": [
+            [
+                "9e1bee6f.ca1dc",
+                "8e029c49.99f81"
+            ]
+        ]
+    },
+    {
+        "id": "20f41dcc.ead692",
+        "type": "change",
+        "z": "e8223701.eebbe8",
+        "name": "ww data format",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{ \"data\":\t  payload.$\t  {\t    $fromMillis(timestamp):\t    {\t      topic:payload\t    }\t  }\t}\t\t\t/*\t{ \"data\":\t  payload.$\t  {\t    $fromMillis(timestamp):\t    {\t      topic:$distinct(payload)\t    }\t  }\t}\t\t\t{ \"data\":\t  payload.$\t  {\t    $fromMillis(timestamp):\t    {\t      topic:payload\t    }\t  }\t}\t\t$fromMillis(*.timestamp)\tpayload.*\t*.timestamp\t\t\t{\t\t$fromMillis(timestamp):\t    [\t    \t{\t\t\ttopic:payload        \t        }\t\t]\t}\t\tpayload.\t\t$fromMillis(timestamp):[{\t\ttopic:payload\t}]\t\t\t\tpayload.\t{\t  $fromMillis(timestamp):\t  [\t    {\t      topic:payload\t\t}\t  ]\t}\t\tpayload\t{\t  $fromMillis(timestamp):\t  [\t    {\t      topic:payload\t\t}\t  ]\t}\t\t\tpayload.$\t{\t  $fromMillis(timestamp):\t  [\t    {\t      topic:payload\t    }\t  ]\t}\t\t\t{ \"data\":\t  payload.$\t  {\t    $fromMillis(timestamp):\t    [\t      {\t        topic:payload\t      }\t    ]\t  }\t}\t\t*/\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 600,
+        "y": 780,
+        "wires": [
+            [
+                "b92480f5.bda35",
+                "ec1ff4f0.8a3f18"
+            ]
+        ]
+    },
+    {
+        "id": "b92480f5.bda35",
+        "type": "debug",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 930,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "9e1bee6f.ca1dc",
+        "type": "function",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "func": "msg.payload = msg.payload.concat(flow.get('wwQueue2') || [])\nflow.set(\"wwQueue2\",msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 290,
+        "y": 780,
+        "wires": [
+            [
+                "b75d37ac.77fba8",
+                "212bbefc.6ea842"
+            ]
+        ]
+    },
+    {
+        "id": "a19c0f0d.080b5",
+        "type": "switch",
+        "z": "e8223701.eebbe8",
+        "name": "block= is null ; unblock = is not null",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "null"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 580,
+        "y": 140,
+        "wires": [
+            [
+                "1913fb4e.05ae35"
+            ]
+        ]
+    },
+    {
+        "id": "8e029c49.99f81",
+        "type": "debug",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 130,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "212bbefc.6ea842",
+        "type": "debug",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 310,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "136dc780.a11f89",
+        "type": "debug",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 550,
+        "y": 820,
         "wires": []
     }
 ]
