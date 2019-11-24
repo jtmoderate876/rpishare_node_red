@@ -14010,8 +14010,8 @@
         "height": 0,
         "passthru": true,
         "topic": "cmnd/tasmotas/color",
-        "x": 120,
-        "y": 800,
+        "x": 100,
+        "y": 820,
         "wires": [
             [
                 "e9cbe961.4a5488"
@@ -14111,8 +14111,8 @@
         "func": "msg.payload = msg.payload.r + \",\" + msg.payload.g + \",\" + msg.payload.b\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 820,
-        "y": 700,
+        "x": 300,
+        "y": 820,
         "wires": [
             [
                 "57ccbf37.f675e",
@@ -14142,8 +14142,8 @@
         "height": 0,
         "passthru": true,
         "topic": "cmnd/tasmota1/color",
-        "x": 120,
-        "y": 840,
+        "x": 100,
+        "y": 860,
         "wires": [
             [
                 "e9cbe961.4a5488"
@@ -14172,8 +14172,8 @@
         "height": 0,
         "passthru": true,
         "topic": "cmnd/tasmota2/color",
-        "x": 120,
-        "y": 880,
+        "x": 100,
+        "y": 900,
         "wires": [
             [
                 "e9cbe961.4a5488"
@@ -14324,6 +14324,144 @@
         "wires": [
             [
                 "e01db829.f44328"
+            ]
+        ]
+    },
+    {
+        "id": "4142d2bc.72251c",
+        "type": "ui_colour_picker",
+        "z": "1fec4b90.1b56f4",
+        "name": "tasmota3",
+        "label": "tasmota3",
+        "group": "e1d17b09.535418",
+        "format": "rgb",
+        "outformat": "object",
+        "showSwatch": true,
+        "showPicker": true,
+        "showValue": true,
+        "showHue": false,
+        "showAlpha": false,
+        "showLightness": true,
+        "square": "false",
+        "dynOutput": "false",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "topic": "cmnd/tasmota3/color",
+        "x": 100,
+        "y": 940,
+        "wires": [
+            [
+                "e9cbe961.4a5488"
+            ]
+        ]
+    },
+    {
+        "id": "3410d97b.64e0b6",
+        "type": "ui_button",
+        "z": "1fec4b90.1b56f4",
+        "name": "",
+        "group": "e1d17b09.535418",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "tasmota3/color",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "cmnd/tasmota3/color",
+        "x": 120,
+        "y": 780,
+        "wires": [
+            [
+                "6ea8e129.0ae1e"
+            ]
+        ]
+    },
+    {
+        "id": "7909ab0a.956e24",
+        "type": "ui_switch",
+        "z": "1fec4b90.1b56f4",
+        "name": "",
+        "label": "tasmota3",
+        "tooltip": "",
+        "group": "e1d17b09.535418",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "cmnd/tasmota3/power",
+        "style": "",
+        "onvalue": "on",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "off",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "x": 440,
+        "y": 920,
+        "wires": [
+            [
+                "6ea8e129.0ae1e"
+            ]
+        ]
+    },
+    {
+        "id": "46e1f9f7.432548",
+        "type": "ui_switch",
+        "z": "1fec4b90.1b56f4",
+        "name": "",
+        "label": "tasmota3blueled",
+        "tooltip": "",
+        "group": "e1d17b09.535418",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "cmnd/tasmota3/ledpower",
+        "style": "",
+        "onvalue": "on",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "off",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "x": 620,
+        "y": 920,
+        "wires": [
+            [
+                "6ea8e129.0ae1e"
+            ]
+        ]
+    },
+    {
+        "id": "2466c2ca.ba8dee",
+        "type": "inject",
+        "z": "1fec4b90.1b56f4",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "3600",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 630,
+        "y": 880,
+        "wires": [
+            [
+                "46e1f9f7.432548"
             ]
         ]
     }
