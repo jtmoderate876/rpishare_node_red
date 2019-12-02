@@ -2356,8 +2356,8 @@
         "links": [
             "3a764f5e.e3f53"
         ],
-        "x": 895,
-        "y": 300,
+        "x": 915,
+        "y": 420,
         "wires": []
     },
     {
@@ -2407,7 +2407,8 @@
         "y": 340,
         "wires": [
             [
-                "951eb9a4.4d2208"
+                "951eb9a4.4d2208",
+                "43c2110c.c34be"
             ]
         ]
     },
@@ -3863,7 +3864,7 @@
         "links": [
             "8b940ec1.056b4"
         ],
-        "x": 175,
+        "x": 155,
         "y": 280,
         "wires": [
             [
@@ -3892,13 +3893,13 @@
         "func": "/*\nIf payload is an object rather than a simple value such as a float, string, etc.\nthen assume payload has:\n{\n    propertyname1 : value1,\n    propertyname2 : value2,\n    propertyname3 : value3\n}\nand parse it into separate msgs, each in the form:\n    newmsg.topic = msg.topic + \"/\" + propertyname\n    newmsg.payload = msg.payload.[propertyname]\n*/\nif (typeof msg.payload == \"object\"){\n    var newmsg = [];\n    var prefix = msg.topic+\"/\";\n/*  two different ways to iterate through payload.properties\n    1. with Object.keys(msg.payload)\n    2. with for propertyname in msg.payload\n    *went with 2*\n    var keys = Object.keys(msg.payload);\n    var obj = {};\n    for (i=0; i<keys.length; i++) { //    node.warn(\"iterating keys with keys[\"+i+\"]=\"+keys[i]);\n        obj[prefix+keys[i]] = msg.payload[keys[i]];\n    }\n*/\n    for(var propertyName in msg.payload) {\n        newmsg.push({\n            topic : prefix  + propertyName,\n            payload : msg.payload[propertyName]\n        });\n    }\n    msg = newmsg;\n}\nreturn [msg];\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 365,
+        "x": 330,
         "y": 280,
         "wires": [
             [
-                "5fed1231.75455c",
                 "570ea412.7b645c",
-                "1dc3ed7a.081c13"
+                "1dc3ed7a.081c13",
+                "8e06ae58.77076"
             ]
         ]
     },
@@ -6063,8 +6064,8 @@
         "active": true,
         "console": "false",
         "complete": "true",
-        "x": 990,
-        "y": 300,
+        "x": 1010,
+        "y": 400,
         "wires": []
     },
     {
@@ -8326,14 +8327,15 @@
         "id": "951eb9a4.4d2208",
         "type": "rbe",
         "z": "50466fda.5d00f",
+        "d": true,
         "name": "",
         "func": "rbe",
         "gap": "",
         "start": "",
         "inout": "out",
         "property": "payload",
-        "x": 830,
-        "y": 300,
+        "x": 1030,
+        "y": 340,
         "wires": [
             [
                 "9cd45335.9c179",
@@ -13101,7 +13103,8 @@
         "y": 340,
         "wires": [
             [
-                "6a095042.3ea6d"
+                "937415a4.c4ade8",
+                "ed164396.f0e44"
             ]
         ]
     },
@@ -13456,30 +13459,6 @@
         "wires": [
             [
                 "84427a8a.39aea8"
-            ]
-        ]
-    },
-    {
-        "id": "6a095042.3ea6d",
-        "type": "switch",
-        "z": "c201e10a.3d66f",
-        "name": "block= is null ; unblock = is not null",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "null"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 280,
-        "y": 340,
-        "wires": [
-            [
-                "937415a4.c4ade8",
-                "ed164396.f0e44"
             ]
         ]
     },
@@ -14450,18 +14429,99 @@
         "type": "inject",
         "z": "1fec4b90.1b56f4",
         "name": "",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
+        "topic": "cmnd/tasmota3/ledpower",
+        "payload": "off",
+        "payloadType": "str",
         "repeat": "3600",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 630,
+        "x": 680,
         "y": 880,
         "wires": [
             [
                 "46e1f9f7.432548"
+            ]
+        ]
+    },
+    {
+        "id": "352a43a.d1f98bc",
+        "type": "inject",
+        "z": "1fec4b90.1b56f4",
+        "name": "",
+        "topic": "cmnd/tasmotas/power",
+        "payload": "off",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "59 23 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 400,
+        "y": 780,
+        "wires": [
+            [
+                "6ea8e129.0ae1e"
+            ]
+        ]
+    },
+    {
+        "id": "d7938a2.281af78",
+        "type": "delay",
+        "z": "c201e10a.3d66f",
+        "name": "",
+        "pauseType": "queue",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "x": 430,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "43c2110c.c34be",
+        "type": "function",
+        "z": "50466fda.5d00f",
+        "name": "RBE+prev.",
+        "func": "/*\ncreating a report-by-exception type node but one that, when the value does change\nsends to messages, one with the old value and last timestamp for that value\nand a second with the new value and timestamp. This way Wonderware Online will have\na better data for visualization / interpolation.\n*/\nvar prevValue = {};\nvar topic = msg.topic;//.replace(/\\//g,\".\"); //globally replace / with .\nprevValue = context.get(topic);\n//create object with .topic, .payload, .timestamp\nvar currValue = {\n    topic : msg.topic,\n    payload : msg.payload,\n    timestamp : msg.timestamp\n};\n/*\nif (typeof prevValue !== 'undefined') {\n    node.warn(\"prevValue=\" + JSON.stringify(prevValue) );\n}\nif (typeof currValue !== 'undefined') {\n    node.warn(\"currValue=\" + JSON.stringify(currValue) );\n}\n*/\n\nif ((typeof prevValue !== 'undefined') && (typeof prevValue.payload !== 'undefined')) {\n    if (currValue.payload==prevValue.payload) {\n        //node.warn(\"Values the same!\")\n        prevValue = currValue;\n        context.set(topic, prevValue)\n        return null;// values the same, no need to process\n    } else {\n        var msgarr = [\n            {\n                timestamp: prevValue.timestamp,\n                topic: prevValue.topic,\n                payload: prevValue.payload\n            },\n            {\n                timestamp: currValue.timestamp,\n                topic: currValue.topic,\n                payload: currValue.payload\n            },\n        ];\n        node.log(msgarr.toString());\n        context.set(topic, currValue)\n        return [msgarr];\n    }\n} else {\n    prevValue = currValue;\n    context.set(topic, prevValue);\n    return msg;\n}\n\n//return msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 610,
+        "y": 400,
+        "wires": [
+            [
+                "9cd45335.9c179",
+                "e75b1948.c5f178"
+            ]
+        ]
+    },
+    {
+        "id": "8e06ae58.77076",
+        "type": "delay",
+        "z": "c201e10a.3d66f",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "90",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 580,
+        "y": 280,
+        "wires": [
+            [
+                "5fed1231.75455c"
             ]
         ]
     }
