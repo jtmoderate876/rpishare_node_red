@@ -3850,7 +3850,8 @@
         "y": 280,
         "wires": [
             [
-                "c27b7891.9b51c8"
+                "c27b7891.9b51c8",
+                "1dc3ed7a.081c13"
             ]
         ]
     },
@@ -3880,7 +3881,6 @@
         "wires": [
             [
                 "570ea412.7b645c",
-                "1dc3ed7a.081c13",
                 "8e06ae58.77076"
             ]
         ]
@@ -4069,8 +4069,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 120,
-        "y": 1060,
+        "x": 660,
+        "y": 1300,
         "wires": [
             [
                 "e650743f.56d978"
@@ -4091,12 +4091,12 @@
         "id": "e650743f.56d978",
         "type": "function",
         "z": "984823b1.a0823",
-        "name": "*WORKS* ",
-        "func": "msg.topic = 'insteon/command/bsmt_officesmall_spare_lamplinc_18.93.3c';\nmsg.payload = '{ \"cmd\": \"off\", \"instant\" : 0 }';\nreturn msg;",
+        "name": "",
+        "func": "msg.topic = 'insteon/command/bsmt_officesmall_lamplinc18933c';\nmsg.payload = '{ \"cmd\": \"off\", \"instant\" : 1 }';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 430,
-        "y": 1060,
+        "x": 950,
+        "y": 1300,
         "wires": [
             [
                 "57ef519c.5bae8"
@@ -4108,15 +4108,15 @@
         "type": "inject",
         "z": "984823b1.a0823",
         "name": "insteon/command/name { \"cmd\": \"off\", \"instant\" : 1 }",
-        "topic": "insteon/command/bsmt_officesmall_spare_lamplinc_18.93.3c",
+        "topic": "insteon/command/bsmt_officesmall_lamplinc18933c",
         "payload": "{ \"cmd\": \"off\", \"instant\" : 1 }",
         "payloadType": "json",
         "repeat": "",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 250,
-        "y": 1100,
+        "x": 790,
+        "y": 1220,
         "wires": [
             [
                 "57ef519c.5bae8"
@@ -4130,7 +4130,7 @@
         "name": "db 14.84.1c",
         "info": "",
         "x": 110,
-        "y": 1460,
+        "y": 1300,
         "wires": []
     },
     {
@@ -4146,7 +4146,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 350,
-        "y": 1460,
+        "y": 1300,
         "wires": [
             [
                 "57ef519c.5bae8"
@@ -4158,17 +4158,19 @@
         "type": "inject",
         "z": "984823b1.a0823",
         "name": "insteon/command/name { \"cmd\": \"on\", \"level\" : 175, \"instant\" : 1 }",
-        "topic": "insteon/command/bsmt_officesmall_spare_lamplinc_18.93.3c",
+        "topic": "insteon/command/bsmt_officesmall_lamplinc18933c",
         "payload": "{ \"cmd\": \"on\", \"level\" : 175, \"instant\" : 1 }",
         "payloadType": "json",
         "repeat": "",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 290,
-        "y": 1020,
+        "x": 830,
+        "y": 1260,
         "wires": [
-            []
+            [
+                "57ef519c.5bae8"
+            ]
         ]
     },
     {
@@ -4176,7 +4178,7 @@
         "type": "inject",
         "z": "984823b1.a0823",
         "name": "insteon/command/name { \"cmd\" : \"refresh\", \"force\" : true }",
-        "topic": "insteon/command/bsmt_officesmall_spare_lamplinc_18.93.3c",
+        "topic": "insteon/command/bsmt_officesmall_lamplinc18933c",
         "payload": "{ \"cmd\" : \"refresh\", \"force\" : true }",
         "payloadType": "json",
         "repeat": "",
@@ -4184,7 +4186,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 270,
-        "y": 1140,
+        "y": 1020,
         "wires": [
             [
                 "57ef519c.5bae8"
@@ -4971,7 +4973,7 @@
         "name": "troubleshooting tools:",
         "info": "",
         "x": 140,
-        "y": 1380,
+        "y": 1220,
         "wires": []
     },
     {
@@ -5005,7 +5007,7 @@
         "type": "inject",
         "z": "984823b1.a0823",
         "name": "*NO* name/set { \"cmd\": \"OFF\", \"level\" : 0, \"instant\" : 1 }",
-        "topic": "insteon/bsmt_officesmall_spare_lamplinc_18.93.3c/set",
+        "topic": "insteon/bsmt_officesmall_lamplinc18933c/set",
         "payload": "{ \"cmd\": \"OFF\", \"level\" : 0, \"instant\" : 1 }",
         "payloadType": "json",
         "repeat": "",
@@ -5087,7 +5089,7 @@
         "type": "debug",
         "z": "984823b1.a0823",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -5101,7 +5103,7 @@
         "type": "inject",
         "z": "984823b1.a0823",
         "name": "*NO* name/level { \"cmd\": \"OFF\", \"level\" : 0, \"instant\" : 1 }",
-        "topic": "insteon/bsmt_officesmall_spare_lamplinc_18.93.3c/level",
+        "topic": "insteon/bsmt_officesmall_lamplinc18933c/level",
         "payload": "{ \"cmd\": \"OFF\", \"level\" : 0, \"instant\" : 1 }",
         "payloadType": "json",
         "repeat": "",
@@ -5120,15 +5122,15 @@
         "id": "f6e792ad.f6d2b",
         "type": "inject",
         "z": "984823b1.a0823",
-        "name": "/level \"OFF\"",
-        "topic": "insteon/bsmt_officesmall_spare_lamplinc_18.93.3c/level",
+        "name": "insteon/name/level \"OFF\"",
+        "topic": "insteon/bsmt_officesmall_lamplinc18933c/level",
         "payload": "\"OFF\"",
         "payloadType": "json",
         "repeat": "",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 670,
+        "x": 710,
         "y": 1100,
         "wires": [
             [
@@ -5140,16 +5142,16 @@
         "id": "e57e3486.499ed8",
         "type": "inject",
         "z": "984823b1.a0823",
-        "name": "insteon/name/set \"OFF\"",
-        "topic": "insteon/bsmt_officesmall_spare_lamplinc_18.93.3c/set",
-        "payload": "\"OFF\"",
+        "name": "insteon/name/set \"off\"",
+        "topic": "insteon/bsmt_officesmall_lamplinc18933c/set",
+        "payload": "\"off\"",
         "payloadType": "json",
         "repeat": "",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
         "x": 160,
-        "y": 1300,
+        "y": 1100,
         "wires": [
             [
                 "57ef519c.5bae8"
@@ -5161,15 +5163,15 @@
         "type": "inject",
         "z": "984823b1.a0823",
         "name": "insteon/name/set {\"cmd\":\"OFF\"}",
-        "topic": "insteon/bsmt_officesmall_spare_lamplinc_18.93.3c/level",
+        "topic": "insteon/bsmt_officesmall_spare_lamplinc_18933c/level",
         "payload": "{\"cmd\":\"OFF\"}",
         "payloadType": "json",
         "repeat": "",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 190,
-        "y": 1340,
+        "x": 990,
+        "y": 1060,
         "wires": [
             [
                 "57ef519c.5bae8"
@@ -5180,16 +5182,16 @@
         "id": "f9a7d47a.67f878",
         "type": "inject",
         "z": "984823b1.a0823",
-        "name": "name/level { \"state\": \"off\", \"level\" : 0, \"instant\" : 1 }",
-        "topic": "insteon/bsmt_officesmall_spare_lamplinc_18.93.3c/level",
+        "name": "insteon/name/level { \"state\": \"off\", \"level\" : 0, \"instant\" : 1 }",
+        "topic": "insteon/bsmt_officesmall_lamplinc18933c/level",
         "payload": "{ \"state\": \"off\", \"level\" : 0, \"instant\" : 1 }",
         "payloadType": "json",
         "repeat": "",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 240,
-        "y": 1260,
+        "x": 810,
+        "y": 1000,
         "wires": [
             [
                 "57ef519c.5bae8"
@@ -5201,15 +5203,15 @@
         "type": "inject",
         "z": "984823b1.a0823",
         "name": "name/level { \"state\": \"on\", \"level\" : 175, \"instant\" : 1 }",
-        "topic": "insteon/bsmt_officesmall_spare_lamplinc_18.93.3c/level",
-        "payload": "{ \"state\": \"on\", \"level\" : 175, \"instant\" : 1 }",
+        "topic": "insteon/bsmt_officesmall_lamplinc18933c/level",
+        "payload": "{ \"state\": \"on\", \"level\" : \"175\", \"instant\" : 1 }",
         "payloadType": "json",
         "repeat": "",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 250,
-        "y": 1220,
+        "x": 790,
+        "y": 1180,
         "wires": [
             [
                 "57ef519c.5bae8"
@@ -5220,16 +5222,16 @@
         "id": "1b5eeda1.c2a742",
         "type": "inject",
         "z": "984823b1.a0823",
-        "name": "name/level { \"state\": \"on\", \"brightness\" : 175, \"instant\" : 1 }",
-        "topic": "insteon/bsmt_officesmall_spare_lamplinc_18.93.3c/level",
+        "name": "insteon/name/level { \"state\": \"on\", \"brightness\" : 175, \"instant\" : 1 }",
+        "topic": "insteon/bsmt_officesmall_lamplinc18933c/level",
         "payload": "{ \"state\": \"on\", \"brightness\" : 175, \"instant\" : 1 }",
         "payloadType": "json",
         "repeat": "",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 270,
-        "y": 1180,
+        "x": 830,
+        "y": 1140,
         "wires": [
             [
                 "57ef519c.5bae8"
@@ -5272,7 +5274,8 @@
         "type": "subflow:eef3db45.68d418",
         "z": "984823b1.a0823",
         "name": "",
-        "x": 830,
+        "env": [],
+        "x": 690,
         "y": 320,
         "wires": [
             [
@@ -6588,7 +6591,7 @@
         "type": "subflow:eef3db45.68d418",
         "z": "984823b1.a0823",
         "name": "",
-        "x": 830,
+        "x": 690,
         "y": 360,
         "wires": [
             [
@@ -6742,7 +6745,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 350,
-        "y": 1380,
+        "y": 1220,
         "wires": [
             [
                 "57ef519c.5bae8"
@@ -6762,7 +6765,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 350,
-        "y": 1420,
+        "y": 1260,
         "wires": [
             [
                 "57ef519c.5bae8"
@@ -8861,7 +8864,7 @@
         "tostatus": false,
         "complete": "false",
         "x": 790,
-        "y": 1540,
+        "y": 1420,
         "wires": []
     },
     {
@@ -8877,7 +8880,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 110,
-        "y": 1520,
+        "y": 1400,
         "wires": [
             [
                 "1af3f48f.5a244b"
@@ -8897,7 +8900,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 110,
-        "y": 1560,
+        "y": 1440,
         "wires": [
             [
                 "1af3f48f.5a244b"
@@ -8913,7 +8916,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 240,
-        "y": 1540,
+        "y": 1420,
         "wires": [
             [
                 "aba1942b.6aba78"
@@ -8940,7 +8943,7 @@
         "z": "984823b1.a0823",
         "name": "",
         "x": 470,
-        "y": 1540,
+        "y": 1420,
         "wires": [
             [
                 "c692a8e4.1677d8"
@@ -8979,7 +8982,7 @@
         "z": "984823b1.a0823",
         "name": "",
         "env": [],
-        "x": 830,
+        "x": 690,
         "y": 400,
         "wires": [
             [
@@ -9020,7 +9023,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 460,
+        "x": 380,
         "y": 400,
         "wires": [
             [
@@ -9033,12 +9036,12 @@
         "type": "mqtt out",
         "z": "984823b1.a0823",
         "name": "",
-        "topic": "insteon/bsmt_officesmall_spare/set",
+        "topic": "insteon/bsmt_officesmall_lamplinc18933c/set",
         "qos": "1",
         "retain": "true",
         "broker": "971eda83.260398",
-        "x": 800,
-        "y": 1640,
+        "x": 830,
+        "y": 1520,
         "wires": []
     },
     {
@@ -9054,7 +9057,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 110,
-        "y": 1600,
+        "y": 1480,
         "wires": [
             [
                 "2b57ffc8.a89d1"
@@ -9072,7 +9075,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 370,
-        "y": 1600,
+        "y": 1480,
         "wires": []
     },
     {
@@ -9084,7 +9087,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 350,
-        "y": 1640,
+        "y": 1520,
         "wires": [
             [
                 "fff57ea6.8e7c7",
@@ -9105,7 +9108,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 110,
-        "y": 1640,
+        "y": 1520,
         "wires": [
             [
                 "2b57ffc8.a89d1"
@@ -9117,7 +9120,8 @@
         "type": "subflow:eef3db45.68d418",
         "z": "984823b1.a0823",
         "name": "",
-        "x": 830,
+        "env": [],
+        "x": 690,
         "y": 280,
         "wires": [
             [
@@ -9457,7 +9461,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 490,
+        "x": 410,
         "y": 280,
         "wires": [
             [
@@ -13183,7 +13187,7 @@
         "name": "plm db",
         "info": "",
         "x": 90,
-        "y": 1420,
+        "y": 1260,
         "wires": []
     },
     {
@@ -14499,14 +14503,15 @@
         "id": "57ef519c.5bae8",
         "type": "function",
         "z": "984823b1.a0823",
-        "name": "",
-        "func": "\nreturn msg;",
+        "name": "topic",
+        "func": "//msg.topic = \"insteon/command/bsmt_officesmall_spare_lamplinc18933c\"\n//msg.topic = \"insteon/command/bsmt_officesmall_spare_lamplinc18933c/set\"\n//msg.topic = \"insteon/bsmt_officesmall_spare_lamplinc18933c/set\"\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 870,
-        "y": 1420,
+        "x": 770,
+        "y": 1360,
         "wires": [
             [
+                "39621f2f.e5fd4",
                 "2dfb8258.b5580e"
             ]
         ]
@@ -14522,5 +14527,541 @@
         "x": 1035,
         "y": 760,
         "wires": []
+    },
+    {
+        "id": "95226526.7f77f8",
+        "type": "mqtt in",
+        "z": "984823b1.a0823",
+        "name": "small office testing",
+        "topic": "insteon/#",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "971eda83.260398",
+        "x": 150,
+        "y": 1720,
+        "wires": [
+            [
+                "8be436f3.7f56a8"
+            ]
+        ]
+    },
+    {
+        "id": "86ee61ee.7a8cb",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 1560,
+        "wires": [
+            [
+                "8f6e263c.6514f8"
+            ]
+        ]
+    },
+    {
+        "id": "147a4f0b.ed4491",
+        "type": "debug",
+        "z": "984823b1.a0823",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 370,
+        "y": 1560,
+        "wires": []
+    },
+    {
+        "id": "8f6e263c.6514f8",
+        "type": "function",
+        "z": "984823b1.a0823",
+        "name": "format {\"cmd\":\"on/off\",\"mode\":\"normal\"}",
+        "func": "/* this doesn't work:\nmsg.topic = \"insteon/bsmt_officesmall/4/level\"\nvar payload = {\n    \"cmd\" : \"on\",\n    \"level\" : msg.payload \n}\n*/\n\nmsg.topic = \"insteon/bsmt_officesmall/set/4\"\nvar payload = {\n    \"cmd\" : \"on\",\n    \"mode\" : \"normal\"\n}\n\nmsg.payload = JSON.stringify(payload);\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 350,
+        "y": 1600,
+        "wires": [
+            [
+                "147a4f0b.ed4491",
+                "c16b335b.0c8c2"
+            ]
+        ]
+    },
+    {
+        "id": "e363d8f1.0c94f8",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "",
+        "payload": "128",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 1600,
+        "wires": [
+            [
+                "8f6e263c.6514f8"
+            ]
+        ]
+    },
+    {
+        "id": "c16b335b.0c8c2",
+        "type": "mqtt out",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "",
+        "qos": "1",
+        "retain": "true",
+        "broker": "971eda83.260398",
+        "x": 710,
+        "y": 1600,
+        "wires": []
+    },
+    {
+        "id": "42185f6d.d478f",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "",
+        "payload": "255",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 1640,
+        "wires": [
+            [
+                "8f6e263c.6514f8"
+            ]
+        ]
+    },
+    {
+        "id": "df06c61c.882948",
+        "type": "debug",
+        "z": "984823b1.a0823",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 570,
+        "y": 1660,
+        "wires": []
+    },
+    {
+        "id": "f1d2ea2d.1c9518",
+        "type": "function",
+        "z": "984823b1.a0823",
+        "name": "format",
+        "func": "msg.topic = \"insteon/bsmt_officesmall/set\"\n\nvar payload = {\n    \"cmd\" : \"refresh\",\n}\n\nmsg.payload = JSON.stringify(payload);\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 250,
+        "y": 1680,
+        "wires": [
+            [
+                "df06c61c.882948",
+                "be47e12b.bcd26"
+            ]
+        ]
+    },
+    {
+        "id": "be47e12b.bcd26",
+        "type": "mqtt out",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "",
+        "qos": "1",
+        "retain": "true",
+        "broker": "971eda83.260398",
+        "x": 710,
+        "y": 1680,
+        "wires": []
+    },
+    {
+        "id": "1d83dd82.5aa192",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 120,
+        "y": 1680,
+        "wires": [
+            [
+                "f1d2ea2d.1c9518"
+            ]
+        ]
+    },
+    {
+        "id": "8be436f3.7f56a8",
+        "type": "debug",
+        "z": "984823b1.a0823",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 430,
+        "y": 1720,
+        "wires": []
+    },
+    {
+        "id": "2065193a.35d7e6",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "",
+        "payload": "on",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 1780,
+        "wires": [
+            [
+                "e0f6b46f.1189a8"
+            ]
+        ]
+    },
+    {
+        "id": "f7ea869d.374968",
+        "type": "debug",
+        "z": "984823b1.a0823",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 370,
+        "y": 1780,
+        "wires": []
+    },
+    {
+        "id": "e0f6b46f.1189a8",
+        "type": "function",
+        "z": "984823b1.a0823",
+        "name": "format {\"cmd\":\"on/off\",\"mode\":\"normal\"}",
+        "func": "msg.topic = \"insteon/bsmt_officesmall/set\"\nmsg.payload = {\n    \"cmd\" : msg.payload,\n    \"mode\" : \"normal\"\n}\n\n//msg.payload = JSON.stringify(msg.payload);\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 350,
+        "y": 1820,
+        "wires": [
+            [
+                "f7ea869d.374968",
+                "c2e3cf10.430ee"
+            ]
+        ]
+    },
+    {
+        "id": "aa17a77a.6d24c8",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "",
+        "payload": "off",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 1820,
+        "wires": [
+            [
+                "e0f6b46f.1189a8"
+            ]
+        ]
+    },
+    {
+        "id": "c2e3cf10.430ee",
+        "type": "mqtt out",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "",
+        "qos": "1",
+        "retain": "true",
+        "broker": "971eda83.260398",
+        "x": 710,
+        "y": 1820,
+        "wires": []
+    },
+    {
+        "id": "80c8b046.0beeb",
+        "type": "function",
+        "z": "984823b1.a0823",
+        "name": "format {\"cmd \":msg.payload}",
+        "func": "//msg.topic = \"insteon/bsmt_officesmall/set\"\nvar payload = {\n    \"cmd\" : msg.payload,\n}\n\n//msg.payload = JSON.stringify(payload);\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 460,
+        "y": 1860,
+        "wires": [
+            [
+                "c2e3cf10.430ee"
+            ]
+        ]
+    },
+    {
+        "id": "3c527558.6d209a",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "insteon/bsmt_officesmall/set",
+        "payload": "pair",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 190,
+        "y": 1860,
+        "wires": [
+            [
+                "80c8b046.0beeb"
+            ]
+        ]
+    },
+    {
+        "id": "ee8eff29.150a1",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "insteon/name/set \"on\"",
+        "topic": "insteon/bsmt_officesmall_lamplinc18933c/set",
+        "payload": "\"on\"",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 420,
+        "y": 1100,
+        "wires": [
+            [
+                "57ef519c.5bae8"
+            ]
+        ]
+    },
+    {
+        "id": "606f171a.edd238",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "insteon/name/set \"off\"",
+        "topic": "insteon/flr1_familyroom/set",
+        "payload": "\"off\"",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 160,
+        "y": 1180,
+        "wires": [
+            [
+                "57ef519c.5bae8"
+            ]
+        ]
+    },
+    {
+        "id": "e9b010b7.48651",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "insteon/name/set \"on\"",
+        "topic": "insteon/flr1_familyroom/set",
+        "payload": "\"on\"",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 420,
+        "y": 1180,
+        "wires": [
+            [
+                "57ef519c.5bae8"
+            ]
+        ]
+    },
+    {
+        "id": "4247a022.2e3c3",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "insteon/name/level \"0\"",
+        "topic": "insteon/bsmt_officesmall_lamplinc18933c/level",
+        "payload": "\"0\"",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 980,
+        "y": 1100,
+        "wires": [
+            [
+                "57ef519c.5bae8"
+            ]
+        ]
+    },
+    {
+        "id": "39621f2f.e5fd4",
+        "type": "mqtt out",
+        "z": "984823b1.a0823",
+        "d": true,
+        "name": "",
+        "topic": "",
+        "qos": "0",
+        "retain": "false",
+        "broker": "971eda83.260398",
+        "x": 990,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "aa3d12e.19743f",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "{ \"cmd\" : \"refresh\", \"force\" : true }",
+        "topic": "",
+        "payload": "{ \"cmd\" : \"refresh\", \"force\" : true }",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 1170,
+        "y": 1440,
+        "wires": [
+            [
+                "1635b75e.1b9119"
+            ]
+        ]
+    },
+    {
+        "id": "1635b75e.1b9119",
+        "type": "change",
+        "z": "984823b1.a0823",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "insteon/command/flr2_master_portable_keypad",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1230,
+        "y": 1340,
+        "wires": [
+            [
+                "2dfb8258.b5580e"
+            ]
+        ]
+    },
+    {
+        "id": "de783686.b969e8",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "",
+        "payload": "{ \"cmd\" : \"get_model\" }",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 1140,
+        "y": 1480,
+        "wires": [
+            [
+                "1635b75e.1b9119"
+            ]
+        ]
+    },
+    {
+        "id": "d4dd450f.e8b728",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "",
+        "payload": "{ \"cmd\" : \"get_model\" }",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 1140,
+        "y": 1520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2b384e47.a45f12",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "",
+        "payload": "{ \"cmd\" : \"get_model\" }",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 1140,
+        "y": 1560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b0eec5d5.5596a8",
+        "type": "inject",
+        "z": "984823b1.a0823",
+        "name": "",
+        "topic": "",
+        "payload": "{ \"cmd\" : \"print_db\" }",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 1130,
+        "y": 1600,
+        "wires": [
+            [
+                "1635b75e.1b9119"
+            ]
+        ]
     }
 ]
