@@ -731,6 +731,24 @@
         "collapse": false
     },
     {
+        "id": "3e67f7d6.39ff88",
+        "type": "xterm_config",
+        "rows": 60,
+        "columns": 120,
+        "cursorStyle": "bar",
+        "fastScrollModifier": "alt",
+        "scrollSensitivity": 1,
+        "fastScrollSensitivity": 1,
+        "scrollback": 1000,
+        "backgroundColor": "#000000",
+        "foregroundColor": "#ffffff",
+        "fontSize": 14,
+        "cursorBlink": true,
+        "drawBoldTextInBrightColors": true,
+        "loggingEnabled": false,
+        "name": "XTerminal"
+    },
+    {
         "id": "71a47ab9.6044a4",
         "type": "mosca in",
         "z": "c201e10a.3d66f",
@@ -4526,19 +4544,6 @@
         ]
     },
     {
-        "id": "d2c06ea.98c9f9",
-        "type": "mqtt out",
-        "z": "11aaf4c8.4bf33b",
-        "name": "",
-        "topic": "garage",
-        "qos": "",
-        "retain": "false",
-        "broker": "971eda83.260398",
-        "x": 960,
-        "y": 280,
-        "wires": []
-    },
-    {
         "id": "bf6423aa.2e9ed",
         "type": "switch",
         "z": "11aaf4c8.4bf33b",
@@ -5717,7 +5722,7 @@
             }
         ],
         "x": 520,
-        "y": 920,
+        "y": 860,
         "wires": [
             [
                 "307e7272.0da96e",
@@ -5731,8 +5736,8 @@
         "z": "e8223701.eebbe8",
         "name": "Read REST API",
         "info": "",
-        "x": 80,
-        "y": 920,
+        "x": 100,
+        "y": 860,
         "wires": []
     },
     {
@@ -5745,7 +5750,7 @@
         "url": "",
         "tls": "",
         "x": 740,
-        "y": 1000,
+        "y": 940,
         "wires": [
             [
                 "5825d936.db4968"
@@ -5764,8 +5769,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 80,
-        "y": 960,
+        "x": 100,
+        "y": 900,
         "wires": [
             [
                 "4917e4e5.06bbbc"
@@ -5781,7 +5786,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 340,
-        "y": 1000,
+        "y": 940,
         "wires": [
             [
                 "43ec985e.08bb38"
@@ -5799,7 +5804,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 930,
-        "y": 1000,
+        "y": 940,
         "wires": []
     },
     {
@@ -5822,7 +5827,7 @@
         "to": "",
         "reg": false,
         "x": 430,
-        "y": 960,
+        "y": 900,
         "wires": [
             [
                 "7e76212d.f8ed5"
@@ -5849,7 +5854,7 @@
         "to": "",
         "reg": false,
         "x": 280,
-        "y": 960,
+        "y": 900,
         "wires": [
             [
                 "dbb8355c.ae2f88"
@@ -5876,7 +5881,7 @@
         "to": "",
         "reg": false,
         "x": 640,
-        "y": 960,
+        "y": 900,
         "wires": [
             [
                 "9a406cda.bd797"
@@ -6392,7 +6397,7 @@
         "type": "debug",
         "z": "e8223701.eebbe8",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -6553,7 +6558,8 @@
                 "7660dea.3da042",
                 "d4ca7121.40415",
                 "285de1d1.22bbae",
-                "51c255f0.079a2c"
+                "51c255f0.079a2c",
+                "30e1e7e5.001b28"
             ]
         ]
     },
@@ -8030,8 +8036,8 @@
         "links": [
             "6ca1b15d.e06ae"
         ],
-        "x": 755,
-        "y": 20,
+        "x": 815,
+        "y": 100,
         "wires": []
     },
     {
@@ -9546,11 +9552,12 @@
         "id": "21f32043.3daa9",
         "type": "link out",
         "z": "88396424.c54498",
+        "d": true,
         "name": "from_rainforest_to_blynk",
         "links": [
             "ce1d314c.f8908"
         ],
-        "x": 875,
+        "x": 995,
         "y": 360,
         "wires": []
     },
@@ -12447,7 +12454,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 930,
-        "y": 920,
+        "y": 860,
         "wires": []
     },
     {
@@ -15063,5 +15070,444 @@
                 "1635b75e.1b9119"
             ]
         ]
+    },
+    {
+        "id": "7058667c.7c5788",
+        "type": "inject",
+        "z": "1fec4b90.1b56f4",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 120,
+        "y": 980,
+        "wires": [
+            [
+                "252ea8c.f261b58"
+            ]
+        ]
+    },
+    {
+        "id": "252ea8c.f261b58",
+        "type": "function",
+        "z": "1fec4b90.1b56f4",
+        "name": "Time Stamp",
+        "func": "var d = new Date().toLocaleString();\nmsg.payload = d;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 270,
+        "y": 980,
+        "wires": [
+            [
+                "4d53d87f.658738",
+                "4626c013.09842",
+                "ff4c0a8e.f92178"
+            ]
+        ]
+    },
+    {
+        "id": "4d53d87f.658738",
+        "type": "moment",
+        "z": "1fec4b90.1b56f4",
+        "name": "1",
+        "topic": "",
+        "input": "payload",
+        "inputType": "msg",
+        "inTz": "Australia/Sydney",
+        "adjAmount": 0,
+        "adjType": "days",
+        "adjDir": "add",
+        "format": "YYYY-MM-DD HH:mm:ss",
+        "locale": "en_AU",
+        "output": "payload",
+        "outputType": "msg",
+        "outTz": "Australia/Sydney",
+        "x": 510,
+        "y": 1020,
+        "wires": [
+            [
+                "69310cc5.1ef0f4"
+            ]
+        ]
+    },
+    {
+        "id": "4626c013.09842",
+        "type": "moment",
+        "z": "1fec4b90.1b56f4",
+        "name": "2",
+        "topic": "",
+        "input": "payload",
+        "inputType": "msg",
+        "inTz": "Australia/Sydney",
+        "adjAmount": 0,
+        "adjType": "days",
+        "adjDir": "add",
+        "format": "YYYY-DD-MM HH:mm:ss",
+        "locale": "en_AU",
+        "output": "payload",
+        "outputType": "msg",
+        "outTz": "Australia/Sydney",
+        "x": 510,
+        "y": 1060,
+        "wires": [
+            [
+                "97f3af72.30f4b"
+            ]
+        ]
+    },
+    {
+        "id": "69310cc5.1ef0f4",
+        "type": "debug",
+        "z": "1fec4b90.1b56f4",
+        "name": "1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 690,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "97f3af72.30f4b",
+        "type": "debug",
+        "z": "1fec4b90.1b56f4",
+        "name": "2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 690,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "ff4c0a8e.f92178",
+        "type": "debug",
+        "z": "1fec4b90.1b56f4",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 690,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "fbc537dd.e5a4c8",
+        "type": "comment",
+        "z": "e8223701.eebbe8",
+        "name": "Simulate Production",
+        "info": "",
+        "x": 110,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "f24013b3.2103c",
+        "type": "function",
+        "z": "e8223701.eebbe8",
+        "name": "Cvt HVAC Status to productid",
+        "func": "var cvtstat2prod = [\n    { \"status\" : \"off\", \"productid\" : \"Product1\"},\n    { \"status\" : \"fan\", \"productid\" : \"Product2\"},\n    { \"status\" : \"auxHeat1\", \"productid\" : \"Product3\"},\n    { \"status\" : \"auxHeat2\", \"productid\" : \"Product4\"},\n    { \"status\" : \"compCool1\", \"productid\" : \"Product5\"},\n    { \"status\" : \"compCool2\", \"productid\" : \"Produt6\"}\n]\nnode.warn(cvtstat2prod[status=\"off\"].productid)\nif (cvtstat2prod[status=msg.payload].productid !== undefined) {\n    msg.payload = cvtstat2prod[status=msg.payload].productid;\n} else {\n    msg=null\n}\n\nreturn msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 680,
+        "y": 1040,
+        "wires": [
+            [
+                "2ff5ee3e.4cc0f2"
+            ]
+        ]
+    },
+    {
+        "id": "30e1e7e5.001b28",
+        "type": "switch",
+        "z": "e8223701.eebbe8",
+        "name": "topic==tapia/home/thermostat/status",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "tapia/home/thermostat/status",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 350,
+        "y": 1100,
+        "wires": [
+            [
+                "eab67a8b.e36868",
+                "2ff5ee3e.4cc0f2"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "eab67a8b.e36868",
+        "type": "change",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "plant1210/line01/productid",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 310,
+        "y": 1140,
+        "wires": [
+            [
+                "27a75d51.8ef752"
+            ]
+        ]
+    },
+    {
+        "id": "ac726c2e.117c2",
+        "type": "change",
+        "z": "e8223701.eebbe8",
+        "name": "JSONata use lookup table",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.lookup.$[status=$$.payload.value].productid",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 710,
+        "y": 1140,
+        "wires": [
+            [
+                "311f30fd.a8947"
+            ]
+        ]
+    },
+    {
+        "id": "311f30fd.a8947",
+        "type": "debug",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 930,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "2ff5ee3e.4cc0f2",
+        "type": "debug",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 930,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "b0d79ef9.9f346",
+        "type": "inject",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "topic": "tapia/home/thermostat/status",
+        "payload": "off",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 170,
+        "y": 1020,
+        "wires": [
+            [
+                "30e1e7e5.001b28"
+            ]
+        ]
+    },
+    {
+        "id": "f4d13e86.34f25",
+        "type": "inject",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "topic": "tapia/home/thermostat/status",
+        "payload": "fan",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 170,
+        "y": 1060,
+        "wires": [
+            [
+                "30e1e7e5.001b28"
+            ]
+        ]
+    },
+    {
+        "id": "ca310117.6952d",
+        "type": "inject",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "topic": "tapia/home/thermostat/status",
+        "payload": "auxHeat1,fan",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 1100,
+        "wires": [
+            [
+                "30e1e7e5.001b28"
+            ]
+        ]
+    },
+    {
+        "id": "667c9b.166b3364",
+        "type": "inject",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "topic": "tapia/home/thermostat/status",
+        "payload": "auxHeat2,fan",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 1140,
+        "wires": [
+            [
+                "30e1e7e5.001b28"
+            ]
+        ]
+    },
+    {
+        "id": "27a75d51.8ef752",
+        "type": "change",
+        "z": "e8223701.eebbe8",
+        "name": "JSONata merge lookup table",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t                \"value\": $.payload,\t                \"lookup\": \t               [\t                   {\t                       \"status\": \"off\",\t                       \"productid\": \"Product1\"\t                   },\t                   {\t                       \"status\": \"fan\",\t                       \"productid\": \"Product2\"\t                   },\t                   {\t                       \"status\": \"auxHeat1,fan\",\t                       \"productid\": \"Product3\"\t                   },\t                   {\t                       \"status\": \"auxHeat2,fan\",\t                       \"productid\": \"Product4\"\t                   },\t                   {\t                       \"status\": \"compCool1,fan\",\t                       \"productid\": \"Product5\"\t                   },\t                   {\t                       \"status\": \"compCool2,fan\",\t                       \"productid\": \"Produt6\"\t                   }\t               ]\t       }\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 1140,
+        "wires": [
+            [
+                "ac726c2e.117c2",
+                "2ff5ee3e.4cc0f2"
+            ]
+        ]
+    },
+    {
+        "id": "b8d7dd32.db69f",
+        "type": "inject",
+        "z": "1fec4b90.1b56f4",
+        "name": "sample data",
+        "topic": "",
+        "payload": "{\"index\":[7],\"timme\":-5,\"timmenu\":17,\"tid\":\"2019-08-08T12:00:00Z\",\"datum\":\"8/8 kl.12\",\"plats\":[15.611086,60.599615],\"parametrar\":[{\"name\":\"msl\",\"levelType\":\"hmsl\",\"level\":0,\"unit\":\"hPa\",\"values\":[1001.1]},{\"name\":\"t\",\"levelType\":\"hl\",\"level\":2,\"unit\":\"Cel\",\"values\":[16.4]},{\"name\":\"vis\",\"levelType\":\"hl\",\"level\":2,\"unit\":\"km\",\"values\":[22.5]},{\"name\":\"wd\",\"levelType\":\"hl\",\"level\":10,\"unit\":\"degree\",\"values\":[114]},{\"name\":\"ws\",\"levelType\":\"hl\",\"level\":10,\"unit\":\"m/s\",\"values\":[3.6]},{\"name\":\"r\",\"levelType\":\"hl\",\"level\":2,\"unit\":\"percent\",\"values\":[94]},{\"name\":\"tstm\",\"levelType\":\"hl\",\"level\":0,\"unit\":\"percent\",\"values\":[12]},{\"name\":\"tcc_mean\",\"levelType\":\"hl\",\"level\":0,\"unit\":\"octas\",\"values\":[8]},{\"name\":\"lcc_mean\",\"levelType\":\"hl\",\"level\":0,\"unit\":\"octas\",\"values\":[7]},{\"name\":\"mcc_mean\",\"levelType\":\"hl\",\"level\":0,\"unit\":\"octas\",\"values\":[2]},{\"name\":\"hcc_mean\",\"levelType\":\"hl\",\"level\":0,\"unit\":\"octas\",\"values\":[7]},{\"name\":\"gust\",\"levelType\":\"hl\",\"level\":10,\"unit\":\"m/s\",\"values\":[8.6]},{\"name\":\"pmin\",\"levelType\":\"hl\",\"level\":0,\"unit\":\"kg/m2/h\",\"values\":[0.6]},{\"name\":\"pmax\",\"levelType\":\"hl\",\"level\":0,\"unit\":\"kg/m2/h\",\"values\":[0.9]},{\"name\":\"spp\",\"levelType\":\"hl\",\"level\":0,\"unit\":\"percent\",\"values\":[0]},{\"name\":\"pcat\",\"levelType\":\"hl\",\"level\":0,\"unit\":\"category\",\"values\":[3]},{\"name\":\"pmean\",\"levelType\":\"hl\",\"level\":0,\"unit\":\"kg/m2/h\",\"values\":[0.8]},{\"name\":\"pmedian\",\"levelType\":\"hl\",\"level\":0,\"unit\":\"kg/m2/h\",\"values\":[0.8]},{\"name\":\"Wsymb2\",\"levelType\":\"hl\",\"level\":0,\"unit\":\"category\",\"values\":[20]}]}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 130,
+        "y": 1100,
+        "wires": [
+            [
+                "4dec96d0.898f68"
+            ]
+        ]
+    },
+    {
+        "id": "4dec96d0.898f68",
+        "type": "change",
+        "z": "1fec4b90.1b56f4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.**[name=\"t\"].values",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 1100,
+        "wires": [
+            [
+                "237fe1ad.6621ce"
+            ]
+        ]
+    },
+    {
+        "id": "237fe1ad.6621ce",
+        "type": "debug",
+        "z": "1fec4b90.1b56f4",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 550,
+        "y": 1100,
+        "wires": []
     }
 ]
