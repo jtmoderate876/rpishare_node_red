@@ -41,6 +41,20 @@
         "info": ""
     },
     {
+        "id": "c201e10a.3d66f",
+        "type": "tab",
+        "label": "MQTT",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "34a0f2ec.a39f9e",
+        "type": "tab",
+        "label": "Weather",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "bc6012ce.56132",
         "type": "tab",
         "label": "Wonderware Simple",
@@ -52,13 +66,6 @@
         "type": "tab",
         "label": "Wonderware Performance",
         "disabled": true,
-        "info": ""
-    },
-    {
-        "id": "c201e10a.3d66f",
-        "type": "tab",
-        "label": "MQTT",
-        "disabled": false,
         "info": ""
     },
     {
@@ -74,6 +81,13 @@
         "label": "my web pages",
         "disabled": false,
         "info": "Go to http://192.168.1.219:1880/mypage"
+    },
+    {
+        "id": "37f7c035.e7072",
+        "type": "tab",
+        "label": "web example",
+        "disabled": false,
+        "info": "http://192.168.1.216:1880/mysite"
     },
     {
         "id": "46e74d68.bf9484",
@@ -94,20 +108,6 @@
         "type": "tab",
         "label": "Insteon HUB direct",
         "disabled": true,
-        "info": ""
-    },
-    {
-        "id": "37f7c035.e7072",
-        "type": "tab",
-        "label": "web example",
-        "disabled": false,
-        "info": "http://192.168.1.216:1880/mysite"
-    },
-    {
-        "id": "34a0f2ec.a39f9e",
-        "type": "tab",
-        "label": "Weather",
-        "disabled": false,
         "info": ""
     },
     {
@@ -1349,13 +1349,15 @@
         "type": "function",
         "z": "88396424.c54498",
         "name": "Reboot after 20 Request Timeout",
-        "func": "if (!context.get('count')) {\n    context.set('count',0);\n}\nvar i = context.get('count');\nif (!msg.payload.Error || msg.payload.Error===null || msg.payload.Error===''){\n    i=0;\n    context.set('count',i);\n    node.status({fill:\"green\",shape:\"dot\",text:\"error count = \" + i});\n    return;\n} else {\n//    if (msg.payload.Error.Text == 'Request Timeout'){\n        i++;\n        node.status({fill:\"yellow\",shape:\"dot\",text:\"error count = \" + i});\n        msg.payload.i=i;\n        if (i>15){ //15*20s = 300s or 5min\n            context.set('count',0);\n            return [msg,{payload:true}];\n        } else {\n            context.set('count',i);\n            return [msg,null];\n        }\n//    } else {\n//        context.set('count',0);\n//        msg.payload.MyText='Error Text did not evaluatate to \"Request Timeout\"';\n//        return [msg,null];    \n//    }\n}\n",
-        "outputs": "2",
+        "func": "if (!context.get('countErrorTimeout')) {\n    context.set('countErrorTimeout',0);\n}\nvar countErrorTimeout = context.get('countErrorTimeout');\n\nif (!msg.payload.Error || msg.payload.Error===null || msg.payload.Error===''){\n    countErrorTimeout=0;\n    context.set('countErrorTimeout',i);\n    node.status({fill:\"green\",shape:\"dot\",text:\"no error\"});\n    return;\n} else {\n    if (msg.payload.Error.Text == 'Request Timeout'){\n        countErrorTimeout++;\n        node.status({fill:\"yellow\",shape:\"dot\",text:\"countErrorTimeout = \" + countErrorTimeout});\n        msg.payload.countErrorTimeout=countErrorTimeout;\n        if (countErrorTimeout>15){ //15*20s = 300s or 5min\n            context.set('countErrorTimeout',0);\n            return [msg,{payload:true}];\n        } else {\n            context.set('countErrorTimeout',countErrorTimeout);\n            return [msg,null];\n        }\n//    } else if (msg.payload.Error.Text == 'Non-whitespace before first tag.'){\n//        countErrorNonWhiteSpace++;\n//        node.status({fill:\"yellow\",shape:\"dot\",text:\"countErrorNonWhiteSpace = \" + countErrorNonWhiteSpace});\n//        msg.payload.countErrorNonWhiteSpace=countErrorNonWhiteSpace;\n//        if (countErrorNonWhiteSpace>15){ //15*20s = 300s or 5min\n//            context.set('countErrorNonWhiteSpace',0);\n//            return [msg,{payload:true}];\n//        } else {\n//            context.set('countErrorNonWhiteSpace',countErrorNonWhiteSpace);\n//            return [msg,null];\n//        }\n//        context.set('countErrorNonWhiteSpace',0);\n//        msg.payload.MyText='Error Text did not evaluatate to \"Request Timeout\"';\n//        return [msg,null];    \n    }\n}\n",
+        "outputs": 2,
         "noerr": 0,
         "x": 180,
         "y": 300,
         "wires": [
-            [],
+            [
+                "64697bfd.e1f814"
+            ],
             [
                 "aecb869a.6a2788",
                 "d07c6ad.e3c7298",
@@ -3908,7 +3910,7 @@
         "type": "debug",
         "z": "c201e10a.3d66f",
         "name": "",
-        "active": false,
+        "active": true,
         "console": "false",
         "complete": "true",
         "x": 750,
@@ -5722,7 +5724,7 @@
             }
         ],
         "x": 520,
-        "y": 860,
+        "y": 820,
         "wires": [
             [
                 "307e7272.0da96e",
@@ -5737,7 +5739,7 @@
         "name": "Read REST API",
         "info": "",
         "x": 100,
-        "y": 860,
+        "y": 820,
         "wires": []
     },
     {
@@ -5750,7 +5752,7 @@
         "url": "",
         "tls": "",
         "x": 740,
-        "y": 940,
+        "y": 900,
         "wires": [
             [
                 "5825d936.db4968"
@@ -5770,7 +5772,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 100,
-        "y": 900,
+        "y": 860,
         "wires": [
             [
                 "4917e4e5.06bbbc"
@@ -5786,7 +5788,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 340,
-        "y": 940,
+        "y": 900,
         "wires": [
             [
                 "43ec985e.08bb38"
@@ -5804,7 +5806,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 930,
-        "y": 940,
+        "y": 900,
         "wires": []
     },
     {
@@ -5827,7 +5829,7 @@
         "to": "",
         "reg": false,
         "x": 430,
-        "y": 900,
+        "y": 860,
         "wires": [
             [
                 "7e76212d.f8ed5"
@@ -5854,7 +5856,7 @@
         "to": "",
         "reg": false,
         "x": 280,
-        "y": 900,
+        "y": 860,
         "wires": [
             [
                 "dbb8355c.ae2f88"
@@ -5881,7 +5883,7 @@
         "to": "",
         "reg": false,
         "x": 640,
-        "y": 900,
+        "y": 860,
         "wires": [
             [
                 "9a406cda.bd797"
@@ -5986,7 +5988,7 @@
         "type": "debug",
         "z": "88396424.c54498",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "complete": "true",
@@ -6466,7 +6468,7 @@
         "type": "debug",
         "z": "88396424.c54498",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -6559,7 +6561,8 @@
                 "d4ca7121.40415",
                 "285de1d1.22bbae",
                 "51c255f0.079a2c",
-                "30e1e7e5.001b28"
+                "30e1e7e5.001b28",
+                "85dfeb9a.823cc8"
             ]
         ]
     },
@@ -7546,7 +7549,7 @@
                 "type": "msg"
             }
         ],
-        "x": 420,
+        "x": 440,
         "y": 200,
         "wires": [
             [
@@ -7623,7 +7626,8 @@
         "y": 200,
         "wires": [
             [
-                "54df6fdf.75846"
+                "54df6fdf.75846",
+                "83a89643.c86798"
             ]
         ]
     },
@@ -7872,8 +7876,8 @@
         "method": "GET",
         "url": "http://www.aviationweather.gov{{{payload}}}",
         "tls": "",
-        "x": 290,
-        "y": 60,
+        "x": 370,
+        "y": 180,
         "wires": [
             [
                 "ae9cde5c.0ae59"
@@ -7896,7 +7900,7 @@
         "y": 60,
         "wires": [
             [
-                "62b313df.b15c0c"
+                "27e15255.3e74ce"
             ]
         ]
     },
@@ -7908,42 +7912,12 @@
         "property": "payload",
         "attr": "",
         "chr": "",
-        "x": 430,
-        "y": 60,
+        "x": 510,
+        "y": 180,
         "wires": [
             [
-                "ed704f2c.f22ba",
-                "7c5cb4b1.9788dc",
                 "2c7ebc95.074a04",
                 "e1908881.88ae48"
-            ]
-        ]
-    },
-    {
-        "id": "d5836136.04284",
-        "type": "debug",
-        "z": "34a0f2ec.a39f9e",
-        "name": "",
-        "active": false,
-        "console": "false",
-        "complete": "false",
-        "x": 770,
-        "y": 60,
-        "wires": []
-    },
-    {
-        "id": "ed704f2c.f22ba",
-        "type": "function",
-        "z": "34a0f2ec.a39f9e",
-        "name": "Parse METAR",
-        "func": "var METARdata = msg.payload.response.data[0].METAR[0];\nvar wind = METARdata.wind_speed_kt[0];\nvar gusts = wind; //if wind_gust_kt is not present, value defaults to wind_speed_kt\n   if (typeof METARdata.wind_gust_kt != \"undefined\") {\n\t   gusts = METARdata.wind_gust_kt[0];\n       }\nvar altim = METARdata.altim_in_hg[0];\nvar pressure = Math.round(altim * 33.8637526); //convert hg to mb\nvar dew = METARdata.dewpoint_c[0];\nvar temp = METARdata.temp_c[0];\n\n//August-Roche-Magnus approximation to calculate humidity\nvar constA = 17.625;\nvar constB = 243.04;\nvar rh_numer = 100.0*Math.exp((constA*eval(dew))/(eval(dew)+constB));\nvar rh_denom = Math.exp((constA*eval(temp))/(eval(temp)+constB));\n//var rh_numer = 100.0*Math.exp((constA*(dew))/((dew)+constB));\n//var rh_denom = Math.exp((constA*(temp))/((temp)+constB));\nvar rh_hum   = (rh_numer/rh_denom);\nvar humidity = Math.round(rh_hum);\n\nmsg.payload = ((wind) + (\",\") + (gusts) + (\",\") + (humidity) + (\",\") + (pressure) + (\",\") + (temp));\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 600,
-        "y": 60,
-        "wires": [
-            [
-                "d5836136.04284"
             ]
         ]
     },
@@ -7954,18 +7928,6 @@
         "name": "NOAA Weather data",
         "info": "Retrieving Airport METAR feed",
         "x": 110,
-        "y": 20,
-        "wires": []
-    },
-    {
-        "id": "7c5cb4b1.9788dc",
-        "type": "debug",
-        "z": "34a0f2ec.a39f9e",
-        "name": "",
-        "active": false,
-        "console": "false",
-        "complete": "false",
-        "x": 590,
         "y": 20,
         "wires": []
     },
@@ -7988,11 +7950,13 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 140,
-        "y": 100,
+        "x": 660,
+        "y": 180,
         "wires": [
             [
-                "60c012f9.8810bc"
+                "60c012f9.8810bc",
+                "ecc169bf.9266e8",
+                "1e11987a.99d258"
             ]
         ]
     },
@@ -8004,13 +7968,12 @@
         "func": "var station = msg.payload.station_id;\n\nvar msgarr = [];\nvar temp_f = msg.payload.temp_c*9/5 + 32;\n\nif ((typeof msg.observation_time !== 'undefined')){\n    dtstring = new Date.parse(msg.observation_time)\n} else {dtstring = new Date().toISOString();}\n\nmsgarr.push({\n    payload:(temp_f),\n    topic: \"airport/\" + station + \"/temperature\",\n    timestamp : dtstring\n});\n\nvar pressure = parseFloat(msg.payload.altim_in_hg[0]); //inches hg\nvar dew = parseFloat(msg.payload.dewpoint_c[0]);\nvar temp = parseFloat(msg.payload.temp_c[0]);\n\n//August-Roche-Magnus approximation to calculate humidity\nvar constA = 17.625;\nvar constB = 243.04;\n//var rh_numer = 100.0*Math.exp((constA*eval(dew))/(eval(dew)+constB));\n//var rh_denom = Math.exp((constA*eval(temp))/(eval(temp)+constB));\nvar rh_numer = 100.0*Math.exp((constA*(dew))/((dew)+constB));\nvar rh_denom = Math.exp((constA*(temp))/((temp)+constB));\nvar rh_hum   = (rh_numer/rh_denom);\nvar humidity = Math.round(rh_hum);\n\nmsgarr.push({\n    payload:(humidity),\n    topic: \"airport/\" + station + \"/humidity\",\n    timestamp : dtstring\n});    \n\nmsgarr.push({\n    payload:(pressure),\n    topic: \"airport/\" + station + \"/pressure\",\n    timestamp : dtstring\n});    \n\n\nreturn [msgarr];\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 490,
-        "y": 100,
+        "x": 890,
+        "y": 180,
         "wires": [
             [
                 "8caa3aef.9eea88",
-                "63702d45.e76ef4",
-                "1e11987a.99d258"
+                "63702d45.e76ef4"
             ]
         ]
     },
@@ -8024,8 +7987,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 650,
-        "y": 100,
+        "x": 990,
+        "y": 140,
         "wires": []
     },
     {
@@ -8036,8 +7999,8 @@
         "links": [
             "6ca1b15d.e06ae"
         ],
-        "x": 815,
-        "y": 100,
+        "x": 975,
+        "y": 180,
         "wires": []
     },
     {
@@ -10787,8 +10750,8 @@
         "func": "msg.payload = \"/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&hoursBeforeNow=3&mostRecent=true&stationString=\"\nmsg.payload = msg.payload + node.name;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 270,
-        "y": 180,
+        "x": 230,
+        "y": 220,
         "wires": [
             [
                 "69d82567.79153c"
@@ -10803,8 +10766,8 @@
         "method": "GET",
         "url": "http://www.aviationweather.gov{{{payload}}}",
         "tls": "",
-        "x": 410,
-        "y": 180,
+        "x": 370,
+        "y": 220,
         "wires": [
             [
                 "7a5659e5.7f6ca8"
@@ -10819,8 +10782,8 @@
         "property": "payload",
         "attr": "",
         "chr": "",
-        "x": 550,
-        "y": 180,
+        "x": 510,
+        "y": 220,
         "wires": [
             [
                 "de38ae68.89888"
@@ -10846,28 +10809,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 700,
-        "y": 180,
+        "x": 660,
+        "y": 220,
         "wires": [
             [
-                "b0fef966.7ea4e8"
-            ]
-        ]
-    },
-    {
-        "id": "b0fef966.7ea4e8",
-        "type": "function",
-        "z": "34a0f2ec.a39f9e",
-        "name": "",
-        "func": "var station = msg.payload.station_id;\n\nvar msgarr = [];\nvar temp_f = msg.payload.temp_c*9/5 + 32;\n\nif ((typeof msg.observation_time !== 'undefined')){\n    dtstring = new Date.parse(msg.observation_time)\n} else {dtstring = new Date().toISOString();}\n\nmsgarr.push({\n    payload:(temp_f),\n    topic: \"airport/\" + station + \"/temperature\",\n    timestamp : dtstring\n});\n\nvar pressure = parseFloat(msg.payload.altim_in_hg[0]); //inches hg\nvar dew = parseFloat(msg.payload.dewpoint_c[0]);\nvar temp = parseFloat(msg.payload.temp_c[0]);\n\n//August-Roche-Magnus approximation to calculate humidity\nvar constA = 17.625;\nvar constB = 243.04;\n//var rh_numer = 100.0*Math.exp((constA*eval(dew))/(eval(dew)+constB));\n//var rh_denom = Math.exp((constA*eval(temp))/(eval(temp)+constB));\nvar rh_numer = 100.0*Math.exp((constA*(dew))/((dew)+constB));\nvar rh_denom = Math.exp((constA*(temp))/((temp)+constB));\nvar rh_hum   = (rh_numer/rh_denom);\nvar humidity = Math.round(rh_hum);\n\nmsgarr.push({\n    payload:(humidity),\n    topic: \"airport/\" + station + \"/humidity\",\n    timestamp : dtstring\n});    \n\nmsgarr.push({\n    payload:(pressure),\n    topic: \"airport/\" + station + \"/pressure\",\n    timestamp : dtstring\n});    \n\n\nreturn [msgarr];\n",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 850,
-        "y": 180,
-        "wires": [
-            [
-                "63702d45.e76ef4",
-                "8caa3aef.9eea88",
+                "60c012f9.8810bc",
                 "9688481f.58d408"
             ]
         ]
@@ -10881,9 +10827,10 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "topic",
-        "x": 880,
-        "y": 20,
+        "complete": "true",
+        "targetType": "full",
+        "x": 910,
+        "y": 60,
         "wires": []
     },
     {
@@ -10894,8 +10841,8 @@
         "func": "msg.payload = \"/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&hoursBeforeNow=3&mostRecent=true&stationString=\"\nmsg.payload = msg.payload + node.name;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 270,
-        "y": 220,
+        "x": 230,
+        "y": 260,
         "wires": [
             [
                 "c48f5bc4.e77fc8"
@@ -10910,8 +10857,8 @@
         "method": "GET",
         "url": "http://www.aviationweather.gov{{{payload}}}",
         "tls": "",
-        "x": 410,
-        "y": 220,
+        "x": 370,
+        "y": 260,
         "wires": [
             [
                 "4748209e.f19e"
@@ -10926,8 +10873,8 @@
         "property": "payload",
         "attr": "",
         "chr": "",
-        "x": 550,
-        "y": 220,
+        "x": 510,
+        "y": 260,
         "wires": [
             [
                 "8727a00a.3a0da"
@@ -10953,27 +10900,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 700,
-        "y": 220,
+        "x": 660,
+        "y": 260,
         "wires": [
             [
-                "63155d47.926624"
-            ]
-        ]
-    },
-    {
-        "id": "63155d47.926624",
-        "type": "function",
-        "z": "34a0f2ec.a39f9e",
-        "name": "",
-        "func": "var station = msg.payload.station_id;\n\nvar msgarr = [];\nvar temp_f = msg.payload.temp_c*9/5 + 32;\n\nif ((typeof msg.observation_time !== 'undefined')){\n    dtstring = new Date.parse(msg.observation_time)\n} else {dtstring = new Date().toISOString();}\n\nmsgarr.push({\n    payload:(temp_f),\n    topic: \"airport/\" + station + \"/temperature\",\n    timestamp : dtstring\n});\n\nvar pressure = parseFloat(msg.payload.altim_in_hg[0]); //inches hg\nvar dew = parseFloat(msg.payload.dewpoint_c[0]);\nvar temp = parseFloat(msg.payload.temp_c[0]);\n\n//August-Roche-Magnus approximation to calculate humidity\nvar constA = 17.625;\nvar constB = 243.04;\n//var rh_numer = 100.0*Math.exp((constA*eval(dew))/(eval(dew)+constB));\n//var rh_denom = Math.exp((constA*eval(temp))/(eval(temp)+constB));\nvar rh_numer = 100.0*Math.exp((constA*(dew))/((dew)+constB));\nvar rh_denom = Math.exp((constA*(temp))/((temp)+constB));\nvar rh_hum   = (rh_numer/rh_denom);\nvar humidity = Math.round(rh_hum);\n\nmsgarr.push({\n    payload:(humidity),\n    topic: \"airport/\" + station + \"/humidity\",\n    timestamp : dtstring\n});    \n\nmsgarr.push({\n    payload:(pressure),\n    topic: \"airport/\" + station + \"/pressure\",\n    timestamp : dtstring\n});    \n\n\nreturn [msgarr];\n",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 850,
-        "y": 220,
-        "wires": [
-            [
-                "63702d45.e76ef4",
+                "60c012f9.8810bc",
                 "845e16c9.1b4898"
             ]
         ]
@@ -10986,8 +10917,8 @@
         "func": "msg.payload = \"/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&hoursBeforeNow=3&mostRecent=true&stationString=\"\nmsg.payload = msg.payload + node.name;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 270,
-        "y": 260,
+        "x": 230,
+        "y": 300,
         "wires": [
             [
                 "d3c81a84.637658"
@@ -11002,8 +10933,8 @@
         "method": "GET",
         "url": "http://www.aviationweather.gov{{{payload}}}",
         "tls": "",
-        "x": 410,
-        "y": 260,
+        "x": 370,
+        "y": 300,
         "wires": [
             [
                 "e4ff5f8b.fe8bc"
@@ -11018,8 +10949,8 @@
         "property": "payload",
         "attr": "",
         "chr": "",
-        "x": 550,
-        "y": 260,
+        "x": 510,
+        "y": 300,
         "wires": [
             [
                 "644084a7.8b738c"
@@ -11045,27 +10976,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 700,
-        "y": 260,
+        "x": 660,
+        "y": 300,
         "wires": [
             [
-                "c818ce91.86932"
-            ]
-        ]
-    },
-    {
-        "id": "c818ce91.86932",
-        "type": "function",
-        "z": "34a0f2ec.a39f9e",
-        "name": "",
-        "func": "var station = msg.payload.station_id;\n\nvar msgarr = [];\nvar temp_f = msg.payload.temp_c*9/5 + 32;\n\nif ((typeof msg.observation_time !== 'undefined')){\n    dtstring = new Date.parse(msg.observation_time)\n} else {dtstring = new Date().toISOString();}\n\nmsgarr.push({\n    payload:(temp_f),\n    topic: \"airport/\" + station + \"/temperature\",\n    timestamp : dtstring\n});\n\nvar pressure = parseFloat(msg.payload.altim_in_hg[0]); //inches hg\nvar dew = parseFloat(msg.payload.dewpoint_c[0]);\nvar temp = parseFloat(msg.payload.temp_c[0]);\n\n//August-Roche-Magnus approximation to calculate humidity\nvar constA = 17.625;\nvar constB = 243.04;\n//var rh_numer = 100.0*Math.exp((constA*eval(dew))/(eval(dew)+constB));\n//var rh_denom = Math.exp((constA*eval(temp))/(eval(temp)+constB));\nvar rh_numer = 100.0*Math.exp((constA*(dew))/((dew)+constB));\nvar rh_denom = Math.exp((constA*(temp))/((temp)+constB));\nvar rh_hum   = (rh_numer/rh_denom);\nvar humidity = Math.round(rh_hum);\n\nmsgarr.push({\n    payload:(humidity),\n    topic: \"airport/\" + station + \"/humidity\",\n    timestamp : dtstring\n});    \n\nmsgarr.push({\n    payload:(pressure),\n    topic: \"airport/\" + station + \"/pressure\",\n    timestamp : dtstring\n});    \n\n\nreturn [msgarr];\n",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 850,
-        "y": 260,
-        "wires": [
-            [
-                "63702d45.e76ef4",
+                "60c012f9.8810bc",
                 "83394f24.5af82"
             ]
         ]
@@ -11078,8 +10993,8 @@
         "func": "msg.payload = \"/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&hoursBeforeNow=3&mostRecent=true&stationString=\"\nmsg.payload = msg.payload + node.name;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 270,
-        "y": 300,
+        "x": 230,
+        "y": 340,
         "wires": [
             [
                 "e6057f64.8b31d"
@@ -11094,8 +11009,8 @@
         "method": "GET",
         "url": "http://www.aviationweather.gov{{{payload}}}",
         "tls": "",
-        "x": 410,
-        "y": 300,
+        "x": 370,
+        "y": 340,
         "wires": [
             [
                 "cd2ce16e.4c19a"
@@ -11110,8 +11025,8 @@
         "property": "payload",
         "attr": "",
         "chr": "",
-        "x": 550,
-        "y": 300,
+        "x": 510,
+        "y": 340,
         "wires": [
             [
                 "206ec417.6e30ac"
@@ -11137,27 +11052,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 700,
-        "y": 300,
+        "x": 660,
+        "y": 340,
         "wires": [
             [
-                "c6553c3.419acc"
-            ]
-        ]
-    },
-    {
-        "id": "c6553c3.419acc",
-        "type": "function",
-        "z": "34a0f2ec.a39f9e",
-        "name": "",
-        "func": "var station = msg.payload.station_id;\n\nvar msgarr = [];\nvar temp_f = msg.payload.temp_c*9/5 + 32;\n\nif ((typeof msg.observation_time !== 'undefined')){\n    dtstring = new Date.parse(msg.observation_time)\n} else {dtstring = new Date().toISOString();}\n\nmsgarr.push({\n    payload:(temp_f),\n    topic: \"airport/\" + station + \"/temperature\",\n    timestamp : dtstring\n});\n\nvar pressure = parseFloat(msg.payload.altim_in_hg[0]); //inches hg\nvar dew = parseFloat(msg.payload.dewpoint_c[0]);\nvar temp = parseFloat(msg.payload.temp_c[0]);\n\n//August-Roche-Magnus approximation to calculate humidity\nvar constA = 17.625;\nvar constB = 243.04;\n//var rh_numer = 100.0*Math.exp((constA*eval(dew))/(eval(dew)+constB));\n//var rh_denom = Math.exp((constA*eval(temp))/(eval(temp)+constB));\nvar rh_numer = 100.0*Math.exp((constA*(dew))/((dew)+constB));\nvar rh_denom = Math.exp((constA*(temp))/((temp)+constB));\nvar rh_hum   = (rh_numer/rh_denom);\nvar humidity = Math.round(rh_hum);\n\nmsgarr.push({\n    payload:(humidity),\n    topic: \"airport/\" + station + \"/humidity\",\n    timestamp : dtstring\n});    \n\nmsgarr.push({\n    payload:(pressure),\n    topic: \"airport/\" + station + \"/pressure\",\n    timestamp : dtstring\n});    \n\n\nreturn [msgarr];\n",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 850,
-        "y": 300,
-        "wires": [
-            [
-                "63702d45.e76ef4",
+                "60c012f9.8810bc",
                 "3ede2674.3419ea"
             ]
         ]
@@ -11170,8 +11069,8 @@
         "func": "msg.payload = \"/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&hoursBeforeNow=3&mostRecent=true&stationString=\"\nmsg.payload = msg.payload + node.name;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 270,
-        "y": 340,
+        "x": 230,
+        "y": 380,
         "wires": [
             [
                 "3efad988.071616"
@@ -11186,8 +11085,8 @@
         "method": "GET",
         "url": "http://www.aviationweather.gov{{{payload}}}",
         "tls": "",
-        "x": 410,
-        "y": 340,
+        "x": 370,
+        "y": 380,
         "wires": [
             [
                 "db7fb27d.0ae95"
@@ -11202,8 +11101,8 @@
         "property": "payload",
         "attr": "",
         "chr": "",
-        "x": 550,
-        "y": 340,
+        "x": 510,
+        "y": 380,
         "wires": [
             [
                 "c4d81042.f53a8"
@@ -11229,27 +11128,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 700,
-        "y": 340,
+        "x": 660,
+        "y": 380,
         "wires": [
             [
-                "8685a532.bd8c28"
-            ]
-        ]
-    },
-    {
-        "id": "8685a532.bd8c28",
-        "type": "function",
-        "z": "34a0f2ec.a39f9e",
-        "name": "",
-        "func": "var station = msg.payload.station_id;\n\nvar msgarr = [];\nvar temp_f = msg.payload.temp_c*9/5 + 32;\n\nif ((typeof msg.observation_time !== 'undefined')){\n    dtstring = new Date.parse(msg.observation_time)\n} else {dtstring = new Date().toISOString();}\n\nmsgarr.push({\n    payload:(temp_f),\n    topic: \"airport/\" + station + \"/temperature\",\n    timestamp : dtstring\n});\n\nvar pressure = parseFloat(msg.payload.altim_in_hg[0]); //inches hg\nvar dew = parseFloat(msg.payload.dewpoint_c[0]);\nvar temp = parseFloat(msg.payload.temp_c[0]);\n\n//August-Roche-Magnus approximation to calculate humidity\nvar constA = 17.625;\nvar constB = 243.04;\n//var rh_numer = 100.0*Math.exp((constA*eval(dew))/(eval(dew)+constB));\n//var rh_denom = Math.exp((constA*eval(temp))/(eval(temp)+constB));\nvar rh_numer = 100.0*Math.exp((constA*(dew))/((dew)+constB));\nvar rh_denom = Math.exp((constA*(temp))/((temp)+constB));\nvar rh_hum   = (rh_numer/rh_denom);\nvar humidity = Math.round(rh_hum);\n\nmsgarr.push({\n    payload:(humidity),\n    topic: \"airport/\" + station + \"/humidity\",\n    timestamp : dtstring\n});    \n\nmsgarr.push({\n    payload:(pressure),\n    topic: \"airport/\" + station + \"/pressure\",\n    timestamp : dtstring\n});    \n\n\nreturn [msgarr];\n",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 850,
-        "y": 340,
-        "wires": [
-            [
-                "63702d45.e76ef4"
+                "60c012f9.8810bc"
             ]
         ]
     },
@@ -11268,8 +11151,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 140,
-        "y": 180,
+        "x": 100,
+        "y": 220,
         "wires": [
             [
                 "ef0aa54f.80aee8"
@@ -11291,8 +11174,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 140,
-        "y": 220,
+        "x": 100,
+        "y": 260,
         "wires": [
             [
                 "ccdb0c56.cb205"
@@ -11314,8 +11197,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 140,
-        "y": 260,
+        "x": 100,
+        "y": 300,
         "wires": [
             [
                 "f2c6902d.f5783"
@@ -11337,8 +11220,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 140,
-        "y": 300,
+        "x": 100,
+        "y": 340,
         "wires": [
             [
                 "9c250061.5e139"
@@ -11360,8 +11243,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 140,
-        "y": 340,
+        "x": 100,
+        "y": 380,
         "wires": [
             [
                 "dbf62df6.c33d5"
@@ -12417,7 +12300,7 @@
         "type": "debug",
         "z": "c6be1934.85f088",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -12454,7 +12337,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 930,
-        "y": 860,
+        "y": 820,
         "wires": []
     },
     {
@@ -12987,7 +12870,7 @@
         "type": "debug",
         "z": "88396424.c54498",
         "name": "",
-        "active": false,
+        "active": true,
         "console": "false",
         "complete": "true",
         "x": 890,
@@ -13492,7 +13375,7 @@
         "complete": "true",
         "targetType": "full",
         "x": 950,
-        "y": 700,
+        "y": 660,
         "wires": []
     },
     {
@@ -13511,7 +13394,7 @@
         "randomUnits": "seconds",
         "drop": true,
         "x": 610,
-        "y": 700,
+        "y": 660,
         "wires": [
             [
                 "d6b679ed.7e34b8"
@@ -13529,7 +13412,7 @@
         "inout": "out",
         "property": "payload",
         "x": 470,
-        "y": 700,
+        "y": 660,
         "wires": [
             [
                 "a938e7c5.2ccaa8"
@@ -13557,7 +13440,7 @@
         "reduceInitType": "",
         "reduceFixup": "",
         "x": 390,
-        "y": 740,
+        "y": 700,
         "wires": [
             [
                 "8b3466d6.fe2718"
@@ -13575,7 +13458,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 950,
-        "y": 740,
+        "y": 700,
         "wires": []
     },
     {
@@ -13587,7 +13470,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 220,
-        "y": 740,
+        "y": 700,
         "wires": [
             [
                 "7bcf3d0e.e20c24"
@@ -13603,7 +13486,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 510,
-        "y": 740,
+        "y": 700,
         "wires": [
             [
                 "d7054213.67888",
@@ -13618,7 +13501,7 @@
         "name": "",
         "info": "I'm chosing the following format as what I would call Node_RED standard time series datapoint:\nmsg = {\n    \"topic\": \"power/consumption/instantaneous\",\n    \"timestamp\": 1573475400000,\n    \"payload\": 5.7\n}\n\nI acknowledge that the following is arguably similar or better for some things:\nmsg = {\n    \"topic\": \"power/consumption/instantaneous\",\n    \"payload\": [{\n        \"timestamp\": 1573475400000,\n        \"value\":5.7\n    }]\n}\n\nwhere the timestamp is an attribute of the payload rather than an attribute of the msg itself, but went with the former for payload simplicity whereby the payload can be assumed to be the current value in MQTT, for math, comparison, range-checking, alarming, etc.\n",
         "x": 80,
-        "y": 700,
+        "y": 660,
         "wires": []
     },
     {
@@ -13676,7 +13559,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 440,
-        "y": 780,
+        "y": 740,
         "wires": [
             [
                 "20f41dcc.ead692",
@@ -13693,7 +13576,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 130,
-        "y": 780,
+        "y": 740,
         "wires": [
             [
                 "9e1bee6f.ca1dc",
@@ -13721,7 +13604,7 @@
         "to": "",
         "reg": false,
         "x": 600,
-        "y": 780,
+        "y": 740,
         "wires": [
             [
                 "b92480f5.bda35",
@@ -13740,7 +13623,7 @@
         "tostatus": false,
         "complete": "false",
         "x": 930,
-        "y": 780,
+        "y": 740,
         "wires": []
     },
     {
@@ -13752,7 +13635,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 290,
-        "y": 780,
+        "y": 740,
         "wires": [
             [
                 "b75d37ac.77fba8",
@@ -13771,7 +13654,7 @@
         "tostatus": false,
         "complete": "false",
         "x": 130,
-        "y": 820,
+        "y": 780,
         "wires": []
     },
     {
@@ -13785,7 +13668,7 @@
         "tostatus": false,
         "complete": "false",
         "x": 310,
-        "y": 820,
+        "y": 780,
         "wires": []
     },
     {
@@ -13800,7 +13683,7 @@
         "complete": "true",
         "targetType": "full",
         "x": 530,
-        "y": 820,
+        "y": 780,
         "wires": []
     },
     {
@@ -14497,7 +14380,7 @@
         "type": "debug",
         "z": "e8223701.eebbe8",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -15205,27 +15088,11 @@
         "id": "fbc537dd.e5a4c8",
         "type": "comment",
         "z": "e8223701.eebbe8",
-        "name": "Simulate Production",
+        "name": "Simulate Production (work in progress)",
         "info": "",
-        "x": 110,
-        "y": 980,
+        "x": 170,
+        "y": 940,
         "wires": []
-    },
-    {
-        "id": "f24013b3.2103c",
-        "type": "function",
-        "z": "e8223701.eebbe8",
-        "name": "Cvt HVAC Status to productid",
-        "func": "var cvtstat2prod = [\n    { \"status\" : \"off\", \"productid\" : \"Product1\"},\n    { \"status\" : \"fan\", \"productid\" : \"Product2\"},\n    { \"status\" : \"auxHeat1\", \"productid\" : \"Product3\"},\n    { \"status\" : \"auxHeat2\", \"productid\" : \"Product4\"},\n    { \"status\" : \"compCool1\", \"productid\" : \"Product5\"},\n    { \"status\" : \"compCool2\", \"productid\" : \"Produt6\"}\n]\nnode.warn(cvtstat2prod[status=\"off\"].productid)\nif (cvtstat2prod[status=msg.payload].productid !== undefined) {\n    msg.payload = cvtstat2prod[status=msg.payload].productid;\n} else {\n    msg=null\n}\n\nreturn msg;\n\n",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 680,
-        "y": 1040,
-        "wires": [
-            [
-                "2ff5ee3e.4cc0f2"
-            ]
-        ]
     },
     {
         "id": "30e1e7e5.001b28",
@@ -15248,7 +15115,7 @@
         "repair": false,
         "outputs": 2,
         "x": 350,
-        "y": 1100,
+        "y": 1060,
         "wires": [
             [
                 "eab67a8b.e36868",
@@ -15276,8 +15143,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 310,
-        "y": 1140,
+        "x": 630,
+        "y": 1060,
         "wires": [
             [
                 "27a75d51.8ef752"
@@ -15304,7 +15171,7 @@
         "to": "",
         "reg": false,
         "x": 710,
-        "y": 1140,
+        "y": 1100,
         "wires": [
             [
                 "311f30fd.a8947"
@@ -15323,7 +15190,7 @@
         "complete": "true",
         "targetType": "full",
         "x": 930,
-        "y": 1140,
+        "y": 1100,
         "wires": []
     },
     {
@@ -15338,7 +15205,7 @@
         "complete": "true",
         "targetType": "full",
         "x": 930,
-        "y": 1100,
+        "y": 1060,
         "wires": []
     },
     {
@@ -15354,7 +15221,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 170,
-        "y": 1020,
+        "y": 980,
         "wires": [
             [
                 "30e1e7e5.001b28"
@@ -15374,7 +15241,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 170,
-        "y": 1060,
+        "y": 1020,
         "wires": [
             [
                 "30e1e7e5.001b28"
@@ -15394,7 +15261,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 110,
-        "y": 1100,
+        "y": 1060,
         "wires": [
             [
                 "30e1e7e5.001b28"
@@ -15414,7 +15281,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 110,
-        "y": 1140,
+        "y": 1100,
         "wires": [
             [
                 "30e1e7e5.001b28"
@@ -15441,7 +15308,7 @@
         "to": "",
         "reg": false,
         "x": 500,
-        "y": 1140,
+        "y": 1100,
         "wires": [
             [
                 "ac726c2e.117c2",
@@ -15509,5 +15376,323 @@
         "x": 550,
         "y": 1100,
         "wires": []
+    },
+    {
+        "id": "d56bebdc.b9e7a8",
+        "type": "comment",
+        "z": "e8223701.eebbe8",
+        "name": "Base64 ID",
+        "info": "",
+        "x": 80,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "a733b94c.9fa858",
+        "type": "inject",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 240,
+        "y": 1140,
+        "wires": [
+            [
+                "b0da915a.844e6"
+            ]
+        ]
+    },
+    {
+        "id": "471cf11c.b3ebe",
+        "type": "debug",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 930,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "b0da915a.844e6",
+        "type": "function",
+        "z": "e8223701.eebbe8",
+        "name": "Base64 less = padding",
+        "func": "msg.payload = msg.payload.toString();\nmsg.payload = Buffer.from(msg.payload);\nmsg.payload = msg.payload.toString(\"base64\");\nmsg.payload = msg.payload.replace(\"=\",\"\");\nmsg.payload = msg.payload.replace(\"=\",\"\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 460,
+        "y": 1140,
+        "wires": [
+            [
+                "471cf11c.b3ebe"
+            ]
+        ]
+    },
+    {
+        "id": "84c98c2a.b6f57",
+        "type": "random",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "low": "1",
+        "high": "10",
+        "inte": "true",
+        "property": "payload",
+        "x": 360,
+        "y": 1260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "85dfeb9a.823cc8",
+        "type": "switch",
+        "z": "e8223701.eebbe8",
+        "name": "topic==tapia/home/power/consumption/total",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "tapia/home/power/consumption/total",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 370,
+        "y": 1180,
+        "wires": [
+            [
+                "a7a996e6.494718",
+                "e61222e6.a4743",
+                "46d7a752.4fdc28"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "a7a996e6.494718",
+        "type": "change",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "plant1210/line01/productioncounter",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 1180,
+        "wires": [
+            [
+                "ceb79d98.66ace"
+            ]
+        ]
+    },
+    {
+        "id": "deccf3f9.96723",
+        "type": "debug",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 930,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "e61222e6.a4743",
+        "type": "function",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 230,
+        "y": 1260,
+        "wires": [
+            [
+                "84c98c2a.b6f57"
+            ]
+        ]
+    },
+    {
+        "id": "46d7a752.4fdc28",
+        "type": "change",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "plant1210/line01/serialid",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 550,
+        "y": 1240,
+        "wires": [
+            [
+                "49941608.cc3328"
+            ]
+        ]
+    },
+    {
+        "id": "49941608.cc3328",
+        "type": "function",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "func": "msg.payload = new Date().getTime();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 700,
+        "y": 1240,
+        "wires": [
+            [
+                "f78c8b52.444388"
+            ]
+        ]
+    },
+    {
+        "id": "f78c8b52.444388",
+        "type": "function",
+        "z": "e8223701.eebbe8",
+        "name": "Base64 less = padding",
+        "func": "msg.payload = msg.payload.toString();\nmsg.payload = Buffer.from(msg.payload);\nmsg.payload = msg.payload.toString(\"base64\");\nmsg.payload = msg.payload.replace(\"=\",\"\");\nmsg.payload = msg.payload.replace(\"=\",\"\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 860,
+        "y": 1240,
+        "wires": [
+            [
+                "deccf3f9.96723"
+            ]
+        ]
+    },
+    {
+        "id": "6734b743.872948",
+        "type": "comment",
+        "z": "e8223701.eebbe8",
+        "name": "productid",
+        "info": "",
+        "x": 780,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "ceb79d98.66ace",
+        "type": "function",
+        "z": "e8223701.eebbe8",
+        "name": "",
+        "func": "msg.payload = new Date().getTime();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 790,
+        "y": 1180,
+        "wires": [
+            [
+                "deccf3f9.96723"
+            ]
+        ]
+    },
+    {
+        "id": "83a89643.c86798",
+        "type": "credentials",
+        "z": "bc6012ce.56132",
+        "d": true,
+        "name": "Wonderware Bearer Token",
+        "props": [
+            {
+                "value": "headers.Authorization",
+                "type": "msg"
+            }
+        ],
+        "x": 380,
+        "y": 420,
+        "wires": [
+            [
+                "6399b6ad.e98fb8",
+                "486b4641.981d08"
+            ]
+        ]
+    },
+    {
+        "id": "ecc169bf.9266e8",
+        "type": "debug",
+        "z": "34a0f2ec.a39f9e",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 930,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "27e15255.3e74ce",
+        "type": "function",
+        "z": "34a0f2ec.a39f9e",
+        "name": "KORD",
+        "func": "msg.payload = \"/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&hoursBeforeNow=3&mostRecent=true&stationString=\"\nmsg.payload = msg.payload + node.name;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 230,
+        "y": 180,
+        "wires": [
+            [
+                "62b313df.b15c0c"
+            ]
+        ]
+    },
+    {
+        "id": "855cf1bc.4e0f1",
+        "type": "function",
+        "z": "88396424.c54498",
+        "name": "Reboot after 20 Request Timeout",
+        "func": "if (!context.get('countErrorTimeout')) {\n    context.set('countErrorTimeout',0);\n}\nvar countErrorTimeout = context.get('countErrorTimeout');\n\nif (!context.get('countErrorNonWhiteSpace')) {\n    context.set('countErrorNonWhiteSpace',0);\n}\nvar countErrorNonWhiteSpace = context.get('countErrorNonWhiteSpace');\nif (!msg.payload.Error || msg.payload.Error===null || msg.payload.Error===''){\n    countErrorTimeout=0;\n    context.set('countErrorTimeout',i);\n    node.status({fill:\"green\",shape:\"dot\",text:\"no error\"});\n    return;\n} else {\n    if (msg.payload.Error.Text == 'Request Timeout'){\n        countErrorTimeout++;\n        node.status({fill:\"yellow\",shape:\"dot\",text:\"countErrorTimeout = \" + countErrorTimeout});\n        msg.payload.countErrorTimeout=countErrorTimeout;\n        if (countErrorTimeout>15){ //15*20s = 300s or 5min\n            context.set('countErrorTimeout',0);\n            return [msg,{payload:true}];\n        } else {\n            context.set('countErrorTimeout',countErrorTimeout);\n            return [msg,null];\n        }\n    } else if (msg.payload.Error.Text == 'Non-whitespace before first tag.'){\n        countErrorNonWhiteSpace++;\n        node.status({fill:\"yellow\",shape:\"dot\",text:\"countErrorNonWhiteSpace = \" + countErrorNonWhiteSpace});\n        msg.payload.countErrorNonWhiteSpace=countErrorNonWhiteSpace;\n        if (countErrorNonWhiteSpace>15){ //15*20s = 300s or 5min\n            context.set('countErrorNonWhiteSpace',0);\n            return [msg,{payload:true}];\n        } else {\n            context.set('countErrorNonWhiteSpace',countErrorNonWhiteSpace);\n            return [msg,null];\n        }\n        context.set('countErrorNonWhiteSpace',0);\n        msg.payload.MyText='Error Text did not evaluatate to \"Request Timeout\"';\n        return [msg,null];    \n    }\n}\n",
+        "outputs": 3,
+        "noerr": 0,
+        "x": 240,
+        "y": 700,
+        "wires": [
+            [],
+            [],
+            []
+        ]
     }
 ]
