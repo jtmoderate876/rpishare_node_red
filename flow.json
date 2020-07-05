@@ -4250,7 +4250,8 @@
         "y": 100,
         "wires": [
             [
-                "795731b2.9f7f4"
+                "795731b2.9f7f4",
+                "e718af7c.58e97"
             ]
         ]
     },
@@ -4259,7 +4260,7 @@
         "type": "debug",
         "z": "11aaf4c8.4bf33b",
         "name": "",
-        "active": false,
+        "active": true,
         "console": "false",
         "complete": "true",
         "x": 950,
@@ -4271,14 +4272,15 @@
         "type": "function",
         "z": "11aaf4c8.4bf33b",
         "name": "",
-        "func": "msg.payload = {\n    \"username\" : flow.get(\"myq.payload.username\"),\n    \"password\" : flow.get(\"myq.payload.password\")\n}\n\nmsg.headers = {\n    ContentType : \"application/json\",\n    Accept : \"application/json\",\n    MyQApplicationId : \"Vj8pQggXLhLy0WHahglCD4N1nAkkXQtGYpq2HrHD7H1nvmbT55KqtN6RSF4ILB/i\",\n    Culture : \"en\"\n}\n\nreturn msg;",
+        "func": "/* old used lowercase\nmsg.payload = {\n    \"username\" : flow.get(\"myq.payload.username\"),\n    \"password\" : flow.get(\"myq.payload.password\")\n}\n*/\nmsg.payload = {\n    \"Username\" : flow.get(\"myq.payload.username\"),\n    \"Password\" : flow.get(\"myq.payload.password\")\n}\n\nmsg.headers = {\n    ContentType : \"application/json\",\n    Accept : \"application/json\",\n    MyQApplicationId : \"Vj8pQggXLhLy0WHahglCD4N1nAkkXQtGYpq2HrHD7H1nvmbT55KqtN6RSF4ILB/i\",\n    Culture : \"en\"\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 650,
         "y": 100,
         "wires": [
             [
-                "e4163af7.d63848"
+                "e4163af7.d63848",
+                "53f997e1.35bcd8"
             ]
         ]
     },
@@ -4308,7 +4310,7 @@
         "active": false,
         "console": "false",
         "complete": "true",
-        "x": 670,
+        "x": 610,
         "y": 60,
         "wires": []
     },
@@ -4317,7 +4319,7 @@
         "type": "debug",
         "z": "11aaf4c8.4bf33b",
         "name": "",
-        "active": false,
+        "active": true,
         "console": "false",
         "complete": "true",
         "x": 630,
@@ -5568,7 +5570,7 @@
         "type": "debug",
         "z": "11aaf4c8.4bf33b",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -12954,7 +12956,7 @@
         "qos": "2",
         "broker": "971eda83.260398",
         "x": 70,
-        "y": 340,
+        "y": 320,
         "wires": [
             [
                 "937415a4.c4ade8",
@@ -15698,5 +15700,29 @@
             [],
             []
         ]
+    },
+    {
+        "id": "e718af7c.58e97",
+        "type": "debug",
+        "z": "11aaf4c8.4bf33b",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 810,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "53f997e1.35bcd8",
+        "type": "debug",
+        "z": "11aaf4c8.4bf33b",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 950,
+        "y": 280,
+        "wires": []
     }
 ]
