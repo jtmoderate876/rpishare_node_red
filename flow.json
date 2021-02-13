@@ -300,7 +300,7 @@
         "id": "971eda83.260398",
         "type": "mqtt-broker",
         "z": "",
-        "name": "127.0.0.1:1883",
+        "name": "192.168.1.216:1883",
         "broker": "127.0.0.1",
         "port": "1883",
         "clientid": "",
@@ -749,6 +749,28 @@
         "name": "XTerminal"
     },
     {
+        "id": "835f0a18.bc2628",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "216rpi>nodered>mqttpage>subscriber[001]",
+        "broker": "127.0.0.1",
+        "port": "1883",
+        "clientid": "216rpi>nodered>mqttpage>subscriber[001]",
+        "usetls": false,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
         "id": "71a47ab9.6044a4",
         "type": "mosca in",
         "z": "c201e10a.3d66f",
@@ -786,13 +808,17 @@
         "z": "c201e10a.3d66f",
         "name": "Monitor # on above MQTT broker",
         "topic": "#",
-        "qos": "2",
-        "broker": "971eda83.260398",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "835f0a18.bc2628",
         "x": 150,
         "y": 100,
         "wires": [
             [
-                "dd27af28.c2e8e"
+                "dd27af28.c2e8e",
+                "937415a4.c4ade8",
+                "ed164396.f0e44",
+                "9736fc4a.16748"
             ]
         ]
     },
@@ -801,7 +827,7 @@
         "type": "debug",
         "z": "c201e10a.3d66f",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -2697,7 +2723,7 @@
         "repeat": "1800",
         "crontab": "",
         "once": true,
-        "x": 310,
+        "x": 330,
         "y": 20,
         "wires": [
             [
@@ -2711,8 +2737,12 @@
         "z": "c6be1934.85f088",
         "name": "Update domains.google.com",
         "method": "GET",
-        "url": "https://jbdowsr8JzGj0wnm:2BY3RRZnfwDPoNvQ@domains.google.com/nic/update?hostname=tapiafamily.org&myip={{payload}}",
+        "paytoqs": false,
+        "url": "https://ELJTFdJ3602DLJcS:BO6UUQfwWPcF4O6s@domains.google.com/nic/update?hostname=tapiafamily.org&myip={{payload}}",
         "tls": "ccbad4df.c6e028",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
         "x": 480,
         "y": 60,
         "wires": [
@@ -2829,7 +2859,7 @@
         "timer": "",
         "oldrc": false,
         "name": "Call IP - ipv4bot whatismyipaddress.com",
-        "x": 560,
+        "x": 600,
         "y": 20,
         "wires": [
             [
@@ -2859,7 +2889,7 @@
         ],
         "checkall": "true",
         "outputs": 2,
-        "x": 820,
+        "x": 860,
         "y": 20,
         "wires": [
             [
@@ -2886,10 +2916,10 @@
         "type": "debug",
         "z": "c6be1934.85f088",
         "name": "",
-        "active": true,
+        "active": false,
         "console": "false",
         "complete": "true",
-        "x": 1030,
+        "x": 970,
         "y": 60,
         "wires": []
     },
@@ -3914,7 +3944,7 @@
         "type": "debug",
         "z": "c201e10a.3d66f",
         "name": "",
-        "active": true,
+        "active": false,
         "console": "false",
         "complete": "true",
         "x": 750,
@@ -3930,7 +3960,7 @@
         "op1type": "nul",
         "op2type": "json",
         "duration": "120",
-        "extend": true,
+        "extend": false,
         "units": "s",
         "reset": "CANCEL",
         "bytopic": "all",
@@ -3939,7 +3969,8 @@
         "y": 180,
         "wires": [
             [
-                "4f19939b.8c2abc"
+                "4f19939b.8c2abc",
+                "f70a39ef.e5f2f8"
             ]
         ]
     },
@@ -4009,7 +4040,7 @@
         "type": "function",
         "z": "984823b1.a0823",
         "name": "CANCEL if OFF",
-        "func": "switch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"CANCEL\";\n        break;\n/*\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n*/        \n    default:\n        msg=null;\n        break;\n}\nreturn msg;\n\n\n/*\nswitch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"OFF\";\n        break;\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n        \n    default:\n        break;\n}\nreturn msg;\n*/\n\n",
+        "func": "switch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"CANCEL\";\n        break;\n\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"CANCEL\";\n        break;\n    default:\n        msg=null;\n        break;\n}\nreturn msg;\n\n\n/*\nswitch (msg.payload)\n{\n    case 0:\n    case \"0\":\n    case false:\n    case \"false\":\n    case \"FALSE\":\n    case \"off\":\n    case \"OFF\":\n        msg.payload = \"OFF\";\n        break;\n    case 1:\n    case \"1\":\n    case true:\n    case \"true\":\n    case \"TRUE\":\n    case \"on\":\n    case \"ON\":\n        msg.payload = \"ON\";\n        break;\n        \n    default:\n        break;\n}\nreturn msg;\n*/\n\n",
         "outputs": 1,
         "noerr": 0,
         "x": 480,
@@ -4042,7 +4073,7 @@
         "type": "debug",
         "z": "984823b1.a0823",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -4612,8 +4643,8 @@
         "func": "\nmsg.payload = \"Garage door is \" + msg.payload.garage.state + \" at \" + msg.payload.timestamp;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 730,
-        "y": 500,
+        "x": 250,
+        "y": 400,
         "wires": [
             [
                 "b1885fd7.f94e7"
@@ -4647,8 +4678,8 @@
         "active": false,
         "console": "false",
         "complete": "true",
-        "x": 430,
-        "y": 300,
+        "x": 350,
+        "y": 280,
         "wires": []
     },
     {
@@ -4726,8 +4757,8 @@
         "active": false,
         "console": "false",
         "complete": "true",
-        "x": 590,
-        "y": 380,
+        "x": 510,
+        "y": 280,
         "wires": []
     },
     {
@@ -4758,8 +4789,8 @@
         "qos": "",
         "retain": "false",
         "broker": "971eda83.260398",
-        "x": 540,
-        "y": 460,
+        "x": 460,
+        "y": 320,
         "wires": []
     },
     {
@@ -4785,6 +4816,7 @@
         "name": "",
         "topic": "garage/status",
         "qos": "2",
+        "datatype": "auto",
         "broker": "971eda83.260398",
         "x": 90,
         "y": 140,
@@ -5011,7 +5043,7 @@
         "y": 320,
         "wires": [
             [
-                "f5a11d90.6ccff"
+                "ea43eb40.0ac898"
             ]
         ]
     },
@@ -5102,7 +5134,7 @@
         "type": "debug",
         "z": "984823b1.a0823",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -5470,8 +5502,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 140,
-        "y": 560,
+        "x": 100,
+        "y": 440,
         "wires": [
             [
                 "971e7d8d.3ce8f"
@@ -5486,8 +5518,8 @@
         "func": "msg = flow.get(\"myq\");\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 290,
-        "y": 560,
+        "x": 250,
+        "y": 440,
         "wires": [
             [
                 "b1885fd7.f94e7"
@@ -5504,8 +5536,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 450,
-        "y": 560,
+        "x": 410,
+        "y": 440,
         "wires": []
     },
     {
@@ -5570,7 +5602,7 @@
         "type": "debug",
         "z": "11aaf4c8.4bf33b",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -6091,7 +6123,8 @@
         "y": 520,
         "wires": [
             [
-                "a492e30a.883e4"
+                "a492e30a.883e4",
+                "c40694c9.73ed58"
             ]
         ]
     },
@@ -10439,7 +10472,7 @@
         "type": "comment",
         "z": "c6be1934.85f088",
         "name": "dynamic IP to Google",
-        "info": "",
+        "info": "[https://support.google.com/domains/answer/4522141?hl=en](https://support.google.com/domains/answer/4522141?hl=en)\n[https://support.google.com/domains/answer/4522141?hl=en]()\nDynamic DNS\nDynamic DNS allows you to direct your domain or a subdomain to a resource that is behind a gateway that has a dynamically assigned IP address.\n\nTo use dynamic DNS with Google Domains you set up a Dynamic DNS synthetic record. This synthetic record:\n\nSets up an A or AAAA record for your domain or subdomain that lets the Google name servers know to expect a dynamic IP.\nGenerates a username and password your host or server will use to communicate the new IP address to the Google name servers.\nOnce you set up the Dynamic DNS synthetic record, you must set up a client program on your host or server (the resource behind the gateway) or on the gateway itself that detects IP address changes and uses the generated username and password and communicate the new address to the Google name servers.\n\nNote: Dynamic DNS works with both IPv4 and IPv6 addresses. \n\nSetting up a Dynamic DNS synthetic record\nSign in to Google Domains.\nSelect the name of your domain.\nOpen the menu Menu.\nClick DNS.\nScroll down to Synthetic Records.\nSelect Dynamic DNS from the list of synthetic record types.\nEnter the name of the resource you plan to have assigned a Dynamic IP, either a subdomain or @ for your default domain (“root domain” or “naked domain”).\nIf you selected sub-domain, enter the name of the subdomain.\nClick Add.\nThe Dynamic DNS record is created in your list of synthetic records. Click the expand triangle next to the record to view its values.\nClick View Credentials to view the user name and password created for this record.\nNote the username and password created for the synthetic record. You'll need these to configure your gateway or client software to contact the Google name servers.\nYou can edit or delete the record with the Edit and Delete buttons next to the record.\n\nSetting up a client program on your gateway, host, or server\nThere are several popular dynamic DNS clients in use, such as DDclient and INADYN. In addition most routers have software built in to detect IP changes and communicate them with the name servers.\n\nNote: Google Domains uses the dyndns2 protocol.\n\nConfigure your dynamic DNS client with:\n\nProvider (or DNS or Service): The name of your DNS Provider.\nUsername: (or credential) the generated username in the Dynamic DNS record.\nPassword (or credential): the generated password in the Dynamic DNS record.\nAfter you have created the record and configured your client software, test it by entering the subdomain and domain into a web browser (or appropriate client) and seeing that it connects to the correct resource.\n\nExamples\nDDclient now has support for Google Domains.\n\nDDclient with Google Domains Support\nddclient.conf entries:\n\nssl=yes\n\nprotocol=googledomains\n\nlogin=generated_username\n\npassword=generated_password\n\nyour_resource.your_domain.tld\n\nGeneral client configuration examples:\n\nDDclient\nwithout Google Domains support\tINADYN\nSample ddclient.conf entries:\n\nprotocol=dyndns2\n\nuse=web\n\nserver=domains.google.com\n\nssl=yes\n\nlogin=generated_username\n\npassword=generated_password\n\nyour_resource.your_domain.tld\n\nAdd the following to your inadyn.conf\n\nsystem default@domains.google.com\n\nusername generated_username\n\npassword generated_password\n\nalias sub.domain.tld\n\n ",
         "x": 120,
         "y": 20,
         "wires": []
@@ -12306,7 +12339,7 @@
         "type": "debug",
         "z": "c6be1934.85f088",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -12946,23 +12979,6 @@
         "x": 110,
         "y": 540,
         "wires": []
-    },
-    {
-        "id": "feed4c77.b17fc",
-        "type": "mqtt in",
-        "z": "c201e10a.3d66f",
-        "name": "",
-        "topic": "#",
-        "qos": "2",
-        "broker": "971eda83.260398",
-        "x": 70,
-        "y": 320,
-        "wires": [
-            [
-                "937415a4.c4ade8",
-                "ed164396.f0e44"
-            ]
-        ]
     },
     {
         "id": "6b782cb9.de7684",
@@ -14425,23 +14441,6 @@
         "wires": []
     },
     {
-        "id": "95226526.7f77f8",
-        "type": "mqtt in",
-        "z": "984823b1.a0823",
-        "name": "small office testing",
-        "topic": "insteon/#",
-        "qos": "2",
-        "datatype": "auto",
-        "broker": "971eda83.260398",
-        "x": 150,
-        "y": 1720,
-        "wires": [
-            [
-                "8be436f3.7f56a8"
-            ]
-        ]
-    },
-    {
         "id": "86ee61ee.7a8cb",
         "type": "inject",
         "z": "984823b1.a0823",
@@ -14608,20 +14607,6 @@
                 "f1d2ea2d.1c9518"
             ]
         ]
-    },
-    {
-        "id": "8be436f3.7f56a8",
-        "type": "debug",
-        "z": "984823b1.a0823",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 430,
-        "y": 1720,
-        "wires": []
     },
     {
         "id": "2065193a.35d7e6",
@@ -15724,5 +15709,264 @@
         "x": 950,
         "y": 280,
         "wires": []
+    },
+    {
+        "id": "1699feae.ce2221",
+        "type": "inject",
+        "z": "1fec4b90.1b56f4",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 120,
+        "y": 1180,
+        "wires": [
+            [
+                "f7c26357.1130f"
+            ]
+        ]
+    },
+    {
+        "id": "f7c26357.1130f",
+        "type": "function",
+        "z": "1fec4b90.1b56f4",
+        "name": "",
+        "func": "var string_lastseen = \"1554625504\";\nvar lastseen = 7200000+Number(string_lastseen)*1000;//convert from seconds to milliseconds\nmsg.payload = {};\nmsg.payload.toString = new Date(lastseen).toString();\nmsg.payload.toUTCString = new Date(lastseen).toUTCString();\nmsg.payload.toLocaleString = new Date(lastseen).toLocaleString(\"en-US\", {timeZone: \"America/New_York\"}) + new Date(lastseen).getTimezoneOffset().toString();\n//msg.payload = new Date(lastseen).toLocaleString(\"en-US\",timeZone ) + new Date(lastseen).getTimezoneOffset().toString();\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 330,
+        "y": 1180,
+        "wires": [
+            [
+                "49900ff6.531d7"
+            ]
+        ]
+    },
+    {
+        "id": "49900ff6.531d7",
+        "type": "debug",
+        "z": "1fec4b90.1b56f4",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 550,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "7cb55f13.71af8",
+        "type": "comment",
+        "z": "1fec4b90.1b56f4",
+        "name": "discourse.nodered.org",
+        "info": "https://discourse.nodered.org/t/converting-epoch-time/9858/3\n",
+        "x": 140,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "9736fc4a.16748",
+        "type": "link out",
+        "z": "c201e10a.3d66f",
+        "name": "MQTTInputForDistribution_OnMQTTPage",
+        "links": [
+            "332886cc.69c84a"
+        ],
+        "x": 655,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "332886cc.69c84a",
+        "type": "link in",
+        "z": "984823b1.a0823",
+        "name": "MQTTinputToInsteon",
+        "links": [
+            "9736fc4a.16748"
+        ],
+        "x": 155,
+        "y": 440,
+        "wires": [
+            [
+                "4f96610b.6914c",
+                "229a735f.49b30c",
+                "72a7462e.d03638"
+            ]
+        ]
+    },
+    {
+        "id": "cc146c09.43208",
+        "type": "change",
+        "z": "984823b1.a0823",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 260,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4f96610b.6914c",
+        "type": "switch",
+        "z": "984823b1.a0823",
+        "name": "insteon/flr2_masterbath_vanity/state",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "insteon/flr2_masterbath_vanity/state",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 300,
+        "y": 220,
+        "wires": [
+            [
+                "ac6b2d4c.ea248"
+            ]
+        ]
+    },
+    {
+        "id": "229a735f.49b30c",
+        "type": "switch",
+        "z": "984823b1.a0823",
+        "name": "insteon/flr1_powderroom/state",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "insteon/flr1_powderroom/state",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 410,
+        "y": 440,
+        "wires": [
+            [
+                "ac6b2d4c.ea248"
+            ]
+        ],
+        "icon": "font-awesome/fa-filter"
+    },
+    {
+        "id": "c40694c9.73ed58",
+        "type": "switch",
+        "z": "984823b1.a0823",
+        "name": "insteon/flr1_powderroom_fan/state",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "insteon/flr1_powderroom_fan/state",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 420,
+        "y": 480,
+        "wires": [
+            [
+                "ac6b2d4c.ea248"
+            ]
+        ],
+        "icon": "font-awesome/fa-filter"
+    },
+    {
+        "id": "f9d5a0ef.16b5f",
+        "type": "debug",
+        "z": "984823b1.a0823",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 910,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "72a7462e.d03638",
+        "type": "switch",
+        "z": "984823b1.a0823",
+        "name": "contains insteon/flr1_powderroom",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "insteon/flr1_powderroom",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 660,
+        "y": 220,
+        "wires": [
+            [
+                "f9d5a0ef.16b5f"
+            ]
+        ],
+        "icon": "font-awesome/fa-filter"
+    },
+    {
+        "id": "ea43eb40.0ac898",
+        "type": "change",
+        "z": "984823b1.a0823",
+        "name": "set msg.delay 1h",
+        "rules": [
+            {
+                "t": "set",
+                "p": "delay",
+                "pt": "msg",
+                "to": "3600000",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 320,
+        "wires": [
+            [
+                "f5a11d90.6ccff"
+            ]
+        ]
     }
 ]
