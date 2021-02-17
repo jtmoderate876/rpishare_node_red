@@ -340,7 +340,7 @@
         "broker": "logic.cloud.shiftr.io",
         "port": "8883",
         "tls": "ccbad4df.c6e028",
-        "clientid": "rpi-node-red-MQTTtoShiftrPage-4c318920",
+        "clientid": "jtapia-rpi-node-red-MQTTtoShiftrPage-4c318920",
         "usetls": true,
         "compatmode": false,
         "keepalive": "60",
